@@ -241,11 +241,47 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        shoe1 = !shoe1;
                                         selectedSize = <String>[];
                                              if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
+                                               selectedSize.add("Shoe1");
+                                               sizeFilter = "Shoe1";
                                              }
                                               else{
 sizeFilter = "";
@@ -280,8 +316,8 @@ sizeFilter = "";
                                                        shoe2 = !shoe2;
                                         selectedSize = <String>[];
                                              if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
+                                               selectedSize.add("Shoe2");
+                                               sizeFilter = "Shoe2";
                                              }
                                               else{
 sizeFilter = "";
@@ -316,8 +352,8 @@ sizeFilter = "";
                                                        shoe3 = !shoe3;
                                         selectedSize = <String>[];
                                              if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
+                                               selectedSize.add("Shoe3");
+                                               sizeFilter = "Shoe3";
                                              }
                                               else{
 sizeFilter = "";
@@ -352,8 +388,8 @@ sizeFilter = "";
                                                        shoe4 = !shoe4;
                                         selectedSize = <String>[];
                                              if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
+                                               selectedSize.add("Shoe4");
+                                               sizeFilter = "Shoe4";
                                              }
                                               else{
 sizeFilter = "";
@@ -388,8 +424,8 @@ sizeFilter = "";
                                                        shoe5 = !shoe5;
                                         selectedSize = <String>[];
                                              if (shoe5 == true){
-                                               selectedSize.add("shoe5");
-                                               sizeFilter = "shoe5";
+                                               selectedSize.add("Shoe5");
+                                               sizeFilter = "Shoe5";
                                              }
                                               else{
 sizeFilter = "";
@@ -424,8 +460,8 @@ sizeFilter = "";
                                                        shoe6 = !shoe6;
                                         selectedSize = <String>[];
                                              if (shoe6 == true){
-                                               selectedSize.add("shoe6");
-                                               sizeFilter = "shoe6";
+                                               selectedSize.add("Shoe6");
+                                               sizeFilter = "Shoe6";
                                              }
                                               else{
 sizeFilter = "";
@@ -460,8 +496,8 @@ sizeFilter = "";
                                                        shoe7 = !shoe7;
                                         selectedSize = <String>[];
                                              if (shoe7 == true){
-                                               selectedSize.add("shoe7");
-                                               sizeFilter = "shoe7";
+                                               selectedSize.add("Shoe7");
+                                               sizeFilter = "Shoe7";
                                              }
                                               else{
 sizeFilter = "";
@@ -496,8 +532,8 @@ sizeFilter = "";
                                                        shoe8 = !shoe8;
                                         selectedSize = <String>[];
                                              if (shoe8 == true){
-                                               selectedSize.add("shoe8");
-                                               sizeFilter = "shoe8";
+                                               selectedSize.add("Shoe8");
+                                               sizeFilter = "Shoe8";
                                              }
                                               else{
 sizeFilter = "";
@@ -532,8 +568,8 @@ sizeFilter = "";
                                                        shoe9 = !shoe9;
                                         selectedSize = <String>[];
                                              if (shoe9 == true){
-                                               selectedSize.add("shoe9");
-                                               sizeFilter = "shoe9";
+                                               selectedSize.add("Shoe9");
+                                               sizeFilter = "Shoe9";
                                              }
                                               else{
 sizeFilter = "";
@@ -568,8 +604,8 @@ sizeFilter = "";
                                                        shoe10 = !shoe10;
                                         selectedSize = <String>[];
                                              if (shoe10 == true){
-                                               selectedSize.add("shoe10");
-                                               sizeFilter = "shoe10";
+                                               selectedSize.add("Shoe10");
+                                               sizeFilter = "Shoe10";
                                              }
                                               else{
 sizeFilter = "";
@@ -603,8 +639,8 @@ sizeFilter = "";
                                                        shoe11 = !shoe11;
                                         selectedSize = <String>[];
                                              if (shoe11 == true){
-                                               selectedSize.add("shoe11");
-                                               sizeFilter = "shoe11";
+                                               selectedSize.add("Shoe11");
+                                               sizeFilter = "Shoe11";
                                              }
                                               else{
 sizeFilter = "";
@@ -638,8 +674,8 @@ sizeFilter = "";
                                                        shoe12 = !shoe12;
                                         selectedSize = <String>[];
                                              if (shoe12 == true){
-                                               selectedSize.add("shoe12");
-                                               sizeFilter = "shoe12";
+                                               selectedSize.add("Shoe12");
+                                               sizeFilter = "Shoe12";
                                              }
                                               else{
 sizeFilter = "";
@@ -673,8 +709,8 @@ sizeFilter = "";
                                                        shoe13 = !shoe13;
                                         selectedSize = <String>[];
                                              if (shoe13 == true){
-                                               selectedSize.add("shoe13");
-                                               sizeFilter = "shoe13";
+                                               selectedSize.add("Shoe13");
+                                               sizeFilter = "Shoe13";
                                              }
                                               else{
 sizeFilter = "";
@@ -708,8 +744,8 @@ sizeFilter = "";
                                                        shoe14 = !shoe14;
                                         selectedSize = <String>[];
                                              if (shoe14 == true){
-                                               selectedSize.add("shoe14");
-                                               sizeFilter = "shoe14";
+                                               selectedSize.add("Shoe14");
+                                               sizeFilter = "Shoe14";
                                              }
                                               else{
 sizeFilter = "";
@@ -743,8 +779,8 @@ sizeFilter = "";
                                                        shoe15 = !shoe15;
                                         selectedSize = <String>[];
                                              if (shoe15== true){
-                                               selectedSize.add("shoe15");
-                                               sizeFilter = "shoe15";
+                                               selectedSize.add("Shoe15");
+                                               sizeFilter = "Shoe15";
                                              }
                                               else{
 sizeFilter = "";
@@ -778,8 +814,8 @@ sizeFilter = "";
                                                        shoe16 = !shoe16;
                                         selectedSize = <String>[];
                                              if (shoe16== true){
-                                               selectedSize.add("shoe16");
-                                               sizeFilter = "shoe16";
+                                               selectedSize.add("Shoe16");
+                                               sizeFilter = "Shoe16";
                                              }
                                               else{
 sizeFilter = "";
@@ -813,8 +849,8 @@ sizeFilter = "";
                                                        shoe17 = !shoe17;
                                         selectedSize = <String>[];
                                              if (shoe17== true){
-                                               selectedSize.add("shoe17");
-                                               sizeFilter = "shoe17";
+                                               selectedSize.add("Shoe17");
+                                               sizeFilter = "Shoe17";
                                              }
                                               else{
 sizeFilter = "";
@@ -848,8 +884,8 @@ sizeFilter = "";
                                                        shoe18 = !shoe18;
                                         selectedSize = <String>[];
                                              if (shoe18== true){
-                                               selectedSize.add("shoe18");
-                                               sizeFilter = "shoe18";
+                                               selectedSize.add("Shoe18");
+                                               sizeFilter = "Shoe18";
                                              }
                                               else{
 sizeFilter = "";
@@ -883,8 +919,8 @@ sizeFilter = "";
                                                        shoe19 = !shoe19;
                                         selectedSize = <String>[];
                                              if (shoe19== true){
-                                               selectedSize.add("shoe19");
-                                               sizeFilter = "shoe19";
+                                               selectedSize.add("Shoe19");
+                                               sizeFilter = "Shoe19";
                                              }
                                               else{
 sizeFilter = "";
@@ -918,8 +954,8 @@ sizeFilter = "";
                                                        shoe20 = !shoe20;
                                         selectedSize = <String>[];
                                              if (shoe20== true){
-                                               selectedSize.add("shoe20");
-                                               sizeFilter = "shoe20";
+                                               selectedSize.add("Shoe20");
+                                               sizeFilter = "Shoe20";
                                              }
                                               else{
 sizeFilter = "";
@@ -953,8 +989,8 @@ sizeFilter = "";
                                                        shoe21 = !shoe21;
                                         selectedSize = <String>[];
                                              if (shoe21== true){
-                                               selectedSize.add("shoe21");
-                                               sizeFilter = "shoe21";
+                                               selectedSize.add("Shoe21");
+                                               sizeFilter = "Shoe21";
                                              }
                                               else{
 sizeFilter = "";
@@ -995,11 +1031,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        ring1 = !ring1;
                                         selectedSize = <String>[];
                                              if (ring1== true){
-                                               selectedSize.add("ring1");
-                                               sizeFilter = "ring1";
+                                               selectedSize.add("Ring1");
+                                               sizeFilter = "Ring1";
                                              }
                                               else{
 sizeFilter = "";
@@ -1034,8 +1106,8 @@ sizeFilter = "";
                                                        ring2 = !ring2;
                                         selectedSize = <String>[];
                                              if (ring2== true){
-                                               selectedSize.add("ring2");
-                                               sizeFilter = "ring2";
+                                               selectedSize.add("Ring2");
+                                               sizeFilter = "Ring2";
                                              }
                                               else{
 sizeFilter = "";
@@ -1070,8 +1142,8 @@ sizeFilter = "";
                                                        ring3 = !ring3;
                                         selectedSize = <String>[];
                                              if (ring3== true){
-                                               selectedSize.add("ring3");
-                                               sizeFilter = "ring3";
+                                               selectedSize.add("Ring3");
+                                               sizeFilter = "Ring3";
                                              }
                                               else{
 sizeFilter = "";
@@ -1106,8 +1178,8 @@ sizeFilter = "";
                                                        ring4 = !ring4;
                                         selectedSize = <String>[];
                                              if (ring4== true){
-                                               selectedSize.add("ring4");
-                                               sizeFilter = "ring4";
+                                               selectedSize.add("Ring4");
+                                               sizeFilter = "Ring4";
                                              }
                                               else{
 sizeFilter = "";
@@ -1142,8 +1214,8 @@ sizeFilter = "";
                                                        ring5 = !ring5;
                                         selectedSize = <String>[];
                                              if (ring5== true){
-                                               selectedSize.add("ring5");
-                                               sizeFilter = "ring5";
+                                               selectedSize.add("Ring5");
+                                               sizeFilter = "Ring5";
                                              }
                                               else{
 sizeFilter = "";
@@ -1178,8 +1250,8 @@ sizeFilter = "";
                                                        ring6 = !ring6;
                                         selectedSize = <String>[];
                                              if (ring6== true){
-                                               selectedSize.add("ring6");
-                                               sizeFilter = "ring6";
+                                               selectedSize.add("Ring6");
+                                               sizeFilter = "Ring6";
                                              }
                                               else{
 sizeFilter = "";
@@ -1214,8 +1286,8 @@ sizeFilter = "";
                                                        ring7 = !ring7;
                                         selectedSize = <String>[];
                                              if (ring7== true){
-                                               selectedSize.add("ring7");
-                                               sizeFilter = "ring7";
+                                               selectedSize.add("Ring7");
+                                               sizeFilter = "Ring7";
                                              }
                                               else{
 sizeFilter = "";
@@ -1250,8 +1322,8 @@ sizeFilter = "";
                                                        ring8 = !ring8;
                                         selectedSize = <String>[];
                                              if (ring8== true){
-                                               selectedSize.add("ring8");
-                                               sizeFilter = "ring8";
+                                               selectedSize.add("Ring8");
+                                               sizeFilter = "Ring8";
                                              }
                                               else{
 sizeFilter = "";
@@ -1286,8 +1358,8 @@ sizeFilter = "";
                                                        ring9 = !ring9;
                                         selectedSize = <String>[];
                                              if (ring9== true){
-                                               selectedSize.add("ring9");
-                                               sizeFilter = "ring9";
+                                               selectedSize.add("Ring9");
+                                               sizeFilter = "Ring9";
                                              }
                                               else{
 sizeFilter = "";
@@ -1322,8 +1394,8 @@ sizeFilter = "";
                                                        ring10 = !ring10;
                                         selectedSize = <String>[];
                                              if (ring10== true){
-                                               selectedSize.add("ring10");
-                                               sizeFilter = "ring10";
+                                               selectedSize.add("Ring10");
+                                               sizeFilter = "Ring10";
                                              }
                                               else{
 sizeFilter = "";
@@ -1357,8 +1429,8 @@ sizeFilter = "";
                                                        ring11 = !ring11;
                                         selectedSize = <String>[];
                                              if (ring11== true){
-                                               selectedSize.add("ring11");
-                                               sizeFilter = "ring11";
+                                               selectedSize.add("Ring11");
+                                               sizeFilter = "Ring11";
                                              }
                                               else{
 sizeFilter = "";
@@ -1392,8 +1464,8 @@ sizeFilter = "";
                                                        ring12 = !ring12;
                                         selectedSize = <String>[];
                                              if (ring12== true){
-                                               selectedSize.add("ring12");
-                                               sizeFilter = "ring12";
+                                               selectedSize.add("Ring12");
+                                               sizeFilter = "Ring12";
                                              }
                                               else{
 sizeFilter = "";
@@ -1427,8 +1499,8 @@ sizeFilter = "";
                                                        ring13 = !ring13;
                                         selectedSize = <String>[];
                                              if (ring13== true){
-                                               selectedSize.add("ring13");
-                                               sizeFilter = "ring13";
+                                               selectedSize.add("Ring13");
+                                               sizeFilter = "Ring13";
                                              }
                                               else{
 sizeFilter = "";
@@ -1462,8 +1534,8 @@ sizeFilter = "";
                                                        ring14 = !ring14;
                                         selectedSize = <String>[];
                                              if (ring14== true){
-                                               selectedSize.add("ring14");
-                                               sizeFilter = "ring14";
+                                               selectedSize.add("Ring14");
+                                               sizeFilter = "Ring14";
                                              }
                                               else{
 sizeFilter = "";
@@ -1497,8 +1569,8 @@ sizeFilter = "";
                                                        ring15 = !ring15;
                                         selectedSize = <String>[];
                                              if (ring15== true){
-                                               selectedSize.add("ring15");
-                                               sizeFilter = "ring15";
+                                               selectedSize.add("Ring15");
+                                               sizeFilter = "Ring15";
                                              }
                                               else{
 sizeFilter = "";
@@ -1532,8 +1604,8 @@ sizeFilter = "";
                                                        ring16 = !ring16;
                                         selectedSize = <String>[];
                                              if (ring16== true){
-                                               selectedSize.add("ring16");
-                                               sizeFilter = "ring16";
+                                               selectedSize.add("Ring16");
+                                               sizeFilter = "Ring16";
                                              }
                                               else{
 sizeFilter = "";
@@ -1567,8 +1639,8 @@ sizeFilter = "";
                                                        ring17 = !ring17;
                                         selectedSize = <String>[];
                                              if (ring17== true){
-                                               selectedSize.add("ring17");
-                                               sizeFilter = "ring17";
+                                               selectedSize.add("Ring17");
+                                               sizeFilter = "Ring17";
                                              }
                                               else{
 sizeFilter = "";
@@ -1602,8 +1674,8 @@ sizeFilter = "";
                                                        ring18 = !ring18;
                                         selectedSize = <String>[];
                                              if (ring18== true){
-                                               selectedSize.add("ring18");
-                                               sizeFilter = "ring18";
+                                               selectedSize.add("Ring18");
+                                               sizeFilter = "Ring18";
                                              }
                                               else{
 sizeFilter = "";
@@ -1637,8 +1709,8 @@ sizeFilter = "";
                                                        ring19 = !ring19;
                                         selectedSize = <String>[];
                                              if (ring19== true){
-                                               selectedSize.add("ring19");
-                                               sizeFilter = "ring19";
+                                               selectedSize.add("Ring19");
+                                               sizeFilter = "Ring19";
                                              }
                                               else{
 sizeFilter = "";
@@ -1672,8 +1744,8 @@ sizeFilter = "";
                                                        ring20 = !ring20;
                                         selectedSize = <String>[];
                                              if (ring20== true){
-                                               selectedSize.add("ring20");
-                                               sizeFilter = "ring20";
+                                               selectedSize.add("Ring20");
+                                               sizeFilter = "Ring20";
                                              }
                                               else{
 sizeFilter = "";
@@ -1707,8 +1779,8 @@ sizeFilter = "";
                                                        ring21 = !ring21;
                                         selectedSize = <String>[];
                                              if (ring21== true){
-                                               selectedSize.add("ring21");
-                                               sizeFilter = "ring21";
+                                               selectedSize.add("Ring21");
+                                               sizeFilter = "Ring21";
                                              }
                                               else{
 sizeFilter = "";
@@ -1742,8 +1814,8 @@ sizeFilter = "";
                                                        ring22 = !ring22;
                                         selectedSize = <String>[];
                                              if (ring22== true){
-                                               selectedSize.add("ring22");
-                                               sizeFilter = "ring22";
+                                               selectedSize.add("Ring22");
+                                               sizeFilter = "Ring22";
                                              }
                                               else{
 sizeFilter = "";
@@ -1777,8 +1849,8 @@ sizeFilter = "";
                                                        ring23 = !ring23;
                                         selectedSize = <String>[];
                                              if (ring23== true){
-                                               selectedSize.add("ring23");
-                                               sizeFilter = "ring23";
+                                               selectedSize.add("Ring23");
+                                               sizeFilter = "Ring23";
                                              }
                                               else{
 sizeFilter = "";
@@ -1813,9 +1885,80 @@ sizeFilter = "";
                                       ]
                                   ) :
                                   ExpansionTile(
-                                      title: Text("Clothing Size"),
+                                      title: Text("Sort by Size"),
                                       children: [Column(
                                         children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                frees = !frees;
+                                                selectedSize = <String>[];
+                                                if (frees== true){
+                                                  selectedSize.add("freesizeQuantity");
+                                                  sizeFilter = "freesizeQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: frees ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Free Size',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
                                           InkWell(
                                             onTap: ()
                                             {
@@ -1823,8 +1966,8 @@ sizeFilter = "";
                                                 xxxs = !xxxs;
                                                 selectedSize = <String>[];
                                                 if (xxxs == true){
-                                                  selectedSize.add("XXXS");
-                                                  sizeFilter = "XXXS";
+                                                  selectedSize.add("xxxsQuantity");
+                                                  sizeFilter = "xxxsQuantity";
                                                 }
 
                                                 else{
@@ -1860,8 +2003,8 @@ sizeFilter = "";
                                                 xxs = !xxs;
                                                 selectedSize = <String>[];
                                                 if (xxs == true){
-                                                  selectedSize.add("XXS");
-                                                  sizeFilter = "XXS";
+                                                  selectedSize.add("xxsQuantity");
+                                                  sizeFilter = "xxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -1896,8 +2039,8 @@ sizeFilter = "";
                                                 xs = !xs;
                                                 selectedSize = <String>[];
                                                 if (xs == true){
-                                                  selectedSize.add("XS");
-                                                  sizeFilter = "XS";
+                                                  selectedSize.add("xsQuantity");
+                                                  sizeFilter = "xsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -1932,8 +2075,8 @@ sizeFilter = "";
                                                 s = !s;
                                                 selectedSize = <String>[];
                                                 if (s == true){
-                                                  selectedSize.add("S");
-                                                  sizeFilter = "S";
+                                                  selectedSize.add("sQuantity");
+                                                  sizeFilter = "sQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -1968,8 +2111,8 @@ sizeFilter = "";
                                                 m = !m;
                                                 selectedSize = <String>[];
                                                 if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
+                                                  selectedSize.add("mQuantity");
+                                                  sizeFilter = "mQuantity";
                                                 }
 
                                                 else{
@@ -2005,8 +2148,8 @@ sizeFilter = "";
                                                 l = !l;
                                                 selectedSize = <String>[];
                                                 if (l == true){
-                                                  selectedSize.add("L");
-                                                  sizeFilter = "L";
+                                                  selectedSize.add("lQuantity");
+                                                  sizeFilter = "lQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2041,8 +2184,8 @@ sizeFilter = "";
                                                 xl = !xl;
                                                 selectedSize = <String>[];
                                                 if (xl == true){
-                                                  selectedSize.add("XL");
-                                                  sizeFilter = "XL";
+                                                  selectedSize.add("xlQuantity");
+                                                  sizeFilter = "xlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2077,8 +2220,8 @@ sizeFilter = "";
                                                 xxl = !xxl;
                                                 selectedSize = <String>[];
                                                 if (xxl == true){
-                                                  selectedSize.add("XXL");
-                                                  sizeFilter = "XXL";
+                                                  selectedSize.add("xxlQuantity");
+                                                  sizeFilter = "xxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2114,8 +2257,8 @@ sizeFilter = "";
                                                 xxxl = !xxxl;
                                                 selectedSize = <String>[];
                                                 if (xxxl == true){
-                                                  selectedSize.add("XXXL");
-                                                  sizeFilter = "XXXL";
+                                                  selectedSize.add("xxxlQuantity");
+                                                  sizeFilter = "xxxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2150,8 +2293,8 @@ sizeFilter = "";
                                                 fourl = !fourl;
                                                 selectedSize = <String>[];
                                                 if (fourl == true){
-                                                  selectedSize.add("4XL");
-                                                  sizeFilter = "4XL";
+                                                  selectedSize.add("fourxlQuantity");
+                                                  sizeFilter = "fourxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2186,8 +2329,8 @@ sizeFilter = "";
                                                 fivel = !fivel;
                                                 selectedSize = <String>[];
                                                 if (fivel == true){
-                                                  selectedSize.add("5XL");
-                                                  sizeFilter = "5XL";
+                                                  selectedSize.add("fivexlQuantity");
+                                                  sizeFilter = "fivexlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2222,8 +2365,8 @@ sizeFilter = "";
                                                 sixl = !sixl;
                                                 selectedSize = <String>[];
                                                 if (sixl == true){
-                                                  selectedSize.add("6XL");
-                                                  sizeFilter = "6XL";
+                                                  selectedSize.add("sixxlQuantity");
+                                                  sizeFilter = "sixxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2258,8 +2401,8 @@ sizeFilter = "";
                                                 sevenl = !sevenl;
                                                 selectedSize = <String>[];
                                                 if (sevenl == true){
-                                                  selectedSize.add("7XL");
-                                                  sizeFilter = "7XL";
+                                                  selectedSize.add("sevenxlQuantity");
+                                                  sizeFilter = "sevenxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2293,8 +2436,8 @@ sizeFilter = "";
                                                 eightl = !eightl;
                                                 selectedSize = <String>[];
                                                 if (eightl == true){
-                                                  selectedSize.add("8XL");
-                                                  sizeFilter = "8XL";
+                                                  selectedSize.add("eightxlQuantity");
+                                                  sizeFilter = "eightxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -2347,7 +2490,27 @@ sizeFilter = "";
                                       ]
                                   ),
                                   FloatingActionButton.extended(onPressed: () {
-                                    duties ? setState(() {
+                                   priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                     duties ? setState(() {
                                       priceQuery =
                                           priceQuery.replaceAll("D", "");
                                       AQuery = AQuery.replaceAll("D", "");
@@ -2414,46 +2577,46 @@ sizeFilter = "";
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
                                     setState(() {
-                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
-                                      AQuery = AQuery.replaceAll(sizeFilter, "");
-                                      BQuery = BQuery.replaceAll(sizeFilter, "");
-                                      CQuery = CQuery.replaceAll(sizeFilter, "");
-                                      DQuery = DQuery.replaceAll(sizeFilter, "");
-                                      EQuery = EQuery.replaceAll(sizeFilter, "");
-                                      FQuery = FQuery.replaceAll(sizeFilter, "");
-                                      GQuery = GQuery.replaceAll(sizeFilter, "");
-                                      HQuery = HQuery.replaceAll(sizeFilter, "");
-                                      IQuery = IQuery.replaceAll(sizeFilter, "");
-                                      JQuery = JQuery.replaceAll(sizeFilter, "");
-                                      KQuery = KQuery.replaceAll(sizeFilter, "");
-                                      LQuery = LQuery.replaceAll(sizeFilter, "");
-                                      MQuery = MQuery.replaceAll(sizeFilter, "");
-                                      NQuery = NQuery.replaceAll(sizeFilter, "");
-                                      OQuery = OQuery.replaceAll(sizeFilter, "");
-                                      PQuery = PQuery.replaceAll(sizeFilter, "");
-                                      QQuery = QQuery.replaceAll(sizeFilter, "");
-                                      RQuery = RQuery.replaceAll(sizeFilter, "");
-                                      SQuery = SQuery.replaceAll(sizeFilter, "");
-                                      priceQuery = priceQuery + sizeFilter;
-                                      AQuery = AQuery + sizeFilter;
-                                      BQuery = BQuery + sizeFilter;
-                                      CQuery = CQuery + sizeFilter;
-                                      DQuery = DQuery + sizeFilter;
-                                      EQuery = EQuery + sizeFilter;
-                                      FQuery = FQuery + sizeFilter;
-                                      GQuery = GQuery + sizeFilter;
-                                      HQuery = HQuery + sizeFilter;
-                                      IQuery = IQuery + sizeFilter;
-                                      JQuery = JQuery + sizeFilter;
-                                      KQuery = KQuery + sizeFilter;
-                                      LQuery = LQuery + sizeFilter;
-                                      MQuery = MQuery + sizeFilter;
-                                      NQuery = NQuery + sizeFilter;
-                                      OQuery = OQuery + sizeFilter;
-                                      PQuery = PQuery + sizeFilter;
-                                      QQuery = QQuery + sizeFilter;
-                                      RQuery = RQuery + sizeFilter;
-                                      SQuery = SQuery + sizeFilter;
+                                      priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                                      priceQuery = priceQuery + "S$sizeFilter";
+                                      AQuery = AQuery + "S$sizeFilter";
+                                      BQuery = BQuery + "S$sizeFilter";
+                                      CQuery = CQuery + "S$sizeFilter";
+                                      DQuery = DQuery + "S$sizeFilter";
+                                      EQuery = EQuery + "S$sizeFilter";
+                                      FQuery = FQuery + "S$sizeFilter";
+                                      GQuery = GQuery + "S$sizeFilter";
+                                      HQuery = HQuery + "S$sizeFilter";
+                                      IQuery = IQuery + "S$sizeFilter";
+                                      JQuery = JQuery + "S$sizeFilter";
+                                      KQuery = KQuery + "S$sizeFilter";
+                                      LQuery = LQuery + "S$sizeFilter";
+                                      MQuery = MQuery + "S$sizeFilter";
+                                      NQuery = NQuery + "S$sizeFilter";
+                                      OQuery = OQuery + "S$sizeFilter";
+                                      PQuery = PQuery + "S$sizeFilter";
+                                      QQuery = QQuery + "S$sizeFilter";
+                                      RQuery = RQuery + "S$sizeFilter";
+                                      SQuery = SQuery + "S$sizeFilter";
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -2672,11 +2835,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        shoe1 = !shoe1;
                                         selectedSize = <String>[];
                                              if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
+                                               selectedSize.add("Shoe1");
+                                               sizeFilter = "Shoe1";
                                              }
                                               else{
 sizeFilter = "";
@@ -2711,8 +2910,8 @@ sizeFilter = "";
                                                        shoe2 = !shoe2;
                                         selectedSize = <String>[];
                                              if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
+                                               selectedSize.add("Shoe2");
+                                               sizeFilter = "Shoe2";
                                              }
                                               else{
 sizeFilter = "";
@@ -2747,8 +2946,8 @@ sizeFilter = "";
                                                        shoe3 = !shoe3;
                                         selectedSize = <String>[];
                                              if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
+                                               selectedSize.add("Shoe3");
+                                               sizeFilter = "Shoe3";
                                              }
                                               else{
 sizeFilter = "";
@@ -2783,8 +2982,8 @@ sizeFilter = "";
                                                        shoe4 = !shoe4;
                                         selectedSize = <String>[];
                                              if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
+                                               selectedSize.add("Shoe4");
+                                               sizeFilter = "Shoe4";
                                              }
                                               else{
 sizeFilter = "";
@@ -2819,8 +3018,8 @@ sizeFilter = "";
                                                        shoe5 = !shoe5;
                                         selectedSize = <String>[];
                                              if (shoe5 == true){
-                                               selectedSize.add("shoe5");
-                                               sizeFilter = "shoe5";
+                                               selectedSize.add("Shoe5");
+                                               sizeFilter = "Shoe5";
                                              }
                                               else{
 sizeFilter = "";
@@ -2855,8 +3054,8 @@ sizeFilter = "";
                                                        shoe6 = !shoe6;
                                         selectedSize = <String>[];
                                              if (shoe6 == true){
-                                               selectedSize.add("shoe6");
-                                               sizeFilter = "shoe6";
+                                               selectedSize.add("Shoe6");
+                                               sizeFilter = "Shoe6";
                                              }
                                               else{
 sizeFilter = "";
@@ -2891,8 +3090,8 @@ sizeFilter = "";
                                                        shoe7 = !shoe7;
                                         selectedSize = <String>[];
                                              if (shoe7 == true){
-                                               selectedSize.add("shoe7");
-                                               sizeFilter = "shoe7";
+                                               selectedSize.add("Shoe7");
+                                               sizeFilter = "Shoe7";
                                              }
                                               else{
 sizeFilter = "";
@@ -2927,8 +3126,8 @@ sizeFilter = "";
                                                        shoe8 = !shoe8;
                                         selectedSize = <String>[];
                                              if (shoe8 == true){
-                                               selectedSize.add("shoe8");
-                                               sizeFilter = "shoe8";
+                                               selectedSize.add("Shoe8");
+                                               sizeFilter = "Shoe8";
                                              }
                                               else{
 sizeFilter = "";
@@ -2963,8 +3162,8 @@ sizeFilter = "";
                                                        shoe9 = !shoe9;
                                         selectedSize = <String>[];
                                              if (shoe9 == true){
-                                               selectedSize.add("shoe9");
-                                               sizeFilter = "shoe9";
+                                               selectedSize.add("Shoe9");
+                                               sizeFilter = "Shoe9";
                                              }
                                               else{
 sizeFilter = "";
@@ -2999,8 +3198,8 @@ sizeFilter = "";
                                                        shoe10 = !shoe10;
                                         selectedSize = <String>[];
                                              if (shoe10 == true){
-                                               selectedSize.add("shoe10");
-                                               sizeFilter = "shoe10";
+                                               selectedSize.add("Shoe10");
+                                               sizeFilter = "Shoe10";
                                              }
                                               else{
 sizeFilter = "";
@@ -3034,8 +3233,8 @@ sizeFilter = "";
                                                        shoe11 = !shoe11;
                                         selectedSize = <String>[];
                                              if (shoe11 == true){
-                                               selectedSize.add("shoe11");
-                                               sizeFilter = "shoe11";
+                                               selectedSize.add("Shoe11");
+                                               sizeFilter = "Shoe11";
                                              }
                                               else{
 sizeFilter = "";
@@ -3069,8 +3268,8 @@ sizeFilter = "";
                                                        shoe12 = !shoe12;
                                         selectedSize = <String>[];
                                              if (shoe12 == true){
-                                               selectedSize.add("shoe12");
-                                               sizeFilter = "shoe12";
+                                               selectedSize.add("Shoe12");
+                                               sizeFilter = "Shoe12";
                                              }
                                               else{
 sizeFilter = "";
@@ -3104,8 +3303,8 @@ sizeFilter = "";
                                                        shoe13 = !shoe13;
                                         selectedSize = <String>[];
                                              if (shoe13 == true){
-                                               selectedSize.add("shoe13");
-                                               sizeFilter = "shoe13";
+                                               selectedSize.add("Shoe13");
+                                               sizeFilter = "Shoe13";
                                              }
                                               else{
 sizeFilter = "";
@@ -3139,8 +3338,8 @@ sizeFilter = "";
                                                        shoe14 = !shoe14;
                                         selectedSize = <String>[];
                                              if (shoe14 == true){
-                                               selectedSize.add("shoe14");
-                                               sizeFilter = "shoe14";
+                                               selectedSize.add("Shoe14");
+                                               sizeFilter = "Shoe14";
                                              }
                                               else{
 sizeFilter = "";
@@ -3174,8 +3373,8 @@ sizeFilter = "";
                                                        shoe15 = !shoe15;
                                         selectedSize = <String>[];
                                              if (shoe15== true){
-                                               selectedSize.add("shoe15");
-                                               sizeFilter = "shoe15";
+                                               selectedSize.add("Shoe15");
+                                               sizeFilter = "Shoe15";
                                              }
                                               else{
 sizeFilter = "";
@@ -3209,8 +3408,8 @@ sizeFilter = "";
                                                        shoe16 = !shoe16;
                                         selectedSize = <String>[];
                                              if (shoe16== true){
-                                               selectedSize.add("shoe16");
-                                               sizeFilter = "shoe16";
+                                               selectedSize.add("Shoe16");
+                                               sizeFilter = "Shoe16";
                                              }
                                               else{
 sizeFilter = "";
@@ -3252,11 +3451,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        ring1 = !ring1;
                                         selectedSize = <String>[];
                                              if (ring1== true){
-                                               selectedSize.add("ring1");
-                                               sizeFilter = "ring1";
+                                               selectedSize.add("Ring1");
+                                               sizeFilter = "Ring1";
                                              }
                                               else{
 sizeFilter = "";
@@ -3291,8 +3526,8 @@ sizeFilter = "";
                                                        ring2 = !ring2;
                                         selectedSize = <String>[];
                                              if (ring2== true){
-                                               selectedSize.add("ring2");
-                                               sizeFilter = "ring2";
+                                               selectedSize.add("Ring2");
+                                               sizeFilter = "Ring2";
                                              }
                                               else{
 sizeFilter = "";
@@ -3327,8 +3562,8 @@ sizeFilter = "";
                                                        ring3 = !ring3;
                                         selectedSize = <String>[];
                                              if (ring3== true){
-                                               selectedSize.add("ring3");
-                                               sizeFilter = "ring3";
+                                               selectedSize.add("Ring3");
+                                               sizeFilter = "Ring3";
                                              }
                                               else{
 sizeFilter = "";
@@ -3363,8 +3598,8 @@ sizeFilter = "";
                                                        ring4 = !ring4;
                                         selectedSize = <String>[];
                                              if (ring4== true){
-                                               selectedSize.add("ring4");
-                                               sizeFilter = "ring4";
+                                               selectedSize.add("Ring4");
+                                               sizeFilter = "Ring4";
                                              }
                                               else{
 sizeFilter = "";
@@ -3399,8 +3634,8 @@ sizeFilter = "";
                                                        ring5 = !ring5;
                                         selectedSize = <String>[];
                                              if (ring5== true){
-                                               selectedSize.add("ring5");
-                                               sizeFilter = "ring5";
+                                               selectedSize.add("Ring5");
+                                               sizeFilter = "Ring5";
                                              }
                                               else{
 sizeFilter = "";
@@ -3435,8 +3670,8 @@ sizeFilter = "";
                                                        ring6 = !ring6;
                                         selectedSize = <String>[];
                                              if (ring6== true){
-                                               selectedSize.add("ring6");
-                                               sizeFilter = "ring6";
+                                               selectedSize.add("Ring6");
+                                               sizeFilter = "Ring6";
                                              }
                                               else{
 sizeFilter = "";
@@ -3471,8 +3706,8 @@ sizeFilter = "";
                                                        ring7 = !ring7;
                                         selectedSize = <String>[];
                                              if (ring7== true){
-                                               selectedSize.add("ring7");
-                                               sizeFilter = "ring7";
+                                               selectedSize.add("Ring7");
+                                               sizeFilter = "Ring7";
                                              }
                                               else{
 sizeFilter = "";
@@ -3507,8 +3742,8 @@ sizeFilter = "";
                                                        ring8 = !ring8;
                                         selectedSize = <String>[];
                                              if (ring8== true){
-                                               selectedSize.add("ring8");
-                                               sizeFilter = "ring8";
+                                               selectedSize.add("Ring8");
+                                               sizeFilter = "Ring8";
                                              }
                                               else{
 sizeFilter = "";
@@ -3543,8 +3778,8 @@ sizeFilter = "";
                                                        ring9 = !ring9;
                                         selectedSize = <String>[];
                                              if (ring9== true){
-                                               selectedSize.add("ring9");
-                                               sizeFilter = "ring9";
+                                               selectedSize.add("Ring9");
+                                               sizeFilter = "Ring9";
                                              }
                                               else{
 sizeFilter = "";
@@ -3579,8 +3814,8 @@ sizeFilter = "";
                                                        ring10 = !ring10;
                                         selectedSize = <String>[];
                                              if (ring10== true){
-                                               selectedSize.add("ring10");
-                                               sizeFilter = "ring10";
+                                               selectedSize.add("Ring10");
+                                               sizeFilter = "Ring10";
                                              }
                                               else{
 sizeFilter = "";
@@ -3614,8 +3849,8 @@ sizeFilter = "";
                                                        ring11 = !ring11;
                                         selectedSize = <String>[];
                                              if (ring11== true){
-                                               selectedSize.add("ring11");
-                                               sizeFilter = "ring11";
+                                               selectedSize.add("Ring11");
+                                               sizeFilter = "Ring11";
                                              }
                                               else{
 sizeFilter = "";
@@ -3649,8 +3884,8 @@ sizeFilter = "";
                                                        ring12 = !ring12;
                                         selectedSize = <String>[];
                                              if (ring12== true){
-                                               selectedSize.add("ring12");
-                                               sizeFilter = "ring12";
+                                               selectedSize.add("Ring12");
+                                               sizeFilter = "Ring12";
                                              }
                                               else{
 sizeFilter = "";
@@ -3684,8 +3919,8 @@ sizeFilter = "";
                                                        ring13 = !ring13;
                                         selectedSize = <String>[];
                                              if (ring13== true){
-                                               selectedSize.add("ring13");
-                                               sizeFilter = "ring13";
+                                               selectedSize.add("Ring13");
+                                               sizeFilter = "Ring13";
                                              }
                                               else{
 sizeFilter = "";
@@ -3719,8 +3954,8 @@ sizeFilter = "";
                                                        ring14 = !ring14;
                                         selectedSize = <String>[];
                                              if (ring14== true){
-                                               selectedSize.add("ring14");
-                                               sizeFilter = "ring14";
+                                               selectedSize.add("Ring14");
+                                               sizeFilter = "Ring14";
                                              }
                                               else{
 sizeFilter = "";
@@ -3754,8 +3989,8 @@ sizeFilter = "";
                                                        ring15 = !ring15;
                                         selectedSize = <String>[];
                                              if (ring15== true){
-                                               selectedSize.add("ring15");
-                                               sizeFilter = "ring15";
+                                               selectedSize.add("Ring15");
+                                               sizeFilter = "Ring15";
                                              }
                                               else{
 sizeFilter = "";
@@ -3789,8 +4024,8 @@ sizeFilter = "";
                                                        ring16 = !ring16;
                                         selectedSize = <String>[];
                                              if (ring16== true){
-                                               selectedSize.add("ring16");
-                                               sizeFilter = "ring16";
+                                               selectedSize.add("Ring16");
+                                               sizeFilter = "Ring16";
                                              }
                                               else{
 sizeFilter = "";
@@ -3824,8 +4059,8 @@ sizeFilter = "";
                                                        ring17 = !ring17;
                                         selectedSize = <String>[];
                                              if (ring17== true){
-                                               selectedSize.add("ring17");
-                                               sizeFilter = "ring17";
+                                               selectedSize.add("Ring17");
+                                               sizeFilter = "Ring17";
                                              }
                                               else{
 sizeFilter = "";
@@ -3859,8 +4094,8 @@ sizeFilter = "";
                                                        ring18 = !ring18;
                                         selectedSize = <String>[];
                                              if (ring18== true){
-                                               selectedSize.add("ring18");
-                                               sizeFilter = "ring18";
+                                               selectedSize.add("Ring18");
+                                               sizeFilter = "Ring18";
                                              }
                                               else{
 sizeFilter = "";
@@ -3894,8 +4129,8 @@ sizeFilter = "";
                                                        ring19 = !ring19;
                                         selectedSize = <String>[];
                                              if (ring19== true){
-                                               selectedSize.add("ring19");
-                                               sizeFilter = "ring19";
+                                               selectedSize.add("Ring19");
+                                               sizeFilter = "Ring19";
                                              }
                                               else{
 sizeFilter = "";
@@ -3929,8 +4164,8 @@ sizeFilter = "";
                                                        ring20 = !ring20;
                                         selectedSize = <String>[];
                                              if (ring20== true){
-                                               selectedSize.add("ring20");
-                                               sizeFilter = "ring20";
+                                               selectedSize.add("Ring20");
+                                               sizeFilter = "Ring20";
                                              }
                                               else{
 sizeFilter = "";
@@ -3964,8 +4199,8 @@ sizeFilter = "";
                                                        ring21 = !ring21;
                                         selectedSize = <String>[];
                                              if (ring21== true){
-                                               selectedSize.add("ring21");
-                                               sizeFilter = "ring21";
+                                               selectedSize.add("Ring21");
+                                               sizeFilter = "Ring21";
                                              }
                                               else{
 sizeFilter = "";
@@ -3999,8 +4234,8 @@ sizeFilter = "";
                                                        ring22 = !ring22;
                                         selectedSize = <String>[];
                                              if (ring22== true){
-                                               selectedSize.add("ring22");
-                                               sizeFilter = "ring22";
+                                               selectedSize.add("Ring22");
+                                               sizeFilter = "Ring22";
                                              }
                                               else{
 sizeFilter = "";
@@ -4034,8 +4269,8 @@ sizeFilter = "";
                                                        ring23 = !ring23;
                                         selectedSize = <String>[];
                                              if (ring23== true){
-                                               selectedSize.add("ring23");
-                                               sizeFilter = "ring23";
+                                               selectedSize.add("Ring23");
+                                               sizeFilter = "Ring23";
                                              }
                                               else{
 sizeFilter = "";
@@ -4070,9 +4305,80 @@ sizeFilter = "";
                                       ]
                                   ) :
                                   ExpansionTile(
-                                      title: Text("Clothing Size"),
+                                      title: Text("Sort by size"),
                                       children: [Column(
                                         children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                frees = !frees;
+                                                selectedSize = <String>[];
+                                                if (frees== true){
+                                                  selectedSize.add("freesizeQuantity");
+                                                  sizeFilter = "freesizeQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: frees ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Free Size',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
                                           InkWell(
                                             onTap: ()
                                             {
@@ -4080,8 +4386,8 @@ sizeFilter = "";
                                                 xxxs = !xxxs;
                                                 selectedSize = <String>[];
                                                 if (xxxs == true){
-                                                  selectedSize.add("XXXS");
-                                                  sizeFilter = "XXXS";
+                                                  selectedSize.add("xxxsQuantity");
+                                                  sizeFilter = "xxxsQuantity";
                                                 }
 
                                               else{
@@ -4117,8 +4423,8 @@ sizeFilter = "";
                                                 xxs = !xxs;
                                                 selectedSize = <String>[];
                                                 if (xxs == true){
-                                                  selectedSize.add("XXS");
-                                                  sizeFilter = "XXS";
+                                                  selectedSize.add("xxsQuantity");
+                                                  sizeFilter = "xxsQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4153,8 +4459,8 @@ sizeFilter = "";
                                                 xs = !xs;
                                                 selectedSize = <String>[];
                                                 if (xs == true){
-                                                  selectedSize.add("XS");
-                                                  sizeFilter = "XS";
+                                                  selectedSize.add("xsQuantity");
+                                                  sizeFilter = "xsQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4189,8 +4495,8 @@ sizeFilter = "";
                                                 s = !s;
                                                 selectedSize = <String>[];
                                                 if (s == true){
-                                                  selectedSize.add("S");
-                                                  sizeFilter = "S";
+                                                  selectedSize.add("sQuantity");
+                                                  sizeFilter = "sQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4225,8 +4531,8 @@ sizeFilter = "";
                                                 m = !m;
                                                 selectedSize = <String>[];
                                                 if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
+                                                  selectedSize.add("mQuantity");
+                                                  sizeFilter = "mQuantity";
                                                 }
 
                                               else{
@@ -4262,8 +4568,8 @@ sizeFilter = "";
                                                 l = !l;
                                                 selectedSize = <String>[];
                                                 if (l == true){
-                                                  selectedSize.add("L");
-                                                  sizeFilter = "L";
+                                                  selectedSize.add("lQuantity");
+                                                  sizeFilter = "lQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4298,8 +4604,8 @@ sizeFilter = "";
                                                 xl = !xl;
                                                 selectedSize = <String>[];
                                                 if (xl == true){
-                                                  selectedSize.add("XL");
-                                                  sizeFilter = "XL";
+                                                  selectedSize.add("xlQuantity");
+                                                  sizeFilter = "xlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4334,8 +4640,8 @@ sizeFilter = "";
                                                 xxl = !xxl;
                                                 selectedSize = <String>[];
                                                 if (xxl == true){
-                                                  selectedSize.add("XXL");
-                                                  sizeFilter = "XXL";
+                                                  selectedSize.add("xxlQuantity");
+                                                  sizeFilter = "xxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4371,8 +4677,8 @@ sizeFilter = "";
                                                 xxxl = !xxxl;
                                                 selectedSize = <String>[];
                                                 if (xxxl == true){
-                                                  selectedSize.add("XXXL");
-                                                  sizeFilter = "XXXL";
+                                                  selectedSize.add("xxxlQuantity");
+                                                  sizeFilter = "xxxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4407,8 +4713,8 @@ sizeFilter = "";
                                                 fourl = !fourl;
                                                 selectedSize = <String>[];
                                                 if (fourl == true){
-                                                  selectedSize.add("4XL");
-                                                  sizeFilter = "4XL";
+                                                  selectedSize.add("fourxlQuantity");
+                                                  sizeFilter = "fourxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4443,8 +4749,8 @@ sizeFilter = "";
                                                 fivel = !fivel;
                                                 selectedSize = <String>[];
                                                 if (fivel == true){
-                                                  selectedSize.add("5XL");
-                                                  sizeFilter = "5XL";
+                                                  selectedSize.add("fivexlQuantity");
+                                                  sizeFilter = "fivexlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4479,8 +4785,8 @@ sizeFilter = "";
                                                 sixl = !sixl;
                                                 selectedSize = <String>[];
                                                 if (sixl == true){
-                                                  selectedSize.add("6XL");
-                                                  sizeFilter = "6XL";
+                                                  selectedSize.add("sixxlQuantity");
+                                                  sizeFilter = "sixxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4515,8 +4821,8 @@ sizeFilter = "";
                                                 sevenl = !sevenl;
                                                 selectedSize = <String>[];
                                                 if (sevenl == true){
-                                                  selectedSize.add("7XL");
-                                                  sizeFilter = "7XL";
+                                                  selectedSize.add("sevenxlQuantity");
+                                                  sizeFilter = "sevenxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4550,8 +4856,8 @@ sizeFilter = "";
                                                 eightl = !eightl;
                                                 selectedSize = <String>[];
                                                 if (eightl == true){
-                                                  selectedSize.add("8XL");
-                                                  sizeFilter = "8XL";
+                                                  selectedSize.add("eightxlQuantity");
+                                                  sizeFilter = "eightxlQuantity";
                                                 }
                                               else{
 sizeFilter = "";
@@ -4604,7 +4910,27 @@ sizeFilter = "";
                                       ]
                                   ),
                                   FloatingActionButton.extended(onPressed: () {
-                                    duties ? setState(() {
+                                   priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+ duties ? setState(() {
                                       priceQuery =
                                           priceQuery.replaceAll("D", "");
                                       AQuery = AQuery.replaceAll("D", "");
@@ -4671,46 +4997,46 @@ sizeFilter = "";
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
                                     setState(() {
-                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
-                                      AQuery = AQuery.replaceAll(sizeFilter, "");
-                                      BQuery = BQuery.replaceAll(sizeFilter, "");
-                                      CQuery = CQuery.replaceAll(sizeFilter, "");
-                                      DQuery = DQuery.replaceAll(sizeFilter, "");
-                                      EQuery = EQuery.replaceAll(sizeFilter, "");
-                                      FQuery = FQuery.replaceAll(sizeFilter, "");
-                                      GQuery = GQuery.replaceAll(sizeFilter, "");
-                                      HQuery = HQuery.replaceAll(sizeFilter, "");
-                                      IQuery = IQuery.replaceAll(sizeFilter, "");
-                                      JQuery = JQuery.replaceAll(sizeFilter, "");
-                                      KQuery = KQuery.replaceAll(sizeFilter, "");
-                                      LQuery = LQuery.replaceAll(sizeFilter, "");
-                                      MQuery = MQuery.replaceAll(sizeFilter, "");
-                                      NQuery = NQuery.replaceAll(sizeFilter, "");
-                                      OQuery = OQuery.replaceAll(sizeFilter, "");
-                                      PQuery = PQuery.replaceAll(sizeFilter, "");
-                                      QQuery = QQuery.replaceAll(sizeFilter, "");
-                                      RQuery = RQuery.replaceAll(sizeFilter, "");
-                                      SQuery = SQuery.replaceAll(sizeFilter, "");
-                                      priceQuery = priceQuery + sizeFilter;
-                                      AQuery = AQuery + sizeFilter;
-                                      BQuery = BQuery + sizeFilter;
-                                      CQuery = CQuery + sizeFilter;
-                                      DQuery = DQuery + sizeFilter;
-                                      EQuery = EQuery + sizeFilter;
-                                      FQuery = FQuery + sizeFilter;
-                                      GQuery = GQuery + sizeFilter;
-                                      HQuery = HQuery + sizeFilter;
-                                      IQuery = IQuery + sizeFilter;
-                                      JQuery = JQuery + sizeFilter;
-                                      KQuery = KQuery + sizeFilter;
-                                      LQuery = LQuery + sizeFilter;
-                                      MQuery = MQuery + sizeFilter;
-                                      NQuery = NQuery + sizeFilter;
-                                      OQuery = OQuery + sizeFilter;
-                                      PQuery = PQuery + sizeFilter;
-                                      QQuery = QQuery + sizeFilter;
-                                      RQuery = RQuery + sizeFilter;
-                                      SQuery = SQuery + sizeFilter;
+                                      priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                                      priceQuery = priceQuery + "S$sizeFilter";
+                                      AQuery = AQuery + "S$sizeFilter";
+                                      BQuery = BQuery + "S$sizeFilter";
+                                      CQuery = CQuery + "S$sizeFilter";
+                                      DQuery = DQuery + "S$sizeFilter";
+                                      EQuery = EQuery + "S$sizeFilter";
+                                      FQuery = FQuery + "S$sizeFilter";
+                                      GQuery = GQuery + "S$sizeFilter";
+                                      HQuery = HQuery + "S$sizeFilter";
+                                      IQuery = IQuery + "S$sizeFilter";
+                                      JQuery = JQuery + "S$sizeFilter";
+                                      KQuery = KQuery + "S$sizeFilter";
+                                      LQuery = LQuery + "S$sizeFilter";
+                                      MQuery = MQuery + "S$sizeFilter";
+                                      NQuery = NQuery + "S$sizeFilter";
+                                      OQuery = OQuery + "S$sizeFilter";
+                                      PQuery = PQuery + "S$sizeFilter";
+                                      QQuery = QQuery + "S$sizeFilter";
+                                      RQuery = RQuery + "S$sizeFilter";
+                                      SQuery = SQuery + "S$sizeFilter";
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -4929,11 +5255,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        shoe1 = !shoe1;
                                         selectedSize = <String>[];
                                              if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
+                                               selectedSize.add("Shoe1");
+                                               sizeFilter = "Shoe1";
                                              }
                                               else{
 sizeFilter = "";
@@ -4968,8 +5330,8 @@ sizeFilter = "";
                                                        shoe2 = !shoe2;
                                         selectedSize = <String>[];
                                              if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
+                                               selectedSize.add("Shoe2");
+                                               sizeFilter = "Shoe2";
                                              }
                                               else{
 sizeFilter = "";
@@ -5004,8 +5366,8 @@ sizeFilter = "";
                                                        shoe3 = !shoe3;
                                         selectedSize = <String>[];
                                              if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
+                                               selectedSize.add("Shoe3");
+                                               sizeFilter = "Shoe3";
                                              }
                                               else{
 sizeFilter = "";
@@ -5040,8 +5402,8 @@ sizeFilter = "";
                                                        shoe4 = !shoe4;
                                         selectedSize = <String>[];
                                              if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
+                                               selectedSize.add("Shoe4");
+                                               sizeFilter = "Shoe4";
                                              }
                                               else{
 sizeFilter = "";
@@ -5077,8 +5439,8 @@ sizeFilter = "";
                                                        shoe5 = !shoe5;
                                         selectedSize = <String>[];
                                              if (shoe5 == true){
-                                               selectedSize.add("shoe5");
-                                               sizeFilter = "shoe5";
+                                               selectedSize.add("Shoe5");
+                                               sizeFilter = "Shoe5";
                                              }
                                               else{
 sizeFilter = "";
@@ -5113,8 +5475,8 @@ sizeFilter = "";
                                                        shoe6 = !shoe6;
                                         selectedSize = <String>[];
                                              if (shoe6 == true){
-                                               selectedSize.add("shoe6");
-                                               sizeFilter = "shoe6";
+                                               selectedSize.add("Shoe6");
+                                               sizeFilter = "Shoe6";
                                              }
                                               else{
 sizeFilter = "";
@@ -5150,8 +5512,8 @@ sizeFilter = "";
                                                        shoe7 = !shoe7;
                                         selectedSize = <String>[];
                                              if (shoe7 == true){
-                                               selectedSize.add("shoe7");
-                                               sizeFilter = "shoe7";
+                                               selectedSize.add("Shoe7");
+                                               sizeFilter = "Shoe7";
                                              }
                                               else{
 sizeFilter = "";
@@ -5188,17 +5550,88 @@ sizeFilter = "";
                                       ]
                                   ) :
                                   ExpansionTile(
-                                      title: Text("Clothing Size"),
+                                      title: Text("Sort by size"),
                                       children: [Column(
                                         children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                frees = !frees;
+                                                selectedSize = <String>[];
+                                                if (frees== true){
+                                                  selectedSize.add("freesizeQuantity");
+                                                  sizeFilter = "freesizeQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: frees ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Free Size',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
                                           InkWell(
                                             onTap: () {
                                               State(() {
                                                 xxxs = !xxxs;
                                                 selectedSize = <String>[];
                                                 if (xxxs == true){
-                                                  selectedSize.add("XXXS");
-                                                  sizeFilter = "XXXS";
+                                                  selectedSize.add("xxxsQuantity");
+                                                  sizeFilter = "xxxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -5233,8 +5666,8 @@ sizeFilter = "";
                                                 xxs = !xxs;
                                                 selectedSize = <String>[];
                                                 if (xxs == true){
-                                                  selectedSize.add("XXS");
-                                                  sizeFilter = "XXS";
+                                                  selectedSize.add("xxsQuantity");
+                                                  sizeFilter = "xxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -5269,8 +5702,8 @@ sizeFilter = "";
                                                 xs = !xs;
                                                 selectedSize = <String>[];
                                                 if (xs == true){
-                                                  selectedSize.add("XS");
-                                                  sizeFilter = "XS";
+                                                  selectedSize.add("xsQuantity");
+                                                  sizeFilter = "xsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -5305,8 +5738,8 @@ sizeFilter = "";
                                                 s = !s;
                                                 selectedSize = <String>[];
                                                 if (s == true){
-                                                  selectedSize.add("S");
-                                                  sizeFilter = "S";
+                                                  selectedSize.add("sQuantity");
+                                                  sizeFilter = "sQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -5341,8 +5774,8 @@ sizeFilter = "";
                                                 m = !m;
                                                 selectedSize = <String>[];
                                                 if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
+                                                  selectedSize.add("mQuantity");
+                                                  sizeFilter = "mQuantity";
                                                 }
 
                                                 else{
@@ -5378,8 +5811,8 @@ sizeFilter = "";
                                                 l = !l;
                                                 selectedSize = <String>[];
                                                 if (l == true){
-                                                  selectedSize.add("L");
-                                                  sizeFilter = "L";
+                                                  selectedSize.add("lQuantity");
+                                                  sizeFilter = "lQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -5434,7 +5867,27 @@ sizeFilter = "";
                                       ]
                                   ),
                                   FloatingActionButton.extended(onPressed: () {
-                                    duties ? setState(() {
+                                   priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+ duties ? setState(() {
                                       priceQuery =
                                           priceQuery.replaceAll("D", "");
                                       AQuery = AQuery.replaceAll("D", "");
@@ -5501,46 +5954,46 @@ sizeFilter = "";
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
                                     setState(() {
-                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
-                                      AQuery = AQuery.replaceAll(sizeFilter, "");
-                                      BQuery = BQuery.replaceAll(sizeFilter, "");
-                                      CQuery = CQuery.replaceAll(sizeFilter, "");
-                                      DQuery = DQuery.replaceAll(sizeFilter, "");
-                                      EQuery = EQuery.replaceAll(sizeFilter, "");
-                                      FQuery = FQuery.replaceAll(sizeFilter, "");
-                                      GQuery = GQuery.replaceAll(sizeFilter, "");
-                                      HQuery = HQuery.replaceAll(sizeFilter, "");
-                                      IQuery = IQuery.replaceAll(sizeFilter, "");
-                                      JQuery = JQuery.replaceAll(sizeFilter, "");
-                                      KQuery = KQuery.replaceAll(sizeFilter, "");
-                                      LQuery = LQuery.replaceAll(sizeFilter, "");
-                                      MQuery = MQuery.replaceAll(sizeFilter, "");
-                                      NQuery = NQuery.replaceAll(sizeFilter, "");
-                                      OQuery = OQuery.replaceAll(sizeFilter, "");
-                                      PQuery = PQuery.replaceAll(sizeFilter, "");
-                                      QQuery = QQuery.replaceAll(sizeFilter, "");
-                                      RQuery = RQuery.replaceAll(sizeFilter, "");
-                                      SQuery = SQuery.replaceAll(sizeFilter, "");
-                                      priceQuery = priceQuery + sizeFilter;
-                                      AQuery = AQuery + sizeFilter;
-                                      BQuery = BQuery + sizeFilter;
-                                      CQuery = CQuery + sizeFilter;
-                                      DQuery = DQuery + sizeFilter;
-                                      EQuery = EQuery + sizeFilter;
-                                      FQuery = FQuery + sizeFilter;
-                                      GQuery = GQuery + sizeFilter;
-                                      HQuery = HQuery + sizeFilter;
-                                      IQuery = IQuery + sizeFilter;
-                                      JQuery = JQuery + sizeFilter;
-                                      KQuery = KQuery + sizeFilter;
-                                      LQuery = LQuery + sizeFilter;
-                                      MQuery = MQuery + sizeFilter;
-                                      NQuery = NQuery + sizeFilter;
-                                      OQuery = OQuery + sizeFilter;
-                                      PQuery = PQuery + sizeFilter;
-                                      QQuery = QQuery + sizeFilter;
-                                      RQuery = RQuery + sizeFilter;
-                                      SQuery = SQuery + sizeFilter;
+                                      priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                                      priceQuery = priceQuery + "S$sizeFilter";
+                                      AQuery = AQuery + "S$sizeFilter";
+                                      BQuery = BQuery + "S$sizeFilter";
+                                      CQuery = CQuery + "S$sizeFilter";
+                                      DQuery = DQuery + "S$sizeFilter";
+                                      EQuery = EQuery + "S$sizeFilter";
+                                      FQuery = FQuery + "S$sizeFilter";
+                                      GQuery = GQuery + "S$sizeFilter";
+                                      HQuery = HQuery + "S$sizeFilter";
+                                      IQuery = IQuery + "S$sizeFilter";
+                                      JQuery = JQuery + "S$sizeFilter";
+                                      KQuery = KQuery + "S$sizeFilter";
+                                      LQuery = LQuery + "S$sizeFilter";
+                                      MQuery = MQuery + "S$sizeFilter";
+                                      NQuery = NQuery + "S$sizeFilter";
+                                      OQuery = OQuery + "S$sizeFilter";
+                                      PQuery = PQuery + "S$sizeFilter";
+                                      QQuery = QQuery + "S$sizeFilter";
+                                      RQuery = RQuery + "S$sizeFilter";
+                                      SQuery = SQuery + "S$sizeFilter";
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -5758,11 +6211,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        shoe1 = !shoe1;
                                         selectedSize = <String>[];
                                              if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
+                                               selectedSize.add("Shoe1");
+                                               sizeFilter = "Shoe1";
                                              }
                                               else{
 sizeFilter = "";
@@ -5797,8 +6286,8 @@ sizeFilter = "";
                                                        shoe2 = !shoe2;
                                         selectedSize = <String>[];
                                              if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
+                                               selectedSize.add("Shoe2");
+                                               sizeFilter = "Shoe2";
                                              }
                                               else{
 sizeFilter = "";
@@ -5833,8 +6322,8 @@ sizeFilter = "";
                                                        shoe3 = !shoe3;
                                         selectedSize = <String>[];
                                              if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
+                                               selectedSize.add("Shoe3");
+                                               sizeFilter = "Shoe3";
                                              }
                                               else{
 sizeFilter = "";
@@ -5869,8 +6358,8 @@ sizeFilter = "";
                                                        shoe4 = !shoe4;
                                         selectedSize = <String>[];
                                              if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
+                                               selectedSize.add("Shoe4");
+                                               sizeFilter = "Shoe4";
                                              }
                                               else{
 sizeFilter = "";
@@ -5905,8 +6394,8 @@ sizeFilter = "";
                                                        shoe5 = !shoe5;
                                         selectedSize = <String>[];
                                              if (shoe5 == true){
-                                               selectedSize.add("shoe5");
-                                               sizeFilter = "shoe5";
+                                               selectedSize.add("Shoe5");
+                                               sizeFilter = "Shoe5";
                                              }
                                               else{
 sizeFilter = "";
@@ -5941,8 +6430,8 @@ sizeFilter = "";
                                                        shoe6 = !shoe6;
                                         selectedSize = <String>[];
                                              if (shoe6 == true){
-                                               selectedSize.add("shoe6");
-                                               sizeFilter = "shoe6";
+                                               selectedSize.add("Shoe6");
+                                               sizeFilter = "Shoe6";
                                              }
                                               else{
 sizeFilter = "";
@@ -5977,8 +6466,8 @@ sizeFilter = "";
                                                        shoe7 = !shoe7;
                                         selectedSize = <String>[];
                                              if (shoe7 == true){
-                                               selectedSize.add("shoe7");
-                                               sizeFilter = "shoe7";
+                                               selectedSize.add("Shoe7");
+                                               sizeFilter = "Shoe7";
                                              }
                                               else{
 sizeFilter = "";
@@ -6013,8 +6502,8 @@ sizeFilter = "";
                                                        shoe8 = !shoe8;
                                         selectedSize = <String>[];
                                              if (shoe8 == true){
-                                               selectedSize.add("shoe8");
-                                               sizeFilter = "shoe8";
+                                               selectedSize.add("Shoe8");
+                                               sizeFilter = "Shoe8";
                                              }
                                               else{
 sizeFilter = "";
@@ -6049,8 +6538,8 @@ sizeFilter = "";
                                                        shoe9 = !shoe9;
                                         selectedSize = <String>[];
                                              if (shoe9 == true){
-                                               selectedSize.add("shoe9");
-                                               sizeFilter = "shoe9";
+                                               selectedSize.add("Shoe9");
+                                               sizeFilter = "Shoe9";
                                              }
                                               else{
 sizeFilter = "";
@@ -6085,8 +6574,8 @@ sizeFilter = "";
                                                        shoe10 = !shoe10;
                                         selectedSize = <String>[];
                                              if (shoe10 == true){
-                                               selectedSize.add("shoe10");
-                                               sizeFilter = "shoe10";
+                                               selectedSize.add("Shoe10");
+                                               sizeFilter = "Shoe10";
                                              }
                                               else{
 sizeFilter = "";
@@ -6120,8 +6609,8 @@ sizeFilter = "";
                                                        shoe11 = !shoe11;
                                         selectedSize = <String>[];
                                              if (shoe11 == true){
-                                               selectedSize.add("shoe11");
-                                               sizeFilter = "shoe11";
+                                               selectedSize.add("Shoe11");
+                                               sizeFilter = "Shoe11";
                                              }
                                               else{
 sizeFilter = "";
@@ -6155,8 +6644,8 @@ sizeFilter = "";
                                                        shoe12 = !shoe12;
                                         selectedSize = <String>[];
                                              if (shoe12 == true){
-                                               selectedSize.add("shoe12");
-                                               sizeFilter = "shoe12";
+                                               selectedSize.add("Shoe12");
+                                               sizeFilter = "Shoe12";
                                              }
                                               else{
 sizeFilter = "";
@@ -6190,8 +6679,8 @@ sizeFilter = "";
                                                        shoe13 = !shoe13;
                                         selectedSize = <String>[];
                                              if (shoe13 == true){
-                                               selectedSize.add("shoe13");
-                                               sizeFilter = "shoe13";
+                                               selectedSize.add("Shoe13");
+                                               sizeFilter = "Shoe13";
                                              }
                                               else{
 sizeFilter = "";
@@ -6225,8 +6714,8 @@ sizeFilter = "";
                                                        shoe14 = !shoe14;
                                         selectedSize = <String>[];
                                              if (shoe14 == true){
-                                               selectedSize.add("shoe14");
-                                               sizeFilter = "shoe14";
+                                               selectedSize.add("Shoe14");
+                                               sizeFilter = "Shoe14";
                                              }
                                               else{
 sizeFilter = "";
@@ -6262,17 +6751,88 @@ sizeFilter = "";
                                       ]
                                   ) :
                                   ExpansionTile(
-                                      title: Text("Clothing Size"),
+                                      title: Text("Sort by size"),
                                       children: [Column(
                                         children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                frees = !frees;
+                                                selectedSize = <String>[];
+                                                if (frees== true){
+                                                  selectedSize.add("freesizeQuantity");
+                                                  sizeFilter = "freesizeQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: frees ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Free Size',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
                                           InkWell(
                                             onTap: () {
                                               State(() {
                                                 xxxs = !xxxs;
                                                 selectedSize = <String>[];
                                                 if (xxxs == true){
-                                                  selectedSize.add("XXXS");
-                                                  sizeFilter = "XXXS";
+                                                  selectedSize.add("xxxsQuantity");
+                                                  sizeFilter = "xxxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6307,8 +6867,8 @@ sizeFilter = "";
                                                 xxs = !xxs;
                                                 selectedSize = <String>[];
                                                 if (xxs == true){
-                                                  selectedSize.add("XXS");
-                                                  sizeFilter = "XXS";
+                                                  selectedSize.add("xxsQuantity");
+                                                  sizeFilter = "xxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6343,8 +6903,8 @@ sizeFilter = "";
                                                 xs = !xs;
                                                 selectedSize = <String>[];
                                                 if (xs == true){
-                                                  selectedSize.add("XS");
-                                                  sizeFilter = "XS";
+                                                  selectedSize.add("xsQuantity");
+                                                  sizeFilter = "xsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6379,8 +6939,8 @@ sizeFilter = "";
                                                 s = !s;
                                                 selectedSize = <String>[];
                                                 if (s == true){
-                                                  selectedSize.add("S");
-                                                  sizeFilter = "S";
+                                                  selectedSize.add("sQuantity");
+                                                  sizeFilter = "sQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6415,8 +6975,8 @@ sizeFilter = "";
                                                 m = !m;
                                                 selectedSize = <String>[];
                                                 if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
+                                                  selectedSize.add("mQuantity");
+                                                  sizeFilter = "mQuantity";
                                                 }
 
                                                 else{
@@ -6452,8 +7012,8 @@ sizeFilter = "";
                                                 l = !l;
                                                 selectedSize = <String>[];
                                                 if (l == true){
-                                                  selectedSize.add("L");
-                                                  sizeFilter = "L";
+                                                  selectedSize.add("lQuantity");
+                                                  sizeFilter = "lQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6489,8 +7049,8 @@ sizeFilter = "";
                                                 xl = !xl;
                                                 selectedSize = <String>[];
                                                 if (xl == true){
-                                                  selectedSize.add("XL");
-                                                  sizeFilter = "XL";
+                                                  selectedSize.add("xlQuantity");
+                                                  sizeFilter = "xlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6525,8 +7085,8 @@ sizeFilter = "";
                                                 xxl = !xxl;
                                                 selectedSize = <String>[];
                                                 if (xxl == true){
-                                                  selectedSize.add("XXL");
-                                                  sizeFilter = "XXL";
+                                                  selectedSize.add("xxlQuantity");
+                                                  sizeFilter = "xxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6561,8 +7121,8 @@ sizeFilter = "";
                                                 xxxl = !xxxl;
                                                 selectedSize = <String>[];
                                                 if (xxxl == true){
-                                                  selectedSize.add("XXXL");
-                                                  sizeFilter = "XXXL";
+                                                  selectedSize.add("xxxlQuantity");
+                                                  sizeFilter = "xxxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6597,8 +7157,8 @@ sizeFilter = "";
                                                 fourl = !fourl;
                                                 selectedSize = <String>[];
                                                 if (fourl == true){
-                                                  selectedSize.add("4XL");
-                                                  sizeFilter = "4XL";
+                                                  selectedSize.add("fourxlQuantity");
+                                                  sizeFilter = "fourxlQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -6654,7 +7214,27 @@ sizeFilter = "";
                                       ]
                                   ),
                                   FloatingActionButton.extended(onPressed: () {
-                                    duties ? setState(() {
+                                   priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+ duties ? setState(() {
                                       priceQuery =
                                           priceQuery.replaceAll("D", "");
                                       AQuery = AQuery.replaceAll("D", "");
@@ -6721,46 +7301,46 @@ sizeFilter = "";
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
                                     setState(() {
-                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
-                                      AQuery = AQuery.replaceAll(sizeFilter, "");
-                                      BQuery = BQuery.replaceAll(sizeFilter, "");
-                                      CQuery = CQuery.replaceAll(sizeFilter, "");
-                                      DQuery = DQuery.replaceAll(sizeFilter, "");
-                                      EQuery = EQuery.replaceAll(sizeFilter, "");
-                                      FQuery = FQuery.replaceAll(sizeFilter, "");
-                                      GQuery = GQuery.replaceAll(sizeFilter, "");
-                                      HQuery = HQuery.replaceAll(sizeFilter, "");
-                                      IQuery = IQuery.replaceAll(sizeFilter, "");
-                                      JQuery = JQuery.replaceAll(sizeFilter, "");
-                                      KQuery = KQuery.replaceAll(sizeFilter, "");
-                                      LQuery = LQuery.replaceAll(sizeFilter, "");
-                                      MQuery = MQuery.replaceAll(sizeFilter, "");
-                                      NQuery = NQuery.replaceAll(sizeFilter, "");
-                                      OQuery = OQuery.replaceAll(sizeFilter, "");
-                                      PQuery = PQuery.replaceAll(sizeFilter, "");
-                                      QQuery = QQuery.replaceAll(sizeFilter, "");
-                                      RQuery = RQuery.replaceAll(sizeFilter, "");
-                                      SQuery = SQuery.replaceAll(sizeFilter, "");
-                                      priceQuery = priceQuery + sizeFilter;
-                                      AQuery = AQuery + sizeFilter;
-                                      BQuery = BQuery + sizeFilter;
-                                      CQuery = CQuery + sizeFilter;
-                                      DQuery = DQuery + sizeFilter;
-                                      EQuery = EQuery + sizeFilter;
-                                      FQuery = FQuery + sizeFilter;
-                                      GQuery = GQuery + sizeFilter;
-                                      HQuery = HQuery + sizeFilter;
-                                      IQuery = IQuery + sizeFilter;
-                                      JQuery = JQuery + sizeFilter;
-                                      KQuery = KQuery + sizeFilter;
-                                      LQuery = LQuery + sizeFilter;
-                                      MQuery = MQuery + sizeFilter;
-                                      NQuery = NQuery + sizeFilter;
-                                      OQuery = OQuery + sizeFilter;
-                                      PQuery = PQuery + sizeFilter;
-                                      QQuery = QQuery + sizeFilter;
-                                      RQuery = RQuery + sizeFilter;
-                                      SQuery = SQuery + sizeFilter;
+                                      priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                                      priceQuery = priceQuery + "S$sizeFilter";
+                                      AQuery = AQuery + "S$sizeFilter";
+                                      BQuery = BQuery + "S$sizeFilter";
+                                      CQuery = CQuery + "S$sizeFilter";
+                                      DQuery = DQuery + "S$sizeFilter";
+                                      EQuery = EQuery + "S$sizeFilter";
+                                      FQuery = FQuery + "S$sizeFilter";
+                                      GQuery = GQuery + "S$sizeFilter";
+                                      HQuery = HQuery + "S$sizeFilter";
+                                      IQuery = IQuery + "S$sizeFilter";
+                                      JQuery = JQuery + "S$sizeFilter";
+                                      KQuery = KQuery + "S$sizeFilter";
+                                      LQuery = LQuery + "S$sizeFilter";
+                                      MQuery = MQuery + "S$sizeFilter";
+                                      NQuery = NQuery + "S$sizeFilter";
+                                      OQuery = OQuery + "S$sizeFilter";
+                                      PQuery = PQuery + "S$sizeFilter";
+                                      QQuery = QQuery + "S$sizeFilter";
+                                      RQuery = RQuery + "S$sizeFilter";
+                                      SQuery = SQuery + "S$sizeFilter";
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -6979,11 +7559,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        shoe1 = !shoe1;
                                         selectedSize = <String>[];
                                              if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
+                                               selectedSize.add("Shoe1");
+                                               sizeFilter = "Shoe1";
                                              }
                                               else{
 sizeFilter = "";
@@ -7018,8 +7634,8 @@ sizeFilter = "";
                                                        shoe2 = !shoe2;
                                         selectedSize = <String>[];
                                              if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
+                                               selectedSize.add("Shoe2");
+                                               sizeFilter = "Shoe2";
                                              }
                                               else{
 sizeFilter = "";
@@ -7054,8 +7670,8 @@ sizeFilter = "";
                                                        shoe3 = !shoe3;
                                         selectedSize = <String>[];
                                              if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
+                                               selectedSize.add("Shoe3");
+                                               sizeFilter = "Shoe3";
                                              }
                                               else{
 sizeFilter = "";
@@ -7090,8 +7706,8 @@ sizeFilter = "";
                                                        shoe4 = !shoe4;
                                         selectedSize = <String>[];
                                              if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
+                                               selectedSize.add("Shoe4");
+                                               sizeFilter = "Shoe4";
                                              }
                                               else{
 sizeFilter = "";
@@ -7134,11 +7750,47 @@ sizeFilter = "";
                                           InkWell(
                                             onTap: () {
                                               State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
                                                        ring1 = !ring1;
                                         selectedSize = <String>[];
                                              if (ring1== true){
-                                               selectedSize.add("ring1");
-                                               sizeFilter = "ring1";
+                                               selectedSize.add("Ring1");
+                                               sizeFilter = "Ring1";
                                              }
                                               else{
 sizeFilter = "";
@@ -7173,8 +7825,8 @@ sizeFilter = "";
                                                        ring2 = !ring2;
                                         selectedSize = <String>[];
                                              if (ring2== true){
-                                               selectedSize.add("ring2");
-                                               sizeFilter = "ring2";
+                                               selectedSize.add("Ring2");
+                                               sizeFilter = "Ring2";
                                              }
                                               else{
 sizeFilter = "";
@@ -7209,8 +7861,8 @@ sizeFilter = "";
                                                        ring3 = !ring3;
                                         selectedSize = <String>[];
                                              if (ring3== true){
-                                               selectedSize.add("ring3");
-                                               sizeFilter = "ring3";
+                                               selectedSize.add("Ring3");
+                                               sizeFilter = "Ring3";
                                              }
                                               else{
 sizeFilter = "";
@@ -7245,8 +7897,8 @@ sizeFilter = "";
                                                        ring4 = !ring4;
                                         selectedSize = <String>[];
                                              if (ring4== true){
-                                               selectedSize.add("ring4");
-                                               sizeFilter = "ring4";
+                                               selectedSize.add("Ring4");
+                                               sizeFilter = "Ring4";
                                              }
                                               else{
 sizeFilter = "";
@@ -7281,8 +7933,8 @@ sizeFilter = "";
                                                        ring5 = !ring5;
                                         selectedSize = <String>[];
                                              if (ring5== true){
-                                               selectedSize.add("ring5");
-                                               sizeFilter = "ring5";
+                                               selectedSize.add("Ring5");
+                                               sizeFilter = "Ring5";
                                              }
                                               else{
 sizeFilter = "";
@@ -7317,8 +7969,8 @@ sizeFilter = "";
                                                        ring6 = !ring6;
                                         selectedSize = <String>[];
                                              if (ring6== true){
-                                               selectedSize.add("ring6");
-                                               sizeFilter = "ring6";
+                                               selectedSize.add("Ring6");
+                                               sizeFilter = "Ring6";
                                              }
                                               else{
 sizeFilter = "";
@@ -7353,8 +8005,8 @@ sizeFilter = "";
                                                        ring7 = !ring7;
                                         selectedSize = <String>[];
                                              if (ring7== true){
-                                               selectedSize.add("ring7");
-                                               sizeFilter = "ring7";
+                                               selectedSize.add("Ring7");
+                                               sizeFilter = "Ring7";
                                              }
                                               else{
 sizeFilter = "";
@@ -7389,8 +8041,8 @@ sizeFilter = "";
                                                        ring8 = !ring8;
                                         selectedSize = <String>[];
                                              if (ring8== true){
-                                               selectedSize.add("ring8");
-                                               sizeFilter = "ring8";
+                                               selectedSize.add("Ring8");
+                                               sizeFilter = "Ring8";
                                              }
                                               else{
 sizeFilter = "";
@@ -7425,8 +8077,8 @@ sizeFilter = "";
                                                        ring9 = !ring9;
                                         selectedSize = <String>[];
                                              if (ring9== true){
-                                               selectedSize.add("ring9");
-                                               sizeFilter = "ring9";
+                                               selectedSize.add("Ring9");
+                                               sizeFilter = "Ring9";
                                              }
                                               else{
 sizeFilter = "";
@@ -7461,8 +8113,8 @@ sizeFilter = "";
                                                        ring10 = !ring10;
                                         selectedSize = <String>[];
                                              if (ring10== true){
-                                               selectedSize.add("ring10");
-                                               sizeFilter = "ring10";
+                                               selectedSize.add("Ring10");
+                                               sizeFilter = "Ring10";
                                              }
                                               else{
 sizeFilter = "";
@@ -7496,8 +8148,8 @@ sizeFilter = "";
                                                        ring11 = !ring11;
                                         selectedSize = <String>[];
                                              if (ring11== true){
-                                               selectedSize.add("ring11");
-                                               sizeFilter = "ring11";
+                                               selectedSize.add("Ring11");
+                                               sizeFilter = "Ring11";
                                              }
                                               else{
 sizeFilter = "";
@@ -7531,8 +8183,8 @@ sizeFilter = "";
                                                        ring12 = !ring12;
                                         selectedSize = <String>[];
                                              if (ring12== true){
-                                               selectedSize.add("ring12");
-                                               sizeFilter = "ring12";
+                                               selectedSize.add("Ring12");
+                                               sizeFilter = "Ring12";
                                              }
                                               else{
 sizeFilter = "";
@@ -7566,8 +8218,8 @@ sizeFilter = "";
                                                        ring13 = !ring13;
                                         selectedSize = <String>[];
                                              if (ring13== true){
-                                               selectedSize.add("ring13");
-                                               sizeFilter = "ring13";
+                                               selectedSize.add("Ring13");
+                                               sizeFilter = "Ring13";
                                              }
                                               else{
 sizeFilter = "";
@@ -7601,8 +8253,8 @@ sizeFilter = "";
                                                        ring14 = !ring14;
                                         selectedSize = <String>[];
                                              if (ring14== true){
-                                               selectedSize.add("ring14");
-                                               sizeFilter = "ring14";
+                                               selectedSize.add("Ring14");
+                                               sizeFilter = "Ring14";
                                              }
                                               else{
 sizeFilter = "";
@@ -7636,8 +8288,8 @@ sizeFilter = "";
                                                        ring15 = !ring15;
                                         selectedSize = <String>[];
                                              if (ring15== true){
-                                               selectedSize.add("ring15");
-                                               sizeFilter = "ring15";
+                                               selectedSize.add("Ring15");
+                                               sizeFilter = "Ring15";
                                              }
                                               else{
 sizeFilter = "";
@@ -7671,8 +8323,8 @@ sizeFilter = "";
                                                        ring16 = !ring16;
                                         selectedSize = <String>[];
                                              if (ring16== true){
-                                               selectedSize.add("ring16");
-                                               sizeFilter = "ring16";
+                                               selectedSize.add("Ring16");
+                                               sizeFilter = "Ring16";
                                              }
                                               else{
 sizeFilter = "";
@@ -7706,8 +8358,8 @@ sizeFilter = "";
                                                        ring17 = !ring17;
                                         selectedSize = <String>[];
                                              if (ring17== true){
-                                               selectedSize.add("ring17");
-                                               sizeFilter = "ring17";
+                                               selectedSize.add("Ring17");
+                                               sizeFilter = "Ring17";
                                              }
                                               else{
 sizeFilter = "";
@@ -7741,8 +8393,8 @@ sizeFilter = "";
                                                        ring18 = !ring18;
                                         selectedSize = <String>[];
                                              if (ring18== true){
-                                               selectedSize.add("ring18");
-                                               sizeFilter = "ring18";
+                                               selectedSize.add("Ring18");
+                                               sizeFilter = "Ring18";
                                              }
                                               else{
 sizeFilter = "";
@@ -7776,8 +8428,8 @@ sizeFilter = "";
                                                        ring19 = !ring19;
                                         selectedSize = <String>[];
                                              if (ring19== true){
-                                               selectedSize.add("ring19");
-                                               sizeFilter = "ring19";
+                                               selectedSize.add("Ring19");
+                                               sizeFilter = "Ring19";
                                              }
                                               else{
 sizeFilter = "";
@@ -7811,8 +8463,8 @@ sizeFilter = "";
                                                        ring20 = !ring20;
                                         selectedSize = <String>[];
                                              if (ring20== true){
-                                               selectedSize.add("ring20");
-                                               sizeFilter = "ring20";
+                                               selectedSize.add("Ring20");
+                                               sizeFilter = "Ring20";
                                              }
                                               else{
 sizeFilter = "";
@@ -7846,8 +8498,8 @@ sizeFilter = "";
                                                        ring21 = !ring21;
                                         selectedSize = <String>[];
                                              if (ring21== true){
-                                               selectedSize.add("ring21");
-                                               sizeFilter = "ring21";
+                                               selectedSize.add("Ring21");
+                                               sizeFilter = "Ring21";
                                              }
                                               else{
 sizeFilter = "";
@@ -7881,8 +8533,8 @@ sizeFilter = "";
                                                        ring22 = !ring22;
                                         selectedSize = <String>[];
                                              if (ring22== true){
-                                               selectedSize.add("ring22");
-                                               sizeFilter = "ring22";
+                                               selectedSize.add("Ring22");
+                                               sizeFilter = "Ring22";
                                              }
                                               else{
 sizeFilter = "";
@@ -7916,8 +8568,8 @@ sizeFilter = "";
                                                        ring23 = !ring23;
                                         selectedSize = <String>[];
                                              if (ring23== true){
-                                               selectedSize.add("ring23");
-                                               sizeFilter = "ring23";
+                                               selectedSize.add("Ring23");
+                                               sizeFilter = "Ring23";
                                              }
                                               else{
 sizeFilter = "";
@@ -7952,17 +8604,88 @@ sizeFilter = "";
                                       ]
                                   ):
                                   ExpansionTile(
-                                      title: Text("Clothing Size"),
+                                      title: Text("Sort by size"),
                                       children: [Column(
                                         children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                mtos = !mtos;
+                                                selectedSize = <String>[];
+                                                if (mtos== true){
+                                                  selectedSize.add("mtoQuantity");
+                                                  sizeFilter = "mtoQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: mtos ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Made-to-order',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                frees = !frees;
+                                                selectedSize = <String>[];
+                                                if (frees== true){
+                                                  selectedSize.add("freesizeQuantity");
+                                                  sizeFilter = "freesizeQuantity";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: frees ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        'Free Size',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
                                           InkWell(
                                             onTap: () {
                                               State(() {
                                                 xxxs = !xxxs;
                                                 selectedSize = <String>[];
                                                 if (xxxs == true){
-                                                  selectedSize.add("XXXS");
-                                                  sizeFilter = "XXXS";
+                                                  selectedSize.add("xxxsQuantity");
+                                                  sizeFilter = "xxxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -7997,8 +8720,8 @@ sizeFilter = "";
                                                 xxs = !xxs;
                                                 selectedSize = <String>[];
                                                 if (xxs == true){
-                                                  selectedSize.add("XXS");
-                                                  sizeFilter = "XXS";
+                                                  selectedSize.add("xxsQuantity");
+                                                  sizeFilter = "xxsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -8033,8 +8756,8 @@ sizeFilter = "";
                                                 xs = !xs;
                                                 selectedSize = <String>[];
                                                 if (xs == true){
-                                                  selectedSize.add("XS");
-                                                  sizeFilter = "XS";
+                                                  selectedSize.add("xsQuantity");
+                                                  sizeFilter = "xsQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -8069,8 +8792,8 @@ sizeFilter = "";
                                                 s = !s;
                                                 selectedSize = <String>[];
                                                 if (s == true){
-                                                  selectedSize.add("S");
-                                                  sizeFilter = "S";
+                                                  selectedSize.add("sQuantity");
+                                                  sizeFilter = "sQuantity";
                                                 }
                                                 else{
                                                   sizeFilter = "";
@@ -8126,7 +8849,27 @@ sizeFilter = "";
                                       ]
                                   ),
                                   FloatingActionButton.extended(onPressed: () {
-                                    duties ? setState(() {
+                                   priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+ duties ? setState(() {
                                       priceQuery =
                                           priceQuery.replaceAll("D", "");
                                       AQuery = AQuery.replaceAll("D", "");
@@ -8193,46 +8936,46 @@ sizeFilter = "";
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
                                     setState(() {
-                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
-                                      AQuery = AQuery.replaceAll(sizeFilter, "");
-                                      BQuery = BQuery.replaceAll(sizeFilter, "");
-                                      CQuery = CQuery.replaceAll(sizeFilter, "");
-                                      DQuery = DQuery.replaceAll(sizeFilter, "");
-                                      EQuery = EQuery.replaceAll(sizeFilter, "");
-                                      FQuery = FQuery.replaceAll(sizeFilter, "");
-                                      GQuery = GQuery.replaceAll(sizeFilter, "");
-                                      HQuery = HQuery.replaceAll(sizeFilter, "");
-                                      IQuery = IQuery.replaceAll(sizeFilter, "");
-                                      JQuery = JQuery.replaceAll(sizeFilter, "");
-                                      KQuery = KQuery.replaceAll(sizeFilter, "");
-                                      LQuery = LQuery.replaceAll(sizeFilter, "");
-                                      MQuery = MQuery.replaceAll(sizeFilter, "");
-                                      NQuery = NQuery.replaceAll(sizeFilter, "");
-                                      OQuery = OQuery.replaceAll(sizeFilter, "");
-                                      PQuery = PQuery.replaceAll(sizeFilter, "");
-                                      QQuery = QQuery.replaceAll(sizeFilter, "");
-                                      RQuery = RQuery.replaceAll(sizeFilter, "");
-                                      SQuery = SQuery.replaceAll(sizeFilter, "");
-                                      priceQuery = priceQuery + sizeFilter;
-                                      AQuery = AQuery + sizeFilter;
-                                      BQuery = BQuery + sizeFilter;
-                                      CQuery = CQuery + sizeFilter;
-                                      DQuery = DQuery + sizeFilter;
-                                      EQuery = EQuery + sizeFilter;
-                                      FQuery = FQuery + sizeFilter;
-                                      GQuery = GQuery + sizeFilter;
-                                      HQuery = HQuery + sizeFilter;
-                                      IQuery = IQuery + sizeFilter;
-                                      JQuery = JQuery + sizeFilter;
-                                      KQuery = KQuery + sizeFilter;
-                                      LQuery = LQuery + sizeFilter;
-                                      MQuery = MQuery + sizeFilter;
-                                      NQuery = NQuery + sizeFilter;
-                                      OQuery = OQuery + sizeFilter;
-                                      PQuery = PQuery + sizeFilter;
-                                      QQuery = QQuery + sizeFilter;
-                                      RQuery = RQuery + sizeFilter;
-                                      SQuery = SQuery + sizeFilter;
+                                      priceQuery = priceQuery.replaceAll("S$sizeFilter", "");
+                                      AQuery = AQuery.replaceAll("S$sizeFilter", "");
+                                      BQuery = BQuery.replaceAll("S$sizeFilter", "");
+                                      CQuery = CQuery.replaceAll("S$sizeFilter", "");
+                                      DQuery = DQuery.replaceAll("S$sizeFilter", "");
+                                      EQuery = EQuery.replaceAll("S$sizeFilter", "");
+                                      FQuery = FQuery.replaceAll("S$sizeFilter", "");
+                                      GQuery = GQuery.replaceAll("S$sizeFilter", "");
+                                      HQuery = HQuery.replaceAll("S$sizeFilter", "");
+                                      IQuery = IQuery.replaceAll("S$sizeFilter", "");
+                                      JQuery = JQuery.replaceAll("S$sizeFilter", "");
+                                      KQuery = KQuery.replaceAll("S$sizeFilter", "");
+                                      LQuery = LQuery.replaceAll("S$sizeFilter", "");
+                                      MQuery = MQuery.replaceAll("S$sizeFilter", "");
+                                      NQuery = NQuery.replaceAll("S$sizeFilter", "");
+                                      OQuery = OQuery.replaceAll("S$sizeFilter", "");
+                                      PQuery = PQuery.replaceAll("S$sizeFilter", "");
+                                      QQuery = QQuery.replaceAll("S$sizeFilter", "");
+                                      RQuery = RQuery.replaceAll("S$sizeFilter", "");
+                                      SQuery = SQuery.replaceAll("S$sizeFilter", "");
+                                      priceQuery = priceQuery + "S$sizeFilter";
+                                      AQuery = AQuery + "S$sizeFilter";
+                                      BQuery = BQuery + "S$sizeFilter";
+                                      CQuery = CQuery + "S$sizeFilter";
+                                      DQuery = DQuery + "S$sizeFilter";
+                                      EQuery = EQuery + "S$sizeFilter";
+                                      FQuery = FQuery + "S$sizeFilter";
+                                      GQuery = GQuery + "S$sizeFilter";
+                                      HQuery = HQuery + "S$sizeFilter";
+                                      IQuery = IQuery + "S$sizeFilter";
+                                      JQuery = JQuery + "S$sizeFilter";
+                                      KQuery = KQuery + "S$sizeFilter";
+                                      LQuery = LQuery + "S$sizeFilter";
+                                      MQuery = MQuery + "S$sizeFilter";
+                                      NQuery = NQuery + "S$sizeFilter";
+                                      OQuery = OQuery + "S$sizeFilter";
+                                      PQuery = PQuery + "S$sizeFilter";
+                                      QQuery = QQuery + "S$sizeFilter";
+                                      RQuery = RQuery + "S$sizeFilter";
+                                      SQuery = SQuery + "S$sizeFilter";
                                     });
                                   }, label: Text("Apply"))
                                 ],

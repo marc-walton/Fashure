@@ -1,3 +1,4 @@
+import 'package:fashow/Categories/Kids/teen/girl/Jwellery.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
@@ -221,7 +222,7 @@ class _TeenGirlState extends State<TeenGirl>  with  TickerProviderStateMixin {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -276,7 +277,8 @@ class _TeenGirlState extends State<TeenGirl>  with  TickerProviderStateMixin {
                   RotatedBox(quarterTurns:3,child: Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
 
                   RotatedBox(quarterTurns:3,child: Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
-                  RotatedBox(quarterTurns:3,child: Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+
+                    RotatedBox(quarterTurns:3,child: Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                   RotatedBox(quarterTurns:3,child: Text("Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
 
                   RotatedBox(quarterTurns:3,child: Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
@@ -286,6 +288,8 @@ class _TeenGirlState extends State<TeenGirl>  with  TickerProviderStateMixin {
 
                   RotatedBox(quarterTurns:3,child: Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                   RotatedBox(quarterTurns:3,child: Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                    RotatedBox(quarterTurns:3,child: Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+
                   ],
                 ),
               ),
@@ -313,6 +317,7 @@ class _TeenGirlState extends State<TeenGirl>  with  TickerProviderStateMixin {
                     TrackBG(),
                     KidSGT(),
                     AccessGT(),
+                    JewelleryTG(),
 
                   ]),
             ),

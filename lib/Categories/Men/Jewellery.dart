@@ -180,7 +180,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -365,7 +365,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -548,7 +548,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -731,7 +731,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -914,7 +914,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1097,7 +1097,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1151,7 +1151,7 @@ class _JewelleryMState extends State<JewelleryM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1198,7 +1198,6 @@ class _JewelleryMState extends State<JewelleryM> {
                       ///outline
                       unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU",color: Colors.white  ),
                       tabs:[
-                        RotatedBox(quarterTurns:3,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                         RotatedBox(quarterTurns:3,child: Text("Bracelets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                         RotatedBox(quarterTurns:3,child: Text("Cuff-links & Tie Bar",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                         RotatedBox(quarterTurns:3,child: Text("Brooches & Pins",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),

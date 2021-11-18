@@ -13,7 +13,9 @@ List<S2Choice<String>> TGGloves = [
 List<S2Choice<String>> TGSocks = [
   S2Choice<String>(value: 'TGSocks', title: 'Socks'),
 ];
-
+List<S2Choice<String>> TGRings = [
+  S2Choice<String>(value: 'TGRings', title: 'Rings'),
+];
 List<S2Choice<String>> TGBags = [
   S2Choice<String>(value: 'TGBackpacks', title: 'Backpacks'),
   S2Choice<String>(value: 'TGShoulder & Cross body Bags', title: 'Shoulder & Cross body Bags'),

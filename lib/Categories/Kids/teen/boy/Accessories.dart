@@ -1,3 +1,4 @@
+import 'package:fashow/Categories/Kids/teen/boy/Jewellery.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
@@ -193,7 +194,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -374,7 +375,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -555,7 +556,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -736,7 +737,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -771,7 +772,7 @@ class _AccessBTState extends State<AccessBT> {
       child: Expanded(
         child: DefaultTabController(
 
-            length:9,
+            length:10,
             child: Scaffold(
               appBar:tabs? AppBar(
                 toolbarHeight: SizeConfig.screenWidth * 0.3,
@@ -800,6 +801,8 @@ class _AccessBTState extends State<AccessBT> {
                       RotatedBox(quarterTurns:3,child: Text("Belts & Braces",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                       RotatedBox(quarterTurns:3,child: Text("Socks",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                       RotatedBox(quarterTurns:3,child: Text("Travel",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                        RotatedBox(quarterTurns:3,child: Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+
                       ],
                     ),
                   ),
@@ -820,6 +823,8 @@ class _AccessBTState extends State<AccessBT> {
                         BracesTB(),
                        TBSocks(),
                        TBTravel(),
+                        JewelleryTB(),
+
                       ]),
                 ),
               ),

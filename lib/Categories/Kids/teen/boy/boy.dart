@@ -1,3 +1,4 @@
+import 'package:fashow/Categories/Kids/teen/boy/Jewellery.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
@@ -37,7 +38,7 @@ class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
     super.initState();
     priceQuery = "";
     sizeFilter = "";
-    _Tabcontroller = new TabController(length: 12, vsync: this,initialIndex: 0);
+    _Tabcontroller = new TabController(length: 13, vsync: this,initialIndex: 0);
 
     // _mainHandler = _maintabs[0];
     _Tabcontroller.addListener(_handleTabIndex);
@@ -211,7 +212,7 @@ class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "highD$sizeFilter"?
+          :priceQuery == "highDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -260,6 +261,7 @@ class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
                   RotatedBox(quarterTurns:3,child: Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
 
                   RotatedBox(quarterTurns:3,child: Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+
                   RotatedBox(quarterTurns:3,child: Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                   RotatedBox(quarterTurns:3,child: Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                   RotatedBox(quarterTurns:3,child: Text("Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
@@ -268,6 +270,8 @@ class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
 
                   RotatedBox(quarterTurns:3,child: Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
                   RotatedBox(quarterTurns:3,child: Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                    RotatedBox(quarterTurns:3,child: Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+
                   ],
                 ),
               ),
@@ -293,6 +297,7 @@ class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
                     TrackBT(),
                     KidSBT(),
                     AccessBT(),
+                    JewelleryTB(),
 
                   ]),
             ),

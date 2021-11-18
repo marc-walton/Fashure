@@ -157,6 +157,9 @@ import 'package:get/get.dart';
 import 'package:fashow/methods/card_user.dart';
 import 'package:fashow/methods/card_prod.dart';
 
+import 'Categories/Kids/teen/boy/Jewellery.dart';
+import 'Categories/Kids/teen/girl/Jwellery.dart';
+
 class ShopSearch extends StatefulWidget {
   @override
   _ShopSearchState createState() => _ShopSearchState();
@@ -3254,6 +3257,67 @@ class _ShopSearchState extends State<ShopSearch> {
           "Collars in Women",
     "Women's Collars",
     "Womens Collars",
+    "Anklets in Teen Girls",
+    ///2840
+    "Teen Girl's Anklets",
+    "Teen Girls Anklets",
+    "Bracelets in Teen Girls",
+    "Teen Girl's Bracelets",
+    "Teen Girls Bracelets",
+    "Body Jewellery in Teen Girls",
+    "Teen Girl's Body Jewellery",
+    "Teen Girls Body Jewellery",
+    "Brooches in Teen Girls",
+    "Teen Girl's Brooches",
+    ///2850
+    "Teen Girls Brooches",
+    "Lapel Pins in Teen Girls",
+    "Teen Girl's Lapel Pins",
+    "Teen Girls Lapel Pins",
+    "Necklace in Teen Girls",
+    "Teen Girl's Necklace",
+    "Teen Girls Necklace",
+    "Earrings in Teen Girls",
+    "Teen Girl's Earrings",
+    "Teen Girls Earrings",
+    ///2860
+
+    "Rings in Teen Girl",
+    "Teen Girl's Rings",
+    "Teen Girls Rings",
+    "Bracelets in Teen Boys",
+    "Teen Boy's Bracelets",
+    "Teen Boys Bracelets",
+    "Jewellery in Teen Boys",
+    ///2870
+    "Teen Boy's Jewellery",
+    "Teen Boys Jewellery",
+    "Cuff-links in Teen Boys",
+    "Teen Boy's Cuff-links",
+    "Teen Boys Cuff-links",
+    "Tie Bar in Teen Boys",
+    "Teen Boy's Tie Bar",
+    "Teen Boys Tie Bar",
+    "Brooches in Teen Boys",
+    "Teen Boy's Brooches",
+    ///2880
+    "Teen Boys Brooches",
+    "Lapel Pins in Teen Boys",
+    "Teen Boy's Lapel Pins",
+    "Teen Boys Lapel Pins",
+    "Necklace in Teen Boys",
+    "Teen Boy's Necklace",
+    "Teen Boys Necklace",
+    "Studs in Teen Boys",
+    "Teen Boy's Studs",
+    "Teen Boys Studs",
+    ///2890
+    "Earrings in Teen Boys",
+    "Teen Boy's Earrings",
+    "Teen Boys Earrings",
+    "Rings in Teen Boys",
+    "Teen Boy's Rings",
+    "Teen Boys Rings",
 
   ];
 
@@ -4591,7 +4655,7 @@ else if(i==2464||i==2465||i==2466){ Get.off(AccessGT(selectedPage: 3,));
     }
 else if(i==2467||i==2468||i==2469){ Get.off(AccessGT(selectedPage: 4,));
     }
-else if(i==2470||i==2471||i==2472){ Get.off(AccessGT(selectedPage: 6,));
+else if(i==2470||i==2471||i==2472){ Get.off(JewelleryTG(selectedPage: 0,));
     }
 else if(i==2473||i==2474||i==2475){ Get.off(AccessGT(selectedPage: 8,));
     }
@@ -4783,6 +4847,36 @@ else if(i==2833||i==2834||i==2835){ Get.off(WTies(selectedPage: 0,));
     }
 else if(i==2836||i==2837||i==2838){ Get.off(WTies(selectedPage: 1,));
     }
+else if(i==2839||i==2840||i==2841){ Get.off(JewelleryTG(selectedPage: 0,));
+    }
+else if(i==2842||i==2843||i==2844){ Get.off(JewelleryTG(selectedPage: 1,));
+    }
+else if(i==2845||i==2846||i==2847){ Get.off(JewelleryTG(selectedPage: 2,));
+    }
+else if(i==2848||i==2849||i==2850||i==2851||i==2852||i==2853){ Get.off(JewelleryTG(selectedPage: 3,));
+    }
+else if(i==2854||i==2855||i==2856){ Get.off(JewelleryTG(selectedPage: 4,));
+    }
+else if(i==2857||i==2858||i==2859){ Get.off(JewelleryTG(selectedPage: 5,));
+    }
+else if(i==2860||i==2861||i==2862){ Get.off(JewelleryTG(selectedPage: 6,));
+    }
+else if(i==2860||i==2861||i==2862){ Get.off(JewelleryTG(selectedPage: 6,));
+    }
+else if(i==2860||i==2861||i==2862){ Get.off(JewelleryTG(selectedPage: 6,));
+    }
+else if(i==2863||i==2864||i==2865||i==2866||i==2867||i==2868){ Get.off(JewelleryTB(selectedPage: 0,));
+    }
+else if(i==2869||i==28670||i==2871||i==2872||i==2873||i==2874){ Get.off(JewelleryTB(selectedPage: 1,));
+    }
+else if(i==2875||i==2876||i==2877||i==2878||i==2879||i==2880){ Get.off(JewelleryTB(selectedPage: 2,));
+    }
+else if(i==2881||i==2882||i==2883){ Get.off(JewelleryTB(selectedPage: 3,));
+    }
+else if(i==2884||i==2885||i==2886||i==2887||i==2888||i==2889){ Get.off(JewelleryTB(selectedPage: 4,));
+    }
+else if(i==2890||i==2891||i==2892){ Get.off(JewelleryTB(selectedPage: 5,));
+    }
 
 else{return null;}
 
@@ -4807,9 +4901,9 @@ else{return null;}
               unselectedLabelColor: kIcon,
 
               tabs:[
-                Text("Category",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                Text("Designer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
- Text("Product",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("by category",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("by designer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+ Text("by name",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
               ],
             ),

@@ -5,7 +5,14 @@ List<S2Choice<String>> TBHats = [
 ];
 List<S2Choice<String>> TBScarves = [
   S2Choice<String>(value: 'TBScarves', title: 'Scarves'),
-];
+];List<S2Choice<String>> TBJewellery = [
+  S2Choice<String>(value: 'TBBracelets', title: 'Bracelets'),
+  S2Choice<String>(value: 'TBCuff-links & Tie Bar', title: 'Cuff-links & Tie Bar'),
+  S2Choice<String>(value: 'TBBrooches & Pins', title: 'Brooches & Pins'),
+  S2Choice<String>(value: 'TBNecklace', title: 'Necklace'),
+  S2Choice<String>(value: 'TBStuds and Earrings', title: 'Studs and Earrings'),
+  S2Choice<String>(value: 'TBRings', title: 'Rings'),];
+
 List<S2Choice<String>> TBTies = [
   S2Choice<String>(value: 'TBTies', title: 'Ties'),
   S2Choice<String>(value: 'TBBow Ties', title: 'Bow Ties'),

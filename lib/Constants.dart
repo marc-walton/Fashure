@@ -109,6 +109,9 @@ bool shoe18 = false;
 bool shoe19 = false;
 bool shoe20 = false;
 bool shoe21 = false;
+bool mtos = false;
+bool frees = false;
+
 bool  clothingIndex = false;
 bool  shoesIndex = false;
 bool  ringIndex = false;

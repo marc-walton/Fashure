@@ -1,3 +1,4 @@
+import 'package:fashow/Categories/Kids/teen/girl/Jwellery.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
@@ -200,7 +201,7 @@ class _AccessGTState extends State<AccessGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -381,7 +382,7 @@ class _AccessGTState extends State<AccessGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -561,7 +562,7 @@ class _AccessGTState extends State<AccessGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -742,7 +743,7 @@ class _AccessGTState extends State<AccessGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -922,7 +923,7 @@ class _AccessGTState extends State<AccessGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -1000,7 +1001,7 @@ class _AccessGTState extends State<AccessGT> {
                         HairTG(),
                        TGGloves(),
                         BagsTG(),
-                        TGJewellery(),
+                        JewelleryTG(),
                         BracesTG(),
                        TGSocks(),
                        TGTravel(),

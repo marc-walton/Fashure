@@ -193,7 +193,7 @@ class _DenimGTState extends State<DenimGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -373,7 +373,7 @@ class _DenimGTState extends State<DenimGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -554,7 +554,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGDenim Skirts')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -734,7 +734,7 @@ class _DenimGTState extends State<DenimGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -914,7 +914,7 @@ class _DenimGTState extends State<DenimGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -1094,7 +1094,7 @@ class _DenimGTState extends State<DenimGT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "highD$sizeFilter"?
+            :priceQuery == "highDS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
