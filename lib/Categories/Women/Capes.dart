@@ -50,7 +50,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -104,9 +106,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -232,7 +320,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -286,9 +376,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -413,7 +589,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -467,9 +645,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -594,7 +858,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -648,9 +914,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -775,7 +1127,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -829,9 +1183,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -956,7 +1396,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1010,9 +1452,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1137,7 +1665,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1191,9 +1721,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1318,7 +1934,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1372,9 +1990,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1499,7 +2203,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1553,9 +2259,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1680,7 +2472,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1734,9 +2528,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1861,7 +2741,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -1915,9 +2797,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -2042,7 +3010,9 @@ class _CapesWState extends State<CapesW> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-
+        Map likes =  documentSnapshot.data()['likes'];
+        bool _isLiked = likes[currentUser.id] == true;
+        bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -2096,9 +3066,95 @@ class _CapesWState extends State<CapesW> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                      Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            productsRef
+                                .doc(ownerId)
+                                .collection('userProducts')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "fav",
+                                "username": currentUser.displayName,
+                                "userId": ownerId,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userFav")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+//      "userId":userId,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "productname": productname,
+                              "shopmediaUrl": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                        icon: Icon(
+                          isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                          color:  Colors.black,
+                        ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):

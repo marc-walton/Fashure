@@ -10557,6 +10557,8 @@ backgroundColor: Colors.black,
         "postId": prodId,
         "mediaUrl": shopmediaUrl.first,
         "timestamp": timestamp,
+        "read": 'false',
+
       });
     }
   }
