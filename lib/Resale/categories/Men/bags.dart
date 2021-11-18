@@ -43,20 +43,22 @@ class _BagsState extends State<Bags> {
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -91,8 +93,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -107,15 +109,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -124,16 +132,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -240,20 +238,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -288,8 +288,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -304,15 +304,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -321,16 +327,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -436,20 +432,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -484,8 +482,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -500,15 +498,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -517,16 +521,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -632,20 +626,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -680,8 +676,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -696,15 +692,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -713,16 +715,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -828,20 +820,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -876,8 +870,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -892,15 +886,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -909,16 +909,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -1024,20 +1014,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -1072,8 +1064,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1088,15 +1080,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -1105,16 +1103,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -1220,20 +1208,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -1268,8 +1258,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1284,15 +1274,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -1301,16 +1297,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -1416,20 +1402,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -1464,8 +1452,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1480,15 +1468,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -1497,16 +1491,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -1612,20 +1596,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -1660,8 +1646,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1676,15 +1662,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -1693,16 +1685,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?
@@ -1808,20 +1790,22 @@ height: MediaQuery.of(context).size.height,
       itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
-       var eur = documentSnapshot.data()['eur'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+        
+        var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
-height: MediaQuery.of(context).size.height,
- width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
             child:
             Padding(
@@ -1856,8 +1840,8 @@ height: MediaQuery.of(context).size.height,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1872,15 +1856,21 @@ height: MediaQuery.of(context).size.height,
                   SizedBox(height: 7.0,),
 
                   Text(productname, style: TextStyle(
-                      color: kText,
-                      ),),
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+                  
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
                   Text(
-                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
                 ],
@@ -1889,16 +1879,6 @@ height: MediaQuery.of(context).size.height,
             ),
 
 
-
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //     childAspectRatio: (0.1 / .4),
-            //
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   children:
-            //     searchResults
-            // ),
           );
       },
       query: priceQuery == "low"?

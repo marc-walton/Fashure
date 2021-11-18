@@ -1,46 +1,26 @@
-import 'package:bottom_bar/bottom_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/ActivityFeed.dart';
-import 'package:fashow/Categories/Kids/baby/boy/BOY.dart';
-import 'package:fashow/Categories/Kids/baby/girl/Girl.dart';
-import 'package:fashow/Categories/Kids/kids/boy/Boy.dart';
-import 'package:fashow/Categories/Kids/kids/girl/girl.dart';
-import 'package:fashow/Categories/Kids/teen/boy/boy.dart';
-import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
-import 'package:fashow/Categories/Men/Men.dart';
-import 'package:fashow/Categories/Women/Women.dart';
+
 import 'package:fashow/Live/Live.dart';
-import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Resale/addressResale.dart';
 import 'package:fashow/Resale/resaleCommenrs.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
-import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
-import 'package:fashow/fav.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/size_config.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fashow/user.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
-import 'package:fashow/shop_search.dart';
-import 'package:fashow/Products.dart';
-import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:getwidget/components/toggle/gf_toggle.dart';
-import 'package:getwidget/types/gf_toggle_type.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';

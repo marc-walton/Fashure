@@ -41,15 +41,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -89,8 +91,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -107,6 +109,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -222,15 +230,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -270,8 +280,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -288,6 +298,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -403,15 +419,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -451,8 +469,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -469,6 +487,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -584,15 +608,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -632,8 +658,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -650,6 +676,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -765,15 +797,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -813,8 +847,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -831,6 +865,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -946,15 +986,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -994,8 +1036,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1012,6 +1054,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
@@ -1127,15 +1175,17 @@ class _JewelleryTGState extends State<JewelleryTG> {
       itemBuilder: (index, context, documentSnapshot)   {
            String ownerId = documentSnapshot.data()['ownerId'];
         String username = documentSnapshot.data()['username'];
-        String productname = documentSnapshot.data()['productname'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
+
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
         var gbp = documentSnapshot.data()['usd'];
 
         String photoUrl = documentSnapshot.data()['photoUrl'];
-        String prodId = documentSnapshot.data()['prodId'];
-        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
         return
           Container(
@@ -1175,8 +1225,8 @@ class _JewelleryTGState extends State<JewelleryTG> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
                           userId: ownerId,
                         ),
                       ),
@@ -1193,6 +1243,12 @@ class _JewelleryTGState extends State<JewelleryTG> {
                   Text(productname, style: TextStyle(
                     color: kText,
                   ),),
+                  SizedBox(height: 7.0,),
+
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
                   SizedBox(height: 7.0,),
 
                   currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):

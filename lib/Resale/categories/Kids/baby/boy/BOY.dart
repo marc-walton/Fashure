@@ -55,89 +55,97 @@ isLive: true,
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
-          String username = documentSnapshot.data()['username'];
-          String productname = documentSnapshot.data()['productname'];
-          var eur = documentSnapshot.data()['eur'];
-          var usd = documentSnapshot.data()['usd'];
-          var inr = documentSnapshot.data()['eur'];
-          var gbp = documentSnapshot.data()['usd'];
+        String username = documentSnapshot.data()['username'];
+        String productname = documentSnapshot.data()['title'];
+        String size = documentSnapshot.data()['size'];
 
-          String photoUrl = documentSnapshot.data()['photoUrl'];
-          String prodId = documentSnapshot.data()['prodId'];
-          List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        var eur = documentSnapshot.data()['eur'];
+        var usd = documentSnapshot.data()['usd'];
+        var inr = documentSnapshot.data()['eur'];
+        var gbp = documentSnapshot.data()['usd'];
 
-          return
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+        String photoUrl = documentSnapshot.data()['photoUrl'];
+        String prodId = documentSnapshot.data()['resaleId'];
+        List shopmediaUrl = documentSnapshot.data()['images'];
 
-              child:
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: ownerId),
-                      child:Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(children:[
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage: CachedNetworkImageProvider(photoUrl),
-                            backgroundColor: Colors.grey,
-                          ),
-                          SizedBox(width: 7.0,),
-                          Text(
-                            username,
-                            style: TextStyle(
-                              color: kText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
-                      ),
+        return
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
-                    ),
-
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
+            child:
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(children:[
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        SizedBox(width: 7.0,),
+                        Text(
+                          username,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                      ]),
+                    ),
+
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
+                          userId: ownerId,
+                        ),
                       ),
-                      child: CachedImage(shopmediaUrl.first,height: MediaQuery
-                          .of(context)
-                          .size
-                          .height/3,width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,),),
-                    SizedBox(height: 7.0,),
+                    ),
+                    child: CachedImage(shopmediaUrl.first,height: MediaQuery
+                        .of(context)
+                        .size
+                        .height/3,width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,),),
+                  SizedBox(height: 7.0,),
 
-                    Text(productname, style: TextStyle(
-                      color: kText,
-                    ),),
-                    SizedBox(height: 7.0,),
+                  Text(productname, style: TextStyle(
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
 
-                    currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-                    currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-                    currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-                    Text(
-                        "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+                  Text("size:$size", style: TextStyle(
+                    color: kText,
+                  ),),
+
+                  SizedBox(height: 7.0,),
+
+                  currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  Text(
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
 
 
-                  ],
+                ],
 
-                ),
               ),
+            ),
 
 
-            );   
+          );
         },
       query: priceQuery == "low"?
       FirebaseFirestore.instance.collectionGroup('userResale')
