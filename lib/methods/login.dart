@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/methods/register.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:fashow/HomePage.dart';
@@ -76,8 +77,12 @@ String accountErrorMessage;
                             keyboardType: TextInputType.emailAddress,
                             validator: emailValidator,
                           ),
-                          RaisedButton(
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation : 0.1,
 
+                              primary:  Colors.white.withOpacity(0.1), // background
+                            ),
                             child:
                             Text('Send mail',style: TextStyle(color: kblue,
                             ),),
@@ -119,10 +124,6 @@ String accountErrorMessage;
         ),
         body: Container(
 
-            decoration: BoxDecoration(
-                gradient: fabGradient
-            ) ,
-            alignment: Alignment.center,
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
                 child: Form(
@@ -165,66 +166,62 @@ String accountErrorMessage;
                         controller: pwdInputController,
                         validator: pwdValidator,
                       ),
-                      FlatButton(
+                      TextButton(
                         child: Text("Forgot Password?",  style: TextStyle(color:kText),),
                         onPressed: () {
                   resetPassword(parentContext: context,email: emailInputController.text??"")    ;                    },
                       ),
-                      RaisedButton(
+                      ElevatedButton(
 
                         child: Text("Login"),
-                        color: kblue,
-                        textColor: Colors.white,
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.1,
+
+                          primary:  Colors.white.withOpacity(0.1), // background
+                        ),
                         onPressed: () {
                           if (_loginFormKey.currentState.validate()) {
-                            FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                email: emailInputController.text,
-                                password: pwdInputController.text)
-                                .then((User) => FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(User.user.uid)
-                                .get()
-                                .then((DocumentSnapshot result) =>
-                            { if (User == null)
-                              {
+                            try{
 
-                                // Navigator.pushReplacementNamed(context, "/login")
-                              }
-                            else
-                              {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Homepage(
-                                          userid:User.user.uid,
-                                          auth: true,
-                                        )),
-                                        (_) => false ),
-                              }}
+                              FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                  email: emailInputController.text,
+                                  password: pwdInputController.text)
+                                  .then((User) => FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(User.user.uid)
+                                  .get()
+                                  .then((DocumentSnapshot result) =>
+                              { if (User == null)
+                                {
 
-                            )
-                                .catchError((err) {switch (err.code) {
-                              case "auth/invalid-email":
-                              case "auth/wrong-password":
-                              case "auth/user-not-found":
-                                {
-                                  this.accountErrorMessage = "Wrong email address or password.";
-                                  break;
+                                  // Navigator.pushReplacementNamed(context, "/login")
                                 }
-                              case "auth/user-disabled":
-                              case "user-disabled":
+                              else
                                 {
-                                  this.accountErrorMessage = "This account is disabled";
-                                  break;
-                                }
-                            }}))
-                                .catchError((err) => print(err));
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Homepage(
+                                            userid:User.user.uid,
+                                            auth: true,
+                                          )),
+                                          (_) => false ),
+                                }}
+
+                              )
+                              );
+                            } on FirebaseAuthException catch(error){
+                              Fluttertoast.showToast(
+                                  msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+
+                            }
+
                           }
                         },
                       ),
                       Text("your first time?",  style: TextStyle(color:kText),),
-                      FlatButton(
+                      TextButton(
                         child: Text("Register here!",  style: TextStyle(color:kText),),
                         onPressed: () {
                           Navigator.pushReplacement(

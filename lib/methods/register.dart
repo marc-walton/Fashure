@@ -9,6 +9,7 @@ import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_select/smart_select.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -28,7 +29,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   String lang = "en";
 String  country = "";
-String currency = "";
+String currency = "Preferred currency";
+  String dropTitle = 'Preferred currency';
+
 String currencyISO = "";
 String currencysym = "";
 String countryISO = "";
@@ -38,7 +41,14 @@ String countryISO = "";
 
   final DateTime timestamp = DateTime.now();
   bool save = false;
+  List<S2Choice<String>> CURRENCY  = [
+    S2Choice<String>(value: 'INR', title: 'INR'),
+    S2Choice<String>(value: 'EUR', title: 'EUR'),
+    S2Choice<String>(value: 'GBP', title: 'GBP'),
+    S2Choice<String>(value: 'USD', title: 'USD'),
 
+
+  ];
   @override
   initState() {
 
@@ -188,7 +198,7 @@ String countryISO = "";
                                 setState(() {
                                   _selected = select;
                                   country = select.name;
-                                  currency = select.currency;
+                                  // currency = select.currency;
                                   currencyISO = select.currencyISO;
                                   countryISO = select.isoCode;
                                   var format = NumberFormat.simpleCurrency(
@@ -203,94 +213,124 @@ String countryISO = "";
 
                         ],
                       ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                        child: GestureDetector(
 
-                      RaisedButton(
-                        color: kblue,
 
+                          child: ListTile(title: Text('$dropTitle',style:TextStyle(color: Colors.black) ,),
+                              trailing:Icon(Icons.arrow_forward_ios_rounded)
+                          ),
+                          onTap: (){
+                            showModalBottomSheet(context: context, builder:(BuildContext context){
+return
+  Expanded(
+    child: ListView(
+      children: <Widget>[
+        SmartSelect<String>.single(
+
+            title: '$dropTitle',
+            value: currency,
+            choiceItems: CURRENCY,
+            onChange: (state) {
+              setState(() => currency = state.value);
+              setState(() => dropTitle = state.title);
+            }
+        ),
+
+
+
+
+      ],
+    ),
+  );
+
+                            },
+                            );
+                          }
+                          ,
+                        ),
+                      ),
+
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.1,
+
+                          primary:  Colors.white.withOpacity(0.1), // background
+                        ),
                         child: Text("Register",        style: TextStyle(color:Colors.white),),
-                        textColor: Colors.white,
                         onPressed: () {
-                          if(country == ""){Fluttertoast.showToast(
-    msg: "Select your region" , timeInSecForIos: 4);}
+                          if(country == ""||currency == "preferred currency"){Fluttertoast.showToast(
+    msg: "Select your region" , timeInSecForIos: 4,gravity: ToastGravity.CENTER);}
 
 
                       else    if (_registerFormKey.currentState.validate()||save == true) {
                             if (pwdInputController.text ==
                                 confirmPwdInputController.text) {
-                              FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                  email: emailInputController.text,
-                                  password: pwdInputController.text)
-                                  .then((ser) async  { FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(ser.user.uid)
-                                  .set({
-                                "id": ser.user.uid,
-                                "username" : firstNameInputController.text,
-                                "photoUrl": "https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0",
-                                "email": emailInputController.text,
-                                "displayName": firstNameInputController.text,
-                                "bio": "",
-                                "client": 0 ,
-                                "countryISO": countryISO ,
+                              try {
+                                FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                    email: emailInputController.text,
+                                    password: pwdInputController.text)
+                                    .then((ser) async  { FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(ser.user.uid)
+                                    .set({
+                                  "id": ser.user.uid,
+                                  "username" : firstNameInputController.text,
+                                  "photoUrl": "https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0",
+                                  "email": emailInputController.text,
+                                  "displayName": firstNameInputController.text,
+                                  "bio": "",
+                                  "client": 0 ,
+                                  "countryISO": countryISO ,
 
-                                "country":country,
-                              "currency":currency,
-                              "currencyISO":currencyISO,
-                                 "currencysym":currencysym,
+                                  "country":country,
+                                  "currency":currency,
+                                  "currencyISO":currencyISO,
+                                  "currencysym":currencysym,
 
-                                "timestamp": timestamp,
-                                "language": "en",
-                                "seller": false,
-  "visits": 0,
-  "ban": false,
- "sales": 0,
- "revenue": 0,
+                                  "timestamp": timestamp,
+                                  "language": "en",
+                                  "seller": false,
+                                  "visits": 0,
+                                  "ban": false,
+                                  "sales": 0,
+                                  "revenue": 0,
 
 
-                              });
-                              bankRef
-                                  .doc(ser.user.uid)
-                                  .set({
+                                });
+                                bankRef
+                                    .doc(ser.user.uid)
+                                    .set({
 
-                                "accno":"",
-                                "ifsc":"",
+                                  "accno":"",
+                                  "ifsc":"",
 
-                              });
-                              // make new user their own follower (to include their posts in their timeline)
-                              await followersRef
-                                  .doc(ser.user.uid)
-                                  .collection('userFollowers')
-                                  .doc(ser.user.uid)
-                                  .set({});
+                                });
+                                // make new user their own follower (to include their posts in their timeline)
+                                await followersRef
+                                    .doc(ser.user.uid)
+                                    .collection('userFollowers')
+                                    .doc(ser.user.uid)
+                                    .set({});
 
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Homepage(
-                                        userid: ser.user.uid,
-                                        auth: true,
-                                      )),
-                                      (_) => false );
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Homepage(
+                                          userid: ser.user.uid,
+                                          auth: true,
+                                        )),
+                                        (_) => false );
 
-                              })
-                                  .catchError((err) => showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      content: Text("Account already exists",style: TextStyle(color:kText),),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text("Close",style: TextStyle(color:kText),),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            Navigator.pop(context);
+                                });
+                              } on FirebaseAuthException catch(error){Fluttertoast.showToast(
+                                  msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+                              }
 
-                                          },
-                                        )
-                                      ],
-                                    );
-                                  }));
+
 
                               //     .then((result) => {
                               //   Navigator.pushAndRemoveUntil(
@@ -319,7 +359,7 @@ String countryISO = "";
                                       title: Text("Error",style: TextStyle(color:kText),),
                                       content: Text("The passwords do not match",style: TextStyle(color:kText),),
                                       actions: <Widget>[
-                                        FlatButton(
+                                       TextButton(
                                           child: Text("Close",style: TextStyle(color:kText),),
                                           onPressed: () {
                                             Navigator.of(context).pop();
@@ -335,7 +375,7 @@ String countryISO = "";
                         },
                       ),
                       Text("Already have an account?",style: TextStyle(color:kText),),
-                      FlatButton(
+                      TextButton(
                         child: Text("Login here!",style: TextStyle(color:kText),),
                         onPressed: () {
                           Navigator.pop(context);
