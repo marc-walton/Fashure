@@ -38,7 +38,7 @@ class _BabykGState extends State<BabykG> {
         String username = documentSnapshot.data()['username'];
         String productname = documentSnapshot.data()['title'];
         String size = documentSnapshot.data()['size'];
-
+        Map likes =  documentSnapshot.data()['likes'];
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
@@ -47,7 +47,8 @@ class _BabykGState extends State<BabykG> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['resaleId'];
         List shopmediaUrl = documentSnapshot.data()['images'];
-
+        bool _isLiked = likes[currentUser.id] == true;
+bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -101,9 +102,91 @@ class _BabykGState extends State<BabykG> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                        Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "resaleLike",
+                                "username": currentUser.displayName,
+                                "userId": currentUser.id,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userWishlist")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+                              "size":size,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "title": productname,
+                              "images": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                          icon:Icon(Icons.bookmark_add ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 7.0,),
 
                   Text("size:$size", style: TextStyle(
@@ -226,7 +309,7 @@ class _BabykGState extends State<BabykG> {
         String username = documentSnapshot.data()['username'];
         String productname = documentSnapshot.data()['title'];
         String size = documentSnapshot.data()['size'];
-
+        Map likes =  documentSnapshot.data()['likes'];
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
@@ -235,7 +318,8 @@ class _BabykGState extends State<BabykG> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['resaleId'];
         List shopmediaUrl = documentSnapshot.data()['images'];
-
+        bool _isLiked = likes[currentUser.id] == true;
+bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -289,9 +373,91 @@ class _BabykGState extends State<BabykG> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                        Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "resaleLike",
+                                "username": currentUser.displayName,
+                                "userId": currentUser.id,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userWishlist")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+                              "size":size,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "title": productname,
+                              "images": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                          icon:Icon(Icons.bookmark_add ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 7.0,),
 
                   Text("size:$size", style: TextStyle(
@@ -414,7 +580,7 @@ class _BabykGState extends State<BabykG> {
         String username = documentSnapshot.data()['username'];
         String productname = documentSnapshot.data()['title'];
         String size = documentSnapshot.data()['size'];
-
+        Map likes =  documentSnapshot.data()['likes'];
         var eur = documentSnapshot.data()['eur'];
         var usd = documentSnapshot.data()['usd'];
         var inr = documentSnapshot.data()['eur'];
@@ -423,7 +589,8 @@ class _BabykGState extends State<BabykG> {
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['resaleId'];
         List shopmediaUrl = documentSnapshot.data()['images'];
-
+        bool _isLiked = likes[currentUser.id] == true;
+bool isLiked;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -477,9 +644,91 @@ class _BabykGState extends State<BabykG> {
                         .width,),),
                   SizedBox(height: 7.0,),
 
-                  Text(productname, style: TextStyle(
-                    color: kText,
-                  ),),
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                        color: kText,
+                      ),),
+                        Spacer(),
+                      IconButton(
+                        onPressed: (){
+
+                          if (_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': false});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .get()
+                                  .then((doc) {
+                                if (doc.exists) {
+                                  doc.reference.delete();
+                                }
+                              });
+                            }
+                            var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(prodId);
+                            docReference.delete();
+                            setState(() {
+                              isLiked = false;
+                              likes[currentUser.id] = false;
+                            });
+                          } else if (!_isLiked) {
+                            FirebaseFirestore.instance.collection('Resale')
+                                .doc(ownerId)
+                                .collection('userResale')
+                                .doc(prodId)
+                                .update({'likes.${currentUser.id}': true});
+                            bool isNotPostOwner = currentUser.id != ownerId;
+                            if (isNotPostOwner) {
+                              activityFeedRef
+                                  .doc(ownerId)
+                                  .collection("feedItems")
+                                  .doc(prodId)
+                                  .set({
+                                "type": "resaleLike",
+                                "username": currentUser.displayName,
+                                "userId": currentUser.id,
+                                "userProfileImg": currentUser.photoUrl,
+                                "postId": prodId,
+                                "mediaUrl": shopmediaUrl.first,
+                                "timestamp": timestamp,
+                                "read": 'false',
+                              });
+                            }
+                            favRef.doc(currentUser.id).collection("userWishlist")
+                                .doc(prodId)
+                                .set({
+                              "username": username,
+                              "prodId": prodId,
+                              "timestamp": timestamp,
+                              "photoUrl": photoUrl,
+                              "size":size,
+                              "ownerId": ownerId,
+                              "eur":eur,
+                              "usd":usd,
+                              "inr":inr,
+                              "gbp":gbp,
+                              "title": productname,
+                              "images": shopmediaUrl.first,
+                            });
+                            setState(() {
+                              isLiked = true;
+                              likes[currentUser.id] = true;
+//        showHeart = true;
+                            });
+                          }
+                        },
+                          icon:Icon(Icons.bookmark_add ),
+                        color:  Colors.black,
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 7.0,),
 
                   Text("size:$size", style: TextStyle(
