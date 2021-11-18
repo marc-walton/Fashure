@@ -126,59 +126,59 @@ class _HatsTGState extends State<HatsTG> {
           );
         },
         query: priceQuery == "low"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps'):
         priceQuery == "high"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             :priceQuery == "0D"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "0S$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "highD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "lowS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
         priceQuery == "highS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "0DS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps')
@@ -186,7 +186,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -195,7 +195,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "highDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -203,7 +203,7 @@ class _HatsTGState extends State<HatsTG> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCaps'),
@@ -306,59 +306,59 @@ class _HatsTGState extends State<HatsTG> {
           );
         },
         query: priceQuery == "low"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats'):
         priceQuery == "high"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             :priceQuery == "0D"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "0S$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
              .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "highD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "lowS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
         priceQuery == "highS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "0DS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats')
@@ -366,7 +366,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -375,7 +375,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "highDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -383,7 +383,7 @@ class _HatsTGState extends State<HatsTG> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKnitted Hats'),
@@ -486,59 +486,59 @@ class _HatsTGState extends State<HatsTG> {
           );
         },
         query: priceQuery == "low"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats'):
         priceQuery == "high"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             :priceQuery == "0D"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "0S$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "highD"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('country',isEqualTo: '${currentUser.country}')
             :priceQuery == "lowS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
         priceQuery == "highS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "0DS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats')
@@ -546,7 +546,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -555,7 +555,7 @@ class _HatsTGState extends State<HatsTG> {
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "highDS$sizeFilter"?
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -563,7 +563,7 @@ class _HatsTGState extends State<HatsTG> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        FirebaseFirestore.instance.collectionGroup('userProducts')
+        FirebaseFirestore.instance.collectionGroup('userResale')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSun Hats'),
