@@ -7,7 +7,6 @@ import 'package:fashow/Constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/progress.dart';
-import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,40 +15,17 @@ import 'package:path_provider/path_provider.dart';
 import 'package:smart_select/smart_select.dart';
 
 import 'package:uuid/uuid.dart';
-import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fashow/Products.dart';
-import 'package:fashow/chatcached_image.dart';
-import 'package:fashow/size_config.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
-import 'package:fashow/user.dart';
 
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:fashow/size_config.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/HomePage.dart';
+
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
-import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
-import 'dart:async';
-import 'package:alert_dialog/alert_dialog.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:fashow/Categories/BboyEcomUp.dart';
 import 'package:fashow/Categories/BgirlEcomUp.dart';
 import 'package:fashow/Categories/KboyEcomUp.dart';
@@ -59,36 +35,10 @@ import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
 
-import 'package:fashow/Products.dart';
-import 'package:fashow/chatcached_image.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:smart_select/smart_select.dart';
-import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/methods/country.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/HomePage.dart';
-import 'package:fashow/Constants.dart';
-import 'package:image/image.dart' as Im;
-import 'package:uuid/uuid.dart';
-import 'package:get/get.dart';
-import 'package:back_pressed/back_pressed.dart';
-import 'package:fashow/size_config.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
 
 class UploadResale extends StatefulWidget {
 
@@ -122,7 +72,7 @@ var  shipCost;
   String value = 'Select Category';
   String dropdownValue = 'Women';
   String condition = 'Gently Used';
-
+String dropTitle = 'Select Category';
   List colors;
   bool worldship = true;
   bool freeship = true;
@@ -922,79 +872,118 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: Hats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: Scarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts',
                     value: value,
                     choiceItems: Belts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Braces and Suspenders',
                     value: value,
                     choiceItems: Braces,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Ties & Bow Ties',
                     value: value,
                     choiceItems: Ties,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Glasses & Frames',
                     value: value,
                     choiceItems: Glasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Sunglasses',
                     value: value,
                     choiceItems: Sunglasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: Gloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: Socks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Pocket Square',
                     value: value,
                     choiceItems: PocketSquare,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Wallets',
                     value: value,
                     choiceItems: Wallets,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Umbrellas & Travel',
                     value: value,
                     choiceItems: Umbrellas,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Phone cases',
                     value: value,
                     choiceItems: Phone,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1006,7 +995,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: Bags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1019,7 +1011,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Activewear',
                     value: value,
                     choiceItems: Activewear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1031,7 +1026,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Beach & Swimwear',
                     value: value,
                     choiceItems: Beach,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1043,7 +1041,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: Denim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1055,7 +1056,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Grooming',
                     value: value,
                     choiceItems: Grooming,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1067,7 +1071,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Indian Ethnic',
                     value: value,
                     choiceItems: Indian,
-                    onChange: (state) => setState(() { value = state.value; })
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1080,7 +1087,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jackets',
                     value: value,
                     choiceItems: Jackets,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1092,7 +1102,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Coats',
                   value: value,
                   choiceItems: Coats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1104,7 +1117,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jewellery',
                     value: value,
                     choiceItems: Jewellery,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1117,7 +1133,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Shirts',
                     value: value,
                     choiceItems: Shirts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1130,7 +1149,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Shorts',
                     value: value,
                     choiceItems: Shorts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1142,7 +1164,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Suits',
                     value: value,
                     choiceItems: Suits,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1154,7 +1179,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Sweatshirts & Sweaters',
                     value: value,
                     choiceItems: Sweatshirts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1166,7 +1194,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Trousers',
                     value: value,
                     choiceItems: Trousers,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1178,7 +1209,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Casual Tops',
                     value: value,
                     choiceItems: Tops,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
 
                 ),
               ],
@@ -1191,7 +1225,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Watches',
                     value: value,
                     choiceItems: Watches,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1203,7 +1240,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Shoes',
                     value: value,
                     choiceItems: Shoes,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1215,7 +1255,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Sneakers',
                     value: value,
                     choiceItems: Sneakers,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
 
@@ -1241,80 +1284,119 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bridal & Wedding',
                     value: value,
                     choiceItems: Bridal,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts',
                     value: value,
                     choiceItems: WBelts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Braces',
                     value: value,
                     choiceItems: WBraces,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Glasses & Frames',
                     value: value,
                     choiceItems: WGlasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Sunglasses',
                     value: value,
                     choiceItems: WSunglasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Hair Accessories',
                     value: value,
                     choiceItems: WHair,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Hats',
                     value: value,
                     choiceItems: WHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Ties & Collars',
                     value: value,
                     choiceItems: WTies,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: WGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: WSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: WScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
                 SmartSelect<String>.single(
                     title: 'Umbrellas & Travel',
                     value: value,
                     choiceItems: WUmbrellas,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Phone cases',
                     value: value,
                     choiceItems: WPhone,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1327,7 +1409,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Indian Ethnic',
                     value: value,
                     choiceItems: WEthnic,
-                    onChange: (state) => setState(() { value = state.value; })
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1340,7 +1425,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: WBags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1353,7 +1441,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bridal Wear',
                     value: value,
                     choiceItems: WBridal,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1367,7 +1458,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Activewear',
                     value: value,
                     choiceItems: WActivewear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1379,7 +1473,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Beach & Swimwear',
                     value: value,
                     choiceItems: WBeach,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1391,7 +1488,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Coats',
                     value: value,
                     choiceItems: WCoats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1403,7 +1503,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jackets',
                     value: value,
                     choiceItems: WJackets,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1416,7 +1519,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: WDenim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1428,7 +1534,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Dresses',
                     value: value,
                     choiceItems: WDresses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1440,7 +1549,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jumpsuits & Playsuits',
                     value: value,
                     choiceItems: WJumpsuits,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1452,7 +1564,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jewellery',
                     value: value,
                     choiceItems: WJewellery,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1464,7 +1579,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Knitwear',
                     value: value,
                     choiceItems: WKnitwear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1476,7 +1594,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Tops',
                     value: value,
                     choiceItems: WTops,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1488,7 +1609,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'WTrouserops',
                     value: value,
                     choiceItems: WTrouser,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1500,7 +1624,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Skirts',
                     value: value,
                     choiceItems: WSkirts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1512,7 +1639,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Shorts',
                     value: value,
                     choiceItems: WShorts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1524,7 +1654,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Shoes',
                     value: value,
                     choiceItems: WShoes,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1536,7 +1669,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Sneakers',
                     value: value,
                     choiceItems: WSneakers,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1548,7 +1684,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Watches',
                     value: value,
                     choiceItems: WWatches,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -1571,37 +1710,55 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: BBHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: BBScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Ties & Bow Ties',
                     value: value,
                     choiceItems: BBTies,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: BBGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: BBSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Travel',
                     value: value,
                     choiceItems: BBTravel,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1626,7 +1783,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Coats & Jackets',
                   value: value,
                   choiceItems: BBCoats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1637,7 +1797,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Babysuits',
                   value: value,
                   choiceItems: BBBabysuits,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1648,7 +1811,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: BBKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1659,7 +1825,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: BBShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1670,7 +1839,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: BBShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1681,7 +1853,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: BBSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1692,7 +1867,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: BBTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1703,7 +1881,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: BBTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1714,7 +1895,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: BBTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1737,32 +1921,47 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: GGHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: GGScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: GGGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: GGSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Travel',
                     value: value,
                     choiceItems: GGTravel,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1775,7 +1974,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Indian Ethnic',
                     value: value,
                     choiceItems: GGEthnic,
-                    onChange: (state) => setState(() { value = state.value; })
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1787,7 +1989,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Coats & Jackets',
                   value: value,
                   choiceItems: GGCoats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1798,7 +2003,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Dresses',
                   value: value,
                   choiceItems: GGDresses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1809,7 +2017,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Babysuits',
                   value: value,
                   choiceItems: GGBabysuits,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1820,7 +2031,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: GGKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1831,7 +2045,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: GGShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1842,7 +2059,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: GGShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1853,7 +2073,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Skirts',
                   value: value,
                   choiceItems: GGSkirts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1865,7 +2088,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: GGSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1876,7 +2102,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: GGTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1887,7 +2116,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: GGTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1898,7 +2130,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: GGTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -1920,49 +2155,73 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: KBHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: KBScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts & Braces ',
                     value: value,
                     choiceItems: KBBelts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Ties & Bow Ties',
                     value: value,
                     choiceItems: KBTies,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Eyewear',
                     value: value,
                     choiceItems: KBGlasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: KBGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: KBSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Travel',
                     value: value,
                     choiceItems: KBSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
 
@@ -1976,7 +2235,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Indian Ethnic',
                     value: value,
                     choiceItems: KBEthnic,
-                    onChange: (state) => setState(() { value = state.value; })
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -1989,7 +2251,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: KBBags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2002,7 +2267,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: KBDenim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2015,7 +2283,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Coats & Jackets',
                     value: value,
                     choiceItems: KBCoats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2028,7 +2299,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: KBShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2039,7 +2313,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: KBShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2050,7 +2327,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: KBSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2061,7 +2341,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: KBKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2072,7 +2355,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: KBTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2083,7 +2369,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: KBTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2094,7 +2383,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: KBTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2116,49 +2408,73 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: KGHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: KGScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts',
                     value: value,
                     choiceItems: KGBelts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Hair Accessories',
                     value: value,
                     choiceItems: KGHair,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Eyewear',
                     value: value,
                     choiceItems: KGGlasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: KGGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: KGSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Jewellery',
                     value: value,
                     choiceItems: KGJewellery,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
               ],
             ),
@@ -2170,7 +2486,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Indian Ethnic',
                     value: value,
                     choiceItems: KGEthnic,
-                    onChange: (state) => setState(() { value = state.value; })
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2183,7 +2502,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: KGBags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2196,7 +2518,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: KGDenim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2209,7 +2534,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Dresses',
                     value: value,
                     choiceItems: KGDresses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2222,7 +2550,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jumpsuits & Playsuits',
                     value: value,
                     choiceItems: KGJumpsuit,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2235,7 +2566,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Coats',
                     value: value,
                     choiceItems: KGCoats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2248,7 +2582,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jackets',
                     value: value,
                     choiceItems: KGJackets,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2261,7 +2598,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: KGShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2272,7 +2612,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: KGShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2283,7 +2626,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Skirts',
                   value: value,
                   choiceItems: KGSkirts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2294,7 +2640,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: KGSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2305,7 +2654,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: KGKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2316,7 +2668,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: KGTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2327,7 +2682,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: KGTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2338,7 +2696,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: KGTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2360,49 +2721,73 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: TBHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: TBScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts & Braces ',
                     value: value,
                     choiceItems: TBBelts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Ties & Bow Ties',
                     value: value,
                     choiceItems: TBTies,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Eyewear',
                     value: value,
                     choiceItems: TBGlasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: TBGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: TBSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Travel',
                     value: value,
                     choiceItems: TBTravel,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
 
@@ -2429,7 +2814,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: TBBags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2442,7 +2830,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: TBDenim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2454,7 +2845,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: TBShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2465,7 +2859,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: TBShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2476,7 +2873,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: TBSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2487,7 +2887,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: TBKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2498,7 +2901,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: TBTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2509,7 +2915,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: TBTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2520,7 +2929,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: TBTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2542,55 +2954,82 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Hats',
                     value: value,
                     choiceItems: TGHats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Scarves',
                     value: value,
                     choiceItems: TGScarves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Belts',
                     value: value,
                     choiceItems: TGBelts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Hair Accessories',
                     value: value,
                     choiceItems: TGHair,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Eyewear',
                     value: value,
                     choiceItems: TGGlasses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Gloves',
                     value: value,
                     choiceItems: TGGloves,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Socks',
                     value: value,
                     choiceItems: TGSocks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Jewellery',
                     value: value,
                     choiceItems: TGJewellery,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 SmartSelect<String>.single(
                     title: 'Travel',
                     value: value,
                     choiceItems: TGTravel,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2617,7 +3056,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Bags',
                     value: value,
                     choiceItems: TGBags,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2630,7 +3072,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Denim',
                     value: value,
                     choiceItems: TGDenim,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2643,7 +3088,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Dresses',
                     value: value,
                     choiceItems: TGDresses,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2656,7 +3104,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                     title: 'Jumpsuit',
                     value: value,
                     choiceItems: TGJumpsuit,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
 
               ],
@@ -2669,7 +3120,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shoes',
                   value: value,
                   choiceItems: TGShoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2680,7 +3134,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Shorts',
                   value: value,
                   choiceItems: TGShorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2691,7 +3148,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Skirts',
                   value: value,
                   choiceItems: TGSkirts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2702,7 +3162,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Swimwear',
                   value: value,
                   choiceItems: TGSwimwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2713,7 +3176,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Knitwear',
                   value: value,
                   choiceItems: TGKnitwear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2724,7 +3190,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tops',
                   value: value,
                   choiceItems: TGTops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2735,7 +3204,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Tracks',
                   value: value,
                   choiceItems: TGTracks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -2746,7 +3218,10 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                   title: 'Trousers',
                   value: value,
                   choiceItems: TGTrousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               ],
             ),
@@ -3280,7 +3755,7 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
                         child: GestureDetector(
 
 
-                          child: ListTile(title: Text('$value',style:TextStyle(color: Colors.black) ,),
+                          child: ListTile(title: Text('$dropTitle',style:TextStyle(color: Colors.black) ,),
                               trailing:Icon(Icons.arrow_forward_ios_rounded)
                         ),
                           onTap: (){

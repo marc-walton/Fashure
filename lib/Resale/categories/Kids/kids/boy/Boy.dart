@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/Categories/Kids/kids/boy/Accessories.dart';

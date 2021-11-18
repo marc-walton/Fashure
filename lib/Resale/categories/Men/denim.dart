@@ -1,6 +1,7 @@
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

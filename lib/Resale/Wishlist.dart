@@ -22,21 +22,21 @@ import 'package:photo_view/photo_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 
-class Fav extends StatefulWidget {
+class ResaleWishList extends StatefulWidget {
 
   final String currentUser;
   final String prodId;
   final String onwerId;
-  Fav({ this.currentUser,
+  ResaleWishList({ this.currentUser,
     this.prodId,
 
     this.onwerId});
 
   @override
-  _FavState createState() => _FavState( prodId: this.prodId,ownerId:this.onwerId);
+  _ResaleWishListState createState() => _ResaleWishListState( prodId: this.prodId,ownerId:this.onwerId);
 }
 
-class _FavState extends State<Fav> {
+class _ResaleWishListState extends State<ResaleWishList> {
   final _firestore = FirebaseFirestore.instance;
   String postOrientation = "grid";
   String shopOrientation = "grid";
@@ -47,7 +47,7 @@ class _FavState extends State<Fav> {
   String ownerId;
   Prod products;
 
-  _FavState({
+  _ResaleWishListState({
     this.prodId, this.products,this.ownerId,
   });
 
@@ -57,7 +57,7 @@ class _FavState extends State<Fav> {
       Scaffold(
         appBar:  AppBar(backgroundColor: kPrimaryColor,
           title: FittedBox(
-            child: Text(   'Favorites',
+            child: Text(   'Wishlist',
               style: TextStyle(
                   fontFamily :"MajorMonoDisplay",
                   color: Colors.white),),
@@ -66,10 +66,9 @@ class _FavState extends State<Fav> {
         ),
 
         body:Container(
-
           child: StreamBuilder(
               stream: favRef.doc(currentUser.id)
-                  .collection('userFav')
+                  .collection('userWishlist')
                   .orderBy('timestamp', descending:true)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -82,8 +81,8 @@ class _FavState extends State<Fav> {
                         DocumentSnapshot ds = snapshot.data.docs[index];
                         return new CartItem(
                           count: snapshot.data.docs.length,
-                          shopmediaUrl: ds['shopmediaUrl'],
-                          productname: ds['productname'],
+                          shopmediaUrl: ds['images'],
+                          productname: ds['title'],
                           eur: ds['eur'],
                           usd : ds['usd'],
                           inr: ds['inr'],
@@ -93,6 +92,7 @@ class _FavState extends State<Fav> {
                           prodId: ds['prodId'],
                           userId: ds['userId'],
                           ownerId: ds['ownerId'],
+                          size: ds['size'],
                         );
                       }
                   );
@@ -119,6 +119,8 @@ class CartItem extends StatelessWidget {
   final String cny;
   final String gbp;
   final String userId;
+  final String size;
+
   final String currentUserId = currentUser?.id;
 
 
@@ -137,6 +139,8 @@ class CartItem extends StatelessWidget {
     this.gbp,
     this.productname,
     this.userId,
+    this.size,
+
   });
 
   showProduct(context) {
@@ -164,7 +168,7 @@ class CartItem extends StatelessWidget {
 //    });
 //  }
   deleteFav(){
-    var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+    var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(prodId);
     docReference.delete();
   }
   @override
@@ -218,6 +222,11 @@ class CartItem extends StatelessWidget {
             ],),),
 
         Text(productname, style: TextStyle(
+          color: kText,
+        ),),
+        SizedBox(height: 7.0,),
+
+        Text("size:$size", style: TextStyle(
           color: kText,
         ),),
 

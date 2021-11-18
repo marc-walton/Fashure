@@ -12,6 +12,8 @@ import 'package:fashow/Product_screen.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
+
 class KidskG extends StatefulWidget {
   final  int selectedPage;
 

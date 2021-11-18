@@ -9,7 +9,10 @@ import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/DesignerShop.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Resale/Resale.dart';
+import 'package:fashow/Resale/ResaleShop.dart';
+import 'package:fashow/Resale/Wishlist.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
+import 'package:fashow/Resale/resale_search.dart';
 import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/fav.dart';
@@ -146,24 +149,40 @@ controller: _Tabcontroller,
              Icons.search,
             ),
             onPressed: () {
-              Get.to (ShopSearch());
+               _Tabcontroller.index == 0 ? Get.to (ShopSearch()):Get.to (ResaleSearch());
               tabs = !tabs ;
 
 
               // do something
             },
-          ),          IconButton(
+          ),
+          IconButton(
             color: Colors.white,
             icon: Icon(
              Icons.favorite,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>Fav( currentUser: currentUser?.id)));
+              _Tabcontroller.index == 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) =>Fav( currentUser: currentUser?.id))):
+               Navigator.push(context, MaterialPageRoute(builder: (context) =>ResaleWishList( currentUser: currentUser?.id)));
               tabs = !tabs ;
 
               // do something
             },
           ),
+          _Tabcontroller.index == 0 ?   IconButton(
+            color: Colors.white,
+            icon: Icon(
+             Icons.shopping_cart_outlined,
+            ),
+            onPressed: () {
+              _Tabcontroller.index == 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) =>Fav( currentUser: currentUser?.id))):
+               Navigator.push(context, MaterialPageRoute(builder: (context) =>ResaleWishList( currentUser: currentUser?.id)));
+              tabs = !tabs ;
+
+              // do something
+            },
+          ):Container(),
+
         ],
       ),
 //        backgroundColor: kPrimaryColor,
@@ -174,7 +193,7 @@ controller: _Tabcontroller,
 
           children: [
             DesignerShop(),
-DFF(),
+            ResaleShop(),
 
 
           ],

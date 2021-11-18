@@ -527,6 +527,8 @@ shipBool = currentUser.country == country?freeship:freeworldship;
           .doc(resaleId)
           .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
+      var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(resaleId);
+      docReference.delete();
       setState(() {
         likeCount -= 1;
         isLiked = false;
@@ -539,6 +541,22 @@ shipBool = currentUser.country == country?freeship:freeworldship;
           .doc(resaleId)
           .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
+      favRef.doc(currentUser.id).collection("userWishlist")
+          .doc(resaleId)
+          .set({
+        "username": username,
+        "prodId": resaleId,
+        "timestamp": timestamp,
+        "photoUrl": photoUrl,
+      "size":size,
+        "ownerId": ownerId,
+        "eur":eur,
+        "usd":usd,
+        "inr":inr,
+        "gbp":gbp,
+        "title": title,
+        "images": images.first,
+      });
       setState(() {
         likeCount += 1;
         isLiked = true;
@@ -870,6 +888,7 @@ shipBool = currentUser.country == country?freeship:freeworldship;
 
           child: Expanded(
             child: Column(
+
               children:  [
                 GestureDetector(
                   onTap:(){},
@@ -974,21 +993,11 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                       onPressed: (){
                         handleLikePost();
                         Fluttertoast.showToast(
-                            msg: "Added to Favorites! " , timeInSecForIos: 4);
+                            msg: "Added to Wislist! " , timeInSecForIos: 4);
                       },
                       icon: Icon(
-                        isLiked?   Icons.favorite:Icons.favorite_border ,
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
                         color:  Colors.black,
-                      ),
-                    ),
-                    Container(
-                      child: Text(
-                        "$likeCount ",
-                        style: TextStyle(
-                          color:kText,
-                          fontSize: 15.0,
-                          //                      fontWeight: FontWeight.bold,
-                        ),
                       ),
                     ),
                     // FutureBuilder<Uri>(
@@ -1040,6 +1049,21 @@ shipBool = currentUser.country == country?freeship:freeworldship;
 
                   ],
                 ),
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "$likeCount wishlisted this item",
+                        style: TextStyle(
+                          color:kText,
+                          fontSize: 15.0,
+                          //                      fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

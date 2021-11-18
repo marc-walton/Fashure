@@ -162,12 +162,12 @@ import 'package:fashow/methods/card_prod.dart';
 
 
 
-class ShopSearch extends StatefulWidget {
+class ResaleSearch extends StatefulWidget {
   @override
-  _ShopSearchState createState() => _ShopSearchState();
+  _ResaleSearchState createState() => _ResaleSearchState();
 }
 
-class _ShopSearchState extends State<ShopSearch> {
+class _ResaleSearchState extends State<ResaleSearch> {
   final List<String> names = [
      "Women's Dresses",
     "Men's Accessories",

@@ -58,6 +58,7 @@ class Uploadecom extends StatefulWidget {
 class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
   String prodId = Uuid().v4();
+  String dropTitle = 'Select Category';
 
 
   List<Asset> images = <Asset>[];
@@ -5222,79 +5223,118 @@ compressImage01() async {
                   title: 'Hats',
                   value: value,
                   choiceItems: Hats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Scarves',
                   value: value,
                   choiceItems: Scarves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Belts',
                   value: value,
                   choiceItems: Belts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Braces and Suspenders',
                   value: value,
                   choiceItems: Braces,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Ties & Bow Ties',
                   value: value,
                   choiceItems: Ties,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Glasses & Frames',
                   value: value,
                   choiceItems: Glasses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Sunglasses',
                   value: value,
                   choiceItems: Sunglasses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Gloves',
                   value: value,
                   choiceItems: Gloves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Socks',
                   value: value,
                   choiceItems: Socks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Pocket Square',
                   value: value,
                   choiceItems: PocketSquare,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Wallets',
                   value: value,
                   choiceItems: Wallets,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Umbrellas & Travel',
                   value: value,
                   choiceItems: Umbrellas,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Phone cases',
                   value: value,
                   choiceItems: Phone,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5306,7 +5346,10 @@ compressImage01() async {
                   title: 'Bags',
                   value: value,
                   choiceItems: Bags,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -5319,7 +5362,10 @@ compressImage01() async {
                   title: 'Activewear',
                   value: value,
                   choiceItems: Activewear,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5331,7 +5377,10 @@ compressImage01() async {
                   title: 'Beach & Swimwear',
                   value: value,
                   choiceItems: Beach,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5343,7 +5392,10 @@ compressImage01() async {
                   title: 'Denim',
                   value: value,
                   choiceItems: Denim,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5355,7 +5407,10 @@ compressImage01() async {
                   title: 'Grooming',
                   value: value,
                   choiceItems: Grooming,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5367,7 +5422,10 @@ compressImage01() async {
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: Indian,
-                  onChange: (state) => setState(() { value = state.value; })
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -5380,7 +5438,10 @@ compressImage01() async {
                   title: 'Jackets',
                   value: value,
                   choiceItems: Jackets,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -5392,7 +5453,10 @@ compressImage01() async {
                 title: 'Coats',
                 value: value,
                 choiceItems: Coats,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -5404,7 +5468,10 @@ compressImage01() async {
                 title: 'Jewellery',
                 value: value,
                 choiceItems: Jewellery,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
             ],
@@ -5417,7 +5484,10 @@ compressImage01() async {
                 title: 'Shirts',
                 value: value,
                 choiceItems: Shirts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
             ],
@@ -5430,7 +5500,10 @@ compressImage01() async {
                   title: 'Shorts',
                   value: value,
                   choiceItems: Shorts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5442,7 +5515,10 @@ compressImage01() async {
                   title: 'Suits',
                   value: value,
                   choiceItems: Suits,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5454,7 +5530,10 @@ compressImage01() async {
                   title: 'Sweatshirts & Sweaters',
                   value: value,
                   choiceItems: Sweatshirts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5466,7 +5545,10 @@ compressImage01() async {
                   title: 'Trousers',
                   value: value,
                   choiceItems: Trousers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5478,7 +5560,10 @@ compressImage01() async {
                   title: 'Casual Tops',
                   value: value,
                   choiceItems: Tops,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
 
               ),
             ],
@@ -5491,7 +5576,10 @@ compressImage01() async {
                   title: 'Watches',
                   value: value,
                   choiceItems: Watches,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5503,7 +5591,10 @@ compressImage01() async {
                   title: 'Shoes',
                   value: value,
                   choiceItems: Shoes,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -5515,7 +5606,10 @@ compressImage01() async {
                   title: 'Sneakers',
                   value: value,
                   choiceItems: Sneakers,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
 
@@ -5541,80 +5635,119 @@ compressImage01() async {
                  title: 'Bridal & Wedding',
                  value: value,
                  choiceItems: Bridal,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Belts',
                  value: value,
                  choiceItems: WBelts,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Braces',
                  value: value,
                  choiceItems: WBraces,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Glasses & Frames',
                  value: value,
                  choiceItems: WGlasses,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Sunglasses',
                  value: value,
                  choiceItems: WSunglasses,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Hair Accessories',
                  value: value,
                  choiceItems: WHair,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Hats',
                  value: value,
                  choiceItems: WHats,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Ties & Collars',
                  value: value,
                  choiceItems: WTies,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Gloves',
                  value: value,
                  choiceItems: WGloves,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Socks',
                  value: value,
                  choiceItems: WSocks,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
              SmartSelect<String>.single(
                  title: 'Scarves',
                  value: value,
                  choiceItems: WScarves,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
   SmartSelect<String>.single(
                  title: 'Umbrellas & Travel',
                  value: value,
                  choiceItems: WUmbrellas,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 SmartSelect<String>.single(
                  title: 'Phone cases',
                  value: value,
                  choiceItems: WPhone,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
            ],
@@ -5627,7 +5760,10 @@ SmartSelect<String>.single(
                  title: 'Indian Ethnic',
                  value: value,
                  choiceItems: WEthnic,
-                 onChange: (state) => setState(() { value = state.value; })
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
            ],
@@ -5640,7 +5776,10 @@ SmartSelect<String>.single(
                  title: 'Bags',
                  value: value,
                  choiceItems: WBags,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
            ],
@@ -5653,7 +5792,10 @@ SmartSelect<String>.single(
                  title: 'Bridal Wear',
                  value: value,
                  choiceItems: WBridal,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
            ],
@@ -5667,7 +5809,10 @@ SmartSelect<String>.single(
                  title: 'Activewear',
                  value: value,
                  choiceItems: WActivewear,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5679,7 +5824,10 @@ SmartSelect<String>.single(
                  title: 'Beach & Swimwear',
                  value: value,
                  choiceItems: WBeach,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5691,7 +5839,10 @@ SmartSelect<String>.single(
                title: 'Coats',
                value: value,
                choiceItems: WCoats,
-               onChange: (state) => setState(() => value = state.value)
+               onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
            ),
            ],
          ),
@@ -5703,7 +5854,10 @@ SmartSelect<String>.single(
                  title: 'Jackets',
                  value: value,
                  choiceItems: WJackets,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
 
            ],
@@ -5716,7 +5870,10 @@ SmartSelect<String>.single(
                  title: 'Denim',
                  value: value,
                  choiceItems: WDenim,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5728,7 +5885,10 @@ SmartSelect<String>.single(
                  title: 'Dresses',
                  value: value,
                  choiceItems: WDresses,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5740,7 +5900,10 @@ SmartSelect<String>.single(
                  title: 'Jumpsuits & Playsuits',
                  value: value,
                  choiceItems: WJumpsuits,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5752,7 +5915,10 @@ SmartSelect<String>.single(
                  title: 'Jewellery',
                  value: value,
                  choiceItems: WJewellery,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5764,7 +5930,10 @@ SmartSelect<String>.single(
                  title: 'Knitwear',
                  value: value,
                  choiceItems: WKnitwear,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5776,7 +5945,10 @@ SmartSelect<String>.single(
                  title: 'Tops',
                  value: value,
                  choiceItems: WTops,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5788,7 +5960,10 @@ SmartSelect<String>.single(
                  title: 'WTrouserops',
                  value: value,
                  choiceItems: WTrouser,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5800,7 +5975,10 @@ SmartSelect<String>.single(
                  title: 'Skirts',
                  value: value,
                  choiceItems: WSkirts,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5812,7 +5990,10 @@ SmartSelect<String>.single(
                  title: 'Shorts',
                  value: value,
                  choiceItems: WShorts,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5824,7 +6005,10 @@ SmartSelect<String>.single(
                  title: 'Shoes',
                  value: value,
                  choiceItems: WShoes,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5836,7 +6020,10 @@ SmartSelect<String>.single(
                  title: 'Sneakers',
                  value: value,
                  choiceItems: WSneakers,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5848,7 +6035,10 @@ SmartSelect<String>.single(
                  title: 'Watches',
                  value: value,
                  choiceItems: WWatches,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
              ),
            ],
          ),
@@ -5871,37 +6061,55 @@ Widget BabyBCategory(){
                       title: 'Hats',
                       value: value,
                       choiceItems: BBHats,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Scarves',
                       value: value,
                       choiceItems: BBScarves,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Ties & Bow Ties',
                       value: value,
                       choiceItems: BBTies,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Gloves',
                       value: value,
                       choiceItems: BBGloves,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Socks',
                       value: value,
                       choiceItems: BBSocks,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                    SmartSelect<String>.single(
                       title: 'Travel',
                       value: value,
                       choiceItems: BBTravel,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
                 ],
@@ -5926,7 +6134,10 @@ Widget BabyBCategory(){
                     title: 'Coats & Jackets',
                     value: value,
                     choiceItems: BBCoats,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5937,7 +6148,10 @@ Widget BabyBCategory(){
                     title: 'Babysuits',
                     value: value,
                     choiceItems: BBBabysuits,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5948,7 +6162,10 @@ Widget BabyBCategory(){
                     title: 'Knitwear',
                     value: value,
                     choiceItems: BBKnitwear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5959,7 +6176,10 @@ Widget BabyBCategory(){
                     title: 'Shoes',
                     value: value,
                     choiceItems: BBShoes,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5970,7 +6190,10 @@ Widget BabyBCategory(){
                     title: 'Shorts',
                     value: value,
                     choiceItems: BBShorts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5981,7 +6204,10 @@ ExpansionTile(
                     title: 'Swimwear',
                     value: value,
                     choiceItems: BBSwimwear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -5992,7 +6218,10 @@ ExpansionTile(
                     title: 'Tops',
                     value: value,
                     choiceItems: BBTops,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6003,7 +6232,10 @@ ExpansionTile(
                     title: 'Tracks',
                     value: value,
                     choiceItems: BBTracks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6014,7 +6246,10 @@ ExpansionTile(
                     title: 'Trousers',
                     value: value,
                     choiceItems: BBTrousers,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6037,32 +6272,47 @@ Widget BabyGCategory() {
                 title: 'Hats',
                 value: value,
                 choiceItems: GGHats,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Scarves',
                 value: value,
                 choiceItems: GGScarves,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
             SmartSelect<String>.single(
                 title: 'Gloves',
                 value: value,
                 choiceItems: GGGloves,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Socks',
                 value: value,
                 choiceItems: GGSocks,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
               SmartSelect<String>.single(
                 title: 'Travel',
                 value: value,
                 choiceItems: GGTravel,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
           ],
@@ -6075,7 +6325,10 @@ Widget BabyGCategory() {
                 title: 'Indian Ethnic',
                 value: value,
                 choiceItems: GGEthnic,
-                onChange: (state) => setState(() { value = state.value; })
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
           ],
@@ -6087,7 +6340,10 @@ Widget BabyGCategory() {
               title: 'Coats & Jackets',
               value: value,
               choiceItems: GGCoats,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6098,7 +6354,10 @@ Widget BabyGCategory() {
               title: 'Dresses',
               value: value,
               choiceItems: GGDresses,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6109,7 +6368,10 @@ Widget BabyGCategory() {
               title: 'Babysuits',
               value: value,
               choiceItems: GGBabysuits,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6120,7 +6382,10 @@ Widget BabyGCategory() {
               title: 'Knitwear',
               value: value,
               choiceItems: GGKnitwear,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6131,7 +6396,10 @@ Widget BabyGCategory() {
               title: 'Shoes',
               value: value,
               choiceItems: GGShoes,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6142,7 +6410,10 @@ Widget BabyGCategory() {
               title: 'Shorts',
               value: value,
               choiceItems: GGShorts,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6153,7 +6424,10 @@ Widget BabyGCategory() {
               title: 'Skirts',
               value: value,
               choiceItems: GGSkirts,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6165,7 +6439,10 @@ Widget BabyGCategory() {
               title: 'Swimwear',
               value: value,
               choiceItems: GGSwimwear,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6176,7 +6453,10 @@ Widget BabyGCategory() {
               title: 'Tops',
               value: value,
               choiceItems: GGTops,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6187,7 +6467,10 @@ Widget BabyGCategory() {
               title: 'Tracks',
               value: value,
               choiceItems: GGTracks,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6198,7 +6481,10 @@ Widget BabyGCategory() {
               title: 'Trousers',
               value: value,
               choiceItems: GGTrousers,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6220,49 +6506,73 @@ Widget KidBCategory(){
                       title: 'Hats',
                       value: value,
                       choiceItems: KBHats,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Scarves',
                       value: value,
                       choiceItems: KBScarves,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Belts & Braces ',
                       value: value,
                       choiceItems: KBBelts,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Ties & Bow Ties',
                       value: value,
                       choiceItems: KBTies,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Eyewear',
                       value: value,
                       choiceItems: KBGlasses,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Gloves',
                       value: value,
                       choiceItems: KBGloves,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
                   SmartSelect<String>.single(
                       title: 'Socks',
                       value: value,
                       choiceItems: KBSocks,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
    SmartSelect<String>.single(
                       title: 'Travel',
                       value: value,
                       choiceItems: KBSocks,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
 
@@ -6276,7 +6586,10 @@ Widget KidBCategory(){
                       title: 'Indian Ethnic',
                       value: value,
                       choiceItems: KBEthnic,
-                      onChange: (state) => setState(() { value = state.value; })
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
                 ],
@@ -6289,7 +6602,10 @@ Widget KidBCategory(){
                       title: 'Bags',
                       value: value,
                       choiceItems: KBBags,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
                 ],
@@ -6302,7 +6618,10 @@ Widget KidBCategory(){
                       title: 'Denim',
                       value: value,
                       choiceItems: KBDenim,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
                 ],
@@ -6315,7 +6634,10 @@ Widget KidBCategory(){
                       title: 'Coats & Jackets',
                       value: value,
                       choiceItems: KBCoats,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                   ),
 
                 ],
@@ -6328,7 +6650,10 @@ Widget KidBCategory(){
                     title: 'Shoes',
                     value: value,
                     choiceItems: KBShoes,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6339,7 +6664,10 @@ Widget KidBCategory(){
                     title: 'Shorts',
                     value: value,
                     choiceItems: KBShorts,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6350,7 +6678,10 @@ Widget KidBCategory(){
                     title: 'Swimwear',
                     value: value,
                     choiceItems: KBSwimwear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6361,7 +6692,10 @@ ExpansionTile(
                     title: 'Knitwear',
                     value: value,
                     choiceItems: KBKnitwear,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6372,7 +6706,10 @@ ExpansionTile(
                     title: 'Tops',
                     value: value,
                     choiceItems: KBTops,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6383,7 +6720,10 @@ ExpansionTile(
                     title: 'Tracks',
                     value: value,
                     choiceItems: KBTracks,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6394,7 +6734,10 @@ ExpansionTile(
                     title: 'Trousers',
                     value: value,
                     choiceItems: KBTrousers,
-                    onChange: (state) => setState(() => value = state.value)
+                    onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
                 ),
                 ],
               ),
@@ -6416,49 +6759,73 @@ return
                   title: 'Hats',
                   value: value,
                   choiceItems: KGHats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Scarves',
                   value: value,
                   choiceItems: KGScarves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Belts',
                   value: value,
                   choiceItems: KGBelts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Hair Accessories',
                   value: value,
                   choiceItems: KGHair,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Eyewear',
                   value: value,
                   choiceItems: KGGlasses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Gloves',
                   value: value,
                   choiceItems: KGGloves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Socks',
                   value: value,
                   choiceItems: KGSocks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
  SmartSelect<String>.single(
                   title: 'Jewellery',
                   value: value,
                   choiceItems: KGJewellery,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
             ],
           ),
@@ -6470,7 +6837,10 @@ return
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: KGEthnic,
-                  onChange: (state) => setState(() { value = state.value; })
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6483,7 +6853,10 @@ return
                   title: 'Bags',
                   value: value,
                   choiceItems: KGBags,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6496,7 +6869,10 @@ return
                   title: 'Denim',
                   value: value,
                   choiceItems: KGDenim,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6509,7 +6885,10 @@ return
                   title: 'Dresses',
                   value: value,
                   choiceItems: KGDresses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6522,7 +6901,10 @@ return
                   title: 'Jumpsuits & Playsuits',
                   value: value,
                   choiceItems: KGJumpsuit,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6535,7 +6917,10 @@ return
                   title: 'Coats',
                   value: value,
                   choiceItems: KGCoats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6548,7 +6933,10 @@ return
                   title: 'Jackets',
                   value: value,
                   choiceItems: KGJackets,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6561,7 +6949,10 @@ return
                 title: 'Shoes',
                 value: value,
                 choiceItems: KGShoes,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6572,7 +6963,10 @@ return
                 title: 'Shorts',
                 value: value,
                 choiceItems: KGShorts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6583,7 +6977,10 @@ return
                 title: 'Skirts',
                 value: value,
                 choiceItems: KGSkirts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6594,7 +6991,10 @@ return
                 title: 'Swimwear',
                 value: value,
                 choiceItems: KGSwimwear,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6605,7 +7005,10 @@ return
                 title: 'Knitwear',
                 value: value,
                 choiceItems: KGKnitwear,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6616,7 +7019,10 @@ return
                 title: 'Tops',
                 value: value,
                 choiceItems: KGTops,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6627,7 +7033,10 @@ return
                 title: 'Tracks',
                 value: value,
                 choiceItems: KGTracks,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6638,7 +7047,10 @@ return
                 title: 'Trousers',
                 value: value,
                 choiceItems: KGTrousers,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6660,49 +7072,73 @@ Widget TeenBCategory(){
                 title: 'Hats',
                 value: value,
                 choiceItems: TBHats,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Scarves',
                 value: value,
                 choiceItems: TBScarves,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Belts & Braces ',
                 value: value,
                 choiceItems: TBBelts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Ties & Bow Ties',
                 value: value,
                 choiceItems: TBTies,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Eyewear',
                 value: value,
                 choiceItems: TBGlasses,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Gloves',
                 value: value,
                 choiceItems: TBGloves,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             SmartSelect<String>.single(
                 title: 'Socks',
                 value: value,
                 choiceItems: TBSocks,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
  SmartSelect<String>.single(
                 title: 'Travel',
                 value: value,
                 choiceItems: TBTravel,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
 
@@ -6729,7 +7165,10 @@ Widget TeenBCategory(){
                 title: 'Bags',
                 value: value,
                 choiceItems: TBBags,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
           ],
@@ -6742,7 +7181,10 @@ Widget TeenBCategory(){
                 title: 'Denim',
                 value: value,
                 choiceItems: TBDenim,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
 
           ],
@@ -6754,7 +7196,10 @@ Widget TeenBCategory(){
               title: 'Shoes',
               value: value,
               choiceItems: TBShoes,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6765,7 +7210,10 @@ Widget TeenBCategory(){
               title: 'Shorts',
               value: value,
               choiceItems: TBShorts,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6776,7 +7224,10 @@ Widget TeenBCategory(){
               title: 'Swimwear',
               value: value,
               choiceItems: TBSwimwear,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6787,7 +7238,10 @@ Widget TeenBCategory(){
               title: 'Knitwear',
               value: value,
               choiceItems: TBKnitwear,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6798,7 +7252,10 @@ Widget TeenBCategory(){
               title: 'Tops',
               value: value,
               choiceItems: TBTops,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6809,7 +7266,10 @@ Widget TeenBCategory(){
               title: 'Tracks',
               value: value,
               choiceItems: TBTracks,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6820,7 +7280,10 @@ Widget TeenBCategory(){
               title: 'Trousers',
               value: value,
               choiceItems: TBTrousers,
-              onChange: (state) => setState(() => value = state.value)
+              onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
           ),
           ],
         ),
@@ -6842,55 +7305,82 @@ Widget TeenGCategory(){
                   title: 'Hats',
                   value: value,
                   choiceItems: TGHats,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Scarves',
                   value: value,
                   choiceItems: TGScarves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Belts',
                   value: value,
                   choiceItems: TGBelts,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Hair Accessories',
                   value: value,
                   choiceItems: TGHair,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Eyewear',
                   value: value,
                   choiceItems: TGGlasses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Gloves',
                   value: value,
                   choiceItems: TGGloves,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Socks',
                   value: value,
                   choiceItems: TGSocks,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
               SmartSelect<String>.single(
                   title: 'Jewellery',
                   value: value,
                   choiceItems: TGJewellery,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
                 SmartSelect<String>.single(
                   title: 'Travel',
                   value: value,
                   choiceItems: TGTravel,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6917,7 +7407,10 @@ Widget TeenGCategory(){
                   title: 'Bags',
                   value: value,
                   choiceItems: TGBags,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6930,7 +7423,10 @@ Widget TeenGCategory(){
                   title: 'Denim',
                   value: value,
                   choiceItems: TGDenim,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6943,7 +7439,10 @@ Widget TeenGCategory(){
                   title: 'Dresses',
                   value: value,
                   choiceItems: TGDresses,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6956,7 +7455,10 @@ Widget TeenGCategory(){
                   title: 'Jumpsuit',
                   value: value,
                   choiceItems: TGJumpsuit,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
               ),
 
             ],
@@ -6969,7 +7471,10 @@ Widget TeenGCategory(){
                 title: 'Shoes',
                 value: value,
                 choiceItems: TGShoes,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6980,7 +7485,10 @@ Widget TeenGCategory(){
                 title: 'Shorts',
                 value: value,
                 choiceItems: TGShorts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -6991,7 +7499,10 @@ Widget TeenGCategory(){
                 title: 'Skirts',
                 value: value,
                 choiceItems: TGSkirts,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -7002,7 +7513,10 @@ Widget TeenGCategory(){
                 title: 'Swimwear',
                 value: value,
                 choiceItems: TGSwimwear,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -7013,7 +7527,10 @@ Widget TeenGCategory(){
                 title: 'Knitwear',
                 value: value,
                 choiceItems: TGKnitwear,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -7024,7 +7541,10 @@ Widget TeenGCategory(){
                 title: 'Tops',
                 value: value,
                 choiceItems: TGTops,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -7035,7 +7555,10 @@ Widget TeenGCategory(){
                 title: 'Tracks',
                 value: value,
                 choiceItems: TGTracks,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -7046,7 +7569,10 @@ Widget TeenGCategory(){
                 title: 'Trousers',
                 value: value,
                 choiceItems: TGTrousers,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) {
+                      setState(() => value = state.value);
+                      setState(() => dropTitle = state.title);
+                    } 
             ),
             ],
           ),
@@ -13298,7 +13824,7 @@ page0(){
                       child: GestureDetector(
 
 
-                        child: ListTile(title: Text('$value',style:TextStyle(color: Colors.black) ,),
+                        child: ListTile(title: Text('$dropTitle',style:TextStyle(color: Colors.black) ,),
                             trailing:Icon(Icons.arrow_forward_ios_rounded)
                         ),
                         onTap: (){
@@ -13416,7 +13942,7 @@ page0(){
                   children: [
                     InkWell(
                       onTap: (){
-                        value == 'Select Category' ?
+                        dropTitle == 'Select Category' ?
  alert(
                         context,
                         // title: Text('Coming Soon'),

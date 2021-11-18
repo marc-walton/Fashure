@@ -10034,6 +10034,21 @@ String taggerCurrency = documentSnapshot.data()['taggerCurrency'];
             ],
           ),
           Row(
+            children: [
+              Container(
+                child: Text(
+                  "$likeCount want this item",
+                  style: TextStyle(
+                    color:kText,
+                    fontSize: 15.0,
+                    //                      fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
@@ -10492,13 +10507,12 @@ backgroundColor: Colors.black,
         "username": username,
         "prodId": prodId,
         "timestamp": timestamp,
-        "avatarUrl": photoUrl,
+        "photoUrl": photoUrl,
 //      "userId":userId,
         "ownerId": ownerId,
         "eur":eur,
         "usd":usd,
         "inr":inr,
-        "cny":cny,
         "gbp":gbp,
         "productname": productname,
         "shopmediaUrl": shopmediaUrl.first,
