@@ -188,7 +188,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -460,7 +463,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -731,7 +737,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -1002,7 +1011,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -1273,7 +1285,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -1544,7 +1559,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -1815,7 +1833,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -2086,7 +2107,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
@@ -2357,7 +2381,10 @@ bool isLiked;
                             });
                           }
                         },
-                          icon:Icon(Icons.bookmark_add ),
+                           icon: Icon(
+                        isLiked?   Icons.bookmark:Icons.bookmark_outline ,
+                        color:  Colors.black,
+                      ),
                         color:  Colors.black,
                       ),
                     ],
