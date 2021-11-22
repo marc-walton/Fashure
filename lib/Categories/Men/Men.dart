@@ -89,7 +89,7 @@ All(){
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
         Map likes =  documentSnapshot.data()['likes'];
         bool _isLiked = likes[currentUser.id] == true;
-        bool isLiked;
+        bool isLiked = false;
         return
           Container(
             height: MediaQuery.of(context).size.height,
@@ -151,8 +151,11 @@ All(){
                       Spacer(),
                       IconButton(
                         onPressed: (){
+                          print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.kainadgsdagdsargr");
+ print("$_isLiked");
 
                           if (_isLiked) {
+                            print("11111111111111111");
                             productsRef
                                 .doc(ownerId)
                                 .collection('userProducts')
@@ -177,7 +180,8 @@ All(){
                               isLiked = false;
                               likes[currentUser.id] = false;
                             });
-                          } else if (!_isLiked) {
+                          }
+                          else if (!_isLiked) {
                             productsRef
                                 .doc(ownerId)
                                 .collection('userProducts')
@@ -185,6 +189,8 @@ All(){
                                 .update({'likes.${currentUser.id}': true});
                             bool isNotPostOwner = currentUser.id != ownerId;
                             if (isNotPostOwner) {
+                              print("zsdfgasfdgs");
+
                               activityFeedRef
                                   .doc(ownerId)
                                   .collection("feedItems")

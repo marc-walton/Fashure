@@ -14,6 +14,7 @@ import 'package:fashow/Resale/Wishlist.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Resale/resale_search.dart';
 import 'package:fashow/Resale/upload_resale.dart';
+import 'package:fashow/Resale/userCart.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/fav.dart';
 import 'package:fashow/size_config.dart';
@@ -169,14 +170,13 @@ controller: _Tabcontroller,
               // do something
             },
           ),
-          _Tabcontroller.index == 0 ?   IconButton(
+          _Tabcontroller.index == 1 ?   IconButton(
             color: Colors.white,
             icon: Icon(
              Icons.shopping_cart_outlined,
             ),
             onPressed: () {
-              _Tabcontroller.index == 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) =>Fav( currentUser: currentUser?.id))):
-               Navigator.push(context, MaterialPageRoute(builder: (context) =>ResaleWishList( currentUser: currentUser?.id)));
+               Navigator.push(context, MaterialPageRoute(builder: (context) =>UserCart( )));
               tabs = !tabs ;
 
               // do something

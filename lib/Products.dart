@@ -9985,13 +9985,15 @@ String taggerCurrency = documentSnapshot.data()['taggerCurrency'];
               //   ),
               // ),
              FutureBuilder<Uri>(
-                    future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
+                    future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,Description: productname,type: "shop",imageURL:shopmediaUrl.first),
                     builder: (context, snapshot) {
                       if(snapshot.hasData) {
                         Uri uri = snapshot.data;
                         return IconButton(
                           color: Colors.black,
-                          onPressed: () => Share.share(uri.toString()),
+                          onPressed: () {
+                             Share.share(uri.toString());},
+                            // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
                           icon: Icon(Icons.send),
                         );
                       } else {

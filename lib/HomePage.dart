@@ -119,8 +119,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
     super.initState();
     pageController = PageController();
     loginuser();
-    WidgetsBinding.instance.addObserver(this);
-
+    getLink();
     // Detects when user signed in
     // googleSignIn.onCurrentUserChanged.listen((account) {
     //   handleSignIn(account);
@@ -139,16 +138,19 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _timerLink = new Timer(
-        const Duration(milliseconds: 1000),
-            () {
-          _dynamicLinkService.retrieveDynamicLink(context);
-        },
-      );
+
     }
   }
-  @override
 
+  @override
+getLink(){
+    _timerLink = new Timer(
+      const Duration(milliseconds: 1000),
+          () {
+        _dynamicLinkService.retrieveDynamicLink(context);
+      },
+    );
+  }
 
   logO() async {
     // await googleSignIn.signOut();

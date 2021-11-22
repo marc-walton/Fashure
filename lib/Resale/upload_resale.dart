@@ -850,7 +850,7 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
       "Category": value,
       "Gender": dropdownValue,
       "size": sizeController.text,
-
+"sold":false,
     });
 
     setState(() {

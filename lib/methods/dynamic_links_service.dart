@@ -14,11 +14,18 @@ class DynamicLinkService {
       if (deepLink != null) {
         if (deepLink.queryParameters.containsKey('postId')) {
           String Link = deepLink.queryParameters['postId'];
+          String Link2 = deepLink.queryParameters['type'];
+
           String postId = Link.split("/").first;
           String ownerIdpart = Link.split("/").last;
           String ownerId = ownerIdpart.split("=").last;
+          String type = Link2.split("/").first;
+
+          print("type$type");
 
           print("postId$postId");
+          print("type$type");
+
           print("ownerud$ownerId");
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ProductScreen(
@@ -31,9 +38,16 @@ class DynamicLinkService {
       FirebaseDynamicLinks.instance.onLink(
           onSuccess: (PendingDynamicLinkData dynamicLink) async {
         String Link = deepLink.queryParameters['postId'];
+         String Link2 = deepLink.queryParameters['type'];
+
         String postId = Link.split("/").first;
         String ownerIdpart = Link.split("/").last;
         String ownerId = ownerIdpart.split("=").last;
+        String type = Link2.split("/").first;
+
+        print("type$type");
+
+        print("ownerud$ownerId");
         print("POSTID$postId");
         print("OWNERID$ownerId");
         Navigator.of(context).push(MaterialPageRoute(
@@ -50,14 +64,18 @@ class DynamicLinkService {
   Future<Uri> createDynamicLink({
     String postId,
     String ownerId,
+    String type,
+    String imageURL,
+    String Description
   }) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://fashure.page.link',
-      link: Uri.parse('https://fashure.page.link/?postId=$postId/$ownerId'),
+      link: Uri.parse('https://fashure.page.link/?type=$type/postId=$postId/$ownerId'),
       androidParameters: AndroidParameters(
         packageName: 'com.fashure.app',
         minimumVersion: 1,
       ),
+      socialMetaTagParameters: SocialMetaTagParameters(title:"Fashure",description: Description,imageUrl:Uri.parse('$imageURL') )
       // iosParameters: IosParameters(
       //  bundleId: 'your_ios_bundle_identifier',
       // minimumVersion: '1',

@@ -51,6 +51,8 @@ class Resale extends StatefulWidget {
   final bool worldship;
   final bool freeworldship;
   final bool freeship;
+  final bool sold;
+
   var usd;
    var eur;
    var gbp;
@@ -94,6 +96,8 @@ class Resale extends StatefulWidget {
      this.shipto,
      this.shipinterfrom,
      this.shipinterto,
+      this.sold,
+
    }) ;
 
   factory Resale.fromDocument(DocumentSnapshot doc) {
@@ -132,6 +136,7 @@ class Resale extends StatefulWidget {
         shipinterfrom: doc.data()['shipinterfrom'],
         shipinterto: doc.data()['shipinterto'],
         images: doc.data()['images'],
+sold: doc.data()['sold'],
 
 
     );
@@ -188,6 +193,7 @@ class Resale extends StatefulWidget {
       shipinterfrom: this.shipinterfrom,
       shipinterto: this.shipinterto,
       images: this.images,
+ sold: this.sold,
 
     likeCount: getLikeCount(this.likes),
 
@@ -214,6 +220,8 @@ class _ResaleState extends State<Resale> {
   final bool worldship;
   final bool freeworldship;
   final bool freeship;
+   final bool sold;
+
   var usd;
   var eur;
   var gbp;
@@ -286,6 +294,8 @@ class _ResaleState extends State<Resale> {
       this.shipcostinterngbp,
       this.shipcostinterninr,
       this.round,
+    this.sold,
+
       this.shipfrom,
       this.shipto,
       this.shipinterfrom,

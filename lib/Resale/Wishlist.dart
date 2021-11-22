@@ -66,6 +66,8 @@ class _ResaleWishListState extends State<ResaleWishList> {
         ),
 
         body:Container(
+          color: Cont,
+
           child: StreamBuilder(
               stream: favRef.doc(currentUser.id)
                   .collection('userWishlist')
@@ -113,11 +115,11 @@ class CartItem extends StatelessWidget {
   final String photoUrl;
   final String shopmediaUrl;
   final String productname;
-  final String eur;
-  final String usd;
-  final String inr;
-  final String cny;
-  final String gbp;
+  var eur;
+  var usd;
+  var inr;
+  var cny;
+  var gbp;
   final String userId;
   final String size;
 
@@ -173,77 +175,81 @@ class CartItem extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
 
-      children: <Widget>[
-        ListTile(
-          leading: GestureDetector(
-            onTap: () => showProfile(context, profileId: ownerId),
-            child: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(photoUrl),
-              backgroundColor: Colors.grey,
-            ),
-          ),
-          title: GestureDetector(
-            onTap: () => showProfile(context, profileId: ownerId),
-            child: Text(
-              username,
-              style: TextStyle(
-                color: kText,
-                fontWeight: FontWeight.bold,
+          children: <Widget>[
+            ListTile(
+              leading: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+                child: CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+              ),
+              title: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-          ),
+            GestureDetector(
+              onTap: () => showProduct(context),
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl,height: MediaQuery
+                      .of(context)
+                      .size
+                      .height/3,width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,),),
+                  Positioned(
+                    top: 10.0,
+                    right: 10.0,
+                    child: FloatingActionButton(
+                      mini: true,
+                      backgroundColor:kText.withOpacity(0.5),
+                      onPressed: deleteFav,
+                      child: Icon(Icons.delete,color: Colors.red,),
+                    ),
+                  )
+                ],),),
+
+            Text(productname, style: TextStyle(
+              color: kText,
+            ),),
+            SizedBox(height: 7.0,),
+
+            Text("size:$size", style: TextStyle(
+              color: kText,
+            ),),
+
+
+            SizedBox(height: 7.0,),
+
+            currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+            currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+            currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+            Text(
+                "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold)),
+
+
+
+          ],
+
         ),
-        GestureDetector(
-          onTap: () => showProduct(context),
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl,height: MediaQuery
-                  .of(context)
-                  .size
-                  .height/3,width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,),),
-              Positioned(
-                top: 10.0,
-                right: 10.0,
-                child: FloatingActionButton(
-                  mini: true,
-                  backgroundColor:kText.withOpacity(0.5),
-                  onPressed: deleteFav,
-                  child: Icon(Icons.delete,color: Colors.red,),
-                ),
-              )
-            ],),),
-
-        Text(productname, style: TextStyle(
-          color: kText,
-        ),),
-        SizedBox(height: 7.0,),
-
-        Text("size:$size", style: TextStyle(
-          color: kText,
-        ),),
-
-
-        SizedBox(height: 7.0,),
-
-        currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-        currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-        currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
-        Text(
-            "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold)),
-
-
-
-        Divider(color: kGrey,),
-      ],
-
+      ),
     );
 
 
