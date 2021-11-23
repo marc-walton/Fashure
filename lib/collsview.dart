@@ -28,6 +28,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:share/share.dart';
 List <Widget>listOfImages = <Widget>[];
 class Coll extends StatefulWidget {
   final String collId;
@@ -103,6 +105,8 @@ int index;
 }
 
 class _CollState extends State<Coll> {
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
+
   final String currentUserId = currentUser?.id;
   final String collId;
   final String ownerId;
@@ -625,6 +629,25 @@ buildPostHeader() {
                 ),
 
               ),
+              FutureBuilder<Uri>(
+                  future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      Uri uri = snapshot.data;
+                      return IconButton(
+                        color: Colors.black,
+                        onPressed: () {
+                          Share.share(uri.toString());},
+                        // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                        icon: Icon(Icons.send),
+                      );
+                    } else {
+                      return Container();
+                    }
+
+                  }
+              ),
+
               Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),

@@ -11,7 +11,7 @@ import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fashow/user.dart';
+import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
@@ -28,6 +28,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:share/share.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:zefyrka/zefyrka.dart';
 
@@ -123,6 +124,8 @@ final String currency;
 }
 
 class _BlogState extends State<Blog> {
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
+
   final String currentUserId = currentUser?.id;
   final String blogId;
   final String ownerId;
@@ -703,6 +706,25 @@ return  showMaterialModalBottomSheet(
             ),
 
           ),
+          FutureBuilder<Uri>(
+              future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl.first),
+              builder: (context, snapshot) {
+                if(snapshot.hasData) {
+                  Uri uri = snapshot.data;
+                  return IconButton(
+                    color: Colors.black,
+                    onPressed: () {
+                      Share.share(uri.toString());},
+                    // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                    icon: Icon(Icons.send),
+                  );
+                } else {
+                  return Container();
+                }
+
+              }
+          ),
+
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),

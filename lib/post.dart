@@ -24,7 +24,8 @@ import 'package:getwidget/types/gf_button_type.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
-
+import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:share/share.dart';
 class Post extends StatefulWidget {
   final String postId;
   final String ownerId;
@@ -103,6 +104,7 @@ class _PostState extends State<Post> {
   final String location;
   final String description;
   final List mediaUrl;
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
 
   final String photoUrl;
   final String currency;
@@ -643,6 +645,25 @@ class _PostState extends State<Post> {
                 ),
 
               ),
+              FutureBuilder<Uri>(
+                  future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      Uri uri = snapshot.data;
+                      return IconButton(
+                        color: Colors.black,
+                        onPressed: () {
+                          Share.share(uri.toString());},
+                        // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                        icon: Icon(Icons.send),
+                      );
+                    } else {
+                      return Container();
+                    }
+
+                  }
+              ),
+
 Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),

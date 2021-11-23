@@ -17,7 +17,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:get/get.dart';
-import 'package:share/share.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
@@ -36,6 +35,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:share/share.dart';
+
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';

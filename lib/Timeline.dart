@@ -51,20 +51,6 @@ final CollectionReference usersRef = FirebaseFirestore.instance.collection('user
     //   this.mediaUrl,
     //   this.likes,
     });
-    int getLikeCount(likes) {
-      //if no likesm return 0
-      if (likes == null) {
-        return 0;
-      }
-      int count = 0;
-      // if the key is explicitly set to true, add a like
-      likes.values.forEach((val) {
-        if (val == true) {
-          count += 1;
-        }
-      });
-      return count;
-    }
 
     @override
     _TimelineState createState() => _TimelineState(
@@ -318,17 +304,7 @@ TabController _tabController;
           );
     }
     Widget _bottomButtons() {
-      if(_tabController.index == 0){return
-        FloatingActionButton(
-          heroTag:'upload',
-          backgroundColor: Colors.black38,
-          onPressed: () async{
-            //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser)));
-          },
-          child: Icon(Icons.add_a_photo),
-        );}
-     else if(_tabController.index == 1){return
+      if(_tabController.index == 1){return
         FloatingActionButton(
           heroTag:'uploadcoll',
 
@@ -517,6 +493,282 @@ class Blog extends StatelessWidget {
 
       );
 
+
+  }
+}
+class GlobalFeed extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+        return  PaginateFirestore(
+        itemBuilderType:
+        PaginateBuilderType.listView, //Change types accordingly
+        itemBuilder: (index, context, documentSnapshot) {
+          List<dynamic> blogMedia =  documentSnapshot.data()['blogmediaUrl'];
+          Map<dynamic,dynamic> data = documentSnapshot.data() as  Map<dynamic,dynamic>
+          List<Post> posts =
+         data.map((doc) => Post.fromDocument(doc)).toList();
+          setState(() {
+            this.posts = posts;
+          });
+          return     Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Card(
+              child: Column(children: <Widget>[
+              GestureDetector(                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+
+                child: ListTile(
+                  leading: GestureDetector(
+                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
+                      backgroundColor: Colors.grey,
+                    ),
+                  ),
+                  title: GestureDetector(
+                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                    child: Text(
+                      documentSnapshot.data()['username'],
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+                Text(documentSnapshot.data()["title"],
+                  style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
+                GestureDetector(
+                  onTap:() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlogScreen(
+                          blogId: documentSnapshot.data()['blogId'],
+                          userId:  documentSnapshot.data()['ownerId'],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+
+                    width: MediaQuery.of(context).size.width,
+
+                    child:  CachedNetworkImage( imageUrl: blogMedia.first),
+
+                  ),
+                ),
+
+        ],
+
+        ),
+            ),)
+          );
+
+
+        },
+
+
+        query: FirebaseFirestore.instance.collectionGroup('userBlog').orderBy('timestamp',descending: true),
+
+      );
+
+
+  }
+}
+
+class Feed extends StatefulWidget {
+
+  @override
+  _FeedState createState() => _FeedState();
+}
+
+class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  List<Post> posts;
+  List<String> foollowingList = [];
+
+  List timelinePosts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getFfollowing();
+
+
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController.addListener(_handleTabIndex);
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_handleTabIndex);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabIndex() {
+    setState(() {});
+  }
+
+  List <Post>Posts = [];
+
+
+  ///1
+  getTimeline() async {
+    QuerySnapshot snapshot = await timelineRef
+        .doc(currentUser.id)
+        .collection('timelinePosts')
+        .orderBy('timestamp', descending: true)
+        .get();
+    List<Post> posts =
+    snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
+    setState(() {
+      this.posts = posts;
+    });
+  }
+  ///2
+  buildTimeline() {
+    if (posts == null) {
+      return circularProgress();
+    } else if (posts.isEmpty) {
+      return buildUsersToFollow();
+    } else {
+      return ListView(children: posts);
+    }
+  }
+
+  getFfollowing() async {
+    QuerySnapshot snapshot = await followingRef
+        .doc(currentUser.id)
+        .collection('userFollowing')
+        .get();
+    setState(() {
+      foollowingList = snapshot.docs.map((doc) => doc.id).toList();
+    });
+  }
+
+
+
+  buildUsersToFollow() {
+    return StreamBuilder(
+      stream:
+      usersRef.orderBy('timestamp', descending: true).limit(30).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        }
+        List<UserResult> userResults = [];
+        snapshot.data.docs.forEach((doc) {
+          Users user = Users.fromDocument(doc);
+          final bool isAuthUser = currentUser.id == user.id;
+          final bool isFollowingUser = foollowingList.contains(user.id);
+          // remove auth user from recommended list
+          if (isAuthUser) {
+            return;
+          } else if (isFollowingUser) {
+            return;
+          } else {
+            UserResult userResult = UserResult(user);
+            userResults.add(userResult);
+          }
+        });
+        return Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.person_add,
+                      color: kblue,
+                      size: 30.0,
+                    ),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Text(
+                      "Users to Follow",
+                      style: TextStyle(
+                        color: kblue,
+                        fontSize: 30.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Column(children: userResults),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(child:
+      Column(children: [
+        DefaultTabController(
+            length:3,
+            child: Column(
+              children: [
+                Container(
+                  child: TabBar(
+
+                    isScrollable: true,
+
+                    tabs:[
+                      Text("Following", ),
+                   Text("Global", ),
+                   Text("Communities", ),
+
+                    ],
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: TabBarView(
+                      children:<Widget> [
+                        buildTimeline(),
+  buildTimeline(),
+  buildTimeline(),
+
+
+                      ]),
+                ),
+              ],
+            )
+        ),
+      ],),);
+  }
+  Widget Buttons(){
+    if(_tabController.index == 2){return
+      FloatingActionButton(
+        heroTag:'upload',
+        backgroundColor: Colors.black38,
+        onPressed: () async{
+          //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser)));
+        },
+        child: Icon(Icons.add_a_photo),
+      );}
+else{return
+      FloatingActionButton(
+        heroTag:'upload',
+        backgroundColor: Colors.black38,
+        onPressed: () async{
+          //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser)));
+        },
+        child: Icon(Icons.add_a_photo),
+      );}
 
   }
 }

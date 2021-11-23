@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Product_screen.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
@@ -113,13 +115,57 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   SharedPreferences myPrefs;
   String idd;
   String username;
+void handleLink()async {
+  print("qwqwqwqwqwqwqw");
 
+  FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (PendingDynamicLinkData dynamicLink) async {
+        print("succes");
+        await _handleDeepLink(dynamicLink);
+      });
+
+  final PendingDynamicLinkData data =
+  await FirebaseDynamicLinks.instance.getInitialLink();
+   _handleDeepLink(data);
+
+}
+  _handleDeepLink(PendingDynamicLinkData data)async{
+    final Uri deepLink = data?.link;
+    if (deepLink != null) {
+      String Link = deepLink.queryParameters['type'];
+      print("$Link");
+
+      String type = Link.split("/").first;
+      print("$type");
+
+      String postIdpart = Link.split("=").last;
+      print("$postIdpart");
+
+      String postId = postIdpart.split("|").first;
+      print("$postId");
+      String ownerId = Link.split("|").last;
+      print("$ownerId");
+
+      print("type$type");
+
+      print("postId$postId");
+
+      print("ownerud$ownerId");
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ProductScreen(
+            prodId: postId,
+            userId: ownerId,
+          )));    }
+
+  }
   @override
   void initState() {
     super.initState();
+    print(">>>>>>>>>>>>>>>>>>>>sdcsdvwsvcwdvcsdscsdcscsdcdc");
     pageController = PageController();
     loginuser();
-    getLink();
+    print("initState");
+    handleLink();
     // Detects when user signed in
     // googleSignIn.onCurrentUserChanged.listen((account) {
     //   handleSignIn(account);
@@ -133,13 +179,23 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
     //   print('Error signing in: $err');
     // });
     //
-    // WidgetsBinding.instance.addObserver(this);
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
+    if (state == AppLifecycleState.resumed) {
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<resumed>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      _dynamicLinkService.retrieveDynamicLink(context);
     }
+    else if (state == AppLifecycleState.detached) {
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<detacg>>>>>>>>>>>>>>>>>>");
+      _dynamicLinkService.retrieveDynamicLink(context);
+    }else if (state == AppLifecycleState.paused) {
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<paused>>>>>>>>>>>>>>>>>>");
+      _dynamicLinkService.retrieveDynamicLink(context);
+    }
+
   }
 
   @override
@@ -175,13 +231,13 @@ getLink(){
       logO();
     }
     else {
-      myPrefs = await SharedPreferences.getInstance();
-      await myPrefs.setString('id', currentUser.id);
-      await myPrefs.setString('displayName', currentUser.displayName);
-      await myPrefs.setString('photoUrl', currentUser.photoUrl);
-      myPrefs = await SharedPreferences.getInstance();
-      idd = myPrefs.getString('id') ?? '';
-      print(',jbkbhn$idd');
+      // myPrefs = await SharedPreferences.getInstance();
+      // await myPrefs.setString('id', currentUser.id);
+      // await myPrefs.setString('displayName', currentUser.displayName);
+      // await myPrefs.setString('photoUrl', currentUser.photoUrl);
+      // myPrefs = await SharedPreferences.getInstance();
+      // idd = myPrefs.getString('id') ?? '';
+      // print(',jbkbhn$idd');
       if (Platform.isIOS) getiOSPermission();
 
       _firebaseMessaging.getToken().then((token) {
@@ -210,6 +266,7 @@ getLink(){
           // print("Notification NOT shown");
         },
       );
+      WidgetsBinding.instance.addObserver(this);
 
               badgescountmessage();
               badgescount();
@@ -428,7 +485,6 @@ getLink(){
   }
 
   Scaffold buildAuthScreen() {
-
 
 
 

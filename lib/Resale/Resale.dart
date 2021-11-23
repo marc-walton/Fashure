@@ -25,7 +25,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:share/share.dart';
 final List<String> cartNumbers = [
   "nROwtseY3nSUhoXoT2zf",
   "Tqd8WNBNZ7ADIWU3P2ci"];
@@ -202,6 +203,7 @@ sold: doc.data()['sold'],
 
 class _ResaleState extends State<Resale> {
   TextEditingController offerController = TextEditingController();
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
 
   final String condition;
   final String ownerId;
@@ -1010,22 +1012,24 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                         color:  Colors.black,
                       ),
                     ),
-                    // FutureBuilder<Uri>(
-                    //     future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
-                    //     builder: (context, snapshot) {
-                    //       if(snapshot.hasData) {
-                    //         Uri uri = snapshot.data;
-                    //         return IconButton(
-                    //           color: Colors.black,
-                    //           onPressed: () => Share.share(uri.toString()),
-                    //           icon: Icon(Icons.send),
-                    //         );
-                    //       } else {
-                    //         return Container();
-                    //       }
-                    //
-                    //     }
-                    // ),
+                    FutureBuilder<Uri>(
+                        future: _dynamicLinkService.createDynamicLink( postId:resaleId,ownerId: ownerId,Description: title,type: "resale",imageURL:images.first),
+                        builder: (context, snapshot) {
+                          if(snapshot.hasData) {
+                            Uri uri = snapshot.data;
+                            return IconButton(
+                              color: Colors.black,
+                              onPressed: () {
+                                Share.share(uri.toString());},
+                              // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                              icon: Icon(Icons.send),
+                            );
+                          } else {
+                            return Container();
+                          }
+
+                        }
+                    ),
                     Spacer(),
                     InkWell(
                       onTap:() => reviews(),
@@ -1282,8 +1286,28 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                         trailing: FloatingActionButton(
                           heroTag:null,
                           backgroundColor: Colors.black,
-                          onPressed: (){
-                            },
+                          onPressed:() async{await addingToList();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddressResale(
+                                OwnerId:OwnerId,
+                                resaleId:ResaleId ,
+                                profileimg: profileimg,
+                                username: Username,
+                                images:Images,
+                                title:Title,
+                                country:Country,
+                                size:Size,
+                                shipcost:shipcost,
+                                usd:Usd,
+                                eur:Eur,
+                                gbp:Gbp,
+                                inr:Inr,
+                                ship: ship,
+                              ),
+                            ),
+                          );},
                           child:   Icon(Icons.add_shopping_cart,),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                         ),
@@ -1593,55 +1617,6 @@ addingToList(){
 
     return Column(children:[
       posteurope(),
-      BottomAppBar(
-        child:
-      Container(height: MediaQuery.of(context).size.height/10,child: Row(
-          mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-          children:[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation : 0.001,
-                primary: Colors.grey.withOpacity(0.3), ),
-              onPressed: () => Tagger(),
-              child: Text('Post', style: TextStyle(
-                // fontFamily :"MajorMonoDisplay",
-                //   fontSize:  ,
-                  color: Colors.white),),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation : 0.001,
-                primary:  Colors.black, ),
-              onPressed:() async{await addingToList();
-                Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddressResale(
-                      OwnerId:OwnerId,
-                       resaleId:ResaleId ,
-                   profileimg: profileimg,
-                  username: Username,
-                   images:Images,
-                   title:Title,
-                    country:Country,
-                   size:Size,
-                shipcost:shipcost,
-                   usd:Usd,
-                  eur:Eur,
-                        gbp:Gbp,
-                     inr:Inr,
-                    ship: ship,
-                  ),
-                ),
-              );},
-              child: Text('Buy Now', style: TextStyle(
-                // fontFamily :"MajorMonoDisplay",
-                //   fontSize:  ,
-                  color: Colors.white),),
-            )
-
-          ]
-      ),)),
 
     ]);
 
