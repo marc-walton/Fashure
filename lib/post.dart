@@ -618,19 +618,7 @@ class _PostState extends State<Post> {
                   color: kText,
                 ),
               ),
-              SizedBox(width: 5.0,),
-              Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "$likeCount ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-//                      fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(right: 20.0)),
+              SizedBox(width: 15.0,),
               GestureDetector(
                 onTap: () => showComments(
                   context,
@@ -645,6 +633,8 @@ class _PostState extends State<Post> {
                 ),
 
               ),
+              SizedBox(width: 15.0,),
+
               FutureBuilder<Uri>(
                   future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
                   builder: (context, snapshot) {
@@ -664,10 +654,25 @@ class _PostState extends State<Post> {
                   }
               ),
 
-Spacer(),
+              Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  "$likeCount likes",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.0,
+ fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),

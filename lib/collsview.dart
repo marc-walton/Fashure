@@ -602,19 +602,8 @@ buildPostHeader() {
                   color: kText,
                 ),
               ),
-              SizedBox(width: 5.0,),
-              Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "$likeCount ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-//                      fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(right: 20.0)),
+              SizedBox(width: 15.0,),
+
               GestureDetector(
                 onTap: () => showComments(
                   context,
@@ -629,6 +618,8 @@ buildPostHeader() {
                 ),
 
               ),
+              SizedBox(width: 15.0,),
+
               FutureBuilder<Uri>(
                   future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
                   builder: (context, snapshot) {
@@ -655,6 +646,22 @@ buildPostHeader() {
               ),
             ],
           ),
+          Row(
+            children: [
+              Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  "$likeCount ",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.0,
+                 fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
         ],
 
       ),

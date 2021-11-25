@@ -10044,7 +10044,7 @@ String taggerCurrency = documentSnapshot.data()['taggerCurrency'];
                   style: TextStyle(
                     color:kText,
                     fontSize: 15.0,
-                    //                      fontWeight: FontWeight.bold,
+                                         fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

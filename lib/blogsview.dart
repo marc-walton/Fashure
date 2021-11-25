@@ -679,19 +679,7 @@ return  showMaterialModalBottomSheet(
               color: kText,
             ),
           ),
-          SizedBox(width: 5.0,),
-          Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-            child: Text(
-              "$likeCount ",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15.0,
-//                      fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(right: 20.0)),
+          SizedBox(width: 15.0,),
           GestureDetector(
             onTap: () => showComments(
               context,
@@ -706,6 +694,7 @@ return  showMaterialModalBottomSheet(
             ),
 
           ),
+          SizedBox(width: 15.0,),
           FutureBuilder<Uri>(
               future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl.first),
               builder: (context, snapshot) {
@@ -732,6 +721,21 @@ return  showMaterialModalBottomSheet(
           ),//
         ],
       ),
+        Row(
+          children: [
+            Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "$likeCount ",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15.0,
+                 fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
     ]),
 
     );
