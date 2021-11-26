@@ -10,32 +10,36 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 
 
-class Comments extends StatefulWidget {
+class CommunityComments extends StatefulWidget {
   final String postId;
   final String postOwnerId;
   final String postMediaUrl;
+ final String communityId;
 
-  Comments({
+  CommunityComments({
     this.postId,
     this.postOwnerId,
     this.postMediaUrl,
+    this.communityId,
+
   });
 
   @override
-  CommentsState createState() => CommentsState(
+  CommunityCommentsState createState() => CommunityCommentsState(
     postId: this.postId,
     postOwnerId: this.postOwnerId,
     postMediaUrl: this.postMediaUrl,
+
   );
 }
 
-class CommentsState extends State<Comments> {
+class CommunityCommentsState extends State<CommunityComments> {
   TextEditingController commentController = TextEditingController();
   final String postId;
   final String postOwnerId;
   final String postMediaUrl;
 
-  CommentsState({
+  CommunityCommentsState({
     this.postId,
     this.postOwnerId,
     this.postMediaUrl,
@@ -43,7 +47,7 @@ class CommentsState extends State<Comments> {
 
   buildComments() {
     return StreamBuilder(
-      stream: commentsRef
+      stream: communitycommentsRef
           .doc(postId)
           .collection('comments')
           .orderBy("timestamp", descending: false)
@@ -65,7 +69,7 @@ class CommentsState extends State<Comments> {
   }
 
   addComment() {
-    commentsRef.doc(postId).collection("comments").add({
+    communitycommentsRef.doc(postId).collection("comments").add({
       "username": currentUser.displayName,
       "comment": commentController.text,
       "timestamp": timestamp,
@@ -75,7 +79,7 @@ class CommentsState extends State<Comments> {
     bool isNotPostOwner = postOwnerId != currentUser.id;
     if (isNotPostOwner) {
       activityFeedRef.doc(postOwnerId).collection('feedItems').add({
-        "type": "comment",
+        "type": "communityComment",
         "commentData": commentController.text,
         "username": currentUser.displayName,
         "userId": currentUser.id,
@@ -83,7 +87,9 @@ class CommentsState extends State<Comments> {
         "postId": postId,
         "mediaUrl": postMediaUrl,
         "timestamp": timestamp,
-        "read": "false"
+        "read": "false",
+         "communityId": widget.communityId
+
       });
     }
     commentController.clear();

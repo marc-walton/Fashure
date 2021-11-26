@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:fashow/Communities/post_screen.dart';
 import 'package:fashow/Live/models/auction_model.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
@@ -393,6 +394,7 @@ class ActivityFeedItem extends StatelessWidget {
   final String commentData;
   final Timestamp timestamp;
 final String message;
+final String communityId;
 
 
   ActivityFeedItem({
@@ -405,6 +407,7 @@ final String message;
     this.commentData,
     this.timestamp,
     this.message,
+this.communityId,
 
   });
 
@@ -430,6 +433,18 @@ final String message;
         builder: (context) => PostScreen(
           postId: postId,
           userId: userId,
+        ),
+      ),
+    );
+  }
+
+  showCommunityPost(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CommunityPostScreen(
+          postId: postId,
+          communityId: communityId,
         ),
       ),
     );
@@ -620,6 +635,30 @@ showOrders(context) {
         ),
       );
     }
+    else if (type == 'communitylike'||type == 'communitycomment'){
+      return
+
+        mediaPreview = GestureDetector(
+        onTap: () => showCommunityPost(context),
+        child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+          child: Container(
+            height: 50.0,
+            width: 50.0,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(mediaUrl),
+                    )),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     else if (type == 'CollectionLikes'|| type == 'collectioncomment'){
       mediaPreview = GestureDetector(
         onTap: () => showColl(context),
@@ -736,7 +775,7 @@ showOrders(context) {
   }
   configureactivityItemText(context) {
 
-    if (type == 'like') {
+    if (type == 'like'||type == 'communitylike') {
       return
 
         activityItemText = "liked your post";
@@ -765,7 +804,7 @@ showOrders(context) {
       activityItemText = "$message";
     }
 
-    else if (type == 'collectioncomment'||type == 'Videocomment'||type == 'blogcomment'||type == 'comment') {
+    else if (type == 'collectioncomment'||type == 'Videocomment'||type == 'blogcomment'||type == 'comment'||type == 'communityComment') {
       activityItemText = '$commentData';
     }
 else if (type == 'fav'||type == 'resaleLike') {
@@ -1796,13 +1835,110 @@ child:CircleAvatar(
          ),
        );
   }
+  followers(ParentContext){
+
+     return
+       Padding(
+         padding: EdgeInsets.only(bottom: 2.0),
+         child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+           child: Container(
+             color: Color(0XFFb3b3ff).withOpacity(0.3),
+             child: ListTile(
+               title: GestureDetector(
+                 onTap: () => showProfile(ParentContext,profileId: userId),
+                 child: RichText(
+                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                     style: TextStyle(
+                       fontSize: 14.0,
+                       color: kText,
+                     ),
+                     children: [
+                       TextSpan(
+                         text: username,
+                         style: TextStyle(
+                             fontWeight: FontWeight.bold, color: Colors.black),
+                       ),
+                       TextSpan(
+                         text: ' $activityItemText',
+                       )
+                     ]),
+                 ),
+               ),
+               leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+               subtitle: Text(
+                 timeago.format(timestamp.toDate()),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(color: kSubtitle),
+               ),
+             ),
+           ),
+         ),
+       );
+  }
+
+  communityPosts(ParentContext){
+
+     return
+       Padding(
+         padding: EdgeInsets.only(bottom: 2.0),
+         child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+           child: Container(
+             color: Color(0XFFb3b3ff).withOpacity(0.3),
+             child: ListTile(
+               title: GestureDetector(
+                 onTap: () => showCommunityPost(ParentContext),
+                 child: RichText(
+                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                     style: TextStyle(
+                       fontSize: 14.0,
+                       color: kText,
+                     ),
+                     children: [
+                       TextSpan(
+                         text: username,
+                         style: TextStyle(
+                             fontWeight: FontWeight.bold, color: Colors.black),
+                       ),
+                       TextSpan(
+                         text: ' $activityItemText',
+                       )
+                     ]),
+                 ),
+               ),
+               leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+               subtitle: Text(
+                 timeago.format(timestamp.toDate()),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(color: kSubtitle),
+               ),
+               trailing: mediaPreview,
+             ),
+           ),
+         ),
+       );
+  }
 
   @override
   Widget build(BuildContext context) {
     configureMediaPreview(context);
     configureactivityItemText(context);
     // || type == 'Videocomment'|| type == 'Videolike'
-    return type == 'like'|| type == 'follow'|| type == 'comment' ? main(context):
+    return
+      type == 'like'|| type == 'comment' ? main(context):
+        type == 'communitylike'|| type == 'communityComment' ? communityPosts(context):
+
+       type == 'follow' ? followers(context):
+
     type == 'bloglike'||type == 'blogcomment' ? blog(context) :
     type == 'CollectionLikes'|| type == 'collectioncomment'?collection(context) :
         type == 'fav' ? prod(context):

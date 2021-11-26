@@ -126,9 +126,14 @@ class CollCommentsState extends State<CollComments> {
                 ),
 
               ),
-              trailing: OutlineButton( color: kPrimaryColor,
+              trailing: OutlinedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation : 0.1,
+                  side: BorderSide.none,
+
+                  primary: collcommentController.text == "" ?  Colors.white.withOpacity(0.1):Colors.black, // background
+                ),
                 onPressed: addComment,
-                borderSide: BorderSide.none,
                 child: Text("Post",style: TextStyle(color: kText),),
               ),
             ),

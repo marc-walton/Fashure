@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/chat_screen.dart';
@@ -30,11 +31,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-var currencyFormatter =
-currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
-currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.countryISO}"):
-currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.countryISO}"): NumberFormat('#,##0.00', );
+import 'package:fashow/enum/Variables.dart';
 
 class Designer extends StatefulWidget {
   @override
@@ -1337,20 +1334,20 @@ class _BItemState extends State<BItem> {
                           user.country,
                           style: TextStyle(color: kText),
                         ),
-                        trailing:                          Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                        trailing: Column(children:[
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -1699,20 +1696,20 @@ class _DItemState extends State<DItem> {
                           user.country,
                           style: TextStyle(color: kText),
                         ),
-                        trailing:                          Column(children:[
-                          currentUser.currency == "INR"?
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                        trailing:                         Column(children:[
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -2087,20 +2084,20 @@ class _IItemState extends State<IItem> {
                           user.country,
                           style: TextStyle(color: kText),
                         ),
-                        trailing:                          Column(children:[
-                          currentUser.currency == "INR"?
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                        trailing:                         Column(children:[
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -2474,20 +2471,20 @@ class _SItemState extends State<SItem> {
                           user.country,
                           style: TextStyle(color: kText),
                         ),
-                        trailing:                          Column(children:[
-                          currentUser.currency == "INR"?
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                        trailing:                         Column(children:[
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -2862,19 +2859,19 @@ class _PItemState extends State<PItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -3250,19 +3247,19 @@ class _MAItemState extends State<MAItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -3639,19 +3636,19 @@ class _MItemState extends State<MItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -4027,19 +4024,19 @@ class _HItemState extends State<HItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -4417,19 +4414,19 @@ class _AItemState extends State<AItem> {
                         ),
                         trailing:                       
                         Column(children:[
-                            currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -4804,22 +4801,21 @@ class _CItemState extends State<CItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          currentUser.currency == "INR"?  
-                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?
+                          Text( "${cf.format(price, CurrencyFormatter.inr)}",style: TextStyle(color: kText,
                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "EUR"?
-                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.eur)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)):
                           currentUser.currency == "GBP"?
-                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                          Text( "${cf.format(price, CurrencyFormatter.gbp)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold))
-                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              :   Text( "${cf.format(price, CurrencyFormatter.usd)}",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
-                        
                           Text("Average cost", style: TextStyle(
                             color: Colors.grey,
                           ),),

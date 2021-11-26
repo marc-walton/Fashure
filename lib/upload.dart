@@ -64,7 +64,11 @@ class _UploadState extends State<Upload>
     // _controller.addListener(_scrollListener); //the listener for up and down.
     super.initState();
     // _tabController = TabController(length: 2,vsync: this);
-
+    postsRef
+        .doc(widget.currentUser.id)
+        .collection("userPosts")
+        .doc(postId)
+        .set({});
   }
 
   compressImage() async {
@@ -416,72 +420,6 @@ class _UploadState extends State<Upload>
 //      isUploading = false;1111
     });
   }
-  tag(){
-    return
-      showMaterialModalBottomSheet(
-        expand:true,
-        context: context,
-        builder: (BuildContext context)
-        {
-          SizeConfig().init(context);
-
-          return
-            Builder(builder: (BuildContext context) {
-              return StatefulBuilder(builder: (BuildContext context, State) {
-                return
-                  Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.75,
-
-                    child: SearchTag(prodId:postId),
-
-                  );
-              }
-              );
-            }
-            );
-        },
-      );
-
-  }
-  tagView(){
-    return
-      StreamBuilder(
-        stream: postsRef
-            .doc(currentUser.id).collection("userPosts").doc(postId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-            return
-              Container();
-          } else {
-            return new ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.docs[index];
-                  return TagItem(
-                    Id: ds['prodId'],
-                    ownerId: ds['ownerId'],
-                    name: ds['name'],
-                    usd: ds['usd'],
-                    inr: ds['inr'],
-                    eur: ds['eur'],
-                    gbp: ds['gbp'],
-
-                    image: ds['image'],
-                    prodId: postId,
-
-                  );
-                }
-            );
-          }
-        },
-      );
-
-  }
 
   page0(){
    return
@@ -531,15 +469,19 @@ class _UploadState extends State<Upload>
            width: 200.0,
            height: 100.0,
            alignment: Alignment.center,
-           child: RaisedButton.icon(
+           child: ElevatedButton.icon(
+               style: ElevatedButton.styleFrom(
+                 elevation : 0.1,
+                 shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(30.0),
+                 ),
+
+                 primary: Colors.blue,// background
+                 onPrimary: Colors.white, // foreground
+               ),
                label: Text(
                  "Use Current Location",
-                 style: TextStyle(color: Colors.white),
                ),
-               shape: RoundedRectangleBorder(
-                 borderRadius: BorderRadius.circular(30.0),
-               ),
-               color: Colors.blue,
                onPressed: getUserLocation,
                icon: Icon(
                  Icons.my_location,
@@ -761,6 +703,72 @@ SizedBox(width: 10,)  ,
   }
 
 
+  tag(){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTag(prodId:postId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+  tagView(){
+    return
+      StreamBuilder(
+        stream: postsRef
+            .doc(currentUser.id).collection("userPosts").doc(postId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
+          } else {
+            return new ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
+                    image: ds['image'],
+                    prodId: postId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
 
   getUserLocation() async {
     Position position = await Geolocator()
