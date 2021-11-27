@@ -45,7 +45,7 @@ dependencies:
   geolocator: ^5.3.1
   cached_network_image: ^2.2.0+1
   animator: ^2.0.0
-  timeago: ^2.0.26
+  timeago: ^3.0.2
   firebase_messaging: ^6.0.16
   image: ^2.1.19
   multi_image_picker: ^4.6.7
@@ -133,6 +133,7 @@ dependencies:
   video_player: any
   fijkplayer: ^0.10.0
   flick_video_player: any
+  simple_polls: ^1.0.6
 
 
 

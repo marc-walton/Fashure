@@ -500,7 +500,7 @@ getLink(){
         child: PageView(
           children: <Widget>[
 
-            Timeline(),
+            Timeline(currentUser: currentUser),
             Shop(currentUser: currentUser),
             Designer(),
             LiveTv(),

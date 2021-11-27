@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:fashow/HomePage.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 class RIKeys {
   static final riKey1 = const Key('__RIKEY1__');
   static final riKey2 = const Key('__RIKEY2__');
@@ -28,6 +29,7 @@ bool _passwordVisible = false;
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
 String accountErrorMessage;
+bool loging =  false;
   @override
   initState() {
     emailInputController = new TextEditingController();
@@ -117,120 +119,129 @@ String accountErrorMessage;
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: kPrimaryColor,
-          title: Text("Login", style: TextStyle(color:Colors.white),),
-        ),
-        body: Container(
+    return  ModalProgressHUD(
+      inAsyncCall: loging,
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: kPrimaryColor,
+            title: Text("Login", style: TextStyle(color:Colors.white),),
+          ),
+          body: Container(
 
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-                child: Form(
-                  key: _loginFormKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        style: TextStyle(color:kText),
-                        decoration: InputDecoration(
-                            labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),
-                            labelText: 'Email', hintText: "john.doe@gmail.com"),
-                        controller: emailInputController,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: emailValidator,
-                      ),
-                      TextFormField(
-                        obscureText: !_passwordVisible,//This will obscure text dynamically
-
-                        style: TextStyle(color:kText),
-                        decoration: InputDecoration(
-                            labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),
-                            labelText: 'Password',
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              _passwordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorDark,
-                            ),
-                            onPressed: () {
-                              // Update the state i.e. toogle the state of passwordVisible variable
-                              setState(() {
-                                _passwordVisible = !_passwordVisible;
-                              });
-                            },
-                          ),),
-                        controller: pwdInputController,
-                        validator: pwdValidator,
-                      ),
-                      TextButton(
-                        child: Text("Forgot Password?",  style: TextStyle(color:kText),),
-                        onPressed: () {
-                  resetPassword(parentContext: context,email: emailInputController.text??"")    ;                    },
-                      ),
-                      ElevatedButton(
-
-                        child: Text("Login"),
-                        style: ElevatedButton.styleFrom(
-                          elevation : 0.1,
-
-                          primary:  Colors.white.withOpacity(0.1), // background
+              padding: const EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                  child: Form(
+                    key: _loginFormKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          style: TextStyle(color:kText),
+                          decoration: InputDecoration(
+                              labelStyle:  TextStyle(color:kText),
+                              hintStyle:  TextStyle(color:kText),
+                              labelText: 'Email', hintText: "john.doe@gmail.com"),
+                          controller: emailInputController,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: emailValidator,
                         ),
-                        onPressed: () {
-                          if (_loginFormKey.currentState.validate()) {
-                            try{
+                        TextFormField(
+                          obscureText: !_passwordVisible,//This will obscure text dynamically
 
-                              FirebaseAuth.instance
-                                  .signInWithEmailAndPassword(
-                                  email: emailInputController.text,
-                                  password: pwdInputController.text)
-                                  .then((User) => FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(User.user.uid)
-                                  .get()
-                                  .then((DocumentSnapshot result) =>
-                              { if (User == null)
-                                {
+                          style: TextStyle(color:kText),
+                          decoration: InputDecoration(
+                              labelStyle:  TextStyle(color:kText),
+                              hintStyle:  TextStyle(color:kText),
+                              labelText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),),
+                          controller: pwdInputController,
+                          validator: pwdValidator,
+                        ),
+                        TextButton(
+                          child: Text("Forgot Password?",  style: TextStyle(color:kText),),
+                          onPressed: () {
+                    resetPassword(parentContext: context,email: emailInputController.text??"")    ;                    },
+                        ),
+                        ElevatedButton(
 
-                                  // Navigator.pushReplacementNamed(context, "/login")
-                                }
-                              else
-                                {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Homepage(
-                                            userid:User.user.uid,
-                                            auth: true,
-                                          )),
-                                          (_) => false ),
-                                }}
+                          child: Text("Login"),
+                          style: ElevatedButton.styleFrom(
+                            elevation : 0.1,
 
-                              )
-                              );
-                            } on FirebaseAuthException catch(error){
-                              Fluttertoast.showToast(
-                                  msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+                            primary:  Colors.white.withOpacity(0.1), // background
+                          ),
+                          onPressed: () {
+                            if (_loginFormKey.currentState.validate()) {
+                              try{
+                                 loging =  true;
+
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                    email: emailInputController.text,
+                                    password: pwdInputController.text)
+                                    .then((User) => FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(User.user.uid)
+                                    .get()
+                                    .then((DocumentSnapshot result) =>
+                                { if (User == null)
+                                  {
+                                    loging =  false,
+
+                                    // Navigator.pushReplacementNamed(context, "/login")
+                                  }
+                                else
+                                  {
+                                    loging =  false,
+
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Homepage(
+                                              userid:User.user.uid,
+                                              auth: true,
+                                            )),
+                                            (_) => false ),
+                                  }}
+
+                                )
+                                );
+                              } on FirebaseAuthException catch(error){
+                                 loging =  false;
+
+                                Fluttertoast.showToast(
+                                    msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+
+                              }
 
                             }
-
-                          }
-                        },
-                      ),
-                      Text("your first time?",  style: TextStyle(color:kText),),
-                      TextButton(
-                        child: Text("Register here!",  style: TextStyle(color:kText),),
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()))    ;                    },
-                      )
-                    ],
-                  ),
-                ))));
+                          },
+                        ),
+                        Text("your first time?",  style: TextStyle(color:kText),),
+                        TextButton(
+                          child: Text("Register here!",  style: TextStyle(color:kText),),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterPage()))    ;                    },
+                        )
+                      ],
+                    ),
+                  )))),
+    );
   }
 }

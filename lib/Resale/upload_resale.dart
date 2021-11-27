@@ -8,6 +8,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/progress.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -99,6 +100,16 @@ String dropTitle = 'Select Category';
   File file3;
   File file4;
   File file5;
+  clearImage() {
+    setState(() {
+      file1 = null;
+      file2 = null;
+      file3 = null;
+      file4 = null;
+      file5 = null;
+
+    });
+  }
 
 
   Widget getImageWidget1() {
@@ -851,11 +862,17 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
       "Gender": dropdownValue,
       "size": sizeController.text,
 "sold":false,
+    }).then((_){
+
+      setState(() {
+        images = [];
+        clearImage();
+        isUploading = false;
+        _inProcess = false;
+      });
     });
 
-    setState(() {
-      isUploading = false;
-    });
+
   }
 
   Widget MenCategory(){
@@ -3589,654 +3606,710 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
         ),
       );
   }
+  Future<bool> _onBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit without uploading?'),
+        actions: <Widget>[
+          new TextButton(
+
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text("NO"),
+          ),
+          SizedBox(height: 16),
+          new TextButton(
+
+            onPressed: () async {Navigator.of(context).pop(true);
+            clearImage();
+            setState(() {
+              isUploading = false;
+              _inProcess = false;
+            });
+            },
+            child: Text("YES"),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+
   buildUploadScreen()  {
     return    ModalProgressHUD(
       inAsyncCall: isUploading,
-      child: Scaffold(
-        appBar:  AppBar(      backgroundColor: kPrimaryColor,
+      child:  WillPopScope(
+        onWillPop:()=>   _onBackPressed(),
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: kPrimaryColor,
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed:()=>  showDialog(
+                  context: context,
+                  builder: (context) => new AlertDialog(
+                    title: new Text('Are you sure?'),
+                    content: new Text('Do you want to exit without uploading?'),
+                    actions: <Widget>[
+                      new TextButton(
 
-          title: FittedBox(
-            fit:BoxFit.contain,
-            child: Text('Upload ',
-              style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  // fontSize:  35.0 ,
-                  color: Colors.white),),
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text("NO"),
+                      ),
+                      SizedBox(height: 16),
+                      new TextButton(
+
+                        onPressed: () async {
+                          Get.back();
+                          Get.back();
+                          clearImage();
+                          setState(() {
+                            isUploading = false;
+                            _inProcess = false;
+                          });
+                        },
+                        child: Text("YES"),
+                      ),
+                    ],
+                  ),
+                ) ??
+                    false),
+
           ),
-          iconTheme: new IconThemeData(color: Colors.white),
-        ),
 
-        body:
-        Container(color:Cont,
-          child: Stack(
-            children:[
-              Container(
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      isUploading ? linearProgress() : Text(""),
-                      Container(
-                          height:160,
-                          child:ListView(scrollDirection:Axis.horizontal,
-                              children:[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget1(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget2(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget3(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget4(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget5(),
-                                ),
+          body:
+          Container(color:Cont,
+            child: Stack(
+              children:[
+                Container(
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      children: [
+                        isUploading ? linearProgress() : Text(""),
+                        Container(
+                            height:160,
+                            child:ListView(scrollDirection:Axis.horizontal,
+                                children:[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: getImageWidget1(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: getImageWidget2(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: getImageWidget3(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: getImageWidget4(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: getImageWidget5(),
+                                  ),
 
-                              ])),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
-                          controller: titleController,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Title',labelStyle: TextStyle(color: kText),
-                            hintText: 'Title',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if ( text.isEmpty) {
-                              return 'Title is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
-
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          controller: detailsController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Description',labelStyle: TextStyle(color: kText),
-                            hintText: 'Description',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if (text.isEmpty) {
-                              return 'Description is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
-                          leading: Icon(
-                            EvilIcons.tag,
-                            color: Colors.orange,
-                            size: 35.0,
-                          ),
-                          title:TextFormField(
-                            style:TextStyle(color: kText),
-                            keyboardType:TextInputType.number,
-                            controller: priceController,
+                                ])),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color:kText),
+                            controller: titleController,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                               enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                              labelText: 'Price',labelStyle: TextStyle(color: kText),
-                              hintText:
-                              currentUser.currency == "INR"?'₹':
-                              currentUser.currency == "EUR"?'€':
-                              currentUser.currency == "GBP"?'£':'\u0024',
+                              labelText: 'Title',labelStyle: TextStyle(color: kText),
+                              hintText: 'Title',
                             ),
                             textAlign: TextAlign.center,
                             validator: (text) {
-                              if (text.isEmpty) {
-                                return 'Price is empty';
+                              if ( text.isEmpty) {
+                                return 'Title is empty';
                               }
                               return null;
                             },
                           ),
                         ),
-                      ),
+                        SizedBox( height: 8.0,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color:kText),
 
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: DropdownButton<String>(
-                            value: dropdownValue,
-                            icon: Icon(Icons.keyboard_arrow_down_sharp),
-                            iconSize: SizeConfig.safeBlockHorizontal *4,
-                            elevation: 4,
-                            style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            controller: detailsController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                            onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                              });
+                              labelText: 'Description',labelStyle: TextStyle(color: kText),
+                              hintText: 'Description',
+                            ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if (text.isEmpty) {
+                                return 'Description is empty';
+                              }
+                              return null;
                             },
-                            items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-
-                              );
-                            }).toList(),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                        child: GestureDetector(
+                        SizedBox( height: 8.0,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                            leading: Icon(
+                              EvilIcons.tag,
+                              color: Colors.orange,
+                              size: 35.0,
+                            ),
+                            title:TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType:TextInputType.number,
+                              controller: priceController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-
-                          child: ListTile(title: Text('$dropTitle',style:TextStyle(color: Colors.black) ,),
-                              trailing:Icon(Icons.arrow_forward_ios_rounded)
-                        ),
-                          onTap: (){
-                            showModalBottomSheet(context: context, builder:(BuildContext context){
-
-
-                              if(dropdownValue=='Women')
-                              {
-                                return
-                                  WomenCategory();
-                              }
-                              else if(dropdownValue=='Men')
-                              {
-                                return
-                                  MenCategory();
-                              }
-                              else if(dropdownValue=='Baby-Boys')
-                              {
-                                return
-                                  BabyBCategory();
-                              }
-                              else if(dropdownValue== 'Baby-Girls'){
-                                return
-                                  BabyGCategory();
-                              }
-                              else if(dropdownValue=='Kids-Boys'){
-                                return
-                                  KidBCategory();
-                              }
-                              else if(dropdownValue=='Kids-Girls'){
-                                return
-                                  KidGCategory();
-                              }
-                              else if(dropdownValue== 'Teen-Boys'){
-                                return
-                                  TeenBCategory();
-                              }
-                              else if(dropdownValue=='Teen-Girls'){
-                                return
-                                  TeenGCategory();
-                              }
-                              else{
-                                return
-                                  Text('text');
-                              }
-                            },
-                            );
-                          }
-                          ,
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Condition"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: DropdownButton<String>(
-                            value: condition,
-                            icon: Icon(Icons.arrow_forward_ios_rounded),
-                            iconSize: SizeConfig.safeBlockHorizontal *4,
-                            elevation: 4,
-                            style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
-
-                            onChanged: (String newValu) {
-                              setState(() {
-                                condition = newValu;
-                              });
-                            },
-                            items: <String>['Brand New - with Tags', 'Never Used', 'Barely used', 'Gently Used','Used',]
-                                .map<DropdownMenuItem<String>>((String valu) {
-                              return DropdownMenuItem<String>(
-                                value: valu,
-                                child: Text(valu),
-
-                              );
-                            }).toList(),
+                                labelText: 'Price',labelStyle: TextStyle(color: kText),
+                                hintText:
+                                currentUser.currency == "INR"?'₹':
+                                currentUser.currency == "EUR"?'€':
+                                currentUser.currency == "GBP"?'£':'\u0024',
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if (text.isEmpty) {
+                                  return 'Price is empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
-                      ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: DropdownButton<String>(
+                              value: dropdownValue,
+                              icon: Icon(Icons.keyboard_arrow_down_sharp),
+                              iconSize: SizeConfig.safeBlockHorizontal *4,
+                              elevation: 4,
+                              style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
+
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                              },
+                              items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                          child: GestureDetector(
+
+
+                            child: ListTile(title: Text('$dropTitle',style:TextStyle(color: Colors.black) ,),
+                                trailing:Icon(Icons.arrow_forward_ios_rounded)
+                          ),
+                            onTap: (){
+                              showModalBottomSheet(context: context, builder:(BuildContext context){
+
+
+                                if(dropdownValue=='Women')
+                                {
+                                  return
+                                    WomenCategory();
+                                }
+                                else if(dropdownValue=='Men')
+                                {
+                                  return
+                                    MenCategory();
+                                }
+                                else if(dropdownValue=='Baby-Boys')
+                                {
+                                  return
+                                    BabyBCategory();
+                                }
+                                else if(dropdownValue== 'Baby-Girls'){
+                                  return
+                                    BabyGCategory();
+                                }
+                                else if(dropdownValue=='Kids-Boys'){
+                                  return
+                                    KidBCategory();
+                                }
+                                else if(dropdownValue=='Kids-Girls'){
+                                  return
+                                    KidGCategory();
+                                }
+                                else if(dropdownValue== 'Teen-Boys'){
+                                  return
+                                    TeenBCategory();
+                                }
+                                else if(dropdownValue=='Teen-Girls'){
+                                  return
+                                    TeenGCategory();
+                                }
+                                else{
+                                  return
+                                    Text('text');
+                                }
+                              },
+                              );
+                            }
+                            ,
+                          ),
+                        ),
+                        SizedBox( height: 8.0,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Condition"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: DropdownButton<String>(
+                              value: condition,
+                              icon: Icon(Icons.arrow_forward_ios_rounded),
+                              iconSize: SizeConfig.safeBlockHorizontal *4,
+                              elevation: 4,
+                              style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
+
+                              onChanged: (String newValu) {
+                                setState(() {
+                                  condition = newValu;
+                                });
+                              },
+                              items: <String>['Brand New - with Tags', 'Never Used', 'Barely used', 'Gently Used','Used',]
+                                  .map<DropdownMenuItem<String>>((String valu) {
+                                return DropdownMenuItem<String>(
+                                  value: valu,
+                                  child: Text(valu),
+
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
 
 Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color:kText),
 
-                          maxLines: null,
-                          controller: sizeController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            maxLines: null,
+                            controller: sizeController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                            labelText: 'Size',labelStyle: TextStyle(color: kText),
-                            hintText: 'Size',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if (text.isEmpty) {
-                              return 'Size is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
-
-                          maxLines: null,
-                          controller: colorController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Color',labelStyle: TextStyle(color: kText),
-                            hintText: 'Color',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if (text.isEmpty) {
-                              return 'Color is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          controller: shipController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-                            hintText: 'countries served & return policy',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if ( text.isEmpty) {
-                              return 'Shipping & returns';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        leading: Icon(
-                          Icons.local_shipping,
-                          color: Colors.orange,
-                          size: 35.0,
-                        ),
-                        title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
-
-                      ),
-                      SizedBox(height: 8.0,),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style:TextStyle(color: kText),
-                                keyboardType: TextInputType.number,
-
-                                controller: durationfrom,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  // labelText: 'Between',labelStyle: TextStyle(color: kText),
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Shipping duration is empty';
-                                  }
-                                  return null;
-                                },
-                              ),
+                              labelText: 'Size',labelStyle: TextStyle(color: kText),
+                              hintText: 'Size',
                             ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if (text.isEmpty) {
+                                return 'Size is empty';
+                              }
+                              return null;
+                            },
                           ),
-                          Text("-",  style:TextStyle(color: kText)),
-
-                          Expanded(
-
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style:TextStyle(color: kText),
-                                keyboardType: TextInputType.number,
-
-                                controller: durationto,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Shipping duration is empty';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                      SizedBox( height: 8.0,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Free shipping',style:TextStyle(color: kText)),
-                      ) ,
-                      SizedBox( height: 8.0,),
-
-                      Row(
-                        mainAxisAlignment:MainAxisAlignment.center,
-                        children: [
-                          Text('No'),
-                          SizedBox( width: 8.0,),
-
-                          Switch(
-                            value: freeship,
-                            onChanged: (value){setState(() {
-                              freeship = value;
-                            });},
-                            activeColor: Colors.blue,
-                            activeTrackColor: kPrimaryColor,
-                          ),
-                          SizedBox( width: 8.0,),
-
-                          Text('Yes')
-                        ],
-                      ),
-
-                      SizedBox( height: 8.0,),
-
-                      !freeship?  Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType: TextInputType.number,
-
-                          controller: shipcost,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            hintText:
-                            currentUser.currency == "INR"?'₹':
-                            currentUser.currency == "EUR"?'€':
-                            currentUser.currency == "GBP"?'£':'\u0024',
-                            labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if ( freeship==false || text.isEmpty ) {
-                              return 'Shipping cost is empty';
-                            }
-                            return null;
-                          },
                         ),
-                      ):Container(),
+                        SizedBox( height: 8.0,),
 
-                      SizedBox( height: 8.0,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Worldwide shipping',style:TextStyle(color: kText)),
-                      ) ,
-                      SizedBox( height: 8.0,),
-                      Row(
-                        mainAxisAlignment:MainAxisAlignment.center,
-                        children: [
-                          Text('No'),
-                          SizedBox( width: 8.0,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color:kText),
 
-                          Switch(
-                            value: worldship,
-                            onChanged: (value){setState(() {
-                              worldship = value;
-                            });},
-                            activeColor: Colors.blue,
-                            activeTrackColor:kPrimaryColor,
+                            maxLines: null,
+                            controller: colorController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                              labelText: 'Color',labelStyle: TextStyle(color: kText),
+                              hintText: 'Color',
+                            ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if (text.isEmpty) {
+                                return 'Color is empty';
+                              }
+                              return null;
+                            },
                           ),
-                          SizedBox( width: 8.0,),
+                        ),
+                        SizedBox( height: 8.0,),
 
-                          Text('Yes')
-                        ],
-                      ),
-                      SizedBox(height: 8.0,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                      worldship ?     Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            controller: shipController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                              labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+                              hintText: 'countries served & return policy',
+                            ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if ( text.isEmpty) {
+                                return 'Shipping & returns';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        ListTile(
                           leading: Icon(
                             Icons.local_shipping,
                             color: Colors.orange,
                             size: 35.0,
                           ),
-                          title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+                          title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
 
                         ),
-                      ):Container(),
-                      SizedBox(height: 8.0,),
+                        SizedBox(height: 8.0,),
 
-                      worldship ?   Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style:TextStyle(color: kText),
+                                  keyboardType: TextInputType.number,
 
-                              child: TextFormField(
-                                style:TextStyle(color: kText),
-                                keyboardType: TextInputType.number,
+                                  controller: durationfrom,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                controller: durationfromw,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                                    // labelText: 'Between',labelStyle: TextStyle(color: kText),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if ( text.isEmpty) {
+                                      return 'Shipping duration is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Text("-",  style:TextStyle(color: kText)),
+
+                            Expanded(
+
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style:TextStyle(color: kText),
+                                  keyboardType: TextInputType.number,
+
+                                  controller: durationto,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if ( text.isEmpty) {
+                                      return 'Shipping duration is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                        SizedBox( height: 8.0,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Free shipping',style:TextStyle(color: kText)),
+                        ) ,
+                        SizedBox( height: 8.0,),
+
+                        Row(
+                          mainAxisAlignment:MainAxisAlignment.center,
+                          children: [
+                            Text('No'),
+                            SizedBox( width: 8.0,),
+
+                            Switch(
+                              value: freeship,
+                              onChanged: (value){setState(() {
+                                freeship = value;
+                              });},
+                              activeColor: Colors.blue,
+                              activeTrackColor: kPrimaryColor,
+                            ),
+                            SizedBox( width: 8.0,),
+
+                            Text('Yes')
+                          ],
+                        ),
+
+                        SizedBox( height: 8.0,),
+
+                        !freeship?  Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+                            keyboardType: TextInputType.number,
+
+                            controller: shipcost,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              hintText:
+                              currentUser.currency == "INR"?'₹':
+                              currentUser.currency == "EUR"?'€':
+                              currentUser.currency == "GBP"?'£':'\u0024',
+                              labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
+
+                            ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if ( freeship==false || text.isEmpty ) {
+                                return 'Shipping cost is empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ):Container(),
+
+                        SizedBox( height: 8.0,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Worldwide shipping',style:TextStyle(color: kText)),
+                        ) ,
+                        SizedBox( height: 8.0,),
+                        Row(
+                          mainAxisAlignment:MainAxisAlignment.center,
+                          children: [
+                            Text('No'),
+                            SizedBox( width: 8.0,),
+
+                            Switch(
+                              value: worldship,
+                              onChanged: (value){setState(() {
+                                worldship = value;
+                              });},
+                              activeColor: Colors.blue,
+                              activeTrackColor:kPrimaryColor,
+                            ),
+                            SizedBox( width: 8.0,),
+
+                            Text('Yes')
+                          ],
+                        ),
+                        SizedBox(height: 8.0,),
+
+                        worldship ?     Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.local_shipping,
+                              color: Colors.orange,
+                              size: 35.0,
+                            ),
+                            title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+
+                          ),
+                        ):Container(),
+                        SizedBox(height: 8.0,),
+
+                        worldship ?   Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+
+                                child: TextFormField(
+                                  style:TextStyle(color: kText),
+                                  keyboardType: TextInputType.number,
+
+                                  controller: durationfromw,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
 // labelText: 'Between',labelStyle: TextStyle(color: kText),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if (worldship==true && text.isEmpty) {
+                                      return 'Shipping duration is empty';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if (worldship==true && text.isEmpty) {
-                                    return 'Shipping duration is empty';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
-                          ),
-                          Text("-",  style:TextStyle(color: kText)),
+                            Text("-",  style:TextStyle(color: kText)),
 
-                          Expanded(
+                            Expanded(
 
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style:TextStyle(color: kText),
-                                keyboardType: TextInputType.number,
-                                controller: durationtow,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style:TextStyle(color: kText),
+                                  keyboardType: TextInputType.number,
+                                  controller: durationtow,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if (worldship==true && text.isEmpty) {
+                                      return 'Shipping duration is empty';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if (worldship==true && text.isEmpty) {
-                                    return 'Shipping duration is empty';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
-                          ),
 
-                        ],
-                      ):Container(),
-                      SizedBox( height: 8.0,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Free worldwide shipping',style:TextStyle(color: kText)),
-                      ) ,
+                          ],
+                        ):Container(),
+                        SizedBox( height: 8.0,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Free worldwide shipping',style:TextStyle(color: kText)),
+                        ) ,
 
-                      SizedBox( height: 8.0,),
+                        SizedBox( height: 8.0,),
 
-                      worldship ? Row(
-                        mainAxisAlignment:MainAxisAlignment.center,
-                        children: [
-                          Text('No'),
-                          SizedBox( width: 8.0,),
+                        worldship ? Row(
+                          mainAxisAlignment:MainAxisAlignment.center,
+                          children: [
+                            Text('No'),
+                            SizedBox( width: 8.0,),
 
-                          Switch(
-                            value: freeworldship,
-                            onChanged: (value){setState(() {
-                              freeworldship = value;
-                            });},
-                            activeColor: Colors.blue,
-                            activeTrackColor:kPrimaryColor,
-                          ),
-                          SizedBox( width: 8.0,),
+                            Switch(
+                              value: freeworldship,
+                              onChanged: (value){setState(() {
+                                freeworldship = value;
+                              });},
+                              activeColor: Colors.blue,
+                              activeTrackColor:kPrimaryColor,
+                            ),
+                            SizedBox( width: 8.0,),
 
-                          Text('Yes')
-                        ],
-                      ):Container(),
+                            Text('Yes')
+                          ],
+                        ):Container(),
 
-                      worldship && freeworldship == false ?   Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType: TextInputType.number,
+                        worldship && freeworldship == false ?   Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+                            keyboardType: TextInputType.number,
 
-                          controller: shipcostintern,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            hintText:
-                            currentUser.currency == "INR"?'₹':
-                            currentUser.currency == "EUR"?'€':
-                            currentUser.currency == "GBP"?'£':'\u0024',
+                            controller: shipcostintern,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              hintText:
+                              currentUser.currency == "INR"?'₹':
+                              currentUser.currency == "EUR"?'€':
+                              currentUser.currency == "GBP"?'£':'\u0024',
 
-                            labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if ( freeworldship==false && text.isEmpty ) {
-                              return 'Shipping cost is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ):Container(),
-                      SizedBox( height: 8.0,),
-
-
-                      Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation : 0.001,
-                              primary:  Colors.black, ),
-                            onPressed:() async{
-                              Fluttertoast.showToast(
-                                  msg: "Please wait:Uploading", timeInSecForIos: 4);
-
-
-                              if(_formKey.currentState.validate()) {
-                                // ignore: unnecessary_statements
-                                await INRUSD();
-
-                                isUploading == false && dropdownValue == "Select Category"? null:Servicecatalog();
-                                Navigator.pop(context);
+                              labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
+                            ),
+                            textAlign: TextAlign.center,
+                            validator: (text) {
+                              if ( freeworldship==false && text.isEmpty ) {
+                                return 'Shipping cost is empty';
                               }
-
+                              return null;
                             },
-                            child: Text('Post', style: TextStyle(
-                              // fontFamily :"MajorMonoDisplay",
-                              //   fontSize:  ,
-                                color: Colors.white),),
-                          )
-                      ),
+                          ),
+                        ):Container(),
+                        SizedBox( height: 8.0,),
 
-                    ],
+
+                        Container(
+                            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation : 0.001,
+                                primary:  Colors.black, ),
+                              onPressed:() async{
+                                Fluttertoast.showToast(
+                                    msg: "Please wait:Uploading", timeInSecForIos: 4);
+
+
+                                if(_formKey.currentState.validate()) {
+                                  // ignore: unnecessary_statements
+                                  await INRUSD();
+
+                                  isUploading == false && dropdownValue == "Select Category"? null:Servicecatalog();
+                                  Navigator.pop(context);
+                                }
+
+                              },
+                              child: Text('Post', style: TextStyle(
+                                // fontFamily :"MajorMonoDisplay",
+                                //   fontSize:  ,
+                                  color: Colors.white),),
+                            )
+                        ),
+
+                      ],
+                    ),
+
                   ),
-
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
 
+        ),
       ),
     );
   }

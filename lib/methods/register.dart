@@ -9,6 +9,7 @@ import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:smart_select/smart_select.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   String dropdownValue = "";
-
+bool loging =false;
   String lang = "en";
 String  country = "";
 String currency = "Preferred currency";
@@ -40,7 +41,7 @@ String countryISO = "";
   bool _passwordVisible = false;
 
   final DateTime timestamp = DateTime.now();
-  bool save = false;
+  // bool save = false;
   List<S2Choice<String>> CURRENCY  = [
     S2Choice<String>(value: 'INR', title: 'INR'),
     S2Choice<String>(value: 'EUR', title: 'EUR'),
@@ -80,7 +81,9 @@ String countryISO = "";
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ModalProgressHUD(
+        inAsyncCall: loging,
+        child:Scaffold(
 
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -265,10 +268,11 @@ return
     msg: "Select your region" , timeInSecForIos: 4,gravity: ToastGravity.CENTER);}
 
 
-                      else    if (_registerFormKey.currentState.validate()||save == true) {
+                      else    if (_registerFormKey.currentState.validate()) {
                             if (pwdInputController.text ==
                                 confirmPwdInputController.text) {
                               try {
+                                loging = true;
                                 FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
                                     email: emailInputController.text,
@@ -326,7 +330,12 @@ return
                                         (_) => false );
 
                                 });
-                              } on FirebaseAuthException catch(error){Fluttertoast.showToast(
+                                loging = false;
+
+                              } on FirebaseAuthException catch(error){
+                                loging = false;
+
+                                Fluttertoast.showToast(
                                   msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
                               }
 
@@ -383,6 +392,6 @@ return
                       )
                     ],
                   ),
-                ))));
+                )))));
   }
 }

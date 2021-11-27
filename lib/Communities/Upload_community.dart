@@ -907,7 +907,11 @@ CommunityId:widget.CommunityId,
 
             onPressed: () async {Navigator.of(context).pop(true);
             delete();
-//            clearImage();
+            clearImage();
+            setState(() {
+              isUploading = false;
+              _inProcess = false;
+            });//            clearImage();
             },
             child: Text("YES"),
           ),
@@ -926,6 +930,16 @@ CommunityId:widget.CommunityId,
       doc.reference.delete();
     }
   });}
+  clearImage() {
+    setState(() {
+      file1 = null;
+      file2 = null;
+      file3 = null;
+      file4 = null;
+      file5 = null;
+
+    });
+  }
 
   builduploadForm() {
     this.setState(() {
@@ -963,7 +977,11 @@ CommunityId:widget.CommunityId,
                                 Get.back();
                                 Get.back();
                                 delete();
-//            clearImage();
+                                clearImage();
+                                setState(() {
+                                  isUploading = false;
+                                  _inProcess = false;
+                                });//            clearImage();
                               },
                               child: Text("YES"),
                             ),

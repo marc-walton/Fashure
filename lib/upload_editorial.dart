@@ -442,8 +442,13 @@ class _UploadEditState extends State<UploadEdit>
             setState(() {
               images = [];
               imageUrls = [];
+              delete();
+              clearImage();
+              setState(() {
+                isUploading = false;
+                _inProcess = false;
             });
-          });
+          });});
         }
       }).catchError((err) {
         print(err);
@@ -622,9 +627,12 @@ class _UploadEditState extends State<UploadEdit>
 
             onPressed: () async {
               Navigator.of(context).pop(true);
-Navigator.of(context).pop(true);
               delete();
-//            clearImage();
+              clearImage();
+              setState(() {
+                isUploading = false;
+                _inProcess = false;
+              });
             },
             child:  Text('YES',),
           ),
@@ -650,7 +658,37 @@ Navigator.of(context).pop(true);
               backgroundColor: kPrimaryColor,
               leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed:()=> _onBackPressed()),
+                  onPressed:()=>  showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      title: new Text('Are you sure?'),
+                      content: new Text('Do you want to exit without uploading?'),
+                      actions: <Widget>[
+                        new TextButton(
+
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text("NO"),
+                        ),
+                        SizedBox(height: 16),
+                        new TextButton(
+
+                          onPressed: () async {
+                            Get.back();
+                            Get.back();
+                            delete();
+                            clearImage();
+                            setState(() {
+                              isUploading = false;
+                              _inProcess = false;
+                            });
+//            clearImage();
+                          },
+                          child: Text("YES"),
+                        ),
+                      ],
+                    ),
+                  ) ??
+                      false),
 
             ),
             body:

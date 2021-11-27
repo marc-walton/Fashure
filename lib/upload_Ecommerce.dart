@@ -151,6 +151,11 @@ var GBP10;
 var GBP11;
 var GBP12;
 
+  File file001;
+  File file002;
+  File file003;
+  File file004;
+  File file005;
 int pageChanged  = 0;
   @override
   void initState() {
@@ -4729,6 +4734,420 @@ compressImage01() async {
     sizeChart = true;
     return downloadUrl;
   }
+
+  Widget getImageWidget001() {
+    if (file001 != null) {
+      return InkWell(
+        onTap:()=>getImage1(),
+        child: Image.file(
+          file001,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage1(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage001() async {
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file001 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget002() {
+    if (file002 != null) {
+      return InkWell(
+        onTap:()=>getImage2(),
+        child: Image.file(
+          file002,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage2(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage002() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file002 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+  Widget getImageWidget003() {
+    if (file003 != null) {
+      return InkWell(
+        onTap:()=>getImage3(),
+        child: Image.file(
+          file003,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage3(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage003() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file003 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget004() {
+    if (file004 != null) {
+      return InkWell(
+        onTap:()=>getImage4(),
+        child: Image.file(
+          file004,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage4(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage004() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file004 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget005() {
+    if (file005 != null) {
+      return InkWell(
+        onTap:()=>getImage5(),
+        child: Image.file(
+          file005,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage5(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+  getImage005() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file005 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+  compressImage001() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file001.readAsBytesSync());
+    final compressedImageFile = File('$path/img001_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file001 = compressedImageFile;
+    });
+  }
+  compressImage002() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file002.readAsBytesSync());
+    final compressedImageFile = File('$path/img002_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file002 = compressedImageFile;
+    });
+  }
+  compressImage003() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file003.readAsBytesSync());
+    final compressedImageFile = File('$path/img003_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file003 = compressedImageFile;
+    });
+  }
+  compressImage004() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file004.readAsBytesSync());
+    final compressedImageFile = File('$path/img004_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file004 = compressedImageFile;
+    });
+  }
+  compressImage005() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file005.readAsBytesSync());
+    final compressedImageFile = File('$path/img005_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file005 = compressedImageFile;
+    });
+  }
+  Future<String> uploadImage001(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+    imageUrls.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage002(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    imageUrls.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage003(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    imageUrls.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage004(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    imageUrls.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage005(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    imageUrls.add(downloadUrl);
+    return downloadUrl;
+  }
+
   // Future<String> uploadImage02(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
   //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
@@ -5199,10 +5618,15 @@ compressImage01() async {
           new TextButton(
               child: Text("YES"),
 
-            onPressed: ()
-            {
-                        Navigator.of(context).maybePop(true);
-                      }
+            onPressed: () {
+              Navigator.of(context).maybePop(true);
+              delete();
+              clearImage();
+              setState(() {
+                isUploading = false;
+                _inProcess = false;
+              });
+            }
     ),
         ],
       ),
@@ -12530,7 +12954,14 @@ Widget sizeGuide(){
 
 
   }
-
+    delete()async{   FirebaseFirestore.instance.collection("products")
+        .doc(currentUser.id).collection("userProducts").doc(prodId)
+        .get()
+        .then((doc) {
+    if (doc.exists) {
+    doc.reference.delete();
+    }
+    });}
 custom(){
     return
       showMaterialModalBottomSheet(
@@ -13690,7 +14121,12 @@ color(){
                   {
                     Get.back();
                    Get.back();
-
+                  delete();
+                  clearImage();
+                  setState(() {
+                  isUploading = false;
+                  _inProcess = false;
+                  });
                   },
                   child: Text("YES"),
                   ),
@@ -13785,7 +14221,32 @@ page0(){
           children: <Widget>[
             isUploading ? linearProgress() : Text(""),
 
-            carousel(),
+            Container(
+                height:160,
+                child:ListView(scrollDirection:Axis.horizontal,
+                    children:[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: getImageWidget1(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: getImageWidget2(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: getImageWidget3(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: getImageWidget4(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: getImageWidget5(),
+                      ),
+
+                    ])),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -18037,7 +18498,17 @@ var resultGBP = await Currency.getConversion(
     setState((){loading = "Uploading to database!";});
    file!=null? await compressImage():null;
     String mediaUrl =  file!=null?await uploadImage(file):"";
-  file1!=null? await compressImage1():null;
+  file001!=null? await compressImage001():null;
+    String mediaUrl001 =  file001!=null?await uploadImage001(file001):"";
+  file002!=null? await compressImage002():null;
+    String mediaUrl002 =  file002!=null?await uploadImage002(file002):"";
+  file003!=null? await compressImage003():null;
+    String mediaUrl003 =  file003!=null?await uploadImage003(file003):"";
+  file004!=null? await compressImage004():null;
+    String mediaUrl004 =  file004!=null?await uploadImage004(file004):"";
+  file005!=null? await compressImage005():null;
+    String mediaUrl005 =  file005!=null?await uploadImage005(file005):"";
+    file1!=null? await compressImage1():null;
     String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
   file2!=null? await compressImage2():null;
     String mediaUrl2 =  file2!=null?await uploadImage2(file2):"";
@@ -18156,127 +18627,121 @@ var resultGBP = await Currency.getConversion(
     // String mediaUrl049 =  customImg49!=null?await uploadImage049(customImg49):"";
     //  customImg50!=null? await compressImage050():null;
     // String mediaUrl050 =  customImg50!=null?await uploadImage050(customImg50):"";
-    for ( var imageFile in images) {
-      postImage(imageFile).then((downloadUrl)  {
-        imageUrls.add(downloadUrl.toString());
-        if(imageUrls.length==images.length){
-          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+    productsRef
+        .doc(widget.currentUser.id)
+        .collection("userProducts")
+        .doc(prodId)
+        .set({
+      "sizechartBool":mediaUrl01,
+      "sizeChart":sizeChart,
+      "colorText1":colorController1.text ?? "",
+      "colorText2":colorController2.text ?? "",
+      "colorText3":colorController3.text ?? "",
+      "colorText4":colorController4.text ?? "",
+      "colorText5":colorController5.text ?? "",
+      "colorText6":colorController6.text ?? "",
+      "colorText7":colorController7.text ?? "",
+      "colorText8":colorController8.text ?? "",
+      "colorText9":colorController9.text ?? "",
+      "colorText10":colorController10.text ?? "",
+      "color1":int.tryParse(colorController11.text) ?? 0,
+      "color2":int.tryParse(colorController21.text) ?? 0,
+      "color3":int.tryParse(colorController31.text) ?? 0,
+      "color4":int.tryParse(colorController41.text) ?? 0,
+      "color5":int.tryParse(colorController51.text) ?? 0,
+      "color6":int.tryParse(colorController61.text) ?? 0,
+      "color7":int.tryParse(colorController71.text) ?? 0,
+      "color8":int.tryParse(colorController81.text) ?? 0,
+      "color9":int.tryParse(colorController91.text) ?? 0,
+      "color10":int.tryParse(colorController10.text) ?? 0,
+      "country":  currentUser.country,
+      "currency":  currentUser.currency,
 
-          productsRef
-              .doc(widget.currentUser.id)
-              .collection("userProducts")
-              .doc(prodId)
-              .set({
-            "sizechartBool":mediaUrl01,
-            "sizeChart":sizeChart,
-            "colorText1":colorController1.text ?? "",
-            "colorText2":colorController2.text ?? "",
-            "colorText3":colorController3.text ?? "",
-            "colorText4":colorController4.text ?? "",
-            "colorText5":colorController5.text ?? "",
-            "colorText6":colorController6.text ?? "",
-            "colorText7":colorController7.text ?? "",
-            "colorText8":colorController8.text ?? "",
-            "colorText9":colorController9.text ?? "",
-            "colorText10":colorController10.text ?? "",
-            "color1":int.tryParse(colorController11.text) ?? 0,
-            "color2":int.tryParse(colorController21.text) ?? 0,
-            "color3":int.tryParse(colorController31.text) ?? 0,
-            "color4":int.tryParse(colorController41.text) ?? 0,
-            "color5":int.tryParse(colorController51.text) ?? 0,
-            "color6":int.tryParse(colorController61.text) ?? 0,
-            "color7":int.tryParse(colorController71.text) ?? 0,
-            "color8":int.tryParse(colorController81.text) ?? 0,
-            "color9":int.tryParse(colorController91.text) ?? 0,
-            "color10":int.tryParse(colorController10.text) ?? 0,
-            "country":  currentUser.country,
-            "currency":  currentUser.currency,
+      "worldship":worldship,
+      "freeworldship":freeworldship,
+      "freeship":freeship,
+      "shipment": shipcontroller.text,
+      "prodId": prodId,
+      "ownerId": widget.currentUser.id,
+      "photoUrl": widget.currentUser.photoUrl,
+      "username": widget.currentUser.displayName,
+      "shopmediaUrl": imageUrls,
+      "Category": value,
+      "Gender": dropdownValue,
+      "details": detailsController.text,
+      "productname": productnameController.text,
+      "usd": USD ,
+      "eur": EUR,
+      "gbp": GBP,
+      "inr": INR,
 
-            "worldship":worldship,
-            "freeworldship":freeworldship,
-            "freeship":freeship,
-            "shipment": shipcontroller.text,
-            "prodId": prodId,
-            "ownerId": widget.currentUser.id,
-            "photoUrl": widget.currentUser.photoUrl,
-            "username": widget.currentUser.displayName,
-            "shopmediaUrl": imageUrls,
-            "Category": value,
-            "Gender": dropdownValue,
-            "details": detailsController.text,
-            "productname": productnameController.text,
-            "usd": USD ,
-            "eur": EUR,
-            "gbp": GBP,
-            "inr": INR,
+      "timestamp": timestamp,
+      "composition": compositionController.text,
+      "washandcare": washandcareController.text,
+      "sizeandfit": sizeandfitController.text,
+      "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+      "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+      "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+      "sQuantity": int.tryParse(scontroller.text) ?? 0,
 
-            "timestamp": timestamp,
-            "composition": compositionController.text,
-            "washandcare": washandcareController.text,
-            "sizeandfit": sizeandfitController.text,
-            "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-            "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-            "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-            "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-            "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-            "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+      "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+      "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
 
 
-            "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-            "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-            "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-            "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-            "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-            "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-            "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-            "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-            "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-            "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-            "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-            "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-            "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-            "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-            "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-            "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-            "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-            "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-            "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-            "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-            "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-            "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-            "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-            "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-            "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-            "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-            "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-            "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-            "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-            "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-            "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-            "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-            "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-            "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-            "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-            "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-            "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-            "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-            "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-            "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-            "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-            "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-            "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-            "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-            "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-            "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-            "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-            "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-            "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-            "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-            "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-            "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-            "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-            "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+      "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+      "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+      "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+      "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+      "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+      "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+      "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+      "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+      "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+      "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+      "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+      "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+      "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+      "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+      "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+      "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+      "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+      "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+      "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+      "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+      "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+      "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+      "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+      "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+      "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+      "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+      "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+      "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+      "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+      "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+      "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+      "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+      "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+      "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+      "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+      "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+      "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+      "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+      "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+      "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+      "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+      "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+      "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+      "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+      "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+      "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+      "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+      "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+      "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+      "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+      "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+      "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+      "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+      "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
 
 //             "customTitle1":  title1Controller.text ?? "",
 //  "customTitle2":  title2Controller.text ?? "",
@@ -18439,127 +18904,120 @@ var resultGBP = await Currency.getConversion(
 //
 
 
-            "variation1":  customController1.text ?? "",
-            "variation2":  customController2.text ?? "",
-            "variation3":  customController3.text ?? "",
-            "variation4":  customController4.text ?? "",
-            "variation5":  customController5.text ?? "",
-            "variation6":  customController6.text ?? "",
-            "variation7":  customController7.text ?? "",
-            "variation8":  customController8.text ?? "",
-            "variation9":  customController9.text ?? "",
-            "variation10":  customController10.text ?? "",
+      "variation1":  customController1.text ?? "",
+      "variation2":  customController2.text ?? "",
+      "variation3":  customController3.text ?? "",
+      "variation4":  customController4.text ?? "",
+      "variation5":  customController5.text ?? "",
+      "variation6":  customController6.text ?? "",
+      "variation7":  customController7.text ?? "",
+      "variation8":  customController8.text ?? "",
+      "variation9":  customController9.text ?? "",
+      "variation10":  customController10.text ?? "",
 
 
-            "variation1img":  mediaUrl ?? "",
-            "variation2img":  mediaUrl1 ?? "",
-            "variation3img":  mediaUrl2 ?? "",
-            "variation4img":  mediaUrl3 ?? "",
-            "variation5img":  mediaUrl4 ?? "",
-            "variation6img":  mediaUrl5 ?? "",
-            "variation7img":  mediaUrl6 ?? "",
-            "variation8img":  mediaUrl7 ?? "",
-            "variation9img":  mediaUrl8 ?? "",
-            "variation10img":  mediaUrl9 ?? "",
+      "variation1img":  mediaUrl ?? "",
+      "variation2img":  mediaUrl1 ?? "",
+      "variation3img":  mediaUrl2 ?? "",
+      "variation4img":  mediaUrl3 ?? "",
+      "variation5img":  mediaUrl4 ?? "",
+      "variation6img":  mediaUrl5 ?? "",
+      "variation7img":  mediaUrl6 ?? "",
+      "variation8img":  mediaUrl7 ?? "",
+      "variation9img":  mediaUrl8 ?? "",
+      "variation10img":  mediaUrl9 ?? "",
 
-            "variationQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
-            "variationQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
-            "variationQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
-            "variationQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
-            "variationQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
-            "variationQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
-            "variationQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
-            "variationQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
-            "variationQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
-            "variationQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+      "variationQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+      "variationQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+      "variationQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+      "variationQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+      "variationQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+      "variationQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+      "variationQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+      "variationQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+      "variationQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+      "variationQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
 
-            "custom11inr": INR1,
-            "custom11usd": USD1,
-            "custom11eur": EUR1,
-            "custom11gbp": GBP1,
+      "custom11inr": INR1,
+      "custom11usd": USD1,
+      "custom11eur": EUR1,
+      "custom11gbp": GBP1,
 
-            "custom21inr": INR2,
-            "custom21usd": USD2 ,
-            "custom21gbp": GBP2,
-            "custom21eur": EUR2,
+      "custom21inr": INR2,
+      "custom21usd": USD2 ,
+      "custom21gbp": GBP2,
+      "custom21eur": EUR2,
 
-            "custom31usd": USD3,
-            "custom31inr": INR3,
-            "custom31gbp": GBP3,
-            "custom31eur": EUR3,
+      "custom31usd": USD3,
+      "custom31inr": INR3,
+      "custom31gbp": GBP3,
+      "custom31eur": EUR3,
 
-            "custom41usd": USD4,
-            "custom41inr": INR4,
-            "custom41gbp": GBP4,
-            "custom41eur": EUR4,
+      "custom41usd": USD4,
+      "custom41inr": INR4,
+      "custom41gbp": GBP4,
+      "custom41eur": EUR4,
 
-            "custom51usd": USD5,
-            "custom51inr": INR5,
-            "custom51gbp": GBP5,
-            "custom51eur": EUR5,
+      "custom51usd": USD5,
+      "custom51inr": INR5,
+      "custom51gbp": GBP5,
+      "custom51eur": EUR5,
 
-            "custom61usd": USD6,
-            "custom61inr": INR6,
-            "custom61eur": EUR6,
-            "custom61gbp": GBP6,
+      "custom61usd": USD6,
+      "custom61inr": INR6,
+      "custom61eur": EUR6,
+      "custom61gbp": GBP6,
 
-            "custom71usd": USD7,
-            "custom71inr": INR7,
-            "custom71eur": EUR7,
-            "custom71gbp": GBP7,
+      "custom71usd": USD7,
+      "custom71inr": INR7,
+      "custom71eur": EUR7,
+      "custom71gbp": GBP7,
 
-            "custom81usd": USD8,
-            "custom81inr": INR8,
-            "custom81eur": EUR8,
-            "custom81gbp": GBP8,
+      "custom81usd": USD8,
+      "custom81inr": INR8,
+      "custom81eur": EUR8,
+      "custom81gbp": GBP8,
 
-            "custom91usd": USD9,
-            "custom91inr": INR9,
-            "custom91eur": EUR9,
-            "custom91gbp": GBP9,
+      "custom91usd": USD9,
+      "custom91inr": INR9,
+      "custom91eur": EUR9,
+      "custom91gbp": GBP9,
 
-            "custom101usd": USD10,
-            "custom101inr": INR10,
-            "custom101eur": EUR10,
-            "custom101gbp": GBP10,
+      "custom101usd": USD10,
+      "custom101inr": INR10,
+      "custom101eur": EUR10,
+      "custom101gbp": GBP10,
 
-            "shipcostusd": USD11,
-            "shipcostinr": INR11,
-            "shipcostgbp": GBP11,
-            "shipcosteur": EUR11,
+      "shipcostusd": USD11,
+      "shipcostinr": INR11,
+      "shipcostgbp": GBP11,
+      "shipcosteur": EUR11,
 
-            "shipcostinternusd": USD12,
-            "shipcostinterninr": INR12,
-            "shipcostinterneur": EUR12,
-            "shipcostinterngbp": GBP12,
+      "shipcostinternusd": USD12,
+      "shipcostinterninr": INR12,
+      "shipcostinterneur": EUR12,
+      "shipcostinterngbp": GBP12,
 
-            "round": USD ?? 0.0,
+      "round": USD ?? 0.0,
 
-            "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-            "processto":  int.tryParse(durationto.text) ?? 0,
-            "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-            "shipto":  int.tryParse(durationto.text) ?? 0,
-            "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-            "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+      "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+      "processto":  int.tryParse(durationto.text) ?? 0,
+      "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+      "shipto":  int.tryParse(durationto.text) ?? 0,
+      "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+      "shipinterto":  int.tryParse(durationtow.text) ?? 0,
 
-            "likes": {},
-          });
+      "likes": {},
+    }).then((_){
 
-
-
-          setState(() {
-            file = null;
-            isUploading = false;
-          });
-
-
-
-        }
-      }).catchError((err) {
-        print(err);
+      setState(() {
+        imageUrls = [];
+        clearImage();
+        isUploading = false;
+        _inProcess = false;
 
       });
-    }
+    });
 
     Get.back();
 
@@ -18593,7 +19051,7 @@ var resultGBP = await Currency.getConversion(
   Widget build(BuildContext context) {
     super.build(context);
 
-    return images.isEmpty ? buildSplashScreen() : builduploadForm();
+    return file001 ==null ? buildSplashScreen() : builduploadForm();
   }
 
 }

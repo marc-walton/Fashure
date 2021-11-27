@@ -49,13 +49,13 @@ class _UploadState extends State<Upload>
   bool isUploading = false;
   String postId = Uuid().v4();
   List<Asset> images = <Asset>[];
+  List<String> Img = <String>[];
+  
   String _error = 'No Error Dectected';
   PageController pageController = PageController();
   int pageChanged  = 0;
 
   List<String> imageUrls = <String>[];
-
-
 
   bool _inProcess = false;
   @override
@@ -71,6 +71,425 @@ class _UploadState extends State<Upload>
         .set({});
   }
 
+  File file1;
+  File file2;
+  File file3;
+  File file4;
+  File file5;
+
+
+  Widget getImageWidget1() {
+    if (file1 != null) {
+      return InkWell(
+        onTap:()=>getImage1(),
+        child: Image.file(
+          file1,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage1(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage1() async {
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file1 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget2() {
+    if (file2 != null) {
+      return InkWell(
+        onTap:()=>getImage2(),
+        child: Image.file(
+          file2,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage2(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage2() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file2 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+  Widget getImageWidget3() {
+    if (file3 != null) {
+      return InkWell(
+        onTap:()=>getImage3(),
+        child: Image.file(
+          file3,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage3(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage3() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file3 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget4() {
+    if (file4 != null) {
+      return InkWell(
+        onTap:()=>getImage4(),
+        child: Image.file(
+          file4,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage4(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+
+  getImage4() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file4 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget5() {
+    if (file5 != null) {
+      return InkWell(
+        onTap:()=>getImage5(),
+        child: Image.file(
+          file5,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage5(),
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                size:50,
+              ),
+              Text("Add image")
+
+            ],
+          ));
+    }
+  }
+  getImage5() async {
+
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file5 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+  compressImage1() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
+    final compressedImageFile = File('$path/img1_$postId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file1 = compressedImageFile;
+    });
+  }
+  compressImage2() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file2.readAsBytesSync());
+    final compressedImageFile = File('$path/img2_$postId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file2 = compressedImageFile;
+    });
+  }
+  compressImage3() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file3.readAsBytesSync());
+    final compressedImageFile = File('$path/img3_$postId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file3 = compressedImageFile;
+    });
+  }
+  compressImage4() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file4.readAsBytesSync());
+    final compressedImageFile = File('$path/img4_$postId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file4 = compressedImageFile;
+    });
+  }
+  compressImage5() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file5.readAsBytesSync());
+    final compressedImageFile = File('$path/img5_$postId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file5 = compressedImageFile;
+    });
+  }
+  Future<String> uploadImage1(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+    Img.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage2(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    Img.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage3(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    Img.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage4(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    Img.add(downloadUrl);
+    return downloadUrl;
+  }
+  Future<String> uploadImage5(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    Img.add(downloadUrl);
+    return downloadUrl;
+  }
   compressImage() async {
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
@@ -83,7 +502,12 @@ class _UploadState extends State<Upload>
   }
   clearImage() {
     setState(() {
-      file = null;
+      file1 = null;
+      file2 = null;
+      file3 = null;
+      file4 = null;
+      file5 = null;
+      
     });
   }
   getImage(ImageSource source) async {
@@ -131,7 +555,7 @@ class _UploadState extends State<Upload>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("postnow${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
@@ -141,39 +565,32 @@ class _UploadState extends State<Upload>
     setState(() {
       isUploading = true;
     });
+    postsRef .doc(widget.currentUser.id)
+        .collection("userPosts")
+        .doc(postId).update({
+      "type":'Post',
 
-    for ( var imageFile in images) {
-      postImage(imageFile).then((downloadUrl) {
-        imageUrls.add(downloadUrl.toString());
-        if(imageUrls.length==images.length){
-          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-          postsRef .doc(widget.currentUser.id)
-              .collection("userPosts")
-              .doc(postId).update({
-            'mediaUrl':imageUrls,
-            "postId": postId,
-            "ownerId": widget.currentUser.id,
-            "username": widget.currentUser.displayName,
-            "photoUrl":widget.currentUser.photoUrl,
-            "currency":widget.currentUser.currency,
-            "description": captionController.text,
-            "location": locationController.text,
-            "timestamp": timestamp,
-            "likes": {},
-          }).then((_){
+      'mediaUrl':Img,
+      "postId": postId,
+      "ownerId": widget.currentUser.id,
+      "username": widget.currentUser.displayName,
+      "photoUrl":widget.currentUser.photoUrl,
+      "currency":widget.currentUser.currency,
+      "description": captionController.text,
+      "location": locationController.text,
+      "timestamp": timestamp,
+      "likes": {},
+    }).then((_){
 
-            setState(() {
-              images = [];
-              imageUrls = [];
-            });
-          });
-        }
-      }).catchError((err) {
-        print(err);
-
+      setState(() {
+        Img = [];
+        clearImage();
+        isUploading = false;
+        _inProcess = false;
 
       });
-    }
+    });
+
     Navigator.pop(context);
 
   }
@@ -228,8 +645,6 @@ class _UploadState extends State<Upload>
       ),
     );
   }
-
-
   Future<bool> _onBackPressed() {
     return showDialog(
       context: context,
@@ -247,7 +662,11 @@ class _UploadState extends State<Upload>
 
             onPressed: () async {Navigator.of(context).pop(true);
             delete();
-//            clearImage();
+clearImage();
+            setState(() {
+              isUploading = false;
+              _inProcess = false;
+            });
             },
             child: Text("YES"),
           ),
@@ -319,10 +738,16 @@ class _UploadState extends State<Upload>
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation : 0.1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      primary:  Colors.black, // background
+                      onPrimary: Colors.white, // foreground
                     ),
+
                     child: Text(
                       "Select images",
                       style: TextStyle(
@@ -330,8 +755,7 @@ class _UploadState extends State<Upload>
                         fontSize: 22.0,
                       ),
                     ),
-                    color: Colors.deepOrange,
-                    onPressed: ()  =>loadAssets(),
+                    onPressed: ()  =>getImage1(),
                     // selectImage(context),
                   ),
                 ),
@@ -358,7 +782,6 @@ class _UploadState extends State<Upload>
       );
     }
   }
-
 
   selectImage(parentContext) {
     return showDialog(
@@ -388,8 +811,6 @@ class _UploadState extends State<Upload>
           );
         });
   }
-
-
   Future<String> uploadImage(imageFile) async {
    UploadTask uploadTask =
     storageRef.child("post_$postId.jpg").putFile(imageFile);
@@ -398,36 +819,38 @@ class _UploadState extends State<Upload>
     return downloadUrl;
   }
 
-
-  createPostInFirestore({String mediaUrl, String location, String description}) {
-    postsRef
-        .doc(widget.currentUser.id)
-        .collection("userPosts")
-        .doc(postId)
-        .set({
-      "postId": postId,
-      "ownerId": widget.currentUser.id,
-      "username": widget.currentUser.displayName,
-      "mediaUrl": mediaUrl,
-      "description": description,
-      "location": location,
-      "timestamp": timestamp,
-      "likes": {},
-    });
-
-    setState(() {
-      file = null;
-//      isUploading = false;1111
-    });
-  }
-
   page0(){
    return
      ListView(
        shrinkWrap: true,
        children: <Widget>[
          isUploading ? linearProgress() : Text(""),
-         carousel(),
+         Container(
+             height:160,
+             child:ListView(scrollDirection:Axis.horizontal,
+                 children:[
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: getImageWidget1(),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: getImageWidget2(),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: getImageWidget3(),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: getImageWidget4(),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: getImageWidget5(),
+                   ),
+
+                 ])),
 
          ListTile(
            leading: CircleAvatar(
@@ -642,7 +1065,11 @@ SizedBox(width: 10,)  ,
                                 Get.back();
                                 Get.back();
                                 delete();
-//            clearImage();
+clearImage();
+                                setState(() {
+                                  isUploading = false;
+                                  _inProcess = false;
+                                });
                               },
                               child: Text("YES"),
                             ),
@@ -683,22 +1110,6 @@ SizedBox(width: 10,)  ,
         ),
       );
 
-
-  }
-  HandleSubmit() async {
-    setState(() {
-      isUploading = true;
-    });
-    await compressImage();
-    String mediaUrl = await uploadImage(file);
-
-    createPostInFirestore(
-      mediaUrl: mediaUrl,
-      location: locationController.text,
-      description: captionController.text,
-    );
-
-    Navigator.pop(context);
 
   }
 
@@ -788,7 +1199,7 @@ SizedBox(width: 10,)  ,
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return images.isEmpty?buildSplashScreen():  builduploadForm();
+    return file1 == null ?buildSplashScreen():  builduploadForm();
   }
 }
 

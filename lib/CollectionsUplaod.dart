@@ -541,7 +541,12 @@ Carousel(){
            setState(() {
              images = [];
              imageUrls = [];
-           });
+             delete();
+             clearImage();
+             setState(() {
+               isUploading = false;
+               _inProcess = false;
+           });       });
         });
        }
      }).catchError((err) {
@@ -572,7 +577,12 @@ Carousel(){
 
             onPressed: () async {Navigator.of(context).pop(true);
             delete();
-
+            delete();
+            clearImage();
+            setState(() {
+              isUploading = false;
+              _inProcess = false;
+            });
 //            clearImage();
             },
             child: Text("YES"),
@@ -617,8 +627,12 @@ Carousel(){
                         onPressed: () async {
 Get.back();
 Get.back();
-
 delete();
+clearImage();
+setState(() {
+  isUploading = false;
+  _inProcess = false;
+});
 //            clearImage();
                         },
                         child: Text("YES"),

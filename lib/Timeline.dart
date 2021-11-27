@@ -332,9 +332,9 @@ ScrollController _scrollController = ScrollController();
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
                             child:
-                            currentUser == null?
-                            Container(child: Icon(EvaIcons.personOutline),):
-                         Container(child: CachedNetworkImage(imageUrl: currentUser.photoUrl),)
+                            // currentUser == null?
+                            // Container(child: Icon(EvaIcons.personOutline),):
+                         Container(child: CachedNetworkImage(imageUrl: widget.currentUser.photoUrl),)
                         
                         ),
                       ),
@@ -349,7 +349,7 @@ ScrollController _scrollController = ScrollController();
         color: Colors.grey.shade200,
         child:     RefreshIndicator(
                 onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
-          Feed(),
+          Feed(currentUser: currentUser),
           Collection(),
           Blog(),
 
@@ -568,6 +568,9 @@ class Blog extends StatelessWidget {
 
 class GlobalFeed extends StatefulWidget {
 
+  final Users currentUser;
+
+  GlobalFeed({this.currentUser,});
   @override
   _GlobalFeedState createState() => _GlobalFeedState();
 }
@@ -1259,6 +1262,9 @@ class _GlobalFeedState extends State<GlobalFeed> {
 
 class Feed extends StatefulWidget {
 
+  final Users currentUser;
+
+  Feed({this.currentUser,});
   @override
   _FeedState createState() => _FeedState();
 }
@@ -1925,7 +1931,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
 
         query: timelineRef
-            .doc(currentUser.id)
+            .doc(widget.currentUser.id)
             .collection('timelinePosts')
             .orderBy('timestamp', descending: true)
 
