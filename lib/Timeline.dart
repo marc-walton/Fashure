@@ -57,7 +57,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:share/share.dart';
-
+import 'package:simple_polls/simple_polls.dart';
 final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
   class Timeline extends StatefulWidget {
@@ -998,6 +998,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
         itemBuilderType:
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
+
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
           postId= documentSnapshot.data()['postId'];
           ownerId= documentSnapshot.data()['ownerId'];
@@ -1012,10 +1013,138 @@ class _GlobalFeedState extends State<GlobalFeed> {
           currency= documentSnapshot.data()['currency'];
           photoUrl= documentSnapshot.data()['photoUrl'];
           likeCount = getLikeCount(this.likes);
+          var option1Total =  documentSnapshot.data()['option1Total'];
+          var option2Total =  documentSnapshot.data()['option2Total'];
+          var option3Total =  documentSnapshot.data()['option3Total'];
+          var option4Total =  documentSnapshot.data()['option4Total'];
+          var option5Total =  documentSnapshot.data()['option5Total'];
+          var option6Total =  documentSnapshot.data()['option6Total'];
+         List option1Voters =  documentSnapshot.data()['option1Voters'];
+          List option2Voters =  documentSnapshot.data()['option2Voters'];
+          List option3Voters =  documentSnapshot.data()['option3Voters'];
+          List option4Voters =  documentSnapshot.data()['option4Voters'];
+          List option5Voters =  documentSnapshot.data()['option5Voters'];
+          List option6Voters =  documentSnapshot.data()['option6Voters'];
+List Voters =  documentSnapshot.data()['Voters'];
+var total =  documentSnapshot.data()['total'];
+          String type =  documentSnapshot.data()['type'];
+
 
           return    Container(
             margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-            child: Column(
+            child: type == 'Poll'?Column(children:[
+              SimplePollsWidget(
+                onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                  print('Now total polls are : ' + model.totalPolls.toString());
+                  print('Selected option has label : ' + selectedOptionModel.label);
+                   option1Total ++ ;
+                   option2Total ++ ;
+                   option3Total ++;
+                   option4Total ++;
+                   option5Total ++ ;
+                   option6Total ++ ;
+                    total ++ ;
+
+                  Voters.add(widget.currentUser.id);
+                  selectedOptionModel.id == 1?
+          option1Voters.add(widget.currentUser.id):
+          selectedOptionModel.id == 2?
+          option2Voters.add(widget.currentUser.id):
+          selectedOptionModel.id == 3?
+          option3Voters.add(widget.currentUser.id):
+          selectedOptionModel.id == 4?
+          option4Voters.add(widget.currentUser.id):
+          selectedOptionModel.id == 5?
+          option5Voters.add(widget.currentUser.id):
+          option6Voters.add(widget.currentUser.id);
+          postsRef
+              .doc(widget.currentUser.id)
+              .collection("userPosts")
+              .doc(postId)
+              .update({
+
+          "total": total,
+
+          "option1Total":option1Total,
+          "option2Total":option2Total,
+          "option3Total":option3Total,
+          "option4Total":option4Total,
+          "option5Total":option5Total,
+          "option6Total":option6Total,
+
+          "option1Voters": option1Voters,
+          "option2Voters": option2Voters,
+          "option3Voters": option3Voters,
+          "option4Voters": option4Voters,
+          "option5Voters": option5Voters,
+          "option6Voters": option6Voters,
+
+          "Voters": Voters,
+
+
+          });
+                },
+                onReset: (PollFrameModel model) {
+                  print(
+                      'Poll has been reset, this happens only in case of editable polls');
+                },
+                optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+                model: PollFrameModel(
+                  title: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      documentSnapshot.data()['title'],
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  totalPolls: documentSnapshot.data()['total'],
+                  endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                  hasVoted: Voters.contains(widget.currentUser.id)? true:false,
+                  editablePoll: false,
+                  options: <PollOptions>[
+                    PollOptions(
+                      label: documentSnapshot.data()['option1'],
+                      pollsCount: option1Total,
+                      isSelected: option1Voters.contains(widget.currentUser.id)?true:false,
+                      id: 1,
+                    ),
+                    PollOptions(
+                      label: documentSnapshot.data()['option2'],
+                      pollsCount:option2Total,
+                      isSelected: option2Voters.contains(widget.currentUser.id)?true:false,
+                      id: 2,
+                    ),
+          documentSnapshot.data()['option3'] == ""?Container(): PollOptions(
+                      label: documentSnapshot.data()['option3'],
+                      pollsCount: option3Total,
+                      isSelected: option3Voters.contains(widget.currentUser.id)?true:false,
+                      id: 3,
+                    ),
+          documentSnapshot.data()['option4'] == ""?Container():PollOptions(
+                      label: documentSnapshot.data()['option4'],
+                      pollsCount: option4Total,
+                      isSelected: option4Voters.contains(widget.currentUser.id)?true:false,
+                      id: 4,
+                    ),
+          documentSnapshot.data()['option5'] == ""?Container():PollOptions(
+                      label: documentSnapshot.data()['option5'],
+                      pollsCount: option5Total,
+                      isSelected: option5Voters.contains(widget.currentUser.id)?true:false,
+                      id: 5,
+                    ),
+                      documentSnapshot.data()['option6'] == ""?Container():PollOptions(
+                      label: documentSnapshot.data()['option6'],
+                      pollsCount: option6Total,
+                      isSelected: option6Voters.contains(widget.currentUser.id)?true:false,
+                      id: 6,
+                    ),
+                  ],
+                ),
+              )
+            ]):Column(
               children:  <Widget> [
                 ListTile(
                   leading: GestureDetector(
@@ -1679,6 +1808,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
         itemBuilderType:
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
+
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
           postId= documentSnapshot.data()['postId'];
           ownerId= documentSnapshot.data()['ownerId'];
@@ -1693,10 +1823,140 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           currency= documentSnapshot.data()['currency'];
           photoUrl= documentSnapshot.data()['photoUrl'];
           likeCount = getLikeCount(this.likes);
+          String type =  documentSnapshot.data()['type'];
 
-          return    Container(
-            margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-            child: Column(
+          var option1Total =  documentSnapshot.data()['option1Total'];
+         var option2Total =  documentSnapshot.data()['option2Total'];
+         var option3Total =  documentSnapshot.data()['option3Total'];
+         var option4Total =  documentSnapshot.data()['option4Total'];
+         var option5Total =  documentSnapshot.data()['option5Total'];
+         var option6Total =  documentSnapshot.data()['option6Total'];
+         List option1Voters =  documentSnapshot.data()['option1Voters'];
+         List option2Voters =  documentSnapshot.data()['option2Voters'];
+         List option3Voters =  documentSnapshot.data()['option3Voters'];
+         List option4Voters =  documentSnapshot.data()['option4Voters'];
+         List option5Voters =  documentSnapshot.data()['option5Voters'];
+         List option6Voters =  documentSnapshot.data()['option6Voters'];
+         List Voters =  documentSnapshot.data()['Voters'];
+         var total =  documentSnapshot.data()['total'];
+
+
+         return    Container(
+           margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
+           child: type == 'Poll'?Column(children:[
+             SimplePollsWidget(
+               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                 print('Now total polls are : ' + model.totalPolls.toString());
+                 print('Selected option has label : ' + selectedOptionModel.label);
+                 option1Total ++ ;
+                 option2Total ++ ;
+                 option3Total ++;
+                 option4Total ++;
+                 option5Total ++ ;
+                 option6Total ++ ;
+                 total ++ ;
+
+                 Voters.add(widget.currentUser.id);
+                 selectedOptionModel.id == 1?
+                 option1Voters.add(widget.currentUser.id):
+                 selectedOptionModel.id == 2?
+                 option2Voters.add(widget.currentUser.id):
+                 selectedOptionModel.id == 3?
+                 option3Voters.add(widget.currentUser.id):
+                 selectedOptionModel.id == 4?
+                 option4Voters.add(widget.currentUser.id):
+                 selectedOptionModel.id == 5?
+                 option5Voters.add(widget.currentUser.id):
+                 option6Voters.add(widget.currentUser.id);
+                 postsRef
+                     .doc(widget.currentUser.id)
+                     .collection("userPosts")
+                     .doc(postId)
+                     .update({
+
+                   "total": total,
+
+                   "option1Total":option1Total,
+                   "option2Total":option2Total,
+                   "option3Total":option3Total,
+                   "option4Total":option4Total,
+                   "option5Total":option5Total,
+                   "option6Total":option6Total,
+
+                   "option1Voters": option1Voters,
+                   "option2Voters": option2Voters,
+                   "option3Voters": option3Voters,
+                   "option4Voters": option4Voters,
+                   "option5Voters": option5Voters,
+                   "option6Voters": option6Voters,
+
+                   "Voters": Voters,
+
+
+                 });
+               },
+               onReset: (PollFrameModel model) {
+                 print(
+                     'Poll has been reset, this happens only in case of editable polls');
+               },
+               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+               model: PollFrameModel(
+                 title: Container(
+                   alignment: Alignment.centerLeft,
+                   child: Text(
+                     documentSnapshot.data()['title'],
+                     style: TextStyle(
+                       fontSize: 14,
+                       fontWeight: FontWeight.w500,
+                     ),
+                   ),
+                 ),
+                 totalPolls: documentSnapshot.data()['total'],
+                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                 hasVoted: Voters.contains(widget.currentUser.id)? true:false,
+                 editablePoll: false,
+                 options: <PollOptions>[
+                   PollOptions(
+                     label: documentSnapshot.data()['option1'],
+                     pollsCount: option1Total,
+                     isSelected: option1Voters.contains(widget.currentUser.id)?true:false,
+                     id: 1,
+                   ),
+                   PollOptions(
+                     label: documentSnapshot.data()['option2'],
+                     pollsCount:option2Total,
+                     isSelected: option2Voters.contains(widget.currentUser.id)?true:false,
+                     id: 2,
+                   ),
+                   documentSnapshot.data()['option3'] == ""?Container(): PollOptions(
+                     label: documentSnapshot.data()['option3'],
+                     pollsCount: option3Total,
+                     isSelected: option3Voters.contains(widget.currentUser.id)?true:false,
+                     id: 3,
+                   ),
+                   documentSnapshot.data()['option4'] == ""?Container():PollOptions(
+                     label: documentSnapshot.data()['option4'],
+                     pollsCount: option4Total,
+                     isSelected: option4Voters.contains(widget.currentUser.id)?true:false,
+                     id: 4,
+                   ),
+                   documentSnapshot.data()['option5'] == ""?Container():PollOptions(
+                     label: documentSnapshot.data()['option5'],
+                     pollsCount: option5Total,
+                     isSelected: option5Voters.contains(widget.currentUser.id)?true:false,
+                     id: 5,
+                   ),
+                   documentSnapshot.data()['option6'] == ""?Container():PollOptions(
+                     label: documentSnapshot.data()['option6'],
+                     pollsCount: option6Total,
+                     isSelected: option6Voters.contains(widget.currentUser.id)?true:false,
+                     id: 6,
+                   ),
+                 ],
+               ),
+             )
+           ]):
+           Column(
               children:  <Widget> [
                 ListTile(
                   leading: GestureDetector(
@@ -1760,7 +2020,8 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                             }):handleDeletePost(context);
                       }),
 
-                ),SizedBox( height:0.0,),
+                ),
+                SizedBox( height:0.0,),
                 GestureDetector(
                     onDoubleTap: handleLikePost,
                     child: Stack(

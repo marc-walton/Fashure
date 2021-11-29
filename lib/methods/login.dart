@@ -9,7 +9,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:fashow/HomePage.dart';
+import 'package:getwidget/colors/gf_color.dart';
+import 'package:getwidget/components/toast/gf_toast.dart';
+import 'package:getwidget/types/gf_toast_type.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:getwidget/getwidget.dart';
 class RIKeys {
   static final riKey1 = const Key('__RIKEY1__');
   static final riKey2 = const Key('__RIKEY2__');
@@ -181,7 +185,7 @@ bool loging =  false;
                           style: ElevatedButton.styleFrom(
                             elevation : 0.1,
 
-                            primary:  Colors.white.withOpacity(0.1), // background
+                            primary:  Colors.black, // background
                           ),
                           onPressed: () {
                             if (_loginFormKey.currentState.validate()) {
@@ -196,16 +200,11 @@ bool loging =  false;
                                     .collection("users")
                                     .doc(User.user.uid)
                                     .get()
-                                    .then((DocumentSnapshot result) =>
-                                { if (User == null)
-                                  {
-                                    loging =  false,
+                                    .then((DocumentSnapshot result)
+                                {
 
-                                    // Navigator.pushReplacementNamed(context, "/login")
-                                  }
-                                else
-                                  {
-                                    loging =  false,
+
+                                    loging =  false;
 
                                     Navigator.pushAndRemoveUntil(
                                         context,
@@ -214,17 +213,42 @@ bool loging =  false;
                                               userid:User.user.uid,
                                               auth: true,
                                             )),
-                                            (_) => false ),
-                                  }}
+                                            (_) => false );
+                                  }
 
-                                )
+                                ).catchError((error){
+                                loging =  false;
+                                GFToast(
+                                 text: '${error.message}',
+                                  duration: Duration(milliseconds: 400),
+                                  alignment: Alignment.topCenter,
+                                  textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                                  backgroundColor: GFColors.DARK,
                                 );
+
+
+                                }),
+                                ).catchError((error){
+                                  loging =  false;
+
+                                  GFToast(
+                                    text: '${error.message}',
+                                    duration: Duration(milliseconds: 400),
+                                    alignment: Alignment.topCenter,
+                                    textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                                    backgroundColor: GFColors.DARK,
+                                  );
+                                });
                               } on FirebaseAuthException catch(error){
                                  loging =  false;
 
-                                Fluttertoast.showToast(
-                                    msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
-
+                                 GFToast(
+                                   text: '${error.message}',
+                                   duration: Duration(milliseconds: 400),
+                                   alignment: Alignment.topCenter,
+                                   textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                                   backgroundColor: GFColors.DARK,
+                                 );
                               }
 
                             }

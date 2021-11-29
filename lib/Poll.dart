@@ -91,6 +91,7 @@ class _UploadResaleState extends State<UploadResale>
   TextEditingController option3Controller = TextEditingController();
   TextEditingController option4Controller = TextEditingController();
   TextEditingController option5Controller = TextEditingController();
+ TextEditingController option6Controller = TextEditingController();
 
   Servicecatalog()async{
     setState(() {
@@ -109,17 +110,28 @@ class _UploadResaleState extends State<UploadResale>
       'postId':postId,
       "country":  currentUser.country,
       "currency":  currentUser.currency,
-      "option1": option1Controller.text,
-      "option2": option2Controller.text,
-      "option3": option3Controller.text,
-      "option4": option4Controller.text,
-      "option5": option5Controller.text,
-      "option1Votes": {},
-      "option2Votes": {},
-      "option3Votes": {},
-      "option4Votes": {},
-      "option5Votes": {},
-      "Voters": {},
+      "total": 0,
+      "option1": option1Controller.text??"",
+      "option2": option2Controller.text??"",
+      "option3": option3Controller.text??"",
+      "option4": option4Controller.text??"",
+      "option5": option5Controller.text??"",
+      "option6": option6Controller.text??"",
+      "option1Total":0,
+       "option2Total":0,
+       "option3Total":0,
+       "option4Total":0,
+       "option5Total":0,
+       "option6Total":0,
+
+      "option1Voters": [],
+      "option2Voters": [],
+      "option3Voters": [],
+      "option4Voters": [],
+      "option5Voters": [],
+      "option6Voters": [],
+
+      "Voters": [],
 
       "timestamp": timestamp,
 
@@ -235,7 +247,7 @@ class _UploadResaleState extends State<UploadResale>
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                         labelText: 'Option 3',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 3',
+                        hintText: 'Option 3(optional)',
                       ),
                       textAlign: TextAlign.center,
 
@@ -255,7 +267,7 @@ class _UploadResaleState extends State<UploadResale>
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                         labelText: 'Option 4',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 4',
+                        hintText: 'Option 4(optional)',
                       ),
                       textAlign: TextAlign.center,
 
@@ -275,13 +287,32 @@ class _UploadResaleState extends State<UploadResale>
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                         labelText: 'Option 5',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 5',
+                        hintText: 'Option 5(optional)',
                       ),
                       textAlign: TextAlign.center,
 
                     ),
                   ),
                   SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      style:TextStyle(color:kText),
+
+                      maxLines: null,
+                      controller: option6Controller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                        labelText: 'Option 6',labelStyle: TextStyle(color: kText),
+                        hintText: 'Option 6(optional)',
+                      ),
+                      textAlign: TextAlign.center,
+
+                    ),
+                  ),
 
 
                 ],

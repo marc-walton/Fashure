@@ -3,7 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/methods/flutter_country_picker.dart';
-
+import 'package:getwidget/colors/gf_color.dart';
+import 'package:getwidget/components/toast/gf_toast.dart';
+import 'package:getwidget/types/gf_toast_type.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
@@ -264,8 +268,14 @@ return
                         ),
                         child: Text("Register",        style: TextStyle(color:Colors.white),),
                         onPressed: () {
-                          if(country == ""||currency == "preferred currency"){Fluttertoast.showToast(
-    msg: "Select your region" , timeInSecForIos: 4,gravity: ToastGravity.CENTER);}
+                          if(country == ""||currency == "preferred currency"){
+                            GFToast(
+                              text: "Select your region",
+                              duration: Duration(milliseconds: 400),
+                              alignment: Alignment.topCenter,
+                              textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                              backgroundColor: GFColors.DARK,
+                            );}
 
 
                       else    if (_registerFormKey.currentState.validate()) {
@@ -329,14 +339,32 @@ return
                                         )),
                                         (_) => false );
 
+                                }).catchError((error){
+                                  loging =  false;
+                                  GFToast(
+                                    text: '${error.message}',
+                                    duration: Duration(milliseconds: 400),
+                                    alignment: Alignment.topCenter,
+                                    textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                                    backgroundColor: GFColors.DARK,
+                                  );
+
+
                                 });
                                 loging = false;
 
                               } on FirebaseAuthException catch(error){
                                 loging = false;
 
-                                Fluttertoast.showToast(
-                                  msg: error.message , timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+                          GFToast(
+                          text: '${error.message}',
+                          duration: Duration(milliseconds: 400),
+                          alignment: Alignment.topCenter,
+                          textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                          backgroundColor: GFColors.DARK,
+                          );
+
+
                               }
 
 
@@ -379,8 +407,14 @@ return
                                   });
                             }
                           }
-                          else {          _registerFormKey.currentState.validate()? Container(): Fluttertoast.showToast(
-                              msg: "Fill the required fields " , timeInSecForIos: 4);}
+                          else {          _registerFormKey.currentState.validate()? Container():
+                          GFToast(
+                          text: "Fill the required fields " ,
+                          duration: Duration(milliseconds: 400),
+                          alignment: Alignment.topCenter,
+                          textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
+                          backgroundColor: GFColors.DARK,
+                          );}
                         },
                       ),
                       Text("Already have an account?",style: TextStyle(color:kText),),
