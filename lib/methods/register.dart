@@ -356,13 +356,8 @@ return
                               } on FirebaseAuthException catch(error){
                                 loging = false;
 
-                          GFToast(
-                          text: '${error.message}',
-                          duration: Duration(milliseconds: 400),
-                          alignment: Alignment.topCenter,
-                          textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
-                          backgroundColor: GFColors.DARK,
-                          );
+                                Fluttertoast.showToast(
+                                    msg: error.message, timeInSecForIos: 4,gravity: ToastGravity.TOP);
 
 
                               }
@@ -408,13 +403,8 @@ return
                             }
                           }
                           else {          _registerFormKey.currentState.validate()? Container():
-                          GFToast(
-                          text: "Fill the required fields " ,
-                          duration: Duration(milliseconds: 400),
-                          alignment: Alignment.topCenter,
-                          textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
-                          backgroundColor: GFColors.DARK,
-                          );}
+                          Fluttertoast.showToast(
+                              msg: "fill the required fields", timeInSecForIos: 4,gravity: ToastGravity.TOP);}
                         },
                       ),
                       Text("Already have an account?",style: TextStyle(color:kText),),

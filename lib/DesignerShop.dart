@@ -9110,7 +9110,7 @@ sizeFilter = "";
           child: Column(
             children: [
               Container(
-                  height:MediaQuery.of(context).size.height/19,
+                  height:MediaQuery.of(context).size.height/18,
                   child:Row(
                     children: [
                       Filter(),

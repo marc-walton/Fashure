@@ -43,7 +43,7 @@ class _CreateCommunityState extends State<CreateCommunity>
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
-  bool private = true;
+  bool private = false;
 
   TextEditingController detailsController = TextEditingController();
   TextEditingController titleController = TextEditingController();
@@ -171,7 +171,22 @@ List<String> bannedMembersId = <String>[];
       "leader":leaders,
       "leaderImg":leadersImg,
       "leaderId":leadersId,
-      "member":members,
+      "members":members,
+      'communityId':communityId,
+      "communityImg":mediaUrl,
+       "bannedMembers":bannedMembersId,
+"awaitingAcceptance":awaitingAcceptance,
+      "timestamp": timestamp,
+      'title':titleController.text,
+      'description':detailsController.text,
+      "closed":false,
+    });FirebaseFirestore.instance.collection('Community')
+        .doc(communityId)
+        .set({
+      "leader":leaders,
+      "leaderImg":leadersImg,
+      "leaderId":leadersId,
+      "members":members,
       'communityId':communityId,
       "communityImg":mediaUrl,
        "bannedMembers":bannedMembersId,

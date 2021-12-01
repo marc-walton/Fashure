@@ -27,6 +27,7 @@ class _FaShowState extends State<FaShow> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   dynamic user;
+dynamic photo;
 
   @override
   void initState() {
@@ -67,6 +68,8 @@ class _FaShowState extends State<FaShow> {
       else
         {
           user= users.uid,
+          photo= users.photoURL,
+
           setState(() {
             isAuth = true;
 
@@ -119,7 +122,7 @@ class _FaShowState extends State<FaShow> {
                   fontSize: 50,
                   color: Colors.white),),
 
-            nextScreen: Homepage(userid: user,auth: isAuth,),
+            nextScreen: Homepage(userid: user,photo: photo,auth: isAuth,),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.black
         ),

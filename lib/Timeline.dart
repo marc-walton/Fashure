@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
+import 'package:fashow/Communities/Create_community.dart';
 import 'package:fashow/Communities/MainPage.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
 import 'package:fashow/custom_image.dart';
@@ -71,8 +72,12 @@ final CollectionReference usersRef = FirebaseFirestore.instance.collection('user
 
 
     final Users currentUser;
+    final userid;
+    final photo;
+
 
     Timeline({this.currentUser,
+      this.userid, this.photo,
     // this.postId,
     //   this.ownerId,
     //   this.username,
@@ -157,7 +162,7 @@ ScrollController _scrollController = ScrollController();
 ///1
     getTimeline() async {
       QuerySnapshot snapshot = await timelineRef
-          .doc(widget.currentUser.id)
+          .doc(widget.userid)
           .collection('timelinePosts')
           .orderBy('timestamp', descending: true)
           .get();
@@ -180,7 +185,7 @@ ScrollController _scrollController = ScrollController();
 
     getFfollowing() async {
       QuerySnapshot snapshot = await followingRef
-          .doc(currentUser.id)
+          .doc(widget.userid)
           .collection('userFollowing')
           .get();
       setState(() {
@@ -334,7 +339,7 @@ ScrollController _scrollController = ScrollController();
                             child:
                             // currentUser == null?
                             // Container(child: Icon(EvaIcons.personOutline),):
-                         Container(child: CachedNetworkImage(imageUrl: widget.currentUser.photoUrl),)
+                         Container(child: CachedImage(widget.photo),)
                         
                         ),
                       ),
@@ -566,6 +571,7 @@ class Blog extends StatelessWidget {
   }
 }
 
+
 class GlobalFeed extends StatefulWidget {
 
   final Users currentUser;
@@ -689,7 +695,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
                                   height: 300,
 
                                   aspectRatio: 16/9,
-                                  viewportFraction: 0.8,
+                                  viewportFraction: 0.9,
                                   initialPage: 0,
                                   enableInfiniteScroll: false,
                                   reverse: false,
@@ -697,7 +703,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
                                   autoPlayInterval: Duration(seconds: 3),
                                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                                   autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
+                                  enlargeCenterPage: false,
                                   pauseAutoPlayOnManualNavigate: true,
                                   pauseAutoPlayOnTouch: true,
                                   // onPageChanged: callbackFunction,
@@ -1779,6 +1785,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
       foollowingList = snapshot.docs.map((doc) => doc.id).toList();
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -2259,52 +2266,57 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child:
-      Column(children: [
-        DefaultTabController(
-            length:3,
-            child: Column(
-              children: [
-                Container(
+    return Scaffold(
+      body: SingleChildScrollView(child:
+        Column(children: [
+          DefaultTabController(
+              length:3,
+              child: Column(
+                children: [
+                  Container(
 height: 50,
-                  child: TabBar(
+                    child: TabBar(
+                      controller:_tabController,
 
-                    isScrollable: true,
+                      isScrollable: true,
 
-                    tabs:[
-                      Text("Following",style:TextStyle(color: Colors.black) ),
-                   Text("Global",style:TextStyle(color: Colors.black) ),
-                   Text("Communities",style:TextStyle(color: Colors.black) ),
+                      tabs:[
+                        Text("Following",style:TextStyle(color: Colors.black) ),
+                     Text("Global",style:TextStyle(color: Colors.black) ),
+                     Text("Communities",style:TextStyle(color: Colors.black) ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: TabBarView(
-                      children:<Widget> [
-                        TimelinePosts(),
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: TabBarView(
+                      controller:_tabController,
+                        children:<Widget> [
+                          TimelinePosts(),
   GlobalFeed(),
-                        GlobalFeed(),
+                          MainPage(),
 
 
-                      ]),
-                ),
-              ],
-            )
-        ),
-      ],),);
+                        ]),
+                  ),
+                ],
+              )
+          ),
+        ],),),
+      floatingActionButton: Buttons(),
+    );
   }
   Widget Buttons(){
     if(_tabController.index == 2){return
       FloatingActionButton(
-        heroTag:'upload',
+        heroTag:'CreateCommunity',
         backgroundColor: Colors.black38,
         onPressed: () async{
           //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>CreateCommunity()));
         },
-        child: Icon(Icons.add_a_photo),
+        child: Icon(Icons.group_add_outlined),
       );}
 else{return
       FloatingActionButton(

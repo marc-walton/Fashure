@@ -183,6 +183,7 @@ flutter:
     - assets/img/shop.png
     - assets/img/RING.jpg
     - assets/logos/fedex.png
+    - assets/img/bohemian.jpg
 
   fonts:
     - family: AlteroDCU

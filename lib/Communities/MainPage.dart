@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
 import 'package:fashow/Constants.dart';
@@ -164,39 +165,102 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(child:
-    Column(children: [
-      DefaultTabController(
-          length:3,
-          child: Column(
-            children: [
-              Container(
-                child: TabBar(
+    Column(
+      children: [
 
-                  isScrollable: true,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
 
-                  tabs:[
-                    Text("Following", ),
-                    Text("Global", ),
-                    Text("Communities", ),
+            child: TextFormField(
+              style:  TextStyle(color: Colors.black),
+              // controller: _searchController,
+              decoration: InputDecoration(
+                hintText: "Search for a community...",
+                hintStyle: TextStyle(color: Colors.grey),
 
-                  ],
+                filled: true,
+
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear,
+                      color: Colors.black),
+                  // onPressed: clearSearch,
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height,
-                child: TabBarView(
-                    children:<Widget> [
-                      buildTimeline(),
-                      buildTimeline(),
-                      buildTimeline(),
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            Text("My communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+          ],
+        ),
+        Container(
+          height: 150,
+          child: GridView.builder(
 
+              primary: false,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: (MediaQuery
+                      .of(context)
+                      .orientation == Orientation.portrait) ? 3 : 3),
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                // DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                // List image = snapshot.data.docs[index]["mediaUrl"];
+                return
 
-                    ]),
-              ),
-            ],
-          )
-      ),
-    ],),);
+                  Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: GestureDetector(
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         PostScreen(
+                              //           postId: docSnapshot["postId"],
+                              //           userId: docSnapshot["ownerId"],
+                              //         ),
+                              //   ),
+                              // );
+                            },
+                            child:
+                                Stack(children:[
+                                  CachedImage("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"),
+                            Positioned.fill(
+                                child: Align(
+                                    alignment: Alignment.bottomCenter, child:Text("title",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,)))),
+                                ])
+                        ),
+                      )
+                  );
+              }),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: ElevatedButton(style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+
+              primary:  Colors.white.withOpacity(0.1), // background
+              onPrimary:  Colors.black, // for
+            ), child: Text("See all",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),),
+          ),
+        ),
+        Row(
+          children: [
+            Text("Explore",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+          ],
+        ),
+        ListTile(leading:CachedImage("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"),
+    title:Text("title",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),subtitle:Text("description......",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
+      ],
+    ),);
   }
   Widget Buttons(){
     if(_tabController.index == 2){return

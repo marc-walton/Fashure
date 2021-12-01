@@ -565,6 +565,17 @@ class _UploadState extends State<Upload>
     setState(() {
       isUploading = true;
     });
+    file1!=null? await compressImage1():null;
+    String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
+    file2!=null? await compressImage2():null;
+    String mediaUrl2 =  file2!=null?await uploadImage2(file2):"";
+    file3!=null? await compressImage3():null;
+    String mediaUrl3 =  file3!=null?await uploadImage3(file3):"";
+    file4!=null? await compressImage4():null;
+    String mediaUrl4 =  file4!=null?await uploadImage4(file4):"";
+    file5!=null? await compressImage5():null;
+    String mediaUrl5 =  file5!=null?await uploadImage5(file5):"";
+
     postsRef .doc(widget.currentUser.id)
         .collection("userPosts")
         .doc(postId).update({

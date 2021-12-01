@@ -87,9 +87,11 @@ Users currentUser;
 
 class Homepage extends StatefulWidget {
   final userid;
+  final photo;
+
   final bool auth;
 
-  const Homepage({Key key, this.userid,this.auth}) : super(key: key);
+  const Homepage({Key key, this.userid, this.photo,this.auth}) : super(key: key);
   @override
   _HomepageState createState() => _HomepageState();
 

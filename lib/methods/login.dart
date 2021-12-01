@@ -34,6 +34,7 @@ bool _passwordVisible = false;
   TextEditingController pwdInputController;
 String accountErrorMessage;
 bool loging =  false;
+// Late FToast Ftoast;
   @override
   initState() {
     emailInputController = new TextEditingController();
@@ -202,8 +203,6 @@ bool loging =  false;
                                     .get()
                                     .then((DocumentSnapshot result)
                                 {
-
-
                                     loging =  false;
 
                                     Navigator.pushAndRemoveUntil(
@@ -219,25 +218,21 @@ bool loging =  false;
                                 ).catchError((error){
                                 loging =  false;
                                 GFToast(
-                                 text: '${error.message}',
+                                  child: Text(error.message) ,
                                   duration: Duration(milliseconds: 400),
                                   alignment: Alignment.topCenter,
                                   textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
                                   backgroundColor: GFColors.DARK,
                                 );
-
+                                Fluttertoast.showToast(
+                                    msg: error.message, timeInSecForIos: 4,gravity: ToastGravity.TOP);
 
                                 }),
                                 ).catchError((error){
                                   loging =  false;
 
-                                  GFToast(
-                                    text: '${error.message}',
-                                    duration: Duration(milliseconds: 400),
-                                    alignment: Alignment.topCenter,
-                                    textStyle: TextStyle(fontSize: 16, color: GFColors.LIGHT),
-                                    backgroundColor: GFColors.DARK,
-                                  );
+                                  Fluttertoast.showToast(
+                                      msg: error.message, timeInSecForIos: 4,gravity: ToastGravity.TOP);
                                 });
                               } on FirebaseAuthException catch(error){
                                  loging =  false;
