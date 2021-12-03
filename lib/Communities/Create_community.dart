@@ -58,6 +58,7 @@ List<String> awaitingAcceptanceImg = <String>[];
 List<String> awaitingAcceptanceId = <String>[];
 
 List<String> bannedMembersId = <String>[];
+List<String> userCommunityId = <String>[];
 
   File file1;
 
@@ -70,6 +71,7 @@ List<String> bannedMembersId = <String>[];
      members.add(currentUser.displayName) ;
      membersImg.add(currentUser.photoUrl) ;
      membersId.add(currentUser.id)  ;
+    userCommunityId.add(communityId)  ;
 
   }
 
@@ -179,22 +181,14 @@ List<String> bannedMembersId = <String>[];
       "timestamp": timestamp,
       'title':titleController.text,
       'description':detailsController.text,
-      "closed":false,
-    });FirebaseFirestore.instance.collection('Community')
-        .doc(communityId)
-        .set({
-      "leader":leaders,
-      "leaderImg":leadersImg,
-      "leaderId":leadersId,
-      "members":members,
-      'communityId':communityId,
-      "communityImg":mediaUrl,
-       "bannedMembers":bannedMembersId,
-"awaitingAcceptance":awaitingAcceptance,
-      "timestamp": timestamp,
-      'title':titleController.text,
-      'description':detailsController.text,
-      "closed":false,
+      "closed":private,
+    });
+ FirebaseFirestore.instance.collection('users')
+        .doc(currentUser.id)
+        .update({
+
+      'communityId':userCommunityId,
+
     });
 
     setState(() {

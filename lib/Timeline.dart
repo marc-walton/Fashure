@@ -614,7 +614,8 @@ class _GlobalFeedState extends State<GlobalFeed> {
   DocumentSnapshot lastDocument; // flag for last document from where next 10 records to be fetched
 
   ScrollController _scrollController = ScrollController();
-  pics({String userid,String prodid}){
+
+   pics({String userid,String prodid}){
     return
       FutureBuilder<QuerySnapshot> (
           future:     postsRef
@@ -1036,9 +1037,7 @@ var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
 
 
-          return    Container(
-            margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-            child: type == 'Poll'?Column(children:[
+          return    type == 'Poll'?Column(children:[
               SimplePollsWidget(
                 onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
                   print('Now total polls are : ' + model.totalPolls.toString());
@@ -1375,7 +1374,6 @@ var total =  documentSnapshot.data()['total'];
 //            SizedBox( height:10.0,),
 
               ],
-            ) ,
 
 
           );
@@ -2291,6 +2289,7 @@ height: 50,
                   Container(
                     height: MediaQuery.of(context).size.height,
                     child: TabBarView(
+
                       controller:_tabController,
                         children:<Widget> [
                           TimelinePosts(),

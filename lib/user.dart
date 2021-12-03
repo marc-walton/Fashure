@@ -71,6 +71,7 @@ class Users{
  bool stylist;
 
  String countryISO;
+List communityId;
 
 
 
@@ -143,6 +144,7 @@ this.modelGbp,
 this.photographerGbp,
 this.bloggerGbp,
 this.stylistGbp,
+this.communityId,
 
   this.designer,
 this.illustrator,
@@ -174,6 +176,7 @@ this.Bidding,
       city: doc.data()['city'],
         Earnings: doc.data()['Earnings'],
         TotalEarnings: doc.data()['TotalEarnings'],
+      communityId: doc.data()['communityId'],
 
         username :doc.data()['username'],
         email :doc.data()['email'],
