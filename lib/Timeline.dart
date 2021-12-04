@@ -2265,44 +2265,46 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(child:
-        Column(children: [
-          DefaultTabController(
-              length:3,
-              child: Column(
-                children: [
-                  Container(
-height: 50,
-                    child: TabBar(
-                      controller:_tabController,
+          appBar:AppBar(
+            toolbarHeight: 50.0 ,
+            backgroundColor: Colors.white,
+            bottom:  PreferredSize(
+              preferredSize: Size.fromHeight(100.0),
 
-                      isScrollable: true,
+              child: Container(
+                decoration: new BoxDecoration(color: Colors.white),
 
-                      tabs:[
-                        Text("Following",style:TextStyle(color: Colors.black) ),
-                     Text("Global",style:TextStyle(color: Colors.black) ),
-                     Text("Communities",style:TextStyle(color: Colors.black) ),
+                height: 50,
+                child: TabBar(
 
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    child: TabBarView(
+                  controller:_tabController,
 
-                      controller:_tabController,
-                        children:<Widget> [
-                          TimelinePosts(),
-  GlobalFeed(),
-                          MainPage(),
+                  isScrollable: true,
 
+                  tabs:[
+                    Text("Following",style:TextStyle(color: Colors.black) ),
+                    Text("Global",style:TextStyle(color: Colors.black) ),
+                    Text("Communities",style:TextStyle(color: Colors.black) ),
 
-                        ]),
-                  ),
-                ],
-              )
+                  ],
+                ),
+              ),
+            ),
           ),
-        ],),),
+
+      body:  Container(
+        // height: MediaQuery.of(context).size.height,
+        child: TabBarView(
+
+            controller:_tabController,
+            children:<Widget> [
+              TimelinePosts(),
+              GlobalFeed(),
+              MainPage(),
+
+
+            ]),
+      ),
       floatingActionButton: Buttons(),
     );
   }

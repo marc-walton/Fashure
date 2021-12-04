@@ -40,17 +40,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child:
+    return SingleChildScrollView(
+      child:
     Column(
       children: [
-
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -80,60 +75,61 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           ],
         ),
         Container(
-          height:300,
+          // height:300,
           child: SingleChildScrollView(child:
             pagi(),
           ),
         ),
 
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: ElevatedButton(style: ElevatedButton.styleFrom(
-              elevation : 0.1,
-
-              primary:  Colors.white.withOpacity(0.1), // background
-              onPrimary:  Colors.black, // for
-            ), child: Text("See all",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),),
-          ),
-        ),
-        Row(
-          children: [
-            Text("More Communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
-          ],
-        ),
-        ListTile(leading:CachedImage("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"),
-    title:Text("title",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),subtitle:Text("description......",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     child: ElevatedButton(style: ElevatedButton.styleFrom(
+        //       elevation : 0.1,
+        //       primary:  Colors.white.withOpacity(0.1), // background
+        //       onPrimary:  Colors.black, // for
+        //     ), child: Text("See all",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),),
+        //   ),
+        // ),
+    //     Row(
+    //       children: [
+    //         Text("More Communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+    //       ],
+    //     ),
+    //     ListTile(leading:CachedImage("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"),
+    // title:Text("title",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),subtitle:Text("description......",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
       ],
     ),);
   }
   pagi(){
     for(var i=0;i < currentUser.communityId.length;i++) {
-      FutureBuilder (
-          future:    FirebaseFirestore.instance.collection('Community')
-              .doc(currentUser.communityId[i])
-          // .where('ownerId' ,isEqualTo: '$ownerId')
-              .get(),
-          builder: (context, snapshot) {
+      return
+      Flexible(
+        child: FutureBuilder (
+            future:    FirebaseFirestore.instance.collection('Community')
+                .doc(currentUser.communityId[i])
+            // .where('ownerId' ,isEqualTo: '$ownerId')
+                .get(),
+            builder: (context, snapshot) {
 
-            if (snapshot.hasData) {
-              return new Container(
-                  height: 150,
-                  child:
-                  ListTile(leading:
-                  CachedImage(snapshot.data['communityImg']),
-                      title:Text(snapshot.data['title'],
-                          style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
-                      subtitle:Text(snapshot.data['description'],style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
+              if (snapshot.hasData) {
+                return new Container(
+                    child:
+                    ListTile(leading:
+                    CachedImage(snapshot.data['communityImg']),
+                        title:Text(snapshot.data['title'],
+                            style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
+                        subtitle:Text(snapshot.data['description'],style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
 
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
               );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
 
-          });
+            }),
+      );
 
 
     }
