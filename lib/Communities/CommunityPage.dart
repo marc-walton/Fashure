@@ -5,6 +5,7 @@ import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Communities/comments.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
+import 'package:fashow/Timeline.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -24,15 +25,20 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:share/share.dart';
+import 'package:simple_polls/models/poll_models.dart';
+import 'package:simple_polls/widgets/polls_widget.dart';
 
 class CommunityMainPage extends StatefulWidget {
 
-  final Users currentUser;
+  final String CommunityId;
+ final String photoUrl;
+final String description ;
 
-  CommunityMainPage({this.currentUser,});
+  CommunityMainPage({this.CommunityId,this.photoUrl,this.description,});
   @override
   _CommunityMainPageState createState() => _CommunityMainPageState();
 }
@@ -59,6 +65,20 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
   String media;
   int _current = 0;
    CarouselController _ccontroller = CarouselController();
+   int getLikeCount(likes) {
+     //if no likesm return 0
+     if (likes == null) {
+       return 0;
+     }
+     int count = 0;
+     // if the key is explicitly set to true, add a like
+     likes.values.forEach((val) {
+       if (val == true) {
+         count += 1;
+       }
+     });
+     return count;
+   }
 
   pics({String userid,String prodid}){
     return
@@ -384,7 +404,6 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
   }
   buildPostHeader() {
     bool isPostOwner = currentUserId == ownerId;
-
     return  Container(
       margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
       child: Column(
@@ -527,7 +546,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                 padding: EdgeInsets.only(bottom: 10.0),
                 margin: EdgeInsets.only(left: 20.0),
                 child: Text(
-                  "$description ",
+                  "$description",
                   style: TextStyle(
                     color: kText,
                     fontWeight: FontWeight.bold,
@@ -615,9 +634,400 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
 
         ],
       ) ,
-
-
     );
+  }
+  pagiante(){
+    return PaginateView(
+      child: PaginateFirestore(
+        isLive:true,
+        itemBuilderType:
+        PaginateBuilderType.listView, //Change types accordingly
+        itemBuilder: (index, context, documentSnapshot) {
+
+          bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
+          postId= documentSnapshot.data()['postId'];
+          ownerId= documentSnapshot.data()['ownerId'];
+          username= documentSnapshot.data()['username'];
+          location= documentSnapshot.data()['location'];
+          description= documentSnapshot.data()['description'];
+          mediaUrl= documentSnapshot.data()['mediaUrl'];
+
+          likes= documentSnapshot.data()['likes'];
+          isLiked = likes[currentUserId] == true;
+
+          currency= documentSnapshot.data()['currency'];
+          photoUrl= documentSnapshot.data()['photoUrl'];
+          likeCount = getLikeCount(this.likes);
+          var option1Total =  documentSnapshot.data()['option1Total'];
+          var option2Total =  documentSnapshot.data()['option2Total'];
+          var option3Total =  documentSnapshot.data()['option3Total'];
+          var option4Total =  documentSnapshot.data()['option4Total'];
+          var option5Total =  documentSnapshot.data()['option5Total'];
+          var option6Total =  documentSnapshot.data()['option6Total'];
+          List option1Voters =  documentSnapshot.data()['option1Voters'];
+          List option2Voters =  documentSnapshot.data()['option2Voters'];
+          List option3Voters =  documentSnapshot.data()['option3Voters'];
+          List option4Voters =  documentSnapshot.data()['option4Voters'];
+          List option5Voters =  documentSnapshot.data()['option5Voters'];
+          List option6Voters =  documentSnapshot.data()['option6Voters'];
+          List Voters =  documentSnapshot.data()['Voters'];
+          var total =  documentSnapshot.data()['total'];
+          String type =  documentSnapshot.data()['type'];
+
+
+          return    type == 'originalPoll'?Column(children:[
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                option1Total ++ ;
+                option2Total ++ ;
+                option3Total ++;
+                option4Total ++;
+                option5Total ++ ;
+                option6Total ++ ;
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                selectedOptionModel.id == 2?
+                option2Voters.add(currentUser.id):
+                selectedOptionModel.id == 3?
+                option3Voters.add(currentUser.id):
+                selectedOptionModel.id == 4?
+                option4Voters.add(currentUser.id):
+                selectedOptionModel.id == 5?
+                option5Voters.add(currentUser.id):
+                option6Voters.add(currentUser.id);
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+                  "option3Total":option3Total,
+                  "option4Total":option4Total,
+                  "option5Total":option5Total,
+                  "option6Total":option6Total,
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+                  "option3Voters": option3Voters,
+                  "option4Voters": option4Voters,
+                  "option5Voters": option5Voters,
+                  "option6Voters": option6Voters,
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['title'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options: <PollOptions>[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+                  documentSnapshot.data()['option3'] == ""?Container(): PollOptions(
+                    label: documentSnapshot.data()['option3'],
+                    pollsCount: option3Total,
+                    isSelected: option3Voters.contains(currentUser.id)?true:false,
+                    id: 3,
+                  ),
+                  documentSnapshot.data()['option4'] == ""?Container():PollOptions(
+                    label: documentSnapshot.data()['option4'],
+                    pollsCount: option4Total,
+                    isSelected: option4Voters.contains(currentUser.id)?true:false,
+                    id: 4,
+                  ),
+                  documentSnapshot.data()['option5'] == ""?Container():PollOptions(
+                    label: documentSnapshot.data()['option5'],
+                    pollsCount: option5Total,
+                    isSelected: option5Voters.contains(currentUser.id)?true:false,
+                    id: 5,
+                  ),
+                  documentSnapshot.data()['option6'] == ""?Container():PollOptions(
+                    label: documentSnapshot.data()['option6'],
+                    pollsCount: option6Total,
+                    isSelected: option6Voters.contains(currentUser.id)?true:false,
+                    id: 6,
+                  ),
+                ],
+              ),
+            )
+          ]):Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: pics(userid:ownerId,prodid: postId)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: mediaUrl.asMap().entries.map((entry) {
+                  return GestureDetector(
+                    onTap: () => _ccontroller.animateToPage(entry.key),
+                    child: Container(
+                      width: 6.0,
+                      height: 6.0,
+                      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black)
+                              .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                    ),
+                  );
+                }).toList(),
+              ),
+              FutureBuilder(
+                future:  postsRef
+                    .doc(ownerId)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .collection("tags")
+                    .orderBy('timestamp',descending: true).get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+                    return Container();
+                  }
+                  else {
+                    return  Row(
+                      children: [
+                        SizedBox(width:12.0),
+                        GFButton(
+                          color: Colors.black,
+                          shape:  GFButtonShape.pills,
+                          textColor: Colors.black,
+                          type : GFButtonType.outline,
+                          onPressed: viewProducts,
+                          text:"View Products",
+                          icon: Icon(
+                            Icons.add_shopping_cart,
+                            // color: Colors.white,
+                            size: 20.0,
+                          ),
+
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+                  SizedBox(width: 15.0,),
+
+                  FutureBuilder<Uri>(
+                      future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                      builder: (context, snapshot) {
+                        if(snapshot.hasData) {
+                          Uri uri = snapshot.data;
+                          return IconButton(
+                            color: Colors.black,
+                            onPressed: () {
+                              Share.share(uri.toString());},
+                            // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                            icon: Icon(Icons.send),
+                          );
+                        } else {
+                          return Container();
+                        }
+
+                      }
+                  ),
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          );
+
+
+        },
+
+
+        query: FirebaseFirestore.instance.collection('Community')
+            .doc(widget.CommunityId)
+            .collection('communityPosts')
+            .orderBy('timestamp',descending: true),
+
+      ),
+    );
+
   }
   @override
 
