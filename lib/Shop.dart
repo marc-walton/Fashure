@@ -104,13 +104,12 @@ class _ShopState extends State<Shop>  with  TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return
       Scaffold(appBar: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
         backgroundColor: Colors.black,
 
         bottom:  PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(80.0),
           child: Container(
             height: 80.0,
             child: new TabBar(
@@ -126,7 +125,7 @@ controller: _Tabcontroller,
                   child: Text('Men',
                     style: TextStyle(
 
-                   fontSize:    SizeConfig.blockSizeHorizontal*4,
+                   // fontSize:    SizeConfig.blockSizeHorizontal*4,
                         color: Colors.white),),
                 ),
                 FittedBox(
@@ -134,7 +133,7 @@ controller: _Tabcontroller,
                   child: Text(   'Women',
                     style: TextStyle(
 
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
+                        // fontSize:    SizeConfig.blockSizeHorizontal*4,
                         color: Colors.white),),
                 ),
 

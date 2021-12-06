@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
 import 'package:fashow/Timeline.dart';
 import 'package:fashow/chatcached_image.dart';
@@ -42,96 +43,149 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child:
-    Column(
+    return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-
-            child: TextFormField(
-              style:  TextStyle(color: Colors.black),
-              // controller: _searchController,
-              decoration: InputDecoration(
-                hintText: "Search for a community...",
-                hintStyle: TextStyle(color: Colors.grey),
-
-                filled: true,
-
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear,
-                      color: Colors.black),
-                  // onPressed: clearSearch,
-                ),
-              ),
+            height:MediaQuery.of(context).size.height/25,
+            child:            Row(
+              children: [
+                Text("My communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(icon: Icon(Icons.search_sharp),),
+                )
+              ],
             ),
+
           ),
         ),
+        Flexible(
+          child:
+        ListView(
+          children: [
+            Container(
+            child:
+                pagi(),
+              ),
+
+          ],
+        )
+          ,),
+      ],
+    );
+  }
+  pagi() {
+    if (currentUser.communityId.length == 0) {
+return  PaginateView(
+  child: PaginateFirestore(
+    isLive:true,
+    itemBuilderType:
+    PaginateBuilderType.listView, //Change types accordingly
+    itemBuilder: (index, context, documentSnapshot) {
+        return new Container(
+        child:
         Row(
           children: [
-            Text("My communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CachedImage(
+                documentSnapshot.data()['communityImg'], width: MediaQuery
+                  .of(context)
+                  .size
+                  .width / 3, height: 200,),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(documentSnapshot.data()['title'], softWrap: true,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
+                ), Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      documentSnapshot.data()['description'], softWrap: true,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
+                ),
+              ],
+            ),
           ],
         ),
-        Container(
-          // height:300,
-          child: SingleChildScrollView(child:
-            pagi(),
-          ),
-        ),
+      );
 
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Container(
-        //     width: MediaQuery.of(context).size.width,
-        //     child: ElevatedButton(style: ElevatedButton.styleFrom(
-        //       elevation : 0.1,
-        //       primary:  Colors.white.withOpacity(0.1), // background
-        //       onPrimary:  Colors.black, // for
-        //     ), child: Text("See all",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),),
-        //   ),
-        // ),
-    //     Row(
-    //       children: [
-    //         Text("More Communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
-    //       ],
-    //     ),
-    //     ListTile(leading:CachedImage("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"),
-    // title:Text("title",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),subtitle:Text("description......",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
-      ],
-    ),);
-  }
-  pagi(){
-    for(var i=0;i < currentUser.communityId.length;i++) {
+
+
+    },
+
+
+    query: FirebaseFirestore.instance.collection('Community')
+        .orderBy('timestamp',descending: false),
+
+  ),
+);
+
+    }
+    else{
+    for (var i = 0; i < currentUser.communityId.length; i++) {
       return
-      Flexible(
-        child: FutureBuilder (
-            future:    FirebaseFirestore.instance.collection('Community')
+        FutureBuilder(
+            future: FirebaseFirestore.instance.collection('Community')
                 .doc(currentUser.communityId[i])
             // .where('ownerId' ,isEqualTo: '$ownerId')
                 .get(),
             builder: (context, snapshot) {
-
               if (snapshot.hasData) {
                 return new Container(
-                    child:
-                    ListTile(leading:
-                    CachedImage(snapshot.data['communityImg']),
-                        title:Text(snapshot.data['title'],
-                            style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
-                        subtitle:Text(snapshot.data['description'],style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,)))
-
+                  child:
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CachedImage(
+                          snapshot.data['communityImg'], width: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 3, height: 200,),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(snapshot.data['title'], softWrap: true,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15)),
+                          ), Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                snapshot.data['description'], softWrap: true,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 );
               }
               return Center(
                 child: CircularProgressIndicator(),
               );
-
-            }),
-      );
-
-
+            });
     }
+  }
   }
 }

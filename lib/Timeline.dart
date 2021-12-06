@@ -337,9 +337,9 @@ ScrollController _scrollController = ScrollController();
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
                             child:
-                            // currentUser == null?
-                            // Container(child: Icon(EvaIcons.personOutline),):
-                         Container(child: CachedImage(widget.photo),)
+                            currentUser == null?
+                            Container(child: Icon(EvaIcons.personOutline),):
+                         Container(child: CachedImage(currentUser.photoUrl),)
                         
                         ),
                       ),
@@ -1396,8 +1396,13 @@ var total =  documentSnapshot.data()['total'];
 class Feed extends StatefulWidget {
 
   final Users currentUser;
+  final userid;
+  final photo;
 
-  Feed({this.currentUser,});
+
+  Feed({this.currentUser,
+  this.userid, this.photo,
+});
   @override
   _FeedState createState() => _FeedState();
 }
@@ -2197,7 +2202,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
 
         query: timelineRef
-            .doc(widget.currentUser.id)
+            .doc(widget.userid)
             .collection('timelinePosts')
             .orderBy('timestamp', descending: true)
 
@@ -2215,7 +2220,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
         List<UserResult> userResults = [];
         snapshot.data.docs.forEach((doc) {
           Users user = Users.fromDocument(doc);
-          final bool isAuthUser = currentUser.id == user.id;
+          final bool isAuthUser = widget.userid == user.id;
           final bool isFollowingUser = foollowingList.contains(user.id);
           // remove auth user from recommended list
           if (isAuthUser) {

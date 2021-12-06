@@ -165,6 +165,8 @@ void handleLink()async {
   void initState() {
     super.initState();
     print(">>>>>>>>>>>>>>>>>>>>sdcsdvwsvcwdvcsdscsdcscsdcdc");
+     print(widget.userid);
+
     pageController = PageController();
     loginuser();
     print("initState");
@@ -487,22 +489,17 @@ getLink(){
 
   }
 
-  Scaffold buildAuthScreen() {
-
-
+   buildAuthScreen() {
 
     return Scaffold(
       key: _scaffoldKey,
 
       body: Container(
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-        alignment: Alignment.center,
+
         child: PageView(
           children: <Widget>[
 
-            Timeline(currentUser: currentUser),
+            Timeline(currentUser: currentUser,userid:widget.userid,photo:widget.photo),
             Shop(currentUser: currentUser),
             Designer(),
             LiveTv(),
