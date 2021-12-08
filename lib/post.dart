@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
+import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
@@ -450,7 +451,7 @@ class _PostState extends State<Post> {
             Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
         });
   }
-  buildPostHeader() {
+  buildPostHeader(CTX) {
     bool isPostOwner = currentUserId == ownerId;
 
     return  Container(
@@ -634,25 +635,67 @@ class _PostState extends State<Post> {
 
               ),
               SizedBox(width: 15.0,),
+              IconButton(
+                color: Colors.black,
+                onPressed: () {
+                  showModalBottomSheet(context: CTX, builder:(CTX) {
+                    return Center(child:
+                    Column(
 
-              FutureBuilder<Uri>(
-                  future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData) {
-                      Uri uri = snapshot.data;
-                      return IconButton(
-                        color: Colors.black,
-                        onPressed: () {
-                          Share.share(uri.toString());},
-                        // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                        icon: Icon(Icons.send),
-                      );
-                    } else {
-                      return Container();
-                    }
+                        children:[
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation : 0.1,
+                              side: BorderSide.none,
 
-                  }
+                              primary:  Colors.black, // background
+                            ),
+    onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+          ShareButton(
+            postId:postId,
+            ownerId:ownerId,
+            type:"SharedPost",
+            imageURL:mediaUrl.first,
+            productname:description,
+
+          ),
+      ));
+    },
+                            child: Text("Share to community",style: TextStyle(color: kText),),
+                          ),
+
+                          FutureBuilder<Uri>(
+                              future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                              builder: (context, snapshot) {
+                                if(snapshot.hasData) {
+                                  Uri uri = snapshot.data;
+                                  return  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      elevation : 0.1,
+                                      side: BorderSide.none,
+
+                                      primary:  Colors.black, // background
+                                    ),
+                                    onPressed: () {
+                                      Share.share(uri.toString());},
+                                    child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+
+                              }
+                          ),
+
+                        ])
+                    );
+                  });
+                },
+                // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                icon: Icon(Icons.send),
               ),
+
 
               Spacer(),
               Padding(
@@ -692,7 +735,7 @@ class _PostState extends State<Post> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        buildPostHeader(),
+        buildPostHeader(context),
 
       ],
     );

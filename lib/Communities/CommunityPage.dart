@@ -4,10 +4,14 @@ import 'package:currency_formatter/currency_formatter.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Communities/comments.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/Timeline.dart';
+import 'package:fashow/blog_sceen.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/collscreen.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/post_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,6 +27,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -673,9 +678,988 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
           List Voters =  documentSnapshot.data()['Voters'];
           var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
+String image =  documentSnapshot.data()['mediaUrl'];
+String taggedId =  documentSnapshot.data()['taggedId'];
+String taggedOwnerId =  documentSnapshot.data()['taggedOwnerId'];
+String taggerId =  documentSnapshot.data()['taggerId'];
+String taggerImg =  documentSnapshot.data()['taggerImg'];
+String taggerName =  documentSnapshot.data()['taggerName'];
+String taggerCurrency =  documentSnapshot.data()['taggerCurrency'];
+String name =  documentSnapshot.data()['name'];
+String inr =  documentSnapshot.data()['inr'];
+String usd =  documentSnapshot.data()['usd'];
+String gbp =  documentSnapshot.data()['gbp'];
+String eur =  documentSnapshot.data()['eur'];
 
 
-          return    type == 'originalPoll'?Column(children:[
+
+          return    type == 'SharedProd'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                  onTap: () {
+                    TaggerId = taggerId;
+                    TaggerImg = taggerImg ;
+                    TaggerName = taggerName;
+                    TaggerCurrency =  taggerCurrency;
+                    TaggerOwnerId = taggedOwnerId;
+                    TaggerProdId = taggedId;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: taggedId,
+                          userId: taggedOwnerId,
+                        ),
+                      ),
+                    );},
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$name",
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              currentUser.currency == "INR"? Row(
+                children: [
+                  Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              currentUser.currency == "EUR"?Row(
+                children: [
+                  Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              currentUser.currency == "GBP"?Row(
+                children: [
+                  Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              Row(
+                children: [
+                  Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ),
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ) :
+          type == 'SharedResale'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                  onTap: () {
+                    TaggerId = taggerId;
+                    TaggerImg = taggerImg ;
+                    TaggerName = taggerName;
+                    TaggerCurrency =  taggerCurrency;
+                    TaggerOwnerId = taggedOwnerId;
+                    TaggerProdId = taggedId;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>ResaleScreen(
+                          postId: taggedId,
+                          userId: taggedOwnerId,
+                        ),
+                      ),
+                    );},
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$name",
+                      style: TextStyle(
+                        color: kText,
+                         fontWeight: FontWeight.bold,
+                      ),                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              currentUser.currency == "INR"? Row(
+                children: [
+                  Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              currentUser.currency == "EUR"?Row(
+                children: [
+                  Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              currentUser.currency == "GBP"?Row(
+                children: [
+                  Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ):
+              Row(
+                children: [
+                  Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      )),
+                ],
+              ),
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ) :
+          type == 'SharedPost'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                   onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>PostScreen( userId:taggedOwnerId,postId:taggedId)));
+         },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ):
+           type == 'SharedBlog'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),
+              SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                   onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>BlogScreen( userId:taggedOwnerId,blogId:taggedId)));
+         },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$name ",
+                      style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ):
+         type == 'SharedColl'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),
+              SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                   onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>CollScreen( userId:taggedOwnerId,collId:taggedId)));
+         },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$name ",
+                      style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ):
+
+          type == 'originalPoll'?Column(children:[
             SimplePollsWidget(
               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
                 print('Now total polls are : ' + model.totalPolls.toString());
@@ -787,7 +1771,8 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                 ],
               ),
             )
-          ]):Column(
+          ]):
+          Column(
             children:  <Widget> [
               ListTile(
                 leading: GestureDetector(

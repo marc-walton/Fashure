@@ -1,4 +1,5 @@
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -458,7 +459,7 @@ return
             Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
         });
   }
-buildPostHeader() {
+buildPostHeader(CTX) {
   bool isPostOwner = currentUserId == ownerId;
   return  ListView(
       shrinkWrap: true,
@@ -547,6 +548,7 @@ buildPostHeader() {
               );
             }).toList(),
           ),
+
           FutureBuilder(
             future:  collRef
                 .doc(ownerId)
@@ -619,25 +621,69 @@ buildPostHeader() {
 
               ),
               SizedBox(width: 15.0,),
+              IconButton(
+                color: Colors.black,
+                onPressed: () {
+                  showModalBottomSheet(context: CTX, builder:(CTX) {
+                    return Center(child:
+                    Column(
 
-              FutureBuilder<Uri>(
-                  future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData) {
-                      Uri uri = snapshot.data;
-                      return IconButton(
-                        color: Colors.black,
-                        onPressed: () {
-                          Share.share(uri.toString());},
-                        // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                        icon: Icon(Icons.send),
-                      );
-                    } else {
-                      return Container();
-                    }
+                        children:[
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation : 0.1,
+                              side: BorderSide.none,
 
-                  }
+                              primary:  Colors.black, // background
+                            ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                  ShareButton(
+                                    postId:collId,
+                                    ownerId:ownerId,
+                                    type:"SharedColl",
+                                    imageURL:collmediaUrl.first,
+                                    productname:title,
+
+                                  ),
+                              ));
+                            },
+                            child: Text("Share to community",style: TextStyle(color: kText),),
+                          ),
+                          FutureBuilder<Uri>(
+                              future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
+                              builder: (context, snapshot) {
+                                if(snapshot.hasData) {
+                                  Uri uri = snapshot.data;
+                                  return  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      elevation : 0.1,
+                                      side: BorderSide.none,
+
+                                      primary:  Colors.black, // background
+                                    ),
+                                    onPressed: () {
+                                      Share.share(uri.toString());},
+                                    child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+
+                              }
+                          ),
+
+
+
+
+                        ])
+                    );
+                  });
+                },
+                // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                icon: Icon(Icons.send),
               ),
+
 
               Spacer(),
               Padding(
@@ -675,7 +721,7 @@ buildPostHeader() {
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);
     return
-      buildPostHeader();
+      buildPostHeader(context);
   }
 }
 

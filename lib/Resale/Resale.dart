@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/Communities/Share_button.dart';
 
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Resale/addressResale.dart';
@@ -890,7 +891,7 @@ shipBool = currentUser.country == country?freeship:freeworldship;
     });
     loading = false;
   }
-  posteurope(){
+  posteurope(CTX){
     bool isPostOwner = currentUserId == ownerId;
 
     return Column(
@@ -1012,24 +1013,70 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                         color:  Colors.black,
                       ),
                     ),
-                    FutureBuilder<Uri>(
-                        future: _dynamicLinkService.createDynamicLink( postId:resaleId,ownerId: ownerId,Description: title,type: "resale",imageURL:images.first),
-                        builder: (context, snapshot) {
-                          if(snapshot.hasData) {
-                            Uri uri = snapshot.data;
-                            return IconButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                Share.share(uri.toString());},
-                              // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                              icon: Icon(Icons.send),
-                            );
-                          } else {
-                            return Container();
-                          }
+                    IconButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        showModalBottomSheet(context: CTX, builder:(CTX) {
+                          return Center(child:
+                          Column(
 
-                        }
+                              children:[
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation : 0.1,
+                                    side: BorderSide.none,
+
+                                    primary:  Colors.black, // background
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                        ShareButton(
+                                          postId:resaleId,
+                                          ownerId:ownerId,
+                                          type:"SharedResale",
+                                          imageURL:images.first,
+                                          productname:title,
+                                          usd:usd,
+                                          eur:eur,
+                                          inr:inr,
+                                          gbp:gbp,
+                                        ),
+                                    ));
+                                  },
+                                  child: Text("Share to community",style: TextStyle(color: kText),),
+                                ),
+                                FutureBuilder<Uri>(
+                                    future: _dynamicLinkService.createDynamicLink( postId:resaleId,ownerId: ownerId,Description: title,type: "resale",imageURL:images.first),
+                                    builder: (context, snapshot) {
+                                      if(snapshot.hasData) {
+                                        Uri uri = snapshot.data;
+                                        return  ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            elevation : 0.1,
+                                            side: BorderSide.none,
+
+                                            primary:  Colors.black, // background
+                                          ),
+                                          onPressed: () {
+                                            Share.share(uri.toString());},
+                                          child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+
+                                    }
+                                ),
+
+
+                              ])
+                          );
+                        });
+                      },
+                      // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                      icon: Icon(Icons.send),
                     ),
+
                     Spacer(),
                     InkWell(
                       onTap:() => reviews(),
@@ -1616,7 +1663,7 @@ addingToList(){
     isLiked = (likes[currentUserId] == true);
 
     return Column(children:[
-      posteurope(),
+      posteurope(context),
 
     ]);
 

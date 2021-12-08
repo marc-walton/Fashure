@@ -187,7 +187,7 @@ List<String> userCommunityId = <String>[];
         .doc(currentUser.id)
         .update({
 
-      'communityId':userCommunityId,
+      'communityId':FieldValue.arrayUnion([communityId]),
 
     });
 

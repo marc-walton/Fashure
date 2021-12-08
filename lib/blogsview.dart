@@ -5,6 +5,7 @@ import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -533,7 +534,7 @@ return  showMaterialModalBottomSheet(
       });
     }
   }
-  buildPostHeader() {
+  buildPostHeader(CTX) {
     bool isPostOwner = currentUserId == ownerId;
     return   Column(
       children: (<Widget>[
@@ -695,24 +696,69 @@ return  showMaterialModalBottomSheet(
 
           ),
           SizedBox(width: 15.0,),
-          FutureBuilder<Uri>(
-              future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl.first),
-              builder: (context, snapshot) {
-                if(snapshot.hasData) {
-                  Uri uri = snapshot.data;
-                  return IconButton(
-                    color: Colors.black,
-                    onPressed: () {
-                      Share.share(uri.toString());},
-                    // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                    icon: Icon(Icons.send),
-                  );
-                } else {
-                  return Container();
-                }
+          IconButton(
+            color: Colors.black,
+            onPressed: () {
+              showModalBottomSheet(context: CTX, builder:(CTX) {
+                return Center(child:
+                Column(
 
-              }
+                    children:[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.1,
+                          side: BorderSide.none,
+
+                          primary:  Colors.black, // background
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              ShareButton(
+                                postId:blogId,
+                                ownerId:ownerId,
+                                type:"SharedBlog",
+                                imageURL:blogmediaUrl.first,
+                                productname:title,
+
+                              ),
+                          ));
+                        },
+                        child: Text("Share to community",style: TextStyle(color: kText),),
+                      ),
+                      FutureBuilder<Uri>(
+                          future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl.first),
+                          builder: (context, snapshot) {
+                            if(snapshot.hasData) {
+                              Uri uri = snapshot.data;
+                              return  ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation : 0.1,
+                                  side: BorderSide.none,
+
+                                  primary:  Colors.black, // background
+                                ),
+                                onPressed: () {
+                                  Share.share(uri.toString());},
+                                child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                              );
+
+                            } else {
+                              return Container();
+                            }
+
+                          }
+                      ),
+
+
+
+                    ])
+                );
+              });
+            },
+            // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+            icon: Icon(Icons.send),
           ),
+
 
           Spacer(),
           Padding(
@@ -755,7 +801,7 @@ return  showMaterialModalBottomSheet(
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        buildPostHeader(),
+        buildPostHeader(context),
       ],
     );
   }
