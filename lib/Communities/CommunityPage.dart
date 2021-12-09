@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Communities/comments.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Support/SupportButton.dart';
@@ -42,8 +43,10 @@ class CommunityMainPage extends StatefulWidget {
   final String CommunityId;
  final String photoUrl;
 final String description ;
+final String title ;
+final List members ;
 
-  CommunityMainPage({this.CommunityId,this.photoUrl,this.description,});
+  CommunityMainPage({this.CommunityId,this.photoUrl,this.description, this.title, this.members,});
   @override
   _CommunityMainPageState createState() => _CommunityMainPageState();
 }
@@ -406,240 +409,6 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
           return
             Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
         });
-  }
-  buildPostHeader() {
-    bool isPostOwner = currentUserId == ownerId;
-    return  Container(
-      margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-      child: Column(
-        children:  <Widget> [
-          ListTile(
-            leading: GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
-
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(photoUrl),
-                backgroundColor: Colors.grey,
-              ),
-            ),
-            title: GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
-              child: Text(
-                username,
-                style: TextStyle(
-                  color: kText,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            subtitle: Text(location,
-              style: TextStyle(color: kText),),
-            trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                onPressed: () {
-                  !isPostOwner?showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: kSecondaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0)), //this right here
-                          child: GestureDetector(
-                            onTap: (){report();
-                            Navigator.pop(context);},
-                            child: Container(
-                              height: 100,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text('Report this post?',style: TextStyle(
-                                              color: Colors.blueAccent,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20.0),)),),
-
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                        // ignore: unnecessary_statements
-                      }):handleDeletePost(context);
-                }),
-
-          ),SizedBox( height:0.0,),
-          GestureDetector(
-              onDoubleTap: handleLikePost,
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-//          Text('text',style: TextStyle(color: kText),),
-                  ClipRRect(borderRadius: BorderRadius.circular(20.0),
-                      child: pics(userid:ownerId,prodid: postId)),
-
-//           products(),
-
-                ],
-              )
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: mediaUrl.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _ccontroller.animateToPage(entry.key),
-                child: Container(
-                  width: 6.0,
-                  height: 6.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                ),
-              );
-            }).toList(),
-          ),
-          FutureBuilder(
-            future:  postsRef
-                .doc(ownerId)
-                .collection("userPosts")
-                .doc(postId)
-                .collection("tags")
-                .orderBy('timestamp',descending: true).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-                return Container();
-              }
-              else {
-                return  Row(
-                  children: [
-                    SizedBox(width:12.0),
-                    GFButton(
-                      color: Colors.black,
-                      shape:  GFButtonShape.pills,
-                      textColor: Colors.black,
-                      type : GFButtonType.outline,
-                      onPressed: viewProducts,
-                      text:"View Products",
-                      icon: Icon(
-                        Icons.add_shopping_cart,
-                        // color: Colors.white,
-                        size: 20.0,
-                      ),
-
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
-          SizedBox( height:3.0,),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "$description",
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-
-              GestureDetector(
-                onTap: handleLikePost,
-
-                child: ImageIcon(
-                  isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                  color: kText,
-                ),
-              ),
-              SizedBox(width: 15.0,),
-              GestureDetector(
-                onTap: () => showComments(
-                  context,
-                  postId: postId,
-                  ownerId: ownerId,
-                  mediaUrl: mediaUrl.first,
-                  communityId: communityId,
-
-                ),
-                child: Icon(
-                  Icons.mode_comment_outlined,
-                  size: 28.0,
-                  color: kText,
-                ),
-
-              ),
-              SizedBox(width: 15.0,),
-
-              FutureBuilder<Uri>(
-                  future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData) {
-                      Uri uri = snapshot.data;
-                      return IconButton(
-                        color: Colors.black,
-                        onPressed: () {
-                          Share.share(uri.toString());},
-                        // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                        icon: Icon(Icons.send),
-                      );
-                    } else {
-                      return Container();
-                    }
-
-                  }
-              ),
-
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "$likeCount likes",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-//            SizedBox( height:10.0,),
-
-        ],
-      ) ,
-    );
   }
   pagiante(){
     return PaginateView(
@@ -2017,13 +1786,103 @@ String eur =  documentSnapshot.data()['eur'];
   @override
 
   Widget build(BuildContext context) {
-    isLiked = (likes[currentUserId] == true);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(),
+    return SafeArea(
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return[
+              SliverAppBar(
+                pinned: false,
+                expandedHeight: 380.0,
+ backgroundColor: Colors.white,
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  background: Column(
 
-      ],
+                    children: [
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom:8.0),
+                            child: CachedImage(
+                              widget.photoUrl, width: MediaQuery
+                                .of(context)
+                                .size
+                                .width ,height: MediaQuery
+                                .of(context)
+                                .size
+                                .height / 3,fit: BoxFit.cover,),
+                          ),
+                          Positioned.fill(
+                            child: Align(
+                              alignment:Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                  children: [
+
+                                    Row(
+
+                                      children: [
+                                        Icon(Icons.group,color: Colors.white,),
+                                        Text("${widget.members.length} members", softWrap: true,
+                                            overflow: TextOverflow.fade,
+                                            style: TextStyle(color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            Text(widget.title, softWrap: true,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25)),
+                            
+                            FittedBox(
+                              child: ExpandableText(widget.description, ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+
+                    ],
+                  ),
+
+                ),
+              ),
+            ];
+          } ,
+
+
+
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              pagiante(),
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

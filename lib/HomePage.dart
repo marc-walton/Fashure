@@ -425,7 +425,7 @@ getLink(){
   badgescount()  {
 
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:  activityFeedRef
             .doc(currentUser.id)
             .collection('feedItems')
@@ -455,7 +455,7 @@ getLink(){
   }
   badgescountmessage()  {
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:FirebaseFirestore.instance.collection('feed')
             .doc(currentUser.id)
             .collection('feedItems')

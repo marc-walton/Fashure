@@ -173,7 +173,7 @@ List<String> userCommunityId = <String>[];
       "leader":leaders,
       "leaderImg":leadersImg,
       "leaderId":leadersId,
-      "members":members,
+      "members":membersId,
       'communityId':communityId,
       "communityImg":mediaUrl,
        "bannedMembers":bannedMembersId,

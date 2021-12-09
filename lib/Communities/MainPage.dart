@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
+import 'package:fashow/Communities/CommunityPage.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
 import 'package:fashow/Timeline.dart';
@@ -62,18 +63,13 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
           ),
         ),
-        Flexible(
+        Container(
+          height:MediaQuery.of(context).size.height/1.625,
+color: Cont,
           child:
-        ListView(
-          children: [
-            Container(
-            child:
-                pagi(),
-              ),
+    pagi()
 
-          ],
-        )
-          ,),
+    ,),
       ],
     );
   }
@@ -85,40 +81,79 @@ return  PaginateView(
     itemBuilderType:
     PaginateBuilderType.listView, //Change types accordingly
     itemBuilder: (index, context, documentSnapshot) {
-        return new Container(
-        child:
-        Row(
-          children: [
-            Padding(
+      print(documentSnapshot.data().length);
+      return  PaginateView(
+        child: PaginateFirestore(
+          isLive:true,
+          itemBuilderType:
+          PaginateBuilderType.listView, //Change types accordingly
+          itemBuilder: (index, context, documentSnapshot) {
+            List members =   documentSnapshot.data()['members'];
+            return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: CachedImage(
-                documentSnapshot.data()['communityImg'], width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 3, height: 200,),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(documentSnapshot.data()['title'], softWrap: true,
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15)),
-                ), Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      documentSnapshot.data()['description'], softWrap: true,
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all (Radius.circular(20.0)),
+                child: Stack(
+
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom:8.0),
+                      child: CachedImage(
+                        documentSnapshot.data()['communityImg'], width: MediaQuery
+                          .of(context)
+                          .size
+                          .width ,height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 3,fit: BoxFit.cover,),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment:Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              Text(documentSnapshot.data()['title'], softWrap: true,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25)),
+                              Row(
+
+                                children: [
+                                  Icon(Icons.group,color: Colors.white,),
+                                  Text("${members.length} members", softWrap: true,
+                                      overflow: TextOverflow.fade,
+                                      style: TextStyle(color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+            );
+
+
+
+          },
+
+
+          query: FirebaseFirestore.instance.collection('Community')
+              .where("members",arrayContains: currentUser.id)
+              .orderBy('timestamp',descending: false),
+
         ),
       );
 
@@ -134,58 +169,94 @@ return  PaginateView(
 );
 
     }
-    else{
-    for (var i = 0; i < currentUser.communityId.length; i++) {
-      return
-        FutureBuilder(
-            future: FirebaseFirestore.instance.collection('Community')
-                .doc(currentUser.communityId[i])
-            // .where('ownerId' ,isEqualTo: '$ownerId')
-                .get(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return new Container(
-                  child:
-                  Row(
+    else {
+      return  PaginateView(
+        child: PaginateFirestore(
+          isLive:true,
+          itemBuilderType:
+          PaginateBuilderType.listView, //Change types accordingly
+          itemBuilder: (index, context, documentSnapshot) {
+          List members =   documentSnapshot.data()['members'];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all (Radius.circular(20.0)),
+                child: GestureDetector(
+                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
+
+                   CommunityId:documentSnapshot.data()['communityId'],
+                   photoUrl:documentSnapshot.data()['communityImg'],
+                   description :documentSnapshot.data()['description'],
+                      title :documentSnapshot.data()['title'],
+                      members:   members ,
+
+                  ))),
+                  child: Stack(
+
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(bottom:8.0),
                         child: CachedImage(
-                          snapshot.data['communityImg'], width: MediaQuery
+                          documentSnapshot.data()['communityImg'], width: MediaQuery
                             .of(context)
                             .size
-                            .width / 3, height: 200,),
+                            .width ,height: MediaQuery
+                            .of(context)
+                            .size
+                            .height / 3,fit: BoxFit.cover,),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
+                      Positioned.fill(
+                        child: Align(
+                          alignment:Alignment.bottomCenter,
+                          child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(snapshot.data['title'], softWrap: true,
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15)),
-                          ), Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                snapshot.data['description'], softWrap: true,
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                Text(documentSnapshot.data()['title'], softWrap: true,
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25)),
+                                Row(
+
+                                  children: [
+                                    Icon(Icons.group,color: Colors.white,),
+                                    Text("${members.length} members", softWrap: true,
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ],
+                                ),
+
+                              ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
+
                     ],
                   ),
-                );
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            });
+                ),
+              ),
+            );
+
+
+
+          },
+
+
+          query: FirebaseFirestore.instance.collection('Community')
+              .where("members",arrayContains: currentUser.id)
+              .orderBy('timestamp',descending: false),
+
+        ),
+      );
+
     }
-  }
+
   }
 }
