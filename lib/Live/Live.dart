@@ -1539,9 +1539,11 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
 //   }
 }
 class ExpandableText extends StatefulWidget {
-  ExpandableText(this.text);
+  ExpandableText({this.text, this.color, this.size});
 
   final String text;
+   var size;
+Color color;
   bool isExpanded = false;
 
   @override
@@ -1564,6 +1566,10 @@ class _ExpandableTextState extends State<ExpandableText>
                 widget.text,
                 softWrap: true,
                 overflow: TextOverflow.fade,
+                  // style: TextStyle(color: widget.color,
+                  //   fontWeight: FontWeight.bold,
+                  //   fontSize: widget.size,
+                  // )
               ))),
       widget.isExpanded
           ? new TextButton(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Communities/comments.dart';
 import 'package:fashow/Live/Live.dart';
@@ -59,10 +60,8 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
    String location;
    String description;
    String communityId;
-
    List mediaUrl;
    DynamicLinkService _dynamicLinkService = DynamicLinkService();
-
    String photoUrl;
    String currency;
   int likeCount;
@@ -1784,21 +1783,181 @@ String eur =  documentSnapshot.data()['eur'];
 
   }
   @override
-
+String test = "sdkjvhkjsv sjhv.ljskdhv z ; h hl lh .jhliu.kjh h .h ;jh kjh lh /lh.h .kjh .h ,ky .kjhkjh h.kj kjh  jykjh .k j k kjg g g kg j,kg k kjg,hg,m b, t.kjg,gjht j hg d,kfgbvksgfkhsgfvskfgvksfv k,"
+      "gfbsgjcfsjh zdfhg z,jdgh zksvhlkzjhg zskdfdhn kzjsdfh ,shdd kshksjgh.z,fvzkfjdgh jsdhg v,sdfb,jsdfhg sd,hgvskjdg ,sdgvkshgckshfsk vhg skjrhgvskgnsekrgvn,skf ,khsgkhsgk"
+      "s,fcbsrgcbsgfmacn mhsgfbajsgas fkhasfaks g,haskgf kasf ,asgaks ,rkh jggasg asiy .kasejh laueska.jfskjksg gzjkdghsk dgzngaksfgas lkg sfk gskdjfg lskd fgskf"
+      "as askhfgsjdgf skfg fy askfgskdgskdghdfkgdfkh jhsfksgdgksdfgkhgfjdsbfs,dk skdfghksjdfghsdlkjhsdgk,jhsd,g jhfg,kdshgsldkjgh,sjdfgsldkg jksgfshkfgsjfgksafgsdkfg ";
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return[
-              SliverAppBar(
-                pinned: false,
-                expandedHeight: 380.0,
- backgroundColor: Colors.white,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  background: Column(
+ //              SliverAppBar(
+ //                pinned: false,
+ //                expandedHeight:test.characters.length.toDouble()*2 ,
+ // backgroundColor: Colors.black,
+ //                flexibleSpace: FlexibleSpaceBar(
+ //                  collapseMode: CollapseMode.pin,
+ //                  background: Column(
+ //
+ //                    children: [
+ //                      Stack(
+ //                        children: [
+ //                          Padding(
+ //                            padding: const EdgeInsets.only(bottom:8.0),
+ //                            child: CachedImage(
+ //                              widget.photoUrl, width: MediaQuery
+ //                                .of(context)
+ //                                .size
+ //                                .width ,height: MediaQuery
+ //                                .of(context)
+ //                                .size
+ //                                .height / 3,fit: BoxFit.cover,),
+ //                          ),
+ //                          Positioned.fill(
+ //                            child: Align(
+ //                              alignment:Alignment.bottomCenter,
+ //                              child: Padding(
+ //                                padding: const EdgeInsets.all(8.0),
+ //                                child: Column(
+ //                                  mainAxisAlignment: MainAxisAlignment.end,
+ //                                  crossAxisAlignment: CrossAxisAlignment.start,
+ //
+ //                                  children: [
+ //
+ //                                    Row(
+ //
+ //                                      children: [
+ //                                        Icon(Icons.group,color: Colors.white,),
+ //                                        Text("${widget.members.length} members", softWrap: true,
+ //                                            overflow: TextOverflow.fade,
+ //                                            style: TextStyle(color: Colors.white,
+ //                                              fontWeight: FontWeight.bold,
+ //                                            )),
+ //                                      ],
+ //                                    ),
+ //
+ //                                  ],
+ //                                ),
+ //                              ),
+ //                            ),
+ //                          ),
+ //
+ //                        ],
+ //                      ),
+ //                      Padding(
+ //                        padding: const EdgeInsets.all(8.0),
+ //                        child: Column(
+ //                          crossAxisAlignment: CrossAxisAlignment.start,
+ //
+ //                          children: [
+ //                            Text(widget.title, softWrap: true,
+ //                                overflow: TextOverflow.fade,
+ //                                style: TextStyle(color: Colors.white,
+ //                                    fontWeight: FontWeight.bold,
+ //                                    fontSize: 25)),
+ //                            SizedBox(height:15),
+ //                            Text(widget.description,  style: TextStyle(color: Colors.white70,
+ //                                // fontWeight: FontWeight.bold,
+ //                                fontSize: 15)),
+ //                          ],
+ //                        ),
+ //                      ),
+ //
+ //
+ //                    ],
+ //                  ),
+ //
+ //                ),
+ //              ),
+              SliverStickyHeader(
+                //          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                //            return[
+                //              SliverAppBar(
+                //                pinned: false,
+                //                expandedHeight:test.characters.length.toDouble()*2 ,
+                // backgroundColor: Colors.black,
+                //                flexibleSpace: FlexibleSpaceBar(
+                //                  collapseMode: CollapseMode.pin,
+                //                  background: Column(
+                //
+                //                    children: [
+                //                      Stack(
+                //                        children: [
+                //                          Padding(
+                //                            padding: const EdgeInsets.only(bottom:8.0),
+                //                            child: CachedImage(
+                //                              widget.photoUrl, width: MediaQuery
+                //                                .of(context)
+                //                                .size
+                //                                .width ,height: MediaQuery
+                //                                .of(context)
+                //                                .size
+                //                                .height / 3,fit: BoxFit.cover,),
+                //                          ),
+                //                          Positioned.fill(
+                //                            child: Align(
+                //                              alignment:Alignment.bottomCenter,
+                //                              child: Padding(
+                //                                padding: const EdgeInsets.all(8.0),
+                //                                child: Column(
+                //                                  mainAxisAlignment: MainAxisAlignment.end,
+                //                                  crossAxisAlignment: CrossAxisAlignment.start,
+                //
+                //                                  children: [
+                //
+                //                                    Row(
+                //
+                //                                      children: [
+                //                                        Icon(Icons.group,color: Colors.white,),
+                //                                        Text("${widget.members.length} members", softWrap: true,
+                //                                            overflow: TextOverflow.fade,
+                //                                            style: TextStyle(color: Colors.white,
+                //                                              fontWeight: FontWeight.bold,
+                //                                            )),
+                //                                      ],
+                //                                    ),
+                //
+                //                                  ],
+                //                                ),
+                //                              ),
+                //                            ),
+                //                          ),
+                //
+                //                        ],
+                //                      ),
+                //                      Padding(
+                //                        padding: const EdgeInsets.all(8.0),
+                //                        child: Column(
+                //                          crossAxisAlignment: CrossAxisAlignment.start,
+                //
+                //                          children: [
+                //                            Text(widget.title, softWrap: true,
+                //                                overflow: TextOverflow.fade,
+                //                                style: TextStyle(color: Colors.white,
+                //                                    fontWeight: FontWeight.bold,
+                //                                    fontSize: 25)),
+                //                            SizedBox(height:15),
+                //                            Text(widget.description,  style: TextStyle(color: Colors.white70,
+                //                                // fontWeight: FontWeight.bold,
+                //                                fontSize: 15)),
+                //                          ],
+                //                        ),
+                //                      ),
+                //
+                //
+                //                    ],
+                //                  ),
+                //
+                //                ),
+                //              ),
+                //            ];
+                //          } ,
+                header:Container(
 
+                  color:Colors.black,
+                  child: Column(
                     children: [
                       Stack(
                         children: [
@@ -1852,13 +2011,16 @@ String eur =  documentSnapshot.data()['eur'];
                           children: [
                             Text(widget.title, softWrap: true,
                                 overflow: TextOverflow.fade,
-                                style: TextStyle(color: Colors.black,
+                                style: TextStyle(color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25)),
-                            
-                            FittedBox(
-                              child: ExpandableText(widget.description, ),
-                            ),
+                            SizedBox(height:15),
+                            Text(widget.description, softWrap: true,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(color: Colors.white70,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15)),
+                            // ExpandableText(text:widget.description,color:Colors.white70,size:15.0),
                           ],
                         ),
                       ),
@@ -1866,8 +2028,8 @@ String eur =  documentSnapshot.data()['eur'];
 
                     ],
                   ),
-
                 ),
+
               ),
             ];
           } ,

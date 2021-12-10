@@ -134,6 +134,7 @@ dependencies:
   fijkplayer: ^0.10.0
   flick_video_player: any
   simple_polls: ^1.0.6
+  flutter_sticky_header: ^0.6.0
 
 
 

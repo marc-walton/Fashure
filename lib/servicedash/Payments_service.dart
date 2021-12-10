@@ -60,8 +60,7 @@ class _ServicePaymentsState extends State<ServicePayments> {
                           ]),
                     ),
                     subtitle:  ExpandableText(
-                        description
-                    ),
+                        text:description,color:Colors.black,size:15.0                    ),
 
                   ),
                   currentUser.currency == "INR"? Row(
@@ -257,8 +256,7 @@ class _ServicePaymentsState extends State<ServicePayments> {
                           ]),
                     ),
                     subtitle:  ExpandableText(
-                        description
-                    ),
+                        text:description,color:Colors.black,size:15.0                    ),
 
                   ),
 

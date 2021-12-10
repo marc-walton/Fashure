@@ -1573,7 +1573,7 @@ onPressed:(){FirebaseFirestore.instance.collection('Resale')
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
-                            ExpandableText("$description",),
+                            ExpandableText(text:description,color:Colors.black,size:15.0),
                             SizedBox(height: 8,),
                             Text("Color:",style: TextStyle(
                               color: kText.withOpacity(0.5),

@@ -432,7 +432,9 @@ getLink(){
             .where('read',isEqualTo: 'false')
             .snapshots(),
         builder: (context,snapshot){
-            if(snapshot.data.docs.length == 0){
+          if(snapshot.hasData){
+
+            if(snapshot.data.docs.length == 0||snapshot.data.docs.isEmpty){
               return Container();
 
             }
@@ -449,6 +451,11 @@ getLink(){
 
             }
 
+          }
+          else{
+            return Container();
+          }
+
         },
       );
 
@@ -464,24 +471,30 @@ getLink(){
 
             .snapshots(),
         builder: (context,snapshot){
+          if(snapshot.hasData){
 
-            if(snapshot.data==null){
+            if(snapshot.data.docs.length == 0||snapshot.data.docs.isEmpty){
               return Container();
 
             }
-            else
-            {
+            else {
               data +=  snapshot.data.docs.length;
 
+              return
+                Badge(
 
-                return
+                  shape: BadgeShape.circle,
+                  padding: EdgeInsets.all(2),
+                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                );
 
-                  Badge(
-                    shape: BadgeShape.circle,
-                    padding: EdgeInsets.all(7),
-                    badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-                  );
-              }
+            }
+
+          }
+          else{
+            return Container();
+          }
+
 
 
         },

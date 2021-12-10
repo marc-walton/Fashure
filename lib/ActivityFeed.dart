@@ -85,35 +85,41 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   }
   badgescount()  {
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:  activityFeedRef
             .doc(currentUser.id)
             .collection('feedItems')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
+          if(snapshot.hasData){
 
-          if(snapshot.data==null){
-return Container();
+            if(snapshot.data.docs.length == 0||snapshot.data.docs.isEmpty){
+              return Container();
+
             }
             else {
-            data += snapshot.data.docs.length;
+              data +=  snapshot.data.docs.length;
 
               return
                 Badge(
 
                   shape: BadgeShape.circle,
                   padding: EdgeInsets.all(2),
-                  badgeContent: Text(
-                    '$data', style: TextStyle(color: Colors.white),),
+                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
                 );
+
             }
+
+          }
+          return Container();
+
         },
       );
 
   }
   badgescountmessage()  {
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:FirebaseFirestore.instance.collection('feed')
             .doc(currentUser.id)
             .collection('feedItems')
@@ -122,24 +128,27 @@ return Container();
 
             .snapshots(),
         builder: (context,snapshot){
+          if(snapshot.hasData){
 
-          if(snapshot.data==null){
-            return Container();
+            if(snapshot.data.docs.length == 0||snapshot.data.docs.isEmpty){
+              return Container();
+
+            }
+            else {
+              data +=  snapshot.data.docs.length;
+
+              return
+                Badge(
+
+                  shape: BadgeShape.circle,
+                  padding: EdgeInsets.all(2),
+                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                );
+
+            }
 
           }
-          else
-          {
-            data +=  snapshot.data.docs.length;
-
-
-            return
-
-              Badge(
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-              );
-          }
+          return Container();
 
 
         },
@@ -163,24 +172,24 @@ return Container();
   }
   orderbadge(){
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:  FirebaseFirestore.instance.collection('ordersSeller')
             .doc(currentUser.id)
             .collection('sellerOrder')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
-          if(snapshot.data.exists) {
+          if(snapshot.hasData) {
             data +=  snapshot.data.docs.length;
 
             return
-              StreamBuilder(
+              StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance.collection('Payments')
                     .doc(currentUser.id,)
                     .collection('SellerPayments')
                     .where('fulfilled', isEqualTo: 'true')
                     .where('read', isEqualTo: 'false').snapshots(),
                 builder: (context, snapshot) {
-                  if(snapshot.data.exists) {
+                  if(snapshot.hasData) {
                     data += snapshot.data.docs.length;
 
                     return
@@ -208,25 +217,25 @@ return Container();
   }
   servicebadge(){
     return
-      StreamBuilder(
+      StreamBuilder<QuerySnapshot>(
         stream:     FirebaseFirestore.instance.collection('serviceSeller')
             .doc(currentUser.id)
             .collection('sellerService')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
-          if(snapshot.data.exists) {
+          if(snapshot.hasData) {
             serdata += snapshot.data.docs.length;
 
 
             return
-              StreamBuilder(
+              StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance.collection('Payments')
                     .doc(currentUser.id)
                     .collection('ServicePayments')
                     .where('fulfilled', isEqualTo: 'true')
                     .where('read', isEqualTo: 'false').snapshots(),
                 builder: (context, snapshot) {
-                  if(snapshot.data.exists) {
+                  if(snapshot.hasData) {
                     setState(() {
                       serdata += snapshot.data.docs.length;
                     });

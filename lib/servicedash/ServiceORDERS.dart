@@ -73,8 +73,7 @@ class _ServiceOrdersState extends State<ServiceOrders> {
                 ]),
           ),
           subtitle:  ExpandableText(
-              des
-          ),
+              text:des,color:Colors.black,size:15.0        ),
 
         ),
 

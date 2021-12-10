@@ -143,9 +143,9 @@ Column(
                                   style: TextStyle(
                                       fontWeight:
                                       FontWeight.bold)),
-                              ExpandableText(
-                                " $description",
-                              ),
+                              // ExpandableText(
+                              //   " $description",
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -401,9 +401,9 @@ Column(
                                             style: TextStyle(
                                                 fontWeight:
                                                 FontWeight.bold)),
-                                        ExpandableText(
-                                          " $description",
-                                        ),
+                                        // ExpandableText(
+                                        //   " $description",
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(

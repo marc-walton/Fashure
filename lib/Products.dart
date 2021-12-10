@@ -10346,7 +10346,7 @@ backgroundColor: Colors.black,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      ExpandableText("$details",),
+                      ExpandableText(text:details,color:Colors.black,size:15.0,),
                       SizedBox(height: 8,),
                       SizedBox(height: 8,),
                       Text('Composition:',style: TextStyle(

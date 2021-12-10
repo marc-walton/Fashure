@@ -1159,7 +1159,7 @@ Widget rev(){
 SizedBox(height: 10.0,),
               Row(
                 children: [
-                  ExpandableText(user.bio),
+                  ExpandableText(text:user.bio,color:Colors.black,size:15.0),
                 ],
               ),
               SizedBox(height: 10.0,),
