@@ -93,54 +93,65 @@ return  PaginateView(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.all (Radius.circular(20.0)),
-                child: Stack(
+                child: GestureDetector(
+                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
 
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom:8.0),
-                      child: CachedImage(
-                        documentSnapshot.data()['communityImg'], width: MediaQuery
-                          .of(context)
-                          .size
-                          .width ,height: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 3,fit: BoxFit.cover,),
-                    ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment:Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    CommunityId:documentSnapshot.data()['communityId'],
+                    photoUrl:documentSnapshot.data()['communityImg'],
+                    description :documentSnapshot.data()['description'],
+                    title :documentSnapshot.data()['title'],
+                    members:   members ,
 
-                            children: [
-                              Text(documentSnapshot.data()['title'], softWrap: true,
-                                  overflow: TextOverflow.fade,
-                                  style: TextStyle(color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25)),
-                              Row(
+                  ))),
+                  child: Stack(
 
-                                children: [
-                                  Icon(Icons.group,color: Colors.white,),
-                                  Text("${members.length} members", softWrap: true,
-                                      overflow: TextOverflow.fade,
-                                      style: TextStyle(color: Colors.white,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom:8.0),
+                        child: CachedImage(
+                          documentSnapshot.data()['communityImg'], width: MediaQuery
+                            .of(context)
+                            .size
+                            .width ,height: MediaQuery
+                            .of(context)
+                            .size
+                            .height / 3,fit: BoxFit.cover,),
+                      ),
+                      Positioned.fill(
+                        child: Align(
+                          alignment:Alignment.bottomCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                Text(documentSnapshot.data()['title'], softWrap: true,
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                      )),
-                                ],
-                              ),
+                                        fontSize: 25)),
+                                Row(
 
-                            ],
+                                  children: [
+                                    Icon(Icons.group,color: Colors.white,),
+                                    Text("${members.length} members", softWrap: true,
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ],
+                                ),
+
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

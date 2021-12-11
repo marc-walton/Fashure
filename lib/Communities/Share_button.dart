@@ -131,7 +131,7 @@ post(){
     "location":"",
     "country":  currentUser.country,
     "currency":  currentUser.currency,
-    "mediaUrl":widget.imageURL,
+    "image":widget.imageURL,
     "communityId":CommunityId,
 
     "likes": {},

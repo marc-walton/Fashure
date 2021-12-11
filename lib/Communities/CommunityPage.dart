@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/Communities/Share_button.dart';
+import 'package:fashow/Communities/Upload_community.dart';
+import 'package:fashow/Communities/upload_poll.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-import 'package:curved_splash_screen/curved_splash_screen.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:fashow/Communities/comments.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
@@ -88,6 +91,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
    }
 
   pics({String userid,String prodid}){
+     print("postId:$prodid");
     return
       FutureBuilder<QuerySnapshot> (
           future:    FirebaseFirestore.instance.collection('Community')
@@ -143,7 +147,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                             .data.docs[index].data()['mediaUrl'][i]),
                       ));
                     }
-                    return Column(
+                    return Stack(
                       children: <Widget>[
                         Container(
 
@@ -164,7 +168,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                                       _current = index;
                                     });
                                   },
-                                  height: 400,
+                                  height: 300,
 
                                   aspectRatio: 16/9,
                                   viewportFraction: 0.8,
@@ -182,6 +186,31 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                                   scrollDirection: Axis.horizontal,
                                 )
                             )
+                        ),
+                        Positioned.fill(
+                          child: Align(
+                            alignment:Alignment.bottomCenter,
+                            child:  snapshot.data.docs[index].data()['mediaUrl']
+                        .length==1?Container(): Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: mediaUrl.asMap().entries.map((entry) {
+                                return GestureDetector(
+                                  onTap: () => _ccontroller.animateToPage(entry.key),
+                                  child: Container(
+                                    width: 6.0,
+                                    height: 6.0,
+                                    margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Theme.of(context).brightness == Brightness.dark
+                                            ? Colors.white
+                                            : Colors.black)
+                                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
                         ),
 
                       ],
@@ -406,7 +435,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
         {
 
           return
-            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+            Container(   color:Colors.black,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
         });
   }
   pagiante(){
@@ -419,6 +448,8 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
 
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
           postId= documentSnapshot.data()['postId'];
+          communityId= documentSnapshot.data()['communityId'];
+
           ownerId= documentSnapshot.data()['ownerId'];
           username= documentSnapshot.data()['username'];
           location= documentSnapshot.data()['location'];
@@ -446,7 +477,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
           List Voters =  documentSnapshot.data()['Voters'];
           var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
-String image =  documentSnapshot.data()['mediaUrl'];
+String image =  documentSnapshot.data()['image'];
 String taggedId =  documentSnapshot.data()['taggedId'];
 String taggedOwnerId =  documentSnapshot.data()['taggedOwnerId'];
 String taggerId =  documentSnapshot.data()['taggerId'];
@@ -1426,6 +1457,181 @@ String eur =  documentSnapshot.data()['eur'];
 
 
           ):
+  type == 'SharedComm'?Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context);
+                    }),
+
+              ),
+              SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap: handleLikePost,
+                   onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>CollScreen( userId:taggedOwnerId,collId:taggedId)));
+         },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: CachedImage(image,height: 300,)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$name ",
+                      style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "$description ",
+                      style: TextStyle(
+                        color: kText,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+
+                  GestureDetector(
+                    onTap: handleLikePost,
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "${getLikeCount(likes)} likes",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+//            SizedBox( height:10.0,),
+
+            ],
+
+
+          ):
 
           type == 'originalPoll'?Column(children:[
             SimplePollsWidget(
@@ -1604,7 +1810,8 @@ String eur =  documentSnapshot.data()['eur'];
                           }):handleDeletePost(context);
                     }),
 
-              ),SizedBox( height:0.0,),
+              ),
+              SizedBox( height:0.0,),
               GestureDetector(
                   onDoubleTap: handleLikePost,
                   child: Stack(
@@ -1619,29 +1826,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ],
                   )
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: mediaUrl.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () => _ccontroller.animateToPage(entry.key),
-                    child: Container(
-                      width: 6.0,
-                      height: 6.0,
-                      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                              .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                    ),
-                  );
-                }).toList(),
-              ),
               FutureBuilder(
-                future:  postsRef
-                    .doc(ownerId)
-                    .collection("userPosts")
+                future:   FirebaseFirestore.instance.collection('Community')
+                    .doc(widget.CommunityId)
+                    .collection('communityPosts')
                     .doc(postId)
                     .collection("tags")
                     .orderBy('timestamp',descending: true).get(),
@@ -1679,12 +1867,10 @@ String eur =  documentSnapshot.data()['eur'];
                   Container(
                     padding: EdgeInsets.only(bottom: 10.0),
                     margin: EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      "$description ",
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: ExpandableText(
+                      text:"$description ",
+                      color: Colors.black,
+                      size:15.0
                     ),
                   ),
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
@@ -1693,7 +1879,7 @@ String eur =  documentSnapshot.data()['eur'];
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                  Padding(padding: EdgeInsets.only( left: 20.0)),
 
                   GestureDetector(
                     onTap: handleLikePost,
@@ -1719,25 +1905,67 @@ String eur =  documentSnapshot.data()['eur'];
 
                   ),
                   SizedBox(width: 15.0,),
+                  IconButton(
+                    color: Colors.black,
+                    onPressed: () {
+                      showModalBottomSheet(context: context, builder:(context) {
+                        return Center(child:
+                        Column(
 
-                  FutureBuilder<Uri>(
-                      future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                      builder: (context, snapshot) {
-                        if(snapshot.hasData) {
-                          Uri uri = snapshot.data;
-                          return IconButton(
-                            color: Colors.black,
-                            onPressed: () {
-                              Share.share(uri.toString());},
-                            // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                            icon: Icon(Icons.send),
-                          );
-                        } else {
-                          return Container();
-                        }
+                            children:[
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation : 0.1,
+                                  side: BorderSide.none,
 
-                      }
+                                  primary:  Colors.black, // background
+                                ),
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                      ShareButton(
+                                        postId:postId,
+                                        ownerId:ownerId,
+                                        type:"SharedComm",
+                                        imageURL:mediaUrl.first,
+                                        productname:description,
+
+                                      ),
+                                  ));
+                                },
+                                child: Text("Share to community",style: TextStyle(color: kText),),
+                              ),
+                              FutureBuilder<Uri>(
+                                  future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "communityPost",imageURL:mediaUrl.first),
+                                  builder: (context, snapshot) {
+                                    if(snapshot.hasData) {
+                                      Uri uri = snapshot.data;
+                                      return ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation : 0.1,
+                                          side: BorderSide.none,
+
+                                          primary:  Colors.black, // background
+                                        ),
+                                        onPressed: () {
+                                          Share.share(uri.toString());},
+                                        child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+
+                                  }
+                              ),
+
+
+                            ])
+                        );
+                      });
+                    },
+                    // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                    icon: Icon(Icons.send),
                   ),
+
 
                   Spacer(),
                   Padding(
@@ -1748,6 +1976,8 @@ String eur =  documentSnapshot.data()['eur'];
               ),
               Row(
                 children: [
+                  Padding(padding: EdgeInsets.only( left: 20.0)),
+
                   Container(
 //                  margin: EdgeInsets.only(left: 20.0),
                     child: Text(
@@ -1783,14 +2013,11 @@ String eur =  documentSnapshot.data()['eur'];
 
   }
   @override
-String test = "sdkjvhkjsv sjhv.ljskdhv z ; h hl lh .jhliu.kjh h .h ;jh kjh lh /lh.h .kjh .h ,ky .kjhkjh h.kj kjh  jykjh .k j k kjg g g kg j,kg k kjg,hg,m b, t.kjg,gjht j hg d,kfgbvksgfkhsgfvskfgvksfv k,"
-      "gfbsgjcfsjh zdfhg z,jdgh zksvhlkzjhg zskdfdhn kzjsdfh ,shdd kshksjgh.z,fvzkfjdgh jsdhg v,sdfb,jsdfhg sd,hgvskjdg ,sdgvkshgckshfsk vhg skjrhgvskgnsekrgvn,skf ,khsgkhsgk"
-      "s,fcbsrgcbsgfmacn mhsgfbajsgas fkhasfaks g,haskgf kasf ,asgaks ,rkh jggasg asiy .kasejh laueska.jfskjksg gzjkdghsk dgzngaksfgas lkg sfk gskdjfg lskd fgskf"
-      "as askhfgsjdgf skfg fy askfgskdgskdghdfkgdfkh jhsfksgdgksdfgkhgfjdsbfs,dk skdfghksjdfghsdlkjhsdgk,jhsd,g jhfg,kdshgsldkjgh,sjdfgsldkg jksgfshkfgsjfgksafgsdkfg ";
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: NestedScrollView(
+
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return[
  //              SliverAppBar(
@@ -2000,13 +2227,24 @@ String test = "sdkjvhkjsv sjhv.ljskdhv z ; h hl lh .jhliu.kjh h .h ;jh kjh lh /l
                               ),
                             ),
                           ),
+ Positioned.fill(
+                            child: Align(
+                              alignment:Alignment.topLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child:IconButton(icon:Icon(Icons.arrow_back_ios),
+                                color:Colors.white,
+                                  onPressed: ()=>Navigator.pop(context),
+                                ),
+                              ),
+                            ),
+                          ),
 
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
 
                           children: [
                             Text(widget.title, softWrap: true,
@@ -2015,12 +2253,12 @@ String test = "sdkjvhkjsv sjhv.ljskdhv z ; h hl lh .jhliu.kjh h .h ;jh kjh lh /l
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25)),
                             SizedBox(height:15),
-                            Text(widget.description, softWrap: true,
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(color: Colors.white70,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15)),
-                            // ExpandableText(text:widget.description,color:Colors.white70,size:15.0),
+                            // Text(widget.description, softWrap: true,
+                            //     overflow: TextOverflow.fade,
+                            //     style: TextStyle(color: Colors.white70,
+                            //         fontWeight: FontWeight.bold,
+                            //         fontSize: 15)),
+                             ExpandableText(text:widget.description,color:Colors.white70,size:15.0),
                           ],
                         ),
                       ),
@@ -2036,14 +2274,36 @@ String test = "sdkjvhkjsv sjhv.ljskdhv z ; h hl lh .jhliu.kjh h .h ;jh kjh lh /l
 
 
 
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              pagiante(),
+          body:                pagiante(),
 
-            ],
-          ),
         ),
+floatingActionButton:SpeedDial(
+    child:Icon(Icons.add),
+speedDialChildren:<SpeedDialChild>[
+  SpeedDialChild(
+child:Icon(Icons.dynamic_feed_outlined),
+    label:'Upload a post',
+    onPressed:(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadCommunityPost(CommunityId:widget.CommunityId)));
+
+    },
+  ),
+    SpeedDialChild(
+child:Icon(Icons.poll),
+    label:'Upload a poll',
+    onPressed:(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadCommunityPoll(CommunityId:widget.CommunityId)));
+
+    },
+  ),
+    SpeedDialChild(
+child:Icon(Icons.play_arrow_outlined),
+    label:'Upload a video',
+    onPressed:(){},
+  ),
+
+]
+)
       ),
     );
   }
@@ -2135,7 +2395,7 @@ class TagItem extends StatelessWidget {
                     children: [
                       Text("${cf.format(inr, CurrencyFormatter.inr)}",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
                           )),
@@ -2145,7 +2405,7 @@ class TagItem extends StatelessWidget {
                     children: [
                       Text("${cf.format(eur, CurrencyFormatter.eur)}",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
                           )),
@@ -2155,7 +2415,7 @@ class TagItem extends StatelessWidget {
                     children: [
                       Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
                           )),
@@ -2164,7 +2424,7 @@ class TagItem extends StatelessWidget {
                     children: [
                       Text("${cf.format(usd, CurrencyFormatter.usd)}",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
                           )),

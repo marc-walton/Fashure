@@ -135,6 +135,7 @@ dependencies:
   flick_video_player: any
   simple_polls: ^1.0.6
   flutter_sticky_header: ^0.6.0
+  simple_speed_dial: ^0.1.3
 
 
 

@@ -7,6 +7,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
 import 'package:fashow/Communities/Create_community.dart';
 import 'package:fashow/Communities/MainPage.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
@@ -59,6 +60,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:share/share.dart';
 import 'package:simple_polls/simple_polls.dart';
+
+import 'Communities/Share_button.dart';
 final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
   class Timeline extends StatefulWidget {
@@ -1288,21 +1291,20 @@ var total =  documentSnapshot.data()['total'];
                     Container(
                       padding: EdgeInsets.only(bottom: 10.0),
                       margin: EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        "$description ",
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: ExpandableText(
+                          text:"$description ",
+                          color: Colors.black,
+                          size:15.0
                       ),
                     ),
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
                   ],
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                    Padding(padding: EdgeInsets.only( left: 20.0)),
 
                     GestureDetector(
                       onTap: handleLikePost,
@@ -1328,25 +1330,69 @@ var total =  documentSnapshot.data()['total'];
 
                     ),
                     SizedBox(width: 15.0,),
+                    IconButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        showModalBottomSheet(context: context, builder:(context) {
+                          return Center(child:
+                          Column(
 
-                    FutureBuilder<Uri>(
-                        future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                        builder: (context, snapshot) {
-                          if(snapshot.hasData) {
-                            Uri uri = snapshot.data;
-                            return IconButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                Share.share(uri.toString());},
-                              // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                              icon: Icon(Icons.send),
-                            );
-                          } else {
-                            return Container();
-                          }
+                              children:[
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation : 0.1,
+                                    side: BorderSide.none,
 
-                        }
+                                    primary:  Colors.black, // background
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                        ShareButton(
+                                          postId:postId,
+                                          ownerId:ownerId,
+                                          type:"SharedPost",
+                                          imageURL:mediaUrl.first,
+                                          productname:description,
+
+                                        ),
+                                    ));
+                                  },
+                                  child: Text("Share to community",style: TextStyle(color: kText),),
+                                ),
+                                FutureBuilder<Uri>(
+                                    future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                                    builder: (context, snapshot) {
+                                      if(snapshot.hasData) {
+                                        Uri uri = snapshot.data;
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            elevation : 0.1,
+                                            side: BorderSide.none,
+
+                                            primary:  Colors.black, // background
+                                          ),
+                                          onPressed: () {
+                                            Share.share(uri.toString());},
+                                          child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+
+                                    }
+                                ),
+
+
+
+
+                              ])
+                          );
+                        });
+                      },
+                      // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                      icon: Icon(Icons.send),
                     ),
+
 
                     Spacer(),
                     Padding(
@@ -1357,8 +1403,9 @@ var total =  documentSnapshot.data()['total'];
                 ),
                 Row(
                   children: [
+                    Padding(padding: EdgeInsets.only( left: 20.0)),
+
                     Container(
-//                  margin: EdgeInsets.only(left: 20.0),
                       child: Text(
                         "${getLikeCount(likes)} likes",
                         style: TextStyle(
@@ -2106,12 +2153,10 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                     Container(
                       padding: EdgeInsets.only(bottom: 10.0),
                       margin: EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        "$description ",
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: ExpandableText(
+                          text:"$description ",
+                          color: Colors.black,
+                          size:15.0
                       ),
                     ),
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
@@ -2120,7 +2165,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                    Padding(padding: EdgeInsets.only( left: 20.0)),
 
                     GestureDetector(
                       onTap: handleLikePost,
@@ -2146,25 +2191,68 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
                     ),
                     SizedBox(width: 15.0,),
+                    IconButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        showModalBottomSheet(context: context, builder:(context) {
+                          return Center(child:
+                          Column(
 
-                    FutureBuilder<Uri>(
-                        future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                        builder: (context, snapshot) {
-                          if(snapshot.hasData) {
-                            Uri uri = snapshot.data;
-                            return IconButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                Share.share(uri.toString());},
-                              // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                              icon: Icon(Icons.send),
-                            );
-                          } else {
-                            return Container();
-                          }
+                              children:[
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation : 0.1,
+                                    side: BorderSide.none,
 
-                        }
+                                    primary:  Colors.black, // background
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                        ShareButton(
+                                          postId:postId,
+                                          ownerId:ownerId,
+                                          type:"SharedPost",
+                                          imageURL:mediaUrl.first,
+                                          productname:description,
+
+                                        ),
+                                    ));
+                                  },
+                                  child: Text("Share to community",style: TextStyle(color: kText),),
+                                ),
+                                FutureBuilder<Uri>(
+                                    future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                                    builder: (context, snapshot) {
+                                      if(snapshot.hasData) {
+                                        Uri uri = snapshot.data;
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            elevation : 0.1,
+                                            side: BorderSide.none,
+
+                                            primary:  Colors.black, // background
+                                          ),
+                                          onPressed: () {
+                                            Share.share(uri.toString());},
+                                          child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+
+                                    }
+                                ),
+
+
+
+                              ])
+                          );
+                        });
+                      },
+                      // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                      icon: Icon(Icons.send),
                     ),
+
 
                     Spacer(),
                     Padding(
@@ -2173,21 +2261,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        "${getLikeCount(likes)} likes",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15.0,
-                fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                Padding(padding: EdgeInsets.only( left: 20.0)),
 
 //            SizedBox( height:10.0,),
 

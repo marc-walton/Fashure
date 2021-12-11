@@ -132,7 +132,7 @@ class _UploadResaleState extends State<UploadResale>
       "option6Voters": [],
 
       "Voters": [],
-
+"likes":{},
       "timestamp": timestamp,
 
       'description':detailsController.text,

@@ -72,17 +72,17 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class UploadResale extends StatefulWidget {
+class UploadCommunityPoll extends StatefulWidget {
   final String CommunityId;
 
-  const UploadResale({Key key, this.CommunityId}) : super(key: key);
+  const UploadCommunityPoll({Key key, this.CommunityId}) : super(key: key);
 
   @override
-  _UploadResaleState createState() => _UploadResaleState();
+  _UploadCommunityPollState createState() => _UploadCommunityPollState();
 }
 
-class _UploadResaleState extends State<UploadResale>
-    with AutomaticKeepAliveClientMixin<UploadResale>{
+class _UploadCommunityPollState extends State<UploadCommunityPoll>
+    with AutomaticKeepAliveClientMixin<UploadCommunityPoll>{
   String postId = Uuid().v4();
   bool isUploading = false;
   List<String> images = <String>[];
@@ -136,7 +136,7 @@ TextEditingController option6Controller = TextEditingController();
       "option6Voters": [],
 
       "Voters": [],
-
+"likes":{},
       "timestamp": timestamp,
 
       'description':detailsController.text,

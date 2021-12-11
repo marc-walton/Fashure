@@ -1554,30 +1554,38 @@ class _ExpandableTextState extends State<ExpandableText>
     with TickerProviderStateMixin<ExpandableText> {
   @override
   Widget build(BuildContext context) {
-    return new Row(children: <Widget>[
+    return new Column(children: <Widget>[
       new AnimatedSize(
           vsync: this,
           duration: const Duration(milliseconds: 500),
           child: new ConstrainedBox(
               constraints: widget.isExpanded
                   ? new BoxConstraints()
-                  : new BoxConstraints(maxHeight: 50.0),
+                  : new BoxConstraints(maxHeight: 30.0),
               child: new Text(
                 widget.text,
                 softWrap: true,
                 overflow: TextOverflow.fade,
-                  // style: TextStyle(color: widget.color,
-                  //   fontWeight: FontWeight.bold,
-                  //   fontSize: widget.size,
-                  // )
+                  style: TextStyle(color: widget.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: widget.size,
+                  )
               ))),
       widget.isExpanded
-          ? new TextButton(
-          child: const Text('less'),
-          onPressed: () => setState(() => widget.isExpanded = false))
-          : new TextButton(
-          child: const Text('more'),
-          onPressed: () => setState(() => widget.isExpanded = true))
+          ? Row(
+            children: [
+              new TextButton(
+              child: const Text('less'),
+              onPressed: () => setState(() => widget.isExpanded = false)),
+            ],
+          )
+          : Row(
+            children: [
+              new TextButton(
+              child: const Text('more'),
+              onPressed: () => setState(() => widget.isExpanded = true)),
+            ],
+          )
     ]);
   }
 }

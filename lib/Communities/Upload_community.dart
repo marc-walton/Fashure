@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/Resale/Resale.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -72,17 +73,17 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class UploadResale extends StatefulWidget {
+class UploadCommunityPost extends StatefulWidget {
 final String CommunityId;
 
-  const UploadResale({Key key, this.CommunityId}) : super(key: key);
+  const UploadCommunityPost({Key key, this.CommunityId}) : super(key: key);
 
   @override
-  _UploadResaleState createState() => _UploadResaleState();
+  _UploadCommunityPostState createState() => _UploadCommunityPostState();
 }
 
-class _UploadResaleState extends State<UploadResale>
-    with AutomaticKeepAliveClientMixin<UploadResale>{
+class _UploadCommunityPostState extends State<UploadCommunityPost>
+    with AutomaticKeepAliveClientMixin<UploadCommunityPost>{
   String postId = Uuid().v4();
   bool isUploading = false;
   List<String> images = <String>[];
@@ -600,7 +601,7 @@ class _UploadResaleState extends State<UploadResale>
                         .size
                         .height * 0.75,
 
-                    child: SearchTag(prodId:postId),
+                    child: SearchTag(prodId:postId,communityId:widget.CommunityId),
 
                   );
               }
@@ -611,6 +612,37 @@ class _UploadResaleState extends State<UploadResale>
       );
 
   }
+   tagResale(){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTagResale(prodId:postId,communityId:widget.CommunityId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+
   tagView(){
     return
       StreamBuilder(
@@ -653,7 +685,7 @@ CommunityId:widget.CommunityId,
   page0(){
     return
       ListView(
-        shrinkWrap: true,
+       shrinkWrap: true,
         children: <Widget>[
           Container(
             child: Form(
@@ -763,7 +795,6 @@ CommunityId:widget.CommunityId,
 
             ),
           ),
-
           Row(
             mainAxisAlignment:MainAxisAlignment.end,
 
@@ -777,13 +808,14 @@ CommunityId:widget.CommunityId,
                 child: FittedBox(
                   fit:  BoxFit.fitHeight,
                   child: Container(
+                    color:Cont,
                     alignment:Alignment.center,
                     height:MediaQuery. of(context). size. height *0.06,
 
                     width:MediaQuery. of(context). size. width *0.5,
 
                     //icon: Icon(Icons.drag_handle),
-                    child:Text("Next",style:TextStyle(color: Colors.black)),
+                    child:Text("Next",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
 
                   ),
                 ),
@@ -792,6 +824,7 @@ CommunityId:widget.CommunityId,
 
             ],
           ),
+
 
         ],
       );
@@ -811,18 +844,59 @@ CommunityId:widget.CommunityId,
 
                   style: ElevatedButton.styleFrom(
 
-                    primary:kButton, // foreground
+                    primary:Colors.black, // foreground
                   ),
                   onPressed: () {
-                    tag();
+                    showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context)
+                    {
+                      return
+                          Container(
+                            height:MediaQuery.of(context).size.height/4,
+                            child: Column(
+                                mainAxisAlignment:MainAxisAlignment.center,
+                                children:[
+                              ElevatedButton(
+
+                                style: ElevatedButton.styleFrom(
+
+                                  primary:Colors.black, // foreground
+                                ),
+                                onPressed: () {
+
+                                  tag();
+                                },
+
+                                child:   Text("Tag from shop",style: TextStyle(
+                                    color:Colors.white70),),
+                              ),
+                             ElevatedButton(
+
+                                style: ElevatedButton.styleFrom(
+
+                                  primary:Colors.black, // foreground
+                                ),
+                                onPressed: () {
+
+                                  tagResale();
+                                },
+
+                                child:   Text("Tag from resale shop",style: TextStyle(
+                                    color:Colors.white70),),
+                              ),
+
+                            ]),
+                          );
+                    }
+                    );
                   },
 
-                  child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
-                      ,color:kText),),
-                ),
+                  child:   Text("Tag Items from Shop",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
+                      ,color:Colors.white70),),                ),
                 SizedBox(width: 10,)  ,
-                Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
-                    ,color:kText),),
+                Text("(optional)",style: TextStyle(
+                    color:kText),),
               ],
             ),
             Container(
@@ -855,12 +929,11 @@ CommunityId:widget.CommunityId,
     msg: "Please wait:Uploading", timeInSecForIos: 4);
 
 
-    if(_formKey.currentState.validate()) {
     // ignore: unnecessary_statements
 
     Servicecatalog();
     Navigator.pop(context);
-    }
+
 
     },
                   child: FittedBox(
@@ -941,84 +1014,87 @@ CommunityId:widget.CommunityId,
     });
   }
 
-  builduploadForm() {
+  buildUploadScreen() {
     this.setState(() {
       _inProcess = false;
     });
 
     return
-      Container(
-        child: Stack(
-          children: [
-            WillPopScope(
-              onWillPop:()=>   _onBackPressed(),
-              child: Scaffold(
+      ModalProgressHUD(
+        inAsyncCall: isUploading,
+        child: Container(
+          child: Stack(
+            children: [
+              WillPopScope(
+                onWillPop:()=>   _onBackPressed(),
+                child: Scaffold(
 
-                // resizeToAvoidBottomPadding: true,
-                appBar: AppBar(
-                  backgroundColor: kPrimaryColor,
-                  leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed:()=>  showDialog(
-                        context: context,
-                        builder: (context) => new AlertDialog(
-                          title: new Text('Are you sure?'),
-                          content: new Text('Do you want to exit without uploading?'),
-                          actions: <Widget>[
-                            new TextButton(
+                  // resizeToAvoidBottomPadding: true,
+                  appBar: AppBar(
+                    backgroundColor: kPrimaryColor,
+                    leading: IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed:()=>  showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: new Text('Are you sure?'),
+                            content: new Text('Do you want to exit without uploading?'),
+                            actions: <Widget>[
+                              new TextButton(
 
-                              onPressed: () => Navigator.of(context).pop(false),
-                              child: Text("NO"),
-                            ),
-                            SizedBox(height: 16),
-                            new TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text("NO"),
+                              ),
+                              SizedBox(height: 16),
+                              new TextButton(
 
-                              onPressed: () async {
-                                Get.back();
-                                Get.back();
-                                delete();
-                                clearImage();
-                                setState(() {
-                                  isUploading = false;
-                                  _inProcess = false;
-                                });//            clearImage();
-                              },
-                              child: Text("YES"),
-                            ),
-                          ],
-                        ),
-                      ) ??
-                          false),
+                                onPressed: () async {
+                                  Get.back();
+                                  Get.back();
+                                  delete();
+                                  clearImage();
+                                  setState(() {
+                                    isUploading = false;
+                                    _inProcess = false;
+                                  });//            clearImage();
+                                },
+                                child: Text("YES"),
+                              ),
+                            ],
+                          ),
+                        ) ??
+                            false),
 
-                ),
-                body:
-                PageView(
-                  physics:new NeverScrollableScrollPhysics(),
-                  pageSnapping: true,
-                  controller: pageController,
-                  onPageChanged: (index) {
-                    setState(() {
-                      pageChanged = index;
-                    });
-                    print(pageChanged);
-                  },
-                  children: [
-                    Container(
-                      child: page0(),
-                    ),
-                    Container(
-                      child: page1(),
-                    ),
+                  ),
+                  body:
+                  PageView(
+                    physics:new NeverScrollableScrollPhysics(),
+                    pageSnapping: true,
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        pageChanged = index;
+                      });
+                      print(pageChanged);
+                    },
+                    children: [
+                      Container(
+                        child: page0(),
+                      ),
+                      Container(
+                        child: page1(),
+                      ),
 
 
-                  ],
+                    ],
+                  ),
+
                 ),
 
               ),
-
-            ),
-            isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
-          ],
+              isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
+            ],
+          ),
         ),
       );
 
@@ -1073,191 +1149,6 @@ CommunityId:widget.CommunityId,
         ),
       );
   }
-  buildUploadScreen()  {
-    return    ModalProgressHUD(
-      inAsyncCall: isUploading,
-      child: Scaffold(
-        appBar:  AppBar(      backgroundColor: kPrimaryColor,
-
-          title: FittedBox(
-            fit:BoxFit.contain,
-            child: Text('Upload ',
-              style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  // fontSize:  35.0 ,
-                  color: Colors.white),),
-          ),
-          iconTheme: new IconThemeData(color: Colors.white),
-        ),
-
-        body:
-        Container(color:Cont,
-          child: Stack(
-            children:[
-              Container(
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      isUploading ? linearProgress() : Text(""),
-                      Container(
-                          height:160,
-                          child:ListView(scrollDirection:Axis.horizontal,
-                              children:[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget1(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget2(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget3(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget4(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: getImageWidget5(),
-                                ),
-
-                              ])),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
-                          controller: titleController,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Title',labelStyle: TextStyle(color: kText),
-                            hintText: 'Title',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if ( text.isEmpty) {
-                              return 'Title is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color:kText),
-
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          controller: detailsController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Description',labelStyle: TextStyle(color: kText),
-                            hintText: 'Description',
-                          ),
-                          textAlign: TextAlign.center,
-                          validator: (text) {
-                            if (text.isEmpty) {
-                              return 'Description is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Divider(),
-                      ListTile(
-                        leading: Icon(
-                          Icons.pin_drop,
-                          color: Colors.orange,
-                          size: 35.0,
-                        ),
-                        title: Container(
-                          width: 250.0,
-                          child: TextField(
-                            style:TextStyle(color: kText),
-
-                            controller: locationController,
-                            decoration: InputDecoration(
-                              hintText: "Where was this photo taken?",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 200.0,
-                        height: 100.0,
-                        alignment: Alignment.center,
-                        child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              elevation : 0.1,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-
-                              primary: Colors.blue,// background
-                              onPrimary: Colors.white, // foreground
-                            ),
-                            label: Text(
-                              "Use Current Location",
-                            ),
-                            onPressed: getUserLocation,
-                            icon: Icon(
-                              Icons.my_location,
-                              color: Colors.white,
-                            )),
-                      ),
-                      SizedBox( height: 8.0,),
-
-
-
-                      Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation : 0.001,
-                              primary:  Colors.black, ),
-                            onPressed:() async{
-                              Fluttertoast.showToast(
-                                  msg: "Please wait:Uploading", timeInSecForIos: 4);
-
-
-                              if(_formKey.currentState.validate()) {
-                                // ignore: unnecessary_statements
-
-                                Servicecatalog();
-                                Navigator.pop(context);
-                              }
-
-                            },
-                            child: Text('Post', style: TextStyle(
-                              // fontFamily :"MajorMonoDisplay",
-                              //   fontSize:  ,
-                                color: Colors.white),),
-                          )
-                      ),
-
-                    ],
-                  ),
-
-                ),
-              ),
-            ],
-          ),
-        ),
-
-      ),
-    );
-  }
   bool get wantKeepAlive => true;
 
   @override
@@ -1268,7 +1159,9 @@ CommunityId:widget.CommunityId,
 }
 class SearchTag extends StatefulWidget {
   final String prodId;
-  SearchTag({this.prodId});
+  final String communityId;
+
+  SearchTag({this.prodId,this.communityId});
   @override
   _SearchTagState createState() => _SearchTagState();
 }
@@ -1383,7 +1276,7 @@ class _SearchTagState extends State<SearchTag> {
       ),
     );
   }
-  df({String ownerId,String prodId}){
+  df({String ownerId,String prodId,String communityId,}){
     return
       showMaterialModalBottomSheet(
         expand:true,
@@ -1402,7 +1295,7 @@ class _SearchTagState extends State<SearchTag> {
                         .size
                         .height * 0.75,
 
-                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId),
+                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId,communityId:widget.communityId,),
 
                   );
               }
@@ -1439,7 +1332,7 @@ class _SearchTagState extends State<SearchTag> {
 
           onTap: ()  {
             Get.back();
-            df(ownerId: user.id,prodId: widget.prodId);},
+            df(ownerId: user.id,prodId: widget.prodId,communityId: widget.communityId,);},
         ),
       ),
     );
@@ -1451,7 +1344,9 @@ class _SearchTagState extends State<SearchTag> {
 class SearchTagProduct extends StatefulWidget {
   final String ownerId;
   final String prodId;
-  SearchTagProduct({this.ownerId, this.prodId});
+  final String communityId;
+
+  SearchTagProduct({this.ownerId, this.prodId, this.communityId});
   @override
   _SearchTagProductState createState() => _SearchTagProductState();
 }
@@ -1557,7 +1452,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
                 child: ListView.builder(
                   itemCount: _resultsList.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      buprod(context, _resultsList[index],widget.prodId),
+                      buprod(context, _resultsList[index],widget.prodId,widget.communityId),
                 )
 
             ),
@@ -1568,7 +1463,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
   }
 }
 
-Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
+Widget buprod(BuildContext context, DocumentSnapshot document,prodId,communityId) {
   final prod = Prod.fromDocument(document);
   // final tripType = trip.types();
 
@@ -1594,10 +1489,9 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
 
         onTap: ()
         {
-          FirebaseFirestore.instance
-              .collection('posts')
-              .doc(currentUser.id)
-              .collection('userPosts')
+          FirebaseFirestore.instance.collection('Community')
+              .doc(communityId)
+              .collection('communityPosts')
               .doc(prodId)
               .collection('tags')
               .doc(prod.prodId)
@@ -1623,6 +1517,366 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
     ),
   );
 }
+class SearchTagResale extends StatefulWidget {
+  final String prodId;
+  final String communityId;
+
+  SearchTagResale({this.prodId,this.communityId});
+  @override
+  _SearchTagResaleState createState() => _SearchTagResaleState();
+}
+
+class _SearchTagResaleState extends State<SearchTagResale> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a user...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+          prefixIcon: Icon(
+            Icons.account_box,
+            size: 28.0,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buCard(context, _resultsList[index]),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  df({String ownerId,String prodId,String communityId}){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTagResaleProduct(ownerId:ownerId,prodId:prodId,communityId:communityId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+  Widget buCard(BuildContext context, DocumentSnapshot document) {
+    final user = Users.fromDocument(document);
+    // final tripType = trip.types();
+
+    return new Container(
+      child: Card(
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(  user.photoUrl,),
+              ),
+              title: Text(
+                user.displayName,
+                style:
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
+              ),
+
+            ),
+          ),
+
+
+          onTap: ()  {
+            Get.back();
+            df(ownerId: user.id,prodId: widget.prodId,communityId:widget.communityId);},
+        ),
+      ),
+    );
+  }
+
+}
+
+
+class SearchTagResaleProduct extends StatefulWidget {
+  final String ownerId;
+  final String prodId;
+    final String communityId;
+
+  SearchTagResaleProduct({this.ownerId, this.prodId,this.communityId});
+  @override
+  _SearchTagResaleProductState createState() => _SearchTagResaleProductState();
+}
+
+class _SearchTagResaleProductState extends State<SearchTagResaleProduct> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Prod.fromDocument(tripSnapshot).productname.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await
+    FirebaseFirestore.instance.collection('Resale')
+          .doc(widget.ownerId)
+        .collection('userResale')
+        .orderBy('timestamp',descending: true)
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a product...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        color:Colors.grey.shade200,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buResale(context, _resultsList[index],widget.prodId,widget.communityId),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+Widget buResale(BuildContext context, DocumentSnapshot document,prodId,communityId) {
+  final prod = Resale.fromDocument(document);
+  // final tripType = trip.types();
+
+  return new Container(
+    child: Card(
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListTile(
+            leading: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Container(child: Image.network(prod.images.first),)),
+
+            title: Text(
+              prod.title,
+              style:
+              TextStyle(color:kText, fontWeight: FontWeight.bold),
+            ),
+
+          ),
+        ),
+
+
+        onTap: ()
+        {
+          FirebaseFirestore.instance.collection('Community')
+              .doc(communityId)
+              .collection('communityPosts')
+              .doc(prodId)
+              .collection('tags')
+              .doc(prod.resaleId)
+              .set({
+            "ownerId":prod.ownerId,
+            "prodId":prod.resaleId,
+            "image":prod.images.first,
+            "name":prod.title,
+            "usd":prod.usd,
+            "eur":prod.eur,
+            "inr":prod.inr,
+            "gbp":prod.gbp,
+            "taggerId":currentUser.id,
+            "taggerImg":currentUser.photoUrl,
+            "taggerName":currentUser.username,
+            "taggerCurrency":currentUser.currency,
+
+            "timestamp":timestamp,
+
+          });
+          Get.back();},
+      ),
+    ),
+  );
+}
+
 class TagItem extends StatelessWidget {
   final String ownerId ;
   final String prodId ;
@@ -1657,7 +1911,7 @@ final CommunityId;
             child: Column(children:[
               ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: CachedImage(image)),
+                  child: CachedImage(image,height: MediaQuery.of(context).size.height/3,width:MediaQuery.of(context).size.width ,)),
               Row(
                 children: [
                   Text(name,
