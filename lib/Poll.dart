@@ -82,6 +82,7 @@ class _UploadResaleState extends State<UploadResale>
     with AutomaticKeepAliveClientMixin<UploadResale>{
   String postId = Uuid().v4();
   bool isUploading = false;
+  int optionNos = 2;
   List<String> images = <String>[];
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
@@ -111,6 +112,7 @@ class _UploadResaleState extends State<UploadResale>
       "country":  currentUser.country,
       "currency":  currentUser.currency,
       "total": 0,
+      'optionNos':optionNos,
       "option1": option1Controller.text??"",
       "option2": option2Controller.text??"",
       "option3": option3Controller.text??"",
@@ -184,136 +186,505 @@ class _UploadResaleState extends State<UploadResale>
                     ),
                   ),
                   SizedBox( height: 8.0,),
-                  Container(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButton<int>(
+                      value: optionNos,
+                      icon: Icon(Icons.keyboard_arrow_down_sharp),
+                      iconSize: SizeConfig.safeBlockHorizontal *4,
+                      elevation: 4,
+                      style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
+
+                      onChanged: (int newValue) {
+                        setState(() {
+                          optionNos = newValue;
+                        });
+                      },
+                      items: <int>[2, 3, 4, 5, 6, ]
+                          .map<DropdownMenuItem<int>>((int value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text("$optionNos"),
+
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox( height: 8.0,),
+                  optionNos ==2?  Column(children:[
+                    Container(
                     margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                     child: TextFormField(
                       style:TextStyle(color:kText),
-
-                      maxLines: null,
                       controller: option1Controller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                        labelText: 'Option 1',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 1',
+                        labelText: 'option 1',labelStyle: TextStyle(color: kText),
+                        hintText: 'option 1',
                       ),
                       textAlign: TextAlign.center,
                       validator: (text) {
                         if (text.isEmpty) {
-                          return 'Option 1 is empty';
+                          return 'option 1 is empty';
                         }
                         return null;
                       },
                     ),
                   ),
-                  SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                    child: TextFormField(
-                      style:TextStyle(color:kText),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option2Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      maxLines: null,
-                      controller: option2Controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                        labelText: 'Option 2',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 2',
+                          labelText: 'option 2',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 2',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 2 is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      textAlign: TextAlign.center,
-                      validator: (text) {
-                        if (text.isEmpty) {
-                          return 'Option 2 is empty';
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                    child: TextFormField(
-                      style:TextStyle(color:kText),
+                    SizedBox( height: 8.0,),
+                  ]): optionNos ==3?
+                  Column(children:[
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option1Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      maxLines: null,
-                      controller: option3Controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                        labelText: 'Option 3',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 3(optional)',
+                          labelText: 'option 1',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 1',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 1 is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      textAlign: TextAlign.center,
-
                     ),
-                  ),
-                  SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                    child: TextFormField(
-                      style:TextStyle(color:kText),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option2Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      maxLines: null,
-                      controller: option4Controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                        labelText: 'Option 4',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 4(optional)',
+                          labelText: 'option 2',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 2',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 2 is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      textAlign: TextAlign.center,
-
                     ),
-                  ),
-                  SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                    child: TextFormField(
-                      style:TextStyle(color:kText),
+                    SizedBox( height: 8.0,),
+                      Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option3Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      maxLines: null,
-                      controller: option5Controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                        labelText: 'Option 5',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 5(optional)',
+                          labelText: 'option 3',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 3',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 3 is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      textAlign: TextAlign.center,
-
                     ),
-                  ),
-                  SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                    child: TextFormField(
-                      style:TextStyle(color:kText),
+                    SizedBox( height: 8.0,),
 
-                      maxLines: null,
-                      controller: option6Controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                  ]):optionNos ==4?
+                  Column(children:[
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option1Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                        labelText: 'Option 6',labelStyle: TextStyle(color: kText),
-                        hintText: 'Option 6(optional)',
+                          labelText: 'option 1',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 1',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 1 is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      textAlign: TextAlign.center,
-
                     ),
-                  ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option2Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
+                          labelText: 'option 2',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 2',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 2 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option3Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 3',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 3',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 3 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option4Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 4',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 4',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 4 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+
+                  ]):optionNos ==5?
+                  Column(children:[
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option1Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 1',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 1',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 1 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option2Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 2',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 2',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 2 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option3Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 3',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 3',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 3 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option4Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 4',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 4',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 4 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option5Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 5',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 5',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 5 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+
+                  ]):
+                  Column(children:[
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option1Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 1',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 1',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 1 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option2Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 2',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 2',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 2 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option3Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 3',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 3',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 3 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option4Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 4',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 4',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 4 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option5Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 5',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 5',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 5 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color:kText),
+                        controller: option6Controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'option 6',labelStyle: TextStyle(color: kText),
+                          hintText: 'option 6',
+                        ),
+                        textAlign: TextAlign.center,
+                        validator: (text) {
+                          if (text.isEmpty) {
+                            return 'option 6 is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox( height: 8.0,),
+
+                  ]),
 
                 ],
               ),
@@ -353,6 +724,7 @@ class _UploadResaleState extends State<UploadResale>
         ],
       );
   }
+
   Future<bool> _onBackPressed() {
     return showDialog(
       context: context,

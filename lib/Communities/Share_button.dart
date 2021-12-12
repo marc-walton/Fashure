@@ -155,32 +155,20 @@ post(){
 }
   getUsersPastTripsStreamSnapshots() async {
     if (currentUser.communityId.length == 0) {
-      return  Center(child: Text("Please join a community to start sharing"),);
-
+      return Center(child: Text("Please join a community to start sharing"),);
     }
-    else{
-      for (var i = 0; i < currentUser.communityId.length; i++) {
-        return
-          FutureBuilder(
-              future: FirebaseFirestore.instance.collection('Community')
-                  .doc(currentUser.communityId[i])
-              // .where('ownerId' ,isEqualTo: '$ownerId')
-                  .get(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  setState(() {
-                    _allResults.add(snapshot.data);
-                  });
-                  searchResultsList();
+    else {
+      var data = await FirebaseFirestore.instance.collection('Community')
+          .where('members', arrayContains: currentUser.id)
+          .orderBy('timestamp', descending: false)
 
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              });
-      }
+          .get();
+      setState(() {
+        _allResults = data.docs;
+      });
+      searchResultsList();
+      return "complete";
     }
-
   }
   clearSearch() {
     _searchController.clear();
