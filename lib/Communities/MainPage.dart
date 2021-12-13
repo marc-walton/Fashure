@@ -35,14 +35,12 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
-
-
   @override
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
-
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,229 +48,231 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            height:MediaQuery.of(context).size.height/25,
-            child:            Row(
+            height: MediaQuery.of(context).size.height / 25,
+            child: Row(
               children: [
-                Text("My communities",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 35)),
+                Text("My communities",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35)),
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: IconButton(icon: Icon(Icons.search_sharp),),
+                  child: IconButton(
+                    icon: Icon(Icons.search_sharp),
+                  ),
                 )
               ],
             ),
-
           ),
         ),
-        Container(
-          height:MediaQuery.of(context).size.height/1.625,
-color: Cont,
-          child:
-    pagi()
-
-    ,),
+        Flexible(
+          child: Container(
+            height: MediaQuery.of(context).size.height / 1.625,
+            color: Cont,
+            child: pagi(),
+          ),
+        ),
       ],
     );
   }
+
   pagi() {
     if (currentUser.communityId.length == 0) {
-return  PaginateView(
-  child: PaginateFirestore(
-    isLive:true,
-    itemBuilderType:
-    PaginateBuilderType.listView, //Change types accordingly
-    itemBuilder: (index, context, documentSnapshot) {
-      print(documentSnapshot.data().length);
-      return  PaginateView(
+      return PaginateView(
         child: PaginateFirestore(
-          isLive:true,
+          isLive: true,
           itemBuilderType:
-          PaginateBuilderType.listView, //Change types accordingly
+              PaginateBuilderType.listView, //Change types accordingly
           itemBuilder: (index, context, documentSnapshot) {
-            List members =   documentSnapshot.data()['members'];
+            print(documentSnapshot.data().length);
+            return PaginateView(
+              child: PaginateFirestore(
+                isLive: true,
+                itemBuilderType:
+                    PaginateBuilderType.listView, //Change types accordingly
+                itemBuilder: (index, context, documentSnapshot) {
+                  List members = documentSnapshot.data()['members'];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CommunityMainPage(
+                                      CommunityId: documentSnapshot
+                                          .data()['communityId'],
+                                      photoUrl: documentSnapshot
+                                          .data()['communityImg'],
+                                      description: documentSnapshot
+                                          .data()['description'],
+                                      title: documentSnapshot.data()['title'],
+                                      members: members,
+                                      admins:
+                                          documentSnapshot.data()['leaderId'],
+                                      banned: documentSnapshot
+                                          .data()['bannedMembers'],
+                                    ))),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: CachedImage(
+                                documentSnapshot.data()['communityImg'],
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height / 3,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(documentSnapshot.data()['title'],
+                                          softWrap: true,
+                                          overflow: TextOverflow.fade,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25)),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.group,
+                                            color: Colors.white,
+                                          ),
+                                          Text("${members.length} members",
+                                              softWrap: true,
+                                              overflow: TextOverflow.fade,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+
+                query: FirebaseFirestore.instance
+                    .collection('Community')
+                    .where("members", arrayContains: currentUser.id)
+                    .orderBy('timestamp', descending: false),
+              ),
+            );
+          },
+
+          query: FirebaseFirestore.instance
+              .collection('Community')
+              .orderBy('timestamp', descending: false),
+        ),
+      );
+    } else {
+      return PaginateView(
+        child: PaginateFirestore(
+          isLive: true,
+          itemBuilderType:
+              PaginateBuilderType.listView, //Change types accordingly
+          itemBuilder: (index, context, documentSnapshot) {
+            List members = documentSnapshot.data()['members'];
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
-                borderRadius: BorderRadius.all (Radius.circular(20.0)),
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 child: GestureDetector(
-                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
-
-                    CommunityId:documentSnapshot.data()['communityId'],
-                    photoUrl:documentSnapshot.data()['communityImg'],
-                    description :documentSnapshot.data()['description'],
-                    title :documentSnapshot.data()['title'],
-                    members:   members ,
-                    admins:  documentSnapshot.data()['leaderId'],
-
-                  ))),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CommunityMainPage(
+                                CommunityId:
+                                    documentSnapshot.data()['communityId'],
+                                photoUrl:
+                                    documentSnapshot.data()['communityImg'],
+                                description:
+                                    documentSnapshot.data()['description'],
+                                title: documentSnapshot.data()['title'],
+                                members: members,
+                                admins: documentSnapshot.data()['leaderId'],
+                              ))),
                   child: Stack(
-
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom:8.0),
+                        padding: const EdgeInsets.only(bottom: 8.0),
                         child: CachedImage(
-                          documentSnapshot.data()['communityImg'], width: MediaQuery
-                            .of(context)
-                            .size
-                            .width ,height: MediaQuery
-                            .of(context)
-                            .size
-                            .height / 3,fit: BoxFit.cover,),
+                          documentSnapshot.data()['communityImg'],
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height / 3,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Positioned.fill(
                         child: Align(
-                          alignment:Alignment.bottomCenter,
+                          alignment: Alignment.bottomCenter,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                Text(documentSnapshot.data()['title'], softWrap: true,
+                                Text(documentSnapshot.data()['title'],
+                                    softWrap: true,
                                     overflow: TextOverflow.fade,
-                                    style: TextStyle(color: Colors.white,
+                                    style: TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25)),
                                 Row(
-
                                   children: [
-                                    Icon(Icons.group,color: Colors.white,),
-                                    Text("${members.length} members", softWrap: true,
+                                    Icon(
+                                      Icons.group,
+                                      color: Colors.white,
+                                    ),
+                                    Text("${members.length} members",
+                                        softWrap: true,
                                         overflow: TextOverflow.fade,
-                                        style: TextStyle(color: Colors.white,
+                                        style: TextStyle(
+                                          color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                         )),
                                   ],
                                 ),
-
                               ],
                             ),
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
               ),
             );
-
-
-
           },
 
-
-          query: FirebaseFirestore.instance.collection('Community')
-              .where("members",arrayContains: currentUser.id)
-              .orderBy('timestamp',descending: false),
-
+          query: FirebaseFirestore.instance
+              .collection('Community')
+              .where("members", arrayContains: currentUser.id)
+              .orderBy('timestamp', descending: false),
         ),
       );
-
-
-
-    },
-
-
-    query: FirebaseFirestore.instance.collection('Community')
-        .orderBy('timestamp',descending: false),
-
-  ),
-);
-
     }
-    else {
-      return  PaginateView(
-        child: PaginateFirestore(
-          isLive:true,
-          itemBuilderType:
-          PaginateBuilderType.listView, //Change types accordingly
-          itemBuilder: (index, context, documentSnapshot) {
-          List members =   documentSnapshot.data()['members'];
-
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all (Radius.circular(20.0)),
-                child: GestureDetector(
-                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
-
-                   CommunityId:documentSnapshot.data()['communityId'],
-                   photoUrl:documentSnapshot.data()['communityImg'],
-                   description :documentSnapshot.data()['description'],
-                      title :documentSnapshot.data()['title'],
-                      members:   members ,
-                    admins:  documentSnapshot.data()['leaderId'],
-
-                  ))),
-                  child: Stack(
-
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom:8.0),
-                        child: CachedImage(
-                          documentSnapshot.data()['communityImg'], width: MediaQuery
-                            .of(context)
-                            .size
-                            .width ,height: MediaQuery
-                            .of(context)
-                            .size
-                            .height / 3,fit: BoxFit.cover,),
-                      ),
-                      Positioned.fill(
-                        child: Align(
-                          alignment:Alignment.bottomCenter,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text(documentSnapshot.data()['title'], softWrap: true,
-                                    overflow: TextOverflow.fade,
-                                    style: TextStyle(color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25)),
-                                Row(
-
-                                  children: [
-                                    Icon(Icons.group,color: Colors.white,),
-                                    Text("${members.length} members", softWrap: true,
-                                        overflow: TextOverflow.fade,
-                                        style: TextStyle(color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                  ],
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-            );
-
-
-
-          },
-
-
-          query: FirebaseFirestore.instance.collection('Community')
-              .where("members",arrayContains: currentUser.id)
-              .orderBy('timestamp',descending: false),
-
-        ),
-      );
-
-    }
-
   }
 }
 
@@ -307,7 +307,6 @@ class _SearchCommunityState extends State<SearchCommunity> {
     resultsLoaded = getUsersPastTripsStreamSnapshots();
   }
 
-
   _onSearchChanged() {
     searchResultsList();
   }
@@ -315,15 +314,15 @@ class _SearchCommunityState extends State<SearchCommunity> {
   searchResultsList() {
     var showResults = [];
 
-    if(_searchController.text != "") {
-      for(var tripSnapshot in _allResults){
-        var title = CommunityModel.fromDocument(tripSnapshot).title.toLowerCase();
+    if (_searchController.text != "") {
+      for (var tripSnapshot in _allResults) {
+        var title =
+            CommunityModel.fromDocument(tripSnapshot).title.toLowerCase();
 
-        if(title.contains(_searchController.text.toLowerCase())) {
+        if (title.contains(_searchController.text.toLowerCase())) {
           showResults.add(tripSnapshot);
         }
       }
-
     } else {
       showResults = List.from(_allResults);
     }
@@ -333,9 +332,9 @@ class _SearchCommunityState extends State<SearchCommunity> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await  FirebaseFirestore.instance.collection('Community')
-        .orderBy('timestamp',descending: false)
-
+    var data = await FirebaseFirestore.instance
+        .collection('Community')
+        .orderBy('timestamp', descending: false)
         .get();
     setState(() {
       _allResults = data.docs;
@@ -343,25 +342,24 @@ class _SearchCommunityState extends State<SearchCommunity> {
     searchResultsList();
     return "complete";
   }
+
   clearSearch() {
     _searchController.clear();
   }
+
   AppBar buildSearchField() {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor:kPrimaryColor,
+      backgroundColor: kPrimaryColor,
       title: TextFormField(
-        style:  TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white),
         controller: _searchController,
         decoration: InputDecoration(
           hintText: "Search for a Community...",
           hintStyle: TextStyle(color: Colors.white),
-
           filled: true,
-
           suffixIcon: IconButton(
-            icon: Icon(Icons.clear,
-                color: Colors.white),
+            icon: Icon(Icons.clear, color: Colors.white),
             onPressed: clearSearch,
           ),
         ),
@@ -373,103 +371,104 @@ class _SearchCommunityState extends State<SearchCommunity> {
     return Scaffold(
       appBar: buildSearchField(),
       body: Container(
-        color:Colors.grey.shade200,
+        color: Colors.grey.shade200,
         child: Column(
           children: <Widget>[
             Expanded(
                 child: ListView.builder(
-                  itemCount: _resultsList.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      buildCommunity(context, _resultsList[index]),
-                )
-
-            ),
+              itemCount: _resultsList.length,
+              itemBuilder: (BuildContext context, int index) =>
+                  buildCommunity(context, _resultsList[index]),
+            )),
           ],
         ),
       ),
     );
   }
 }
+
 Widget buildCommunity(BuildContext context, DocumentSnapshot document) {
   final prod = CommunityModel.fromDocument(document);
   // final tripType = trip.types();
 
   return InkWell(
-  child: Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: ClipRRect(
-    borderRadius: BorderRadius.all (Radius.circular(20.0)),
-    child: GestureDetector(
-      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
-
-        CommunityId:prod.communityId,
-        photoUrl:prod.communityImg,
-        description :prod.description,
-        title :prod.title,
-        members:   prod.members ,
-
-      ))),
-      child: Stack(
-
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom:8.0),
-            child: CachedImage(
-              prod.communityImg, width: MediaQuery
-                .of(context)
-                .size
-                .width ,height: MediaQuery
-                .of(context)
-                .size
-                .height / 3,fit: BoxFit.cover,),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment:Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: [
-                    Text(prod.title, softWrap: true,
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25)),
-                    Row(
-
-                      children: [
-                        Icon(Icons.group,color: Colors.white,),
-                        Text("${prod.members.length} members", softWrap: true,
-                            overflow: TextOverflow.fade,
-                            style: TextStyle(color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ],
-                    ),
-
-                  ],
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CommunityMainPage(
+                        CommunityId: prod.communityId,
+                        photoUrl: prod.communityImg,
+                        description: prod.description,
+                        title: prod.title,
+                        members: prod.members,
+                      ))),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: CachedImage(
+                  prod.communityImg,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 3,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
+              Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(prod.title,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25)),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.group,
+                              color: Colors.white,
+                            ),
+                            Text("${prod.members.length} members",
+                                softWrap: true,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-
-        ],
+        ),
       ),
     ),
-  ),
-  ),
-
-    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CommunityMainPage(
-
-      CommunityId:prod.communityId,
-      photoUrl:prod.communityImg,
-      description :prod.description,
-      title :prod.title,
-      members:   prod.members ,
-admins: prod.leaderId,
-    ))),
+    onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CommunityMainPage(
+                  CommunityId: prod.communityId,
+                  photoUrl: prod.communityImg,
+                  description: prod.description,
+                  title: prod.title,
+                  members: prod.members,
+                  admins: prod.leaderId,
+                ))),
   );
 }

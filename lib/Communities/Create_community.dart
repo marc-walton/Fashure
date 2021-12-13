@@ -170,8 +170,7 @@ List<String> userCommunityId = <String>[];
     FirebaseFirestore.instance.collection('Community')
         .doc(communityId)
         .set({
-      "leader":leaders,
-      "leaderImg":leadersImg,
+
       "leaderId":leadersId,
       "members":membersId,
       'communityId':communityId,

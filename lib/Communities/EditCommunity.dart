@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Communities/Community_model.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/progress.dart';
@@ -384,8 +386,10 @@ class _EditCommunityState extends State<EditCommunity> {
 class ViewMembers extends StatefulWidget {
   final List members ;
   final List admins ;
+final String id ;
+final List banned ;
 
-  const ViewMembers({Key key, this.members, this.admins}) : super(key: key);
+  const ViewMembers({Key key, this.members, this.admins, this.id, this.banned}) : super(key: key);
   @override
   _ViewMembersState createState() => _ViewMembersState();
 }
@@ -666,9 +670,187 @@ class _ViewMembersState extends State<ViewMembers> {
 //     );
 //
 //   }
+List<Widget>Members = <Widget>[];
+allMembers(){
+  print( widget.members
+      .length);
+  for ( int i = 0;
+  i <
+      widget.members
+          .length;
+  i++) {
+    print( widget.members
+        .length);
+    print( widget.members
+        );
+    // then delete all activity feed notifications
+    //  DocumentSnapshot doc = await usersRef.doc( widget.members[i]).get();
+    // users = Users.fromDocument(doc);
+     StreamBuilder(
+      stream: usersRef.doc( widget.members[i]).snapshots(),
+      // ignore: missing_return
+      builder: (context, snapshot) {
+
+       Users users = Users.fromDocument(snapshot.data);
+       Members.add(Container(
+         height:50,
+         child: InkWell(
+           child: Padding(
+             padding: const EdgeInsets.all(16.0),
+             child: ListTile(
+               leading: CircleAvatar(
+                 backgroundColor: Colors.grey,
+                 backgroundImage: CachedNetworkImageProvider(users.photoUrl),
+               ),
+               title: Text(
+                 users.displayName,
+                 style:
+                 TextStyle(color:kText, fontWeight: FontWeight.bold),
+               ),
+               trailing:widget.admins.contains(currentUser.id)?IconButton(icon:Icon(Icons.person_remove_outlined,
+               ), onPressed: () {  FirebaseFirestore.instance.collection('Community')
+                   .doc(widget.id).update({
+                 'members':FieldValue.arrayRemove([users.id]),
+                 "bannedMembers":FieldValue.arrayUnion([users.id] )
+               });},)
+                   :Container(),
+             ),
+           ),
+
+
+           onTap: () => showProfile(context, profileId: users.id),
+         ),
+       ));
+
+      }
+
+    );
+return Container(
+  height:100,
+
+  child:   ListView.builder(itemCount: Members.length,
+
+      itemBuilder: (context, index) {
+
+
+
+    return Column(children: [
+
+      Expanded(
+        child: Container(
+          child:    Members[index],
+        ),
+      )
+
+    ],);
+
+      }),
+);
+  }
+}
+AdminMembers(){
+  for ( var imageFile in widget.admins) {
+    // then delete all activity feed notifications
+    // DocumentSnapshot doc = await usersRef.doc(imageFile).get();
+    // users = Users.fromDocument(doc);
+    return StreamBuilder(
+      stream: usersRef.doc(imageFile).snapshots(),
+      builder: (context, snapshot) {
+
+       Users users = Users.fromDocument(snapshot.data);
+
+        return InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(users.photoUrl),
+              ),
+              title: Text(
+                users.displayName,
+                style:
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
+              ),
+trailing:widget.admins.contains(currentUser.id)?IconButton(icon:Icon(Icons.person_remove_outlined,
+), onPressed: () {  FirebaseFirestore.instance.collection('Community')
+        .doc(widget.id).update({
+  'leaderId':FieldValue.arrayRemove([users.id]),
+});},)
+        :Container(),
+            ),
+          ),
+
+
+          onTap: () => showProfile(context, profileId: users.id),
+        );
+      }
+    );
+
+  }
+}
+BannedMembers(){
+  for ( var imageFile in widget.banned) {
+    // then delete all activity feed notifications
+    // DocumentSnapshot doc = await usersRef.doc(imageFile).get();
+    // users = Users.fromDocument(doc);
+    return StreamBuilder(
+      stream: usersRef.doc(imageFile).snapshots(),
+      builder: (context, snapshot) {
+
+       Users users = Users.fromDocument(snapshot.data);
+
+        return InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(users.photoUrl),
+              ),
+              title: Text(
+                users.displayName,
+                style:
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
+              ),
+trailing:widget.admins.contains(currentUser.id)?IconButton(icon:Icon(Icons.person_add_outlined,
+), onPressed: () {  FirebaseFirestore.instance.collection('Community')
+        .doc(widget.id).update({
+  'members':FieldValue.arrayUnion([users.id]),
+});},)
+        :Container(),
+            ),
+          ),
+
+
+          onTap: () => showProfile(context, profileId: users.id),
+        );
+      }
+    );
+
+  }
+}
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar:AppBar(backgroundColor: kPrimaryColor,title: Text("Members",style:TextStyle(color:Colors.white70)),),
+      body: Column(children: [
+        ExpansionTile(title: Text("Curators"),
+        children:[        AdminMembers(),
+      ]
+        ),
+        ExpansionTile(title: Text("Members"),
+        children:[        allMembers(),
+      ]
+        ),
+      //    ExpansionTile(title: Text("Banned Members"),
+      //   children:[        BannedMembers(),
+      // ]
+      //   ),
+
+
+      ],),
+    );
   }
 }

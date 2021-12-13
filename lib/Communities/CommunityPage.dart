@@ -51,8 +51,9 @@ final String description ;
 final String title ;
 final List members ;
 final List admins ;
+final List banned ;
 
-  CommunityMainPage({this.CommunityId,this.photoUrl,this.description, this.title, this.members, this.admins,});
+  CommunityMainPage({this.CommunityId,this.photoUrl,this.description, this.title, this.members, this.banned, this.admins,});
   @override
   _CommunityMainPageState createState() => _CommunityMainPageState();
 }
@@ -515,8 +516,7 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
                       !isPostOwner?showDialog(
@@ -743,11 +743,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
-                      !isPostOwner?showDialog(
+                      !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -783,10 +782,11 @@ String eur =  documentSnapshot.data()['eur'];
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
                     }),
 
-              ),SizedBox( height:0.0,),
+              ),
+              SizedBox( height:0.0,),
               GestureDetector(
                   onDoubleTap: handleLikePost,
                   onTap: () {
@@ -971,11 +971,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
-                      !isPostOwner?showDialog(
+                      !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -1011,10 +1010,11 @@ String eur =  documentSnapshot.data()['eur'];
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
                     }),
 
-              ),SizedBox( height:0.0,),
+              ),
+              SizedBox( height:0.0,),
               GestureDetector(
                   onDoubleTap: handleLikePost,
                    onTap: () {
@@ -1130,11 +1130,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
-                      !isPostOwner?showDialog(
+                      !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -1170,7 +1169,7 @@ String eur =  documentSnapshot.data()['eur'];
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
                     }),
 
               ),
@@ -1305,11 +1304,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
-                      !isPostOwner?showDialog(
+                      !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -1345,7 +1343,7 @@ String eur =  documentSnapshot.data()['eur'];
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
                     }),
 
               ),
@@ -1480,11 +1478,10 @@ String eur =  documentSnapshot.data()['eur'];
                     ),
                   ),
                 ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
+
                 trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
                     onPressed: () {
-                      !isPostOwner?showDialog(
+                      !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
@@ -1520,11 +1517,12 @@ String eur =  documentSnapshot.data()['eur'];
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
                     }),
 
               ),
               SizedBox( height:0.0,),
+
               GestureDetector(
                   onDoubleTap: handleLikePost,
                    onTap: () {
@@ -1636,6 +1634,69 @@ String eur =  documentSnapshot.data()['eur'];
           ):
 
           type == 'originalPoll'?Column(children:[
+            ListTile(
+              leading: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+
+                child: CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+              ),
+              title: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                  onPressed: () {
+                    !isPostOwner||widget.admins.contains(currentUser.id)?showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: GestureDetector(
+                              onTap: (){report();
+                              Navigator.pop(context);},
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Report this post?',style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),)),),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                          // ignore: unnecessary_statements
+                        }):widget.admins.contains(currentUser.id)?handleDeletePost(context):handleDeletePost(context);
+                  }),
+
+            ),SizedBox( height:0.0,),
+
             documentSnapshot.data()['optionNos'] == 2?
             SimplePollsWidget(
               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
@@ -2586,16 +2647,26 @@ SimplePollsWidget(
 
                                   children: [
 
-                                    Row(
+                                    InkWell(
+                                      onTap: ()=>  Navigator.push(context, MaterialPageRoute(builder: (context) =>ViewMembers(
 
-                                      children: [
-                                        Icon(Icons.group,color: Colors.white,),
-                                        Text("${widget.members.length} members", softWrap: true,
-                                            overflow: TextOverflow.fade,
-                                            style: TextStyle(color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ],
+                                        id:widget.CommunityId,
+
+                                        members:   widget.members ,
+                                        admins: widget.admins,
+                                        banned:widget.banned,
+                                      ))),
+                                      child: Row(
+
+                                        children: [
+                                          Icon(Icons.group,color: Colors.white,),
+                                          Text("${widget.members.length} members", softWrap: true,
+                                              overflow: TextOverflow.fade,
+                                              style: TextStyle(color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              )),
+                                        ],
+                                      ),
                                     ),
 
                                   ],
@@ -2636,24 +2707,21 @@ SimplePollsWidget(
                                 ),
                               ),
                             ),
-                          ):Container(),
+                          ):widget.members.contains(currentUser.id)? Align(
+                                alignment:Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:ElevatedButton(child: Text("leave community"),
+                                    onPressed: () {
+                                      FirebaseFirestore.instance.collection('Community').doc(widget.CommunityId).update({
+                                        "members":FieldValue.arrayRemove([currentUser.id])
 
-widget.members.contains(currentUser.id)? Positioned.fill(
-                            child: Align(
-                              alignment:Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child:ElevatedButton(child: Text("leave community"),
-                                  onPressed: () {
-                                    FirebaseFirestore.instance.collection('Community').doc(widget.CommunityId).update({
-                                      "members":FieldValue.arrayRemove([currentUser.id])
-
-                                    });
-                                  Navigator.pop(context);},
+                                      });
+                                      Navigator.pop(context);},
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ):Container(),
+                              ):Container(),
+
 
                         ],
                       ),
@@ -2692,19 +2760,7 @@ widget.members.contains(currentUser.id)? Positioned.fill(
           body:                pagiante(),
 
         ),
-floatingActionButton:widget.members.contains(currentUser.id)?FloatingActionButton.extended(onPressed: (){
-  FirebaseFirestore.instance.collection('Community').doc(widget.CommunityId).update({
-    "members":FieldValue.arrayUnion([currentUser.id])
-
-  });
-  FirebaseFirestore.instance.collection('users')
-      .doc(currentUser.id)
-      .update({
-
-    'communityId':FieldValue.arrayUnion([widget.CommunityId]),
-
-  });
-}, label: Text("Join")):SpeedDial(
+floatingActionButton:widget.members.contains(currentUser.id)?SpeedDial(
     child:Icon(Icons.add),
 speedDialChildren:<SpeedDialChild>[
   SpeedDialChild(
@@ -2730,7 +2786,19 @@ child:Icon(Icons.play_arrow_outlined),
   ),
 
 ]
-)
+):FloatingActionButton.extended(onPressed: (){
+  FirebaseFirestore.instance.collection('Community').doc(widget.CommunityId).update({
+    "members":FieldValue.arrayUnion([currentUser.id])
+
+  });
+  FirebaseFirestore.instance.collection('users')
+      .doc(currentUser.id)
+      .update({
+
+    'communityId':FieldValue.arrayUnion([widget.CommunityId]),
+
+  });
+}, label: Text("Join")),
       ),
     );
   }
