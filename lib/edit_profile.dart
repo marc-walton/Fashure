@@ -107,85 +107,7 @@ class _EditProfileState extends State<EditProfile> {
     // setcheckbox();
 
   }
-  getImage(ImageSource source) async {
-    setState(() {
-      isLoading = true;
-    });
-    this.setState((){
-      _inProcess = true;
-    });
-    File image = await ImagePicker.pickImage(source: source);
-    if(image != null){
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 500,
-          maxHeight: 900,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "Crop Image",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
 
-      this.setState((){
-        file = cropped;
-        _inProcess = false;
-      });
-      handleSubmit();
-    } else {
-      this.setState((){
-        _inProcess = false;
-      });
-    }
-    setState(() {
-      isLoading = true;
-    });
-  }
-
-  handleSubmit() async {
-    setState(() {
-      isUploading = true;
-    });
-    await compressImage();
-    String mediaUrl = await uploadImage(file);
-
-    createPostInFirestore(
-      mediaUrl: mediaUrl,
-
-    );
-
-    Navigator.pop(context);
-
-  }
-
-  selectImage() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: Text('Select Image'),
-
-            children: <Widget>[
-              SimpleDialogOption(
-                child: Text('Image from Gallery'),
-                onPressed:  () {
-                  getImage(ImageSource.gallery);
-                  Navigator.pop(context);
-                },
-              ),
-              SimpleDialogOption(
-                child: Text('Cancel'),
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          );
-        });
-  }
  //  checkbox()
  //  async {
  //    FirebaseFirestore.instance.collection('users')
@@ -355,7 +277,85 @@ class _EditProfileState extends State<EditProfile> {
 
   }
 
+  getImage(ImageSource source) async {
+    setState(() {
+      isLoading = true;
+    });
+    this.setState((){
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
 
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  handleSubmit() async {
+    setState(() {
+      isUploading = true;
+    });
+    await compressImage();
+    String mediaUrl = await uploadImage(file);
+
+    createPostInFirestore(
+      mediaUrl: mediaUrl,
+
+    );
+
+    Navigator.pop(context);
+
+  }
+
+  selectImage() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text('Select Image'),
+
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Text('Image from Gallery'),
+                onPressed:  () {
+                  getImage(ImageSource.gallery);
+                  Navigator.pop(context);
+                },
+              ),
+              SimpleDialogOption(
+                child: Text('Cancel'),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          );
+        });
+  }
 
   clearImage() {
     setState(() {
@@ -373,8 +373,14 @@ class _EditProfileState extends State<EditProfile> {
       file = compressedImageFile;
     });
   }
+  deletePost() async {
+    var photo =  FirebaseStorage.instance.refFromURL(currentUser.photoUrl) ;
+    await photo.delete();
 
+
+  }
   Future<String> uploadImage(imageFile) async {
+    deletePost();
     UploadTask  uploadTask =
     storageRef.child("profile_$photoId.jpg").putFile(imageFile);
     TaskSnapshot storageSnap = await uploadTask;
@@ -1679,7 +1685,7 @@ INR = resultINR.rate;
                     ),
                     Padding(
                       padding: EdgeInsets.all(16.0),
-                      child: FlatButton.icon(
+                      child: TextButton.icon(
                         onPressed: logout,
                         icon: Icon(Icons.cancel, color: Colors.red),
                         label: Text(

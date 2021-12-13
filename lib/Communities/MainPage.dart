@@ -102,6 +102,7 @@ return  PaginateView(
                     description :documentSnapshot.data()['description'],
                     title :documentSnapshot.data()['title'],
                     members:   members ,
+                    admins:  documentSnapshot.data()['leaderId'],
 
                   ))),
                   child: Stack(
@@ -189,6 +190,7 @@ return  PaginateView(
           PaginateBuilderType.listView, //Change types accordingly
           itemBuilder: (index, context, documentSnapshot) {
           List members =   documentSnapshot.data()['members'];
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
@@ -201,6 +203,7 @@ return  PaginateView(
                    description :documentSnapshot.data()['description'],
                       title :documentSnapshot.data()['title'],
                       members:   members ,
+                    admins:  documentSnapshot.data()['leaderId'],
 
                   ))),
                   child: Stack(
@@ -466,7 +469,7 @@ Widget buildCommunity(BuildContext context, DocumentSnapshot document) {
       description :prod.description,
       title :prod.title,
       members:   prod.members ,
-
+admins: prod.leaderId,
     ))),
   );
 }

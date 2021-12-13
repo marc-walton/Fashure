@@ -1041,6 +1041,70 @@ var total =  documentSnapshot.data()['total'];
 
 
           return    type == 'Poll'?Column(children:[
+            ListTile(
+              leading: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+
+                child: CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+              ),
+              title: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              subtitle: Text(location,
+                style: TextStyle(color: kText),),
+              trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                  onPressed: () {
+                    !isPostOwner?showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: GestureDetector(
+                              onTap: (){report();
+                              Navigator.pop(context);},
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Report this post?',style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),)),),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                          // ignore: unnecessary_statements
+                        }):handleDeletePost(context);
+                  }),
+
+            ),SizedBox( height:0.0,),
+
             documentSnapshot.data()['optionNos'] == 2?
             SimplePollsWidget(
               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
@@ -2276,6 +2340,70 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
          return    Container(
            margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
            child: type == 'Poll'?Column(children:[
+             ListTile(
+               leading: GestureDetector(
+                 onTap: () => showProfile(context, profileId: ownerId),
+
+                 child: CircleAvatar(
+                   backgroundImage: CachedNetworkImageProvider(photoUrl),
+                   backgroundColor: Colors.grey,
+                 ),
+               ),
+               title: GestureDetector(
+                 onTap: () => showProfile(context, profileId: ownerId),
+                 child: Text(
+                   username,
+                   style: TextStyle(
+                     color: kText,
+                     fontWeight: FontWeight.bold,
+                   ),
+                 ),
+               ),
+               subtitle: Text(location,
+                 style: TextStyle(color: kText),),
+               trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                   onPressed: () {
+                     !isPostOwner?showDialog(
+                         context: context,
+                         builder: (BuildContext context) {
+                           return Dialog(
+                             backgroundColor: kSecondaryColor,
+                             shape: RoundedRectangleBorder(
+                                 borderRadius:
+                                 BorderRadius.circular(20.0)), //this right here
+                             child: GestureDetector(
+                               onTap: (){report();
+                               Navigator.pop(context);},
+                               child: Container(
+                                 height: 100,
+                                 child: Padding(
+                                   padding: const EdgeInsets.all(12.0),
+                                   child: Column(
+                                     mainAxisAlignment: MainAxisAlignment.center,
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+                                       Container(
+
+                                         child: Align(
+                                             alignment: Alignment.center,
+                                             child: Text('Report this post?',style: TextStyle(
+                                                 color: Colors.blueAccent,
+                                                 fontWeight: FontWeight.bold,
+                                                 fontSize: 20.0),)),),
+
+
+                                     ],
+                                   ),
+                                 ),
+                               ),
+                             ),
+                           );
+                           // ignore: unnecessary_statements
+                         }):handleDeletePost(context);
+                   }),
+
+             ),SizedBox( height:0.0,),
+
              documentSnapshot.data()['optionNos'] == 2?
              SimplePollsWidget(
                onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {

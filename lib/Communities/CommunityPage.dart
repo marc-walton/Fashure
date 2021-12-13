@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/Communities/EditCommunity.dart';
 import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Communities/Upload_community.dart';
 import 'package:fashow/Communities/upload_poll.dart';
@@ -2621,7 +2622,17 @@ SimplePollsWidget(
                                 padding: const EdgeInsets.all(8.0),
                                 child:IconButton(icon:Icon(Icons.settings),
                                 color:Colors.white,
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>EditCommunity(
+
+                                      CommunityId:widget.CommunityId,
+                                      photoUrl:widget.photoUrl,
+                                      description :widget.description,
+                                      title :widget.title,
+                                      members:   widget.members ,
+                                      admins: widget.admins,
+                                    )));
+                                  },
                                 ),
                               ),
                             ),
@@ -2723,6 +2734,7 @@ child:Icon(Icons.play_arrow_outlined),
       ),
     );
   }
+
 }
 
 
