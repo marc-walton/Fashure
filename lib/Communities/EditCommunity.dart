@@ -13,9 +13,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:image/image.dart' as Im;
-
 import 'package:image_cropper/image_cropper.dart';
 
 class EditCommunity extends StatefulWidget {
@@ -382,7 +380,6 @@ class _EditCommunityState extends State<EditCommunity> {
         )
     );  }
 }
-
 
 class ViewMembers extends StatefulWidget {
   final List members ;
