@@ -148,14 +148,10 @@ All(){
                       Text(productname, style: TextStyle(
                         color: kText,
                       ),),
-                      Spacer(),
                       IconButton(
                         onPressed: (){
-                          print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.kainadgsdagdsargr");
- print("$_isLiked");
 
                           if (_isLiked) {
-                            print("11111111111111111");
                             productsRef
                                 .doc(ownerId)
                                 .collection('userProducts')
@@ -180,8 +176,7 @@ All(){
                               isLiked = false;
                               likes[currentUser.id] = false;
                             });
-                          }
-                          else if (!_isLiked) {
+                          } else if (!_isLiked) {
                             productsRef
                                 .doc(ownerId)
                                 .collection('userProducts')
@@ -189,8 +184,6 @@ All(){
                                 .update({'likes.${currentUser.id}': true});
                             bool isNotPostOwner = currentUser.id != ownerId;
                             if (isNotPostOwner) {
-                              print("zsdfgasfdgs");
-
                               activityFeedRef
                                   .doc(ownerId)
                                   .collection("feedItems")

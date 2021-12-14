@@ -725,27 +725,21 @@ allMembers(){
       }
 
     );
-return Container(
-  height:100,
+return ListView.builder(itemCount: Members.length,
 
-  child:   ListView.builder(itemCount: Members.length,
-
-      itemBuilder: (context, index) {
+    itemBuilder: (context, index) {
 
 
 
-    return Column(children: [
+  return Column(children: [
 
-      Expanded(
-        child: Container(
-          child:    Members[index],
-        ),
-      )
+    Container(
+      child:    Members[index],
+    )
 
-    ],);
+  ],);
 
-      }),
-);
+    });
   }
 }
 AdminMembers(){
@@ -841,7 +835,10 @@ trailing:widget.admins.contains(currentUser.id)?IconButton(icon:Icon(Icons.perso
       ]
         ),
         ExpansionTile(title: Text("Members"),
-        children:[        allMembers(),
+        children:[  Row(children:[
+          Expanded(child: Container(height:100,child:allMembers(),))
+
+        ])
       ]
         ),
       //    ExpansionTile(title: Text("Banned Members"),
