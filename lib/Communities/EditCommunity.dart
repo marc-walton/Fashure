@@ -834,17 +834,10 @@ trailing:widget.admins.contains(currentUser.id)?IconButton(icon:Icon(Icons.perso
         children:[        AdminMembers(),
       ]
         ),
-        ExpansionTile(title: Text("Members"),
-        children:[  Row(children:[
-          Expanded(child: Container(height:100,child:allMembers(),))
+        Text("Members"),
+        Container(height:100,child:allMembers(),)
 
-        ])
-      ]
-        ),
-      //    ExpansionTile(title: Text("Banned Members"),
-      //   children:[        BannedMembers(),
-      // ]
-      //   ),
+
 
 
       ],),

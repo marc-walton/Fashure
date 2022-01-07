@@ -1343,26 +1343,17 @@ SizedBox(height: 10.0,),
         emptyDisplay: Center(child: Text("No posts",style: TextStyle(
           fontWeight: FontWeight.bold,
         ),)),
-        itemsPerPage : 30,
+        scrollDirection: Axis.vertical,
         itemBuilderType:
-        PaginateBuilderType.listView,
+        PaginateBuilderType.gridView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['userId'];
           List image =   documentSnapshot.data()['mediaUrl'];
 
           return
-            Container(
-              height: 400,
-              child: GridView(
-
-                  primary: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: (MediaQuery
-                          .of(context)
-                          .orientation == Orientation.portrait) ? 3 : 3),
-                  children: [                      Padding(
-              padding: EdgeInsets.all(5.0),
+            Padding(
+                padding: EdgeInsets.all(5.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: GestureDetector(
@@ -1382,9 +1373,6 @@ SizedBox(height: 10.0,),
                         image.first,)
                   ),
                 )
-            ),
-          ],
-                ),
             );
           },
         query: postsRef
@@ -1402,26 +1390,17 @@ SizedBox(height: 10.0,),
         emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
           fontWeight: FontWeight.bold,
         ),)),
-        itemsPerPage : 30,
+        scrollDirection: Axis.vertical,
         itemBuilderType:
-        PaginateBuilderType.listView,
+        PaginateBuilderType.gridView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['userId'];
           List image =   documentSnapshot.data()['shopmediaUrl'];
 
           return
-            Container(
-              height: 400,
-              child: GridView(
-
-                  primary: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: (MediaQuery
-                          .of(context)
-                          .orientation == Orientation.portrait) ? 3 : 3),
-                  children: [                      Padding(
-              padding: EdgeInsets.all(5.0),
+            Padding(
+                padding: EdgeInsets.all(5.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: GestureDetector(
@@ -1441,9 +1420,6 @@ SizedBox(height: 10.0,),
                         image.first,)
                   ),
                 )
-            ),
-          ],
-                ),
             );
           },
         query: productsRef
@@ -1460,26 +1436,17 @@ Resales() {
         emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
           fontWeight: FontWeight.bold,
         ),)),
-        itemsPerPage : 30,
+        scrollDirection: Axis.vertical,
         itemBuilderType:
-        PaginateBuilderType.listView,
+        PaginateBuilderType.gridView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['userId'];
           List image =   documentSnapshot.data()['images'];
 
           return
-            Container(
-              height: 400,
-              child: GridView(
-
-                  primary: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: (MediaQuery
-                          .of(context)
-                          .orientation == Orientation.portrait) ? 3 : 3),
-                  children: [                      Padding(
-              padding: EdgeInsets.all(5.0),
+            Padding(
+                padding: EdgeInsets.all(5.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: GestureDetector(
@@ -1499,9 +1466,6 @@ Resales() {
                         image.first,)
                   ),
                 )
-            ),
-          ],
-                ),
             );
           },
         query: FirebaseFirestore.instance.collection('Resale')

@@ -229,7 +229,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
 
   }
 
-  handleDeletePost(BuildContext parentContext) {
+  handleDeletePost(BuildContext parentContext,{String communityId,String ownerId}) {
     return showDialog(
 
         context: parentContext,
@@ -243,7 +243,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
                 SimpleDialogOption(
                   onPressed: () {
                     Navigator.pop(context);
-                    deletePost();
+                    deletePost(postId:postId);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -263,7 +263,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
   }
 
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
-  deletePost() async {
+  deletePost({String postId}) async {
     // delete post itself
     FirebaseFirestore.instance.collection('Community')
         .doc(communityId)
@@ -275,8 +275,6 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
         doc.reference.delete();
       }
     });
-    // delete uploaded image for the post
-//    storageRef.child("postnow${postId}").delete();
 
     for ( var imageFile in mediaUrl) {
       var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
@@ -304,7 +302,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
     });
   }
 
-  handleLikePost() {
+  handleLikePost({String postId,String ownerId}) {
     bool _isLiked = likes[currentUserId] == true;
 
     if (_isLiked) {
@@ -313,7 +311,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
           .collection('communityPosts')
           .doc(postId)
           .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed();
+      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount -= 1;
         isLiked = false;
@@ -325,7 +323,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
           .collection('communityPosts')
           .doc(postId)
           .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed();
+      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount += 1;
         isLiked = true;
@@ -335,7 +333,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
     }
   }
 
-  addLikeToActivityFeed() {
+  addLikeToActivityFeed({String postId,String ownerId}) {
     // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
@@ -358,7 +356,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
     }
   }
 
-  removeLikeFromActivityFeed() {
+  removeLikeFromActivityFeed({String postId,String ownerId}) {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
@@ -373,7 +371,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
       });
     }
   }
-  report(){
+  report({String postId,String ownerId}){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
     FirebaseFirestore.instance.collection('reports')
@@ -387,7 +385,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
       "timestamp": timestamp,
     });
   }
-  tagView(){
+  tagView({String postId}){
     return
       StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Community')
@@ -431,14 +429,14 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
       );
 
   }
-  viewProducts(){
+  viewProducts({String postId}){
     return  showMaterialModalBottomSheet(
         context: context,
         builder: (BuildContext context)
         {
 
           return
-            Container(   color:Colors.black,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+            Container(   color:Colors.black,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId),);
         });
   }
   pagiante(){
@@ -450,21 +448,21 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
         itemBuilder: (index, context, documentSnapshot) {
 
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
-          postId= documentSnapshot.data()['postId'];
-          communityId= documentSnapshot.data()['communityId'];
+          String postId= documentSnapshot.data()['postId'];
+          String ownerId= documentSnapshot.data()['ownerId'];
+          String username= documentSnapshot.data()['username'];
+          String location= documentSnapshot.data()['location'];
+          String description= documentSnapshot.data()['description'];
+          List mediaUrl= documentSnapshot.data()['mediaUrl'];
 
-          ownerId= documentSnapshot.data()['ownerId'];
-          username= documentSnapshot.data()['username'];
-          location= documentSnapshot.data()['location'];
-          description= documentSnapshot.data()['description'];
-          mediaUrl= documentSnapshot.data()['mediaUrl'];
+          Map likes= documentSnapshot.data()['likes'];
+          bool isLiked = likes[currentUserId] == true;
 
-          likes= documentSnapshot.data()['likes'];
-          isLiked = likes[currentUserId] == true;
+          String currency= documentSnapshot.data()['currency'];
+          String  photoUrl= documentSnapshot.data()['photoUrl'];
+           communityId= documentSnapshot.data()['communityId'];
 
-          currency= documentSnapshot.data()['currency'];
-          photoUrl= documentSnapshot.data()['photoUrl'];
-          likeCount = getLikeCount(this.likes);
+
           var option1Total =  documentSnapshot.data()['option1Total'];
           var option2Total =  documentSnapshot.data()['option2Total'];
           var option3Total =  documentSnapshot.data()['option3Total'];
@@ -2217,7 +2215,7 @@ SimplePollsWidget(
                                   borderRadius:
                                   BorderRadius.circular(20.0)), //this right here
                               child: GestureDetector(
-                                onTap: (){report();
+                                onTap: (){report(postId:postId,ownerId:ownerId);
                                 Navigator.pop(context);},
                                 child: Container(
                                   height: 100,
@@ -2244,13 +2242,13 @@ SimplePollsWidget(
                               ),
                             );
                             // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
+                          }):handleDeletePost(context,ownerId:ownerId);
                     }),
 
               ),
               SizedBox( height:0.0,),
               GestureDetector(
-                  onDoubleTap: handleLikePost,
+                  onDoubleTap: (){handleLikePost(ownerId: ownerId,postId:postId);},
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -2283,7 +2281,7 @@ SimplePollsWidget(
                           shape:  GFButtonShape.pills,
                           textColor: Colors.black,
                           type : GFButtonType.outline,
-                          onPressed: viewProducts,
+                          onPressed:(){ viewProducts(postId:postId);},
                           text:"View Products",
                           icon: Icon(
                             Icons.add_shopping_cart,
@@ -2457,167 +2455,7 @@ SimplePollsWidget(
 
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return[
- //              SliverAppBar(
- //                pinned: false,
- //                expandedHeight:test.characters.length.toDouble()*2 ,
- // backgroundColor: Colors.black,
- //                flexibleSpace: FlexibleSpaceBar(
- //                  collapseMode: CollapseMode.pin,
- //                  background: Column(
- //
- //                    children: [
- //                      Stack(
- //                        children: [
- //                          Padding(
- //                            padding: const EdgeInsets.only(bottom:8.0),
- //                            child: CachedImage(
- //                              widget.photoUrl, width: MediaQuery
- //                                .of(context)
- //                                .size
- //                                .width ,height: MediaQuery
- //                                .of(context)
- //                                .size
- //                                .height / 3,fit: BoxFit.cover,),
- //                          ),
- //                          Positioned.fill(
- //                            child: Align(
- //                              alignment:Alignment.bottomCenter,
- //                              child: Padding(
- //                                padding: const EdgeInsets.all(8.0),
- //                                child: Column(
- //                                  mainAxisAlignment: MainAxisAlignment.end,
- //                                  crossAxisAlignment: CrossAxisAlignment.start,
- //
- //                                  children: [
- //
- //                                    Row(
- //
- //                                      children: [
- //                                        Icon(Icons.group,color: Colors.white,),
- //                                        Text("${widget.members.length} members", softWrap: true,
- //                                            overflow: TextOverflow.fade,
- //                                            style: TextStyle(color: Colors.white,
- //                                              fontWeight: FontWeight.bold,
- //                                            )),
- //                                      ],
- //                                    ),
- //
- //                                  ],
- //                                ),
- //                              ),
- //                            ),
- //                          ),
- //
- //                        ],
- //                      ),
- //                      Padding(
- //                        padding: const EdgeInsets.all(8.0),
- //                        child: Column(
- //                          crossAxisAlignment: CrossAxisAlignment.start,
- //
- //                          children: [
- //                            Text(widget.title, softWrap: true,
- //                                overflow: TextOverflow.fade,
- //                                style: TextStyle(color: Colors.white,
- //                                    fontWeight: FontWeight.bold,
- //                                    fontSize: 25)),
- //                            SizedBox(height:15),
- //                            Text(widget.description,  style: TextStyle(color: Colors.white70,
- //                                // fontWeight: FontWeight.bold,
- //                                fontSize: 15)),
- //                          ],
- //                        ),
- //                      ),
- //
- //
- //                    ],
- //                  ),
- //
- //                ),
- //              ),
               SliverStickyHeader(
-                //          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                //            return[
-                //              SliverAppBar(
-                //                pinned: false,
-                //                expandedHeight:test.characters.length.toDouble()*2 ,
-                // backgroundColor: Colors.black,
-                //                flexibleSpace: FlexibleSpaceBar(
-                //                  collapseMode: CollapseMode.pin,
-                //                  background: Column(
-                //
-                //                    children: [
-                //                      Stack(
-                //                        children: [
-                //                          Padding(
-                //                            padding: const EdgeInsets.only(bottom:8.0),
-                //                            child: CachedImage(
-                //                              widget.photoUrl, width: MediaQuery
-                //                                .of(context)
-                //                                .size
-                //                                .width ,height: MediaQuery
-                //                                .of(context)
-                //                                .size
-                //                                .height / 3,fit: BoxFit.cover,),
-                //                          ),
-                //                          Positioned.fill(
-                //                            child: Align(
-                //                              alignment:Alignment.bottomCenter,
-                //                              child: Padding(
-                //                                padding: const EdgeInsets.all(8.0),
-                //                                child: Column(
-                //                                  mainAxisAlignment: MainAxisAlignment.end,
-                //                                  crossAxisAlignment: CrossAxisAlignment.start,
-                //
-                //                                  children: [
-                //
-                //                                    Row(
-                //
-                //                                      children: [
-                //                                        Icon(Icons.group,color: Colors.white,),
-                //                                        Text("${widget.members.length} members", softWrap: true,
-                //                                            overflow: TextOverflow.fade,
-                //                                            style: TextStyle(color: Colors.white,
-                //                                              fontWeight: FontWeight.bold,
-                //                                            )),
-                //                                      ],
-                //                                    ),
-                //
-                //                                  ],
-                //                                ),
-                //                              ),
-                //                            ),
-                //                          ),
-                //
-                //                        ],
-                //                      ),
-                //                      Padding(
-                //                        padding: const EdgeInsets.all(8.0),
-                //                        child: Column(
-                //                          crossAxisAlignment: CrossAxisAlignment.start,
-                //
-                //                          children: [
-                //                            Text(widget.title, softWrap: true,
-                //                                overflow: TextOverflow.fade,
-                //                                style: TextStyle(color: Colors.white,
-                //                                    fontWeight: FontWeight.bold,
-                //                                    fontSize: 25)),
-                //                            SizedBox(height:15),
-                //                            Text(widget.description,  style: TextStyle(color: Colors.white70,
-                //                                // fontWeight: FontWeight.bold,
-                //                                fontSize: 15)),
-                //                          ],
-                //                        ),
-                //                      ),
-                //
-                //
-                //                    ],
-                //                  ),
-                //
-                //                ),
-                //              ),
-                //            ];
-                //          } ,
                 header:Container(
 
                   color:Colors.black,
@@ -2736,11 +2574,6 @@ SimplePollsWidget(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25)),
                             SizedBox(height:15),
-                            // Text(widget.description, softWrap: true,
-                            //     overflow: TextOverflow.fade,
-                            //     style: TextStyle(color: Colors.white70,
-                            //         fontWeight: FontWeight.bold,
-                            //         fontSize: 15)),
                              ExpandableText(text:widget.description,color:Colors.white70,size:15.0),
                           ],
                         ),

@@ -157,7 +157,7 @@ String countryISO = "";
                           },
                         ),),
                         controller: pwdInputController,
-                        obscureText: true,
+                        obscureText: _passwordVisible,
                         validator: pwdValidator,
                       ),
                       TextFormField(
@@ -184,7 +184,7 @@ String countryISO = "";
 
                         ),
                         controller: confirmPwdInputController,
-                        obscureText: true,
+                        obscureText: _passwordVisible,
                         validator: pwdValidator,
                       ),
                       Text('Select your region',style: TextStyle(color:kText)),

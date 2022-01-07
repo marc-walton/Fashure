@@ -743,7 +743,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
      return count;
    }
 
-  handleDeletePost(BuildContext parentContext) {
+  handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
     return showDialog(
 
         context: parentContext,
@@ -757,7 +757,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
                 SimpleDialogOption(
                   onPressed: () {
                     Navigator.pop(context);
-                    deletePost();
+                    deletePost(postId:postId,ownerId:ownerId);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -777,7 +777,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
   }
 
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
-  deletePost() async {
+  deletePost({String postId,String ownerId}) async {
     // delete post itself
     postsRef
         .doc(ownerId)
@@ -818,7 +818,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
     });
   }
 
-  handleLikePost() {
+  handleLikePost({String postId,String ownerId}) {
     bool _isLiked = likes[currentUserId] == true;
 
     if (_isLiked) {
@@ -827,7 +827,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
           .collection('userPosts')
           .doc(postId)
           .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed();
+      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount -= 1;
         isLiked = false;
@@ -839,7 +839,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
           .collection('userPosts')
           .doc(postId)
           .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed();
+      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount += 1;
         isLiked = true;
@@ -849,7 +849,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
     }
   }
 
-  addLikeToActivityFeed() {
+  addLikeToActivityFeed({String postId,String ownerId}) {
     // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
@@ -870,7 +870,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
     }
   }
 
-  removeLikeFromActivityFeed() {
+  removeLikeFromActivityFeed({String postId,String ownerId}) {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
@@ -885,7 +885,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
       });
     }
   }
-  report(){
+  report({String postId,String ownerId}){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
     FirebaseFirestore.instance.collection('reports')
@@ -899,7 +899,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
       "timestamp": timestamp,
     });
   }
-  tagView(){
+  tagView({String postId,String ownerId}){
     return
       StreamBuilder(
         stream:  postsRef
@@ -911,7 +911,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data.docs.isEmpty){
             return
-              Container();
+              Container(child: Text("sjdvclskbcskcbaskcaskcbasdc$ownerId$postId"),);
           } else {
             return new ListView.builder(
                 scrollDirection :Axis.horizontal,
@@ -943,57 +943,17 @@ class _GlobalFeedState extends State<GlobalFeed> {
       );
 
   }
-  viewProducts(){
+  viewProducts({String postId,String ownerId}){
     return  showMaterialModalBottomSheet(
         context: context,
         builder: (BuildContext context)
         {
 
           return
-            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
         });
   }
 
-  getProducts() async {
-   //  if (!hasMore) {
-   //    print('No More Products');
-   //    return;
-   //  }
-   // else if (isLoading) {
-   //    return;
-   //  }
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot querySnapshot;
-    if (lastDocument == null) {
-      querySnapshot = await  FirebaseFirestore.instance.collectionGroup('userPosts')
-          .orderBy('timestamp',descending: true)
-          .limit(documentLimit)
-          .get();
-      print("wdfsdcdscacsx as s");
-
-    } else {
-      querySnapshot = await FirebaseFirestore.instance.collectionGroup('userPosts')
-          .orderBy('timestamp',descending: true)
-          .startAfterDocument(lastDocument)
-          .limit(documentLimit)
-          .get();
-      print("wfvwvddddddddddddd");
-    }
-    if (querySnapshot.docs.length < documentLimit) {
-      hasMore = false;
-    }
-    lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-    List<Post> posts =
-    querySnapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
-    setState(() {
-      this.products = posts;
-    });
-    setState(() {
-      isLoading = false;
-    });
-  }
 
   @override
   void initState() {
@@ -1010,19 +970,19 @@ class _GlobalFeedState extends State<GlobalFeed> {
         itemBuilder: (index, context, documentSnapshot) {
 
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
-          postId= documentSnapshot.data()['postId'];
-          ownerId= documentSnapshot.data()['ownerId'];
-          username= documentSnapshot.data()['username'];
-          location= documentSnapshot.data()['location'];
-          description= documentSnapshot.data()['description'];
-          mediaUrl= documentSnapshot.data()['mediaUrl'];
+         String postId= documentSnapshot.data()['postId'];
+         String ownerId= documentSnapshot.data()['ownerId'];
+         String username= documentSnapshot.data()['username'];
+         String location= documentSnapshot.data()['location'];
+         String description= documentSnapshot.data()['description'];
+         List mediaUrl= documentSnapshot.data()['mediaUrl'];
 
-          likes= documentSnapshot.data()['likes'];
-          isLiked = likes[currentUserId] == true;
+         Map likes= documentSnapshot.data()['likes'];
+         bool isLiked = likes[currentUserId] == true;
 
-          currency= documentSnapshot.data()['currency'];
-          photoUrl= documentSnapshot.data()['photoUrl'];
-          likeCount = getLikeCount(this.likes);
+         String currency= documentSnapshot.data()['currency'];
+        String  photoUrl= documentSnapshot.data()['photoUrl'];
+         int likeCount = getLikeCount(this.likes);
           var option1Total =  documentSnapshot.data()['option1Total'];
           var option2Total =  documentSnapshot.data()['option2Total'];
           var option3Total =  documentSnapshot.data()['option3Total'];
@@ -1652,12 +1612,12 @@ var total =  documentSnapshot.data()['total'];
                                 ),
                               );
                               // ignore: unnecessary_statements
-                            }):handleDeletePost(context);
+                            }):handleDeletePost(context,postId:postId,ownerId:ownerId);
                       }),
 
                 ),SizedBox( height:0.0,),
                 GestureDetector(
-                    onDoubleTap: handleLikePost,
+                    onDoubleTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[
@@ -1709,7 +1669,7 @@ var total =  documentSnapshot.data()['total'];
                             shape:  GFButtonShape.pills,
                             textColor: Colors.black,
                             type : GFButtonType.outline,
-                            onPressed: viewProducts,
+                            onPressed:(){viewProducts(postId:documentSnapshot.data()['postId'],ownerId:documentSnapshot.data()['ownerId']);},
                             text:"View Products",
                             icon: Icon(
                               Icons.add_shopping_cart,
@@ -1723,6 +1683,10 @@ var total =  documentSnapshot.data()['total'];
                     }
                   },
                 ),
+                IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+              print(postId);
+                    }),
                 SizedBox( height:3.0,),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1746,7 +1710,7 @@ var total =  documentSnapshot.data()['total'];
                     Padding(padding: EdgeInsets.only( left: 20.0)),
 
                     GestureDetector(
-                      onTap: handleLikePost,
+                      onTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
 
                       child: ImageIcon(
                         isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
@@ -2055,7 +2019,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     return count;
   }
 
-  handleDeletePost(BuildContext parentContext) {
+  handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
     return showDialog(
 
         context: parentContext,
@@ -2069,7 +2033,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                 SimpleDialogOption(
                   onPressed: () {
                     Navigator.pop(context);
-                    deletePost();
+                    deletePost(postId:postId,ownerId:ownerId);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -2089,7 +2053,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
   }
 
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
-  deletePost() async {
+  deletePost({String postId,String ownerId}) async {
     // delete post itself
     postsRef
         .doc(ownerId)
@@ -2130,7 +2094,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     });
   }
 
-  handleLikePost() {
+  handleLikePost({String postId,String ownerId}) {
     bool _isLiked = likes[currentUserId] == true;
 
     if (_isLiked) {
@@ -2139,7 +2103,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           .collection('userPosts')
           .doc(postId)
           .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed();
+      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount -= 1;
         isLiked = false;
@@ -2151,7 +2115,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           .collection('userPosts')
           .doc(postId)
           .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed();
+      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
       setState(() {
         likeCount += 1;
         isLiked = true;
@@ -2161,7 +2125,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     }
   }
 
-  addLikeToActivityFeed() {
+  addLikeToActivityFeed({String postId,String ownerId}) {
     // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
@@ -2182,7 +2146,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     }
   }
 
-  removeLikeFromActivityFeed() {
+  removeLikeFromActivityFeed({String postId,String ownerId}) {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
@@ -2197,7 +2161,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
       });
     }
   }
-  report(){
+  report({String postId,String ownerId}){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
     FirebaseFirestore.instance.collection('reports')
@@ -2211,7 +2175,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
       "timestamp": timestamp,
     });
   }
-  tagView(){
+  tagView({String postId,String ownerId}){
     return
       StreamBuilder(
         stream:  postsRef
@@ -2223,7 +2187,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data.docs.isEmpty){
             return
-              Container();
+              Container(child: Text("sjdvclskbcskcbaskcaskcbasdc$ownerId$postId"),);
           } else {
             return new ListView.builder(
                 scrollDirection :Axis.horizontal,
@@ -2255,14 +2219,14 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
       );
 
   }
-  viewProducts(){
+  viewProducts({String postId,String ownerId}){
     return  showMaterialModalBottomSheet(
         context: context,
         builder: (BuildContext context)
         {
 
           return
-            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
         });
   }
   getFfollowing() async {
@@ -2275,876 +2239,870 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    getFfollowing();
-
-
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
-    _tabController.addListener(_handleTabIndex);
-  }
-
-  @override
-  void dispose() {
-    _tabController.removeListener(_handleTabIndex);
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  void _handleTabIndex() {
-    setState(() {});
-  }
-
 
   TimelinePosts(){
-    return PaginateView(child:PaginateFirestore(
-        emptyDisplay:  buildUsersToFollow() ,
+    return PaginateView(
+      child: PaginateFirestore(
         isLive:true,
         itemBuilderType:
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
 
           bool isPostOwner = currentUserId == documentSnapshot.data()['ownerId'];
-          postId= documentSnapshot.data()['postId'];
-          ownerId= documentSnapshot.data()['ownerId'];
-          username= documentSnapshot.data()['username'];
-          location= documentSnapshot.data()['location'];
-          description= documentSnapshot.data()['description'];
-          mediaUrl= documentSnapshot.data()['mediaUrl'];
+          String postId= documentSnapshot.data()['postId'];
+          String ownerId= documentSnapshot.data()['ownerId'];
+          String username= documentSnapshot.data()['username'];
+          String location= documentSnapshot.data()['location'];
+          String description= documentSnapshot.data()['description'];
+          List mediaUrl= documentSnapshot.data()['mediaUrl'];
 
-          likes= documentSnapshot.data()['likes'];
-          isLiked = likes[currentUserId] == true;
+          Map likes= documentSnapshot.data()['likes'];
+          bool isLiked = likes[currentUserId] == true;
 
-          currency= documentSnapshot.data()['currency'];
-          photoUrl= documentSnapshot.data()['photoUrl'];
-          likeCount = getLikeCount(this.likes);
+          String currency= documentSnapshot.data()['currency'];
+          String  photoUrl= documentSnapshot.data()['photoUrl'];
+          int likeCount = getLikeCount(this.likes);
+          var option1Total =  documentSnapshot.data()['option1Total'];
+          var option2Total =  documentSnapshot.data()['option2Total'];
+          var option3Total =  documentSnapshot.data()['option3Total'];
+          var option4Total =  documentSnapshot.data()['option4Total'];
+          var option5Total =  documentSnapshot.data()['option5Total'];
+          var option6Total =  documentSnapshot.data()['option6Total'];
+          List option1Voters =  documentSnapshot.data()['option1Voters'];
+          List option2Voters =  documentSnapshot.data()['option2Voters'];
+          List option3Voters =  documentSnapshot.data()['option3Voters'];
+          List option4Voters =  documentSnapshot.data()['option4Voters'];
+          List option5Voters =  documentSnapshot.data()['option5Voters'];
+          List option6Voters =  documentSnapshot.data()['option6Voters'];
+          List Voters =  documentSnapshot.data()['Voters'];
+          var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
 
-          var option1Total =  documentSnapshot.data()['option1Total'];
-         var option2Total =  documentSnapshot.data()['option2Total'];
-         var option3Total =  documentSnapshot.data()['option3Total'];
-         var option4Total =  documentSnapshot.data()['option4Total'];
-         var option5Total =  documentSnapshot.data()['option5Total'];
-         var option6Total =  documentSnapshot.data()['option6Total'];
-         List option1Voters =  documentSnapshot.data()['option1Voters'];
-         List option2Voters =  documentSnapshot.data()['option2Voters'];
-         List option3Voters =  documentSnapshot.data()['option3Voters'];
-         List option4Voters =  documentSnapshot.data()['option4Voters'];
-         List option5Voters =  documentSnapshot.data()['option5Voters'];
-         List option6Voters =  documentSnapshot.data()['option6Voters'];
-         List Voters =  documentSnapshot.data()['Voters'];
-         var total =  documentSnapshot.data()['total'];
 
-
-         return    Container(
-           margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-           child: type == 'Poll'?Column(children:[
-             ListTile(
-               leading: GestureDetector(
-                 onTap: () => showProfile(context, profileId: ownerId),
-
-                 child: CircleAvatar(
-                   backgroundImage: CachedNetworkImageProvider(photoUrl),
-                   backgroundColor: Colors.grey,
-                 ),
-               ),
-               title: GestureDetector(
-                 onTap: () => showProfile(context, profileId: ownerId),
-                 child: Text(
-                   username,
-                   style: TextStyle(
-                     color: kText,
-                     fontWeight: FontWeight.bold,
-                   ),
-                 ),
-               ),
-               subtitle: Text(location,
-                 style: TextStyle(color: kText),),
-               trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                   onPressed: () {
-                     !isPostOwner?showDialog(
-                         context: context,
-                         builder: (BuildContext context) {
-                           return Dialog(
-                             backgroundColor: kSecondaryColor,
-                             shape: RoundedRectangleBorder(
-                                 borderRadius:
-                                 BorderRadius.circular(20.0)), //this right here
-                             child: GestureDetector(
-                               onTap: (){report();
-                               Navigator.pop(context);},
-                               child: Container(
-                                 height: 100,
-                                 child: Padding(
-                                   padding: const EdgeInsets.all(12.0),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       Container(
-
-                                         child: Align(
-                                             alignment: Alignment.center,
-                                             child: Text('Report this post?',style: TextStyle(
-                                                 color: Colors.blueAccent,
-                                                 fontWeight: FontWeight.bold,
-                                                 fontSize: 20.0),)),),
-
-
-                                     ],
-                                   ),
-                                 ),
-                               ),
-                             ),
-                           );
-                           // ignore: unnecessary_statements
-                         }):handleDeletePost(context);
-                   }),
-
-             ),SizedBox( height:0.0,),
-
-             documentSnapshot.data()['optionNos'] == 2?
-             SimplePollsWidget(
-               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
-                 print('Now total polls are : ' + model.totalPolls.toString());
-                 print('Selected option has label : ' + selectedOptionModel.label);
-                 selectedOptionModel.id == 1?
-                 option1Total ++ :
-                 option2Total ++ ;
-
-
-                 total ++ ;
-
-                 Voters.add(currentUser.id);
-                 selectedOptionModel.id == 1?
-                 option1Voters.add(currentUser.id):
-                 option2Voters.add(currentUser.id);
-
-                 postsRef
-                     .doc(currentUser.id)
-                     .collection("userPosts")
-                     .doc(postId)
-                     .update({
-
-                   "total": total,
-
-                   "option1Total":option1Total,
-                   "option2Total":option2Total,
-
-                   "option1Voters": option1Voters,
-                   "option2Voters": option2Voters,
-
-
-                   "Voters": Voters,
-
-
-                 });
-               },
-               onReset: (PollFrameModel model) {
-                 print(
-                     'Poll has been reset, this happens only in case of editable polls');
-               },
-               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
-               model: PollFrameModel(
-                 title: Container(
-                   alignment: Alignment.centerLeft,
-                   child: Text(
-                     documentSnapshot.data()['description'],
-                     style: TextStyle(
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ),
-                 totalPolls: documentSnapshot.data()['total'],
-                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
-                 hasVoted: Voters.contains(currentUser.id)? true:false,
-                 editablePoll: false,
-                 options:[
-                   PollOptions(
-                     label: documentSnapshot.data()['option1'],
-                     pollsCount: option1Total,
-                     isSelected: option1Voters.contains(currentUser.id)?true:false,
-                     id: 1,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option2'],
-                     pollsCount:option2Total,
-                     isSelected: option2Voters.contains(currentUser.id)?true:false,
-                     id: 2,
-                   ),
-
-                 ],
-               ),
-             ):
-             documentSnapshot.data()['optionNos'] == 3?
-             SimplePollsWidget(
-               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
-                 print('Now total polls are : ' + model.totalPolls.toString());
-                 print('Selected option has label : ' + selectedOptionModel.label);
-                 selectedOptionModel.id == 1?
-                 option1Total ++ :
-                 selectedOptionModel.id == 2?
-                 option2Total ++ :
-                 option3Total ++;
-
-
-                 total ++ ;
-
-                 Voters.add(currentUser.id);
-                 selectedOptionModel.id == 1?
-                 option1Voters.add(currentUser.id):
-                 selectedOptionModel.id == 2?
-                 option2Voters.add(currentUser.id):
-                 option3Voters.add(currentUser.id);
-
-                 postsRef
-                     .doc(currentUser.id)
-                     .collection("userPosts")
-                     .doc(postId)
-                     .update({
-
-                   "total": total,
-
-                   "option1Total":option1Total,
-                   "option2Total":option2Total,
-                   "option3Total":option3Total,
-
-
-                   "option1Voters": option1Voters,
-                   "option2Voters": option2Voters,
-                   "option3Voters": option3Voters,
-
-
-                   "Voters": Voters,
-
-
-                 });
-               },
-               onReset: (PollFrameModel model) {
-                 print(
-                     'Poll has been reset, this happens only in case of editable polls');
-               },
-               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
-               model: PollFrameModel(
-                 title: Container(
-                   alignment: Alignment.centerLeft,
-                   child: Text(
-                     documentSnapshot.data()['description'],
-                     style: TextStyle(
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ),
-                 totalPolls: documentSnapshot.data()['total'],
-                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
-                 hasVoted: Voters.contains(currentUser.id)? true:false,
-                 editablePoll: false,
-                 options:[
-                   PollOptions(
-                     label: documentSnapshot.data()['option1'],
-                     pollsCount: option1Total,
-                     isSelected: option1Voters.contains(currentUser.id)?true:false,
-                     id: 1,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option2'],
-                     pollsCount:option2Total,
-                     isSelected: option2Voters.contains(currentUser.id)?true:false,
-                     id: 2,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option3'],
-                     pollsCount: option3Total,
-                     isSelected: option3Voters.contains(currentUser.id)?true:false,
-                     id: 3,
-                   ),
-
-                 ],
-               ),
-             ):
-             documentSnapshot.data()['optionNos'] == 4?
-             SimplePollsWidget(
-               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
-                 print('Now total polls are : ' + model.totalPolls.toString());
-                 print('Selected option has label : ' + selectedOptionModel.label);
-                 selectedOptionModel.id == 1?
-                 option1Total ++ :
-                 selectedOptionModel.id == 2?
-                 option2Total ++ :
-                 selectedOptionModel.id == 3?
-                 option3Total ++:
-                 option4Total ++;
-
-                 total ++ ;
-
-                 Voters.add(currentUser.id);
-                 selectedOptionModel.id == 1?
-                 option1Voters.add(currentUser.id):
-                 selectedOptionModel.id == 2?
-                 option2Voters.add(currentUser.id):
-                 selectedOptionModel.id == 3?
-                 option3Voters.add(currentUser.id):
-                 option4Voters.add(currentUser.id);
-
-                 postsRef
-                     .doc(currentUser.id)
-                     .collection("userPosts")
-                     .doc(postId)
-                     .update({
-
-                   "total": total,
-
-                   "option1Total":option1Total,
-                   "option2Total":option2Total,
-                   "option3Total":option3Total,
-                   "option4Total":option4Total,
-
-
-                   "option1Voters": option1Voters,
-                   "option2Voters": option2Voters,
-                   "option3Voters": option3Voters,
-                   "option4Voters": option4Voters,
-
-
-                   "Voters": Voters,
-
-
-                 });
-               },
-               onReset: (PollFrameModel model) {
-                 print(
-                     'Poll has been reset, this happens only in case of editable polls');
-               },
-               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
-               model: PollFrameModel(
-                 title: Container(
-                   alignment: Alignment.centerLeft,
-                   child: Text(
-                     documentSnapshot.data()['description'],
-                     style: TextStyle(
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ),
-                 totalPolls: documentSnapshot.data()['total'],
-                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
-                 hasVoted: Voters.contains(currentUser.id)? true:false,
-                 editablePoll: false,
-                 options:[
-                   PollOptions(
-                     label: documentSnapshot.data()['option1'],
-                     pollsCount: option1Total,
-                     isSelected: option1Voters.contains(currentUser.id)?true:false,
-                     id: 1,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option2'],
-                     pollsCount:option2Total,
-                     isSelected: option2Voters.contains(currentUser.id)?true:false,
-                     id: 2,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option3'],
-                     pollsCount: option3Total,
-                     isSelected: option3Voters.contains(currentUser.id)?true:false,
-                     id: 3,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option4'],
-                     pollsCount: option4Total,
-                     isSelected: option4Voters.contains(currentUser.id)?true:false,
-                     id: 4,
-                   ),
-
-                 ],
-               ),
-             ):
-             documentSnapshot.data()['optionNos'] == 5?
-             SimplePollsWidget(
-               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
-                 print('Now total polls are : ' + model.totalPolls.toString());
-                 print('Selected option has label : ' + selectedOptionModel.label);
-                 selectedOptionModel.id == 1?
-                 option1Total ++ :
-                 selectedOptionModel.id == 2?
-                 option2Total ++ :
-                 selectedOptionModel.id == 3?
-                 option3Total ++:
-                 selectedOptionModel.id == 4?
-                 option4Total ++:
-                 option5Total ++;
-
-                 total ++ ;
-
-                 Voters.add(currentUser.id);
-                 selectedOptionModel.id == 1?
-                 option1Voters.add(currentUser.id):
-                 selectedOptionModel.id == 2?
-                 option2Voters.add(currentUser.id):
-                 selectedOptionModel.id == 3?
-                 option3Voters.add(currentUser.id):
-                 selectedOptionModel.id == 4?
-                 option4Voters.add(currentUser.id):
-                 option5Voters.add(currentUser.id);
-                 postsRef
-                     .doc(currentUser.id)
-                     .collection("userPosts")
-                     .doc(postId)
-                     .update({
-
-                   "total": total,
-
-                   "option1Total":option1Total,
-                   "option2Total":option2Total,
-                   "option3Total":option3Total,
-                   "option4Total":option4Total,
-                   "option5Total":option5Total,
-
-
-                   "option1Voters": option1Voters,
-                   "option2Voters": option2Voters,
-                   "option3Voters": option3Voters,
-                   "option4Voters": option4Voters,
-                   "option5Voters": option5Voters,
-
-                   "Voters": Voters,
-
-
-                 });
-               },
-               onReset: (PollFrameModel model) {
-                 print(
-                     'Poll has been reset, this happens only in case of editable polls');
-               },
-               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
-               model: PollFrameModel(
-                 title: Container(
-                   alignment: Alignment.centerLeft,
-                   child: Text(
-                     documentSnapshot.data()['description'],
-                     style: TextStyle(
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ),
-                 totalPolls: documentSnapshot.data()['total'],
-                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
-                 hasVoted: Voters.contains(currentUser.id)? true:false,
-                 editablePoll: false,
-                 options:[
-                   PollOptions(
-                     label: documentSnapshot.data()['option1'],
-                     pollsCount: option1Total,
-                     isSelected: option1Voters.contains(currentUser.id)?true:false,
-                     id: 1,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option2'],
-                     pollsCount:option2Total,
-                     isSelected: option2Voters.contains(currentUser.id)?true:false,
-                     id: 2,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option3'],
-                     pollsCount: option3Total,
-                     isSelected: option3Voters.contains(currentUser.id)?true:false,
-                     id: 3,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option4'],
-                     pollsCount: option4Total,
-                     isSelected: option4Voters.contains(currentUser.id)?true:false,
-                     id: 4,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option5'],
-                     pollsCount: option5Total,
-                     isSelected: option5Voters.contains(currentUser.id)?true:false,
-                     id: 5,
-                   ),
-                 ],
-               ),
-             ):
-
-             SimplePollsWidget(
-               onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
-                 print('Now total polls are : ' + model.totalPolls.toString());
-                 print('Selected option has label : ' + selectedOptionModel.label);
-                 selectedOptionModel.id == 1?
-                 option1Total ++ :
-                 selectedOptionModel.id == 2?
-                 option2Total ++ :
-                 selectedOptionModel.id == 3?
-                 option3Total ++:
-                 selectedOptionModel.id == 4?
-                 option4Total ++:
-                 selectedOptionModel.id == 5?
-                 option5Total ++:
-                 option6Total ++;
-
-                 total ++ ;
-
-                 Voters.add(currentUser.id);
-                 selectedOptionModel.id == 1?
-                 option1Voters.add(currentUser.id):
-                 selectedOptionModel.id == 2?
-                 option2Voters.add(currentUser.id):
-                 selectedOptionModel.id == 3?
-                 option3Voters.add(currentUser.id):
-                 selectedOptionModel.id == 4?
-                 option4Voters.add(currentUser.id):
-                 selectedOptionModel.id == 5?
-                 option5Voters.add(currentUser.id):
-                 option6Voters.add(currentUser.id);
-                 postsRef
-                     .doc(currentUser.id)
-                     .collection("userPosts")
-                     .doc(postId)
-                     .update({
-
-                   "total": total,
-
-                   "option1Total":option1Total,
-                   "option2Total":option2Total,
-                   "option3Total":option3Total,
-                   "option4Total":option4Total,
-                   "option5Total":option5Total,
-                   "option6Total":option6Total,
-
-                   "option1Voters": option1Voters,
-                   "option2Voters": option2Voters,
-                   "option3Voters": option3Voters,
-                   "option4Voters": option4Voters,
-                   "option5Voters": option5Voters,
-                   "option6Voters": option6Voters,
-
-                   "Voters": Voters,
-
-
-                 });
-               },
-               onReset: (PollFrameModel model) {
-                 print(
-                     'Poll has been reset, this happens only in case of editable polls');
-               },
-               optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
-               model: PollFrameModel(
-                 title: Container(
-                   alignment: Alignment.centerLeft,
-                   child: Text(
-                     documentSnapshot.data()['description'],
-                     style: TextStyle(
-                       fontSize: 14,
-                       fontWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ),
-                 totalPolls: documentSnapshot.data()['total'],
-                 endTime: DateTime.now().toUtc().add(Duration(days: 10)),
-                 hasVoted: Voters.contains(currentUser.id)? true:false,
-                 editablePoll: false,
-                 options:[
-                   PollOptions(
-                     label: documentSnapshot.data()['option1'],
-                     pollsCount: option1Total,
-                     isSelected: option1Voters.contains(currentUser.id)?true:false,
-                     id: 1,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option2'],
-                     pollsCount:option2Total,
-                     isSelected: option2Voters.contains(currentUser.id)?true:false,
-                     id: 2,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option3'],
-                     pollsCount: option3Total,
-                     isSelected: option3Voters.contains(currentUser.id)?true:false,
-                     id: 3,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option4'],
-                     pollsCount: option4Total,
-                     isSelected: option4Voters.contains(currentUser.id)?true:false,
-                     id: 4,
-                   ),
-                   // null,
-                   PollOptions(
-                     label: documentSnapshot.data()['option5'],
-                     pollsCount: option5Total,
-                     isSelected: option5Voters.contains(currentUser.id)?true:false,
-                     id: 5,
-                   ),
-                   PollOptions(
-                     label: documentSnapshot.data()['option6'],
-                     pollsCount: option6Total,
-                     isSelected: option6Voters.contains(currentUser.id)?true:false,
-                     id: 6,
-                   ),
-                 ],
-               ),
-             )
-           ]):
-
-           Column(
-              children:  <Widget> [
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(photoUrl),
-                      backgroundColor: Colors.grey,
+          return    type == 'Poll'?Column(children:[
+            ListTile(
+              leading: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+
+                child: CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+              ),
+              title: GestureDetector(
+                onTap: () => showProfile(context, profileId: ownerId),
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              subtitle: Text(location,
+                style: TextStyle(color: kText),),
+              trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                  onPressed: () {
+                    !isPostOwner?showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: GestureDetector(
+                              onTap: (){report();
+                              Navigator.pop(context);},
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Report this post?',style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),)),),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                          // ignore: unnecessary_statements
+                        }):handleDeletePost(context);
+                  }),
+
+            ),SizedBox( height:0.0,),
+
+            documentSnapshot.data()['optionNos'] == 2?
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                selectedOptionModel.id == 1?
+                option1Total ++ :
+                option2Total ++ ;
+
+
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                option2Voters.add(currentUser.id);
+
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options:[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+
+                ],
+              ),
+            ):
+            documentSnapshot.data()['optionNos'] == 3?
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                selectedOptionModel.id == 1?
+                option1Total ++ :
+                selectedOptionModel.id == 2?
+                option2Total ++ :
+                option3Total ++;
+
+
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                selectedOptionModel.id == 2?
+                option2Voters.add(currentUser.id):
+                option3Voters.add(currentUser.id);
+
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+                  "option3Total":option3Total,
+
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+                  "option3Voters": option3Voters,
+
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options:[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option3'],
+                    pollsCount: option3Total,
+                    isSelected: option3Voters.contains(currentUser.id)?true:false,
+                    id: 3,
+                  ),
+
+                ],
+              ),
+            ):
+            documentSnapshot.data()['optionNos'] == 4?
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                selectedOptionModel.id == 1?
+                option1Total ++ :
+                selectedOptionModel.id == 2?
+                option2Total ++ :
+                selectedOptionModel.id == 3?
+                option3Total ++:
+                option4Total ++;
+
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                selectedOptionModel.id == 2?
+                option2Voters.add(currentUser.id):
+                selectedOptionModel.id == 3?
+                option3Voters.add(currentUser.id):
+                option4Voters.add(currentUser.id);
+
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+                  "option3Total":option3Total,
+                  "option4Total":option4Total,
+
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+                  "option3Voters": option3Voters,
+                  "option4Voters": option4Voters,
+
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options:[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option3'],
+                    pollsCount: option3Total,
+                    isSelected: option3Voters.contains(currentUser.id)?true:false,
+                    id: 3,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option4'],
+                    pollsCount: option4Total,
+                    isSelected: option4Voters.contains(currentUser.id)?true:false,
+                    id: 4,
+                  ),
+
+                ],
+              ),
+            ):
+            documentSnapshot.data()['optionNos'] == 5?
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                selectedOptionModel.id == 1?
+                option1Total ++ :
+                selectedOptionModel.id == 2?
+                option2Total ++ :
+                selectedOptionModel.id == 3?
+                option3Total ++:
+                selectedOptionModel.id == 4?
+                option4Total ++:
+                option5Total ++;
+
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                selectedOptionModel.id == 2?
+                option2Voters.add(currentUser.id):
+                selectedOptionModel.id == 3?
+                option3Voters.add(currentUser.id):
+                selectedOptionModel.id == 4?
+                option4Voters.add(currentUser.id):
+                option5Voters.add(currentUser.id);
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+                  "option3Total":option3Total,
+                  "option4Total":option4Total,
+                  "option5Total":option5Total,
+
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+                  "option3Voters": option3Voters,
+                  "option4Voters": option4Voters,
+                  "option5Voters": option5Voters,
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options:[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option3'],
+                    pollsCount: option3Total,
+                    isSelected: option3Voters.contains(currentUser.id)?true:false,
+                    id: 3,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option4'],
+                    pollsCount: option4Total,
+                    isSelected: option4Voters.contains(currentUser.id)?true:false,
+                    id: 4,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option5'],
+                    pollsCount: option5Total,
+                    isSelected: option5Voters.contains(currentUser.id)?true:false,
+                    id: 5,
+                  ),
+                ],
+              ),
+            ):
+
+            SimplePollsWidget(
+              onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+                print('Now total polls are : ' + model.totalPolls.toString());
+                print('Selected option has label : ' + selectedOptionModel.label);
+                selectedOptionModel.id == 1?
+                option1Total ++ :
+                selectedOptionModel.id == 2?
+                option2Total ++ :
+                selectedOptionModel.id == 3?
+                option3Total ++:
+                selectedOptionModel.id == 4?
+                option4Total ++:
+                selectedOptionModel.id == 5?
+                option5Total ++:
+                option6Total ++;
+
+                total ++ ;
+
+                Voters.add(currentUser.id);
+                selectedOptionModel.id == 1?
+                option1Voters.add(currentUser.id):
+                selectedOptionModel.id == 2?
+                option2Voters.add(currentUser.id):
+                selectedOptionModel.id == 3?
+                option3Voters.add(currentUser.id):
+                selectedOptionModel.id == 4?
+                option4Voters.add(currentUser.id):
+                selectedOptionModel.id == 5?
+                option5Voters.add(currentUser.id):
+                option6Voters.add(currentUser.id);
+                postsRef
+                    .doc(currentUser.id)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .update({
+
+                  "total": total,
+
+                  "option1Total":option1Total,
+                  "option2Total":option2Total,
+                  "option3Total":option3Total,
+                  "option4Total":option4Total,
+                  "option5Total":option5Total,
+                  "option6Total":option6Total,
+
+                  "option1Voters": option1Voters,
+                  "option2Voters": option2Voters,
+                  "option3Voters": option3Voters,
+                  "option4Voters": option4Voters,
+                  "option5Voters": option5Voters,
+                  "option6Voters": option6Voters,
+
+                  "Voters": Voters,
+
+
+                });
+              },
+              onReset: (PollFrameModel model) {
+                print(
+                    'Poll has been reset, this happens only in case of editable polls');
+              },
+              optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
+              model: PollFrameModel(
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    documentSnapshot.data()['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                totalPolls: documentSnapshot.data()['total'],
+                endTime: DateTime.now().toUtc().add(Duration(days: 10)),
+                hasVoted: Voters.contains(currentUser.id)? true:false,
+                editablePoll: false,
+                options:[
+                  PollOptions(
+                    label: documentSnapshot.data()['option1'],
+                    pollsCount: option1Total,
+                    isSelected: option1Voters.contains(currentUser.id)?true:false,
+                    id: 1,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option2'],
+                    pollsCount:option2Total,
+                    isSelected: option2Voters.contains(currentUser.id)?true:false,
+                    id: 2,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option3'],
+                    pollsCount: option3Total,
+                    isSelected: option3Voters.contains(currentUser.id)?true:false,
+                    id: 3,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option4'],
+                    pollsCount: option4Total,
+                    isSelected: option4Voters.contains(currentUser.id)?true:false,
+                    id: 4,
+                  ),
+                  // null,
+                  PollOptions(
+                    label: documentSnapshot.data()['option5'],
+                    pollsCount: option5Total,
+                    isSelected: option5Voters.contains(currentUser.id)?true:false,
+                    id: 5,
+                  ),
+                  PollOptions(
+                    label: documentSnapshot.data()['option6'],
+                    pollsCount: option6Total,
+                    isSelected: option6Voters.contains(currentUser.id)?true:false,
+                    id: 6,
+                  ),
+                ],
+              ),
+            )
+          ]):
+          Column(
+            children:  <Widget> [
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: Text(
+                    username,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                subtitle: Text(location,
+                  style: TextStyle(color: kText),),
+                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                    onPressed: () {
+                      !isPostOwner?showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: kSecondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0)), //this right here
+                              child: GestureDetector(
+                                onTap: (){report();
+                                Navigator.pop(context);},
+                                child: Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text('Report this post?',style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),)),),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: unnecessary_statements
+                          }):handleDeletePost(context,postId:postId,ownerId:ownerId);
+                    }),
+
+              ),SizedBox( height:0.0,),
+              GestureDetector(
+                  onDoubleTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+//          Text('text',style: TextStyle(color: kText),),
+                      ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                          child: pics(userid:ownerId,prodid: postId)),
+
+//           products(),
+
+                    ],
+                  )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: mediaUrl.asMap().entries.map((entry) {
+                  return GestureDetector(
+                    onTap: () => _ccontroller.animateToPage(entry.key),
+                    child: Container(
+                      width: 6.0,
+                      height: 6.0,
+                      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black)
+                              .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                    ),
+                  );
+                }).toList(),
+              ),
+              FutureBuilder(
+                future:  postsRef
+                    .doc(ownerId)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .collection("tags")
+                    .orderBy('timestamp',descending: true).get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+                    return Container();
+                  }
+                  else {
+                    return  Row(
+                      children: [
+                        SizedBox(width:12.0),
+                        GFButton(
+                          color: Colors.black,
+                          shape:  GFButtonShape.pills,
+                          textColor: Colors.black,
+                          type : GFButtonType.outline,
+                          onPressed:(){viewProducts(postId:postId,ownerId:ownerId);},
+                          text:"View Products",
+                          icon: Icon(
+                            Icons.add_shopping_cart,
+                            // color: Colors.white,
+                            size: 20.0,
+                          ),
+
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+              IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                  onPressed: () {
+                    print(postId);
+                  }),
+              SizedBox( height:3.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(left: 20.0),
+                    child: ExpandableText(
+                        text:"$description ",
+                        color: Colors.black,
+                        size:15.0
+                    ),
+                  ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only( left: 20.0)),
+
+                  GestureDetector(
+                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
+
+                    child: ImageIcon(
+                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                      color: kText,
+                    ),
+                  ),
+                  SizedBox(width: 15.0,),
+                  GestureDetector(
+                    onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl.first,
+                    ),
+                    child: Icon(
+                      Icons.mode_comment_outlined,
+                      size: 28.0,
+                      color: kText,
+                    ),
+
+                  ),
+                  SizedBox(width: 15.0,),
+                  IconButton(
+                    color: Colors.black,
+                    onPressed: () {
+                      showModalBottomSheet(context: context, builder:(context) {
+                        return Center(child:
+                        Column(
+
+                            children:[
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation : 0.1,
+                                  side: BorderSide.none,
+
+                                  primary:  Colors.black, // background
+                                ),
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                      ShareButton(
+                                        postId:postId,
+                                        ownerId:ownerId,
+                                        type:"SharedPost",
+                                        imageURL:mediaUrl.first,
+                                        productname:description,
+
+                                      ),
+                                  ));
+                                },
+                                child: Text("Share to community",style: TextStyle(color: kText),),
+                              ),
+                              FutureBuilder<Uri>(
+                                  future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
+                                  builder: (context, snapshot) {
+                                    if(snapshot.hasData) {
+                                      Uri uri = snapshot.data;
+                                      return ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation : 0.1,
+                                          side: BorderSide.none,
+
+                                          primary:  Colors.black, // background
+                                        ),
+                                        onPressed: () {
+                                          Share.share(uri.toString());},
+                                        child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+
+                                  }
+                              ),
+
+
+
+
+                            ])
+                        );
+                      });
+                    },
+                    // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                    icon: Icon(Icons.send),
+                  ),
+
+
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only( left: 20.0)),
+
+                  Container(
                     child: Text(
-                      username,
+                      "${getLikeCount(likes)} likes",
                       style: TextStyle(
-                        color: kText,
+                        color: Colors.black,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  subtitle: Text(location,
-                    style: TextStyle(color: kText),),
-                  trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                      onPressed: () {
-                        !isPostOwner?showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Dialog(
-                                backgroundColor: kSecondaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(20.0)), //this right here
-                                child: GestureDetector(
-                                  onTap: (){report();
-                                  Navigator.pop(context);},
-                                  child: Container(
-                                    height: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-
-                                            child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text('Report this post?',style: TextStyle(
-                                                    color: Colors.blueAccent,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.0),)),),
-
-
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                              // ignore: unnecessary_statements
-                            }):handleDeletePost(context);
-                      }),
-
-                ),
-                SizedBox( height:0.0,),
-                GestureDetector(
-                    onDoubleTap: handleLikePost,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-//          Text('text',style: TextStyle(color: kText),),
-                        ClipRRect(borderRadius: BorderRadius.circular(20.0),
-                            child: pics(userid:ownerId,prodid: postId)),
-
-//           products(),
-
-                      ],
-                    )
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: mediaUrl.asMap().entries.map((entry) {
-                    return GestureDetector(
-                      onTap: () => _ccontroller.animateToPage(entry.key),
-                      child: Container(
-                        width: 6.0,
-                        height: 6.0,
-                        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black)
-                                .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                FutureBuilder(
-                  future:  postsRef
-                      .doc(ownerId)
-                      .collection("userPosts")
-                      .doc(postId)
-                      .collection("tags")
-                      .orderBy('timestamp',descending: true).get(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-                      return Container();
-                    }
-                    else {
-                      return  Row(
-                        children: [
-                          SizedBox(width:12.0),
-                          GFButton(
-                            color: Colors.black,
-                            shape:  GFButtonShape.pills,
-                            textColor: Colors.black,
-                            type : GFButtonType.outline,
-                            onPressed: viewProducts,
-                            text:"View Products",
-                            icon: Icon(
-                              Icons.add_shopping_cart,
-                              // color: Colors.white,
-                              size: 20.0,
-                            ),
-
-                          ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-                SizedBox( height:3.0,),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      margin: EdgeInsets.only(left: 20.0),
-                      child: ExpandableText(
-                          text:"$description ",
-                          color: Colors.black,
-                          size:15.0
-                      ),
-                    ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(padding: EdgeInsets.only( left: 20.0)),
-
-                    GestureDetector(
-                      onTap: handleLikePost,
-
-                      child: ImageIcon(
-                        isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                        color: kText,
-                      ),
-                    ),
-                    SizedBox(width: 15.0,),
-                    GestureDetector(
-                      onTap: () => showComments(
-                        context,
-                        postId: postId,
-                        ownerId: ownerId,
-                        mediaUrl: mediaUrl.first,
-                      ),
-                      child: Icon(
-                        Icons.mode_comment_outlined,
-                        size: 28.0,
-                        color: kText,
-                      ),
-
-                    ),
-                    SizedBox(width: 15.0,),
-                    IconButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        showModalBottomSheet(context: context, builder:(context) {
-                          return Center(child:
-                          Column(
-
-                              children:[
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    elevation : 0.1,
-                                    side: BorderSide.none,
-
-                                    primary:  Colors.black, // background
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                        ShareButton(
-                                          postId:postId,
-                                          ownerId:ownerId,
-                                          type:"SharedPost",
-                                          imageURL:mediaUrl.first,
-                                          productname:description,
-
-                                        ),
-                                    ));
-                                  },
-                                  child: Text("Share to community",style: TextStyle(color: kText),),
-                                ),
-                                FutureBuilder<Uri>(
-                                    future: _dynamicLinkService.createDynamicLink( postId:postId,ownerId: ownerId,Description: description,type: "post",imageURL:mediaUrl.first),
-                                    builder: (context, snapshot) {
-                                      if(snapshot.hasData) {
-                                        Uri uri = snapshot.data;
-                                        return ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            elevation : 0.1,
-                                            side: BorderSide.none,
-
-                                            primary:  Colors.black, // background
-                                          ),
-                                          onPressed: () {
-                                            Share.share(uri.toString());},
-                                          child: Text("Share to External Apps",style: TextStyle(color: kText),),
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-
-                                    }
-                                ),
-
-
-
-                              ])
-                          );
-                        });
-                      },
-                      // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                      icon: Icon(Icons.send),
-                    ),
-
-
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
-                    ),
-                  ],
-                ),
-                Padding(padding: EdgeInsets.only( left: 20.0)),
+                ],
+              ),
 
 //            SizedBox( height:10.0,),
 
-              ],
-            ) ,
+            ],
 
 
           );
@@ -3153,12 +3111,11 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
         },
 
 
-        query: timelineRef
-            .doc(widget.userid)
-            .collection('timelinePosts')
-            .orderBy('timestamp', descending: true)
+        query: FirebaseFirestore.instance.collectionGroup('userPosts')
+            .orderBy('timestamp',descending: true),
 
-    ));
+      ),
+    );
   }
 
   buildUsersToFollow() {
