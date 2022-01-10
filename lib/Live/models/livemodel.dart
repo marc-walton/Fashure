@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Live {
   String username;
   String image;
-  int channelId;
+  var channelId;
   bool me;
 String ownerId;
 

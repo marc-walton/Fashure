@@ -6,6 +6,7 @@ import 'package:fashow/Resale/Resaletile.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/Support/SupportButton.dart';
+import 'package:fashow/Timeline.dart';
 import 'package:fashow/chat_screen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/clientreview.dart';
@@ -1338,7 +1339,7 @@ SizedBox(height: 10.0,),
 
   }
   Posts() {
-    return  PaginateFirestore(
+    return  PaginateView(child:PaginateFirestore(
         isLive: true,
         emptyDisplay: Center(child: Text("No posts",style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -1381,103 +1382,107 @@ SizedBox(height: 10.0,),
             .orderBy('timestamp', descending: true)
 
 
-    );
+    ));
 
   }
  Products() {
-    return  PaginateFirestore(
-        isLive: true,
-        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),)),
-        scrollDirection: Axis.vertical,
-        itemBuilderType:
-        PaginateBuilderType.gridView,
-        itemBuilder: (index, context, documentSnapshot)   {
+    return  PaginateView(
+      child: PaginateFirestore(
+          isLive: true,
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),)),
+          scrollDirection: Axis.vertical,
+          itemBuilderType:
+          PaginateBuilderType.gridView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
-          String ownerId = documentSnapshot.data()['userId'];
-          List image =   documentSnapshot.data()['shopmediaUrl'];
+            String ownerId = documentSnapshot.data()['userId'];
+            List image =   documentSnapshot.data()['shopmediaUrl'];
 
-          return
-            Padding(
-                padding: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ProductScreen(
-                                  prodId:  documentSnapshot.data()["prodId"],
-                                  userId:  documentSnapshot.data()["ownerId"],
-                                ),
-                          ),
-                        );
-                      },
-                      child: CachedImage(
-                        image.first,)
-                  ),
-                )
-            );
-          },
-        query: productsRef
-            .doc(widget.profileId)
-            .collection('userProducts')
-            .orderBy('timestamp', descending: true)
+            return
+              Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductScreen(
+                                    prodId:  documentSnapshot.data()["prodId"],
+                                    userId:  documentSnapshot.data()["ownerId"],
+                                  ),
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                          image.first,)
+                    ),
+                  )
+              );
+            },
+          query: productsRef
+              .doc(widget.profileId)
+              .collection('userProducts')
+              .orderBy('timestamp', descending: true)
 
+      ),
     );
 
   }
 Resales() {
-    return  PaginateFirestore(
-        isLive: true,
-        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),)),
-        scrollDirection: Axis.vertical,
-        itemBuilderType:
-        PaginateBuilderType.gridView,
-        itemBuilder: (index, context, documentSnapshot)   {
+    return  PaginateView(
+      child: PaginateFirestore(
+          isLive: true,
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),)),
+          scrollDirection: Axis.vertical,
+          itemBuilderType:
+          PaginateBuilderType.gridView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
-          String ownerId = documentSnapshot.data()['userId'];
-          List image =   documentSnapshot.data()['images'];
+            String ownerId = documentSnapshot.data()['userId'];
+            List image =   documentSnapshot.data()['images'];
 
-          return
-            Padding(
-                padding: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ResaleScreen(
-                                  postId:  documentSnapshot.data()["resaleId"],
-                                  userId:  documentSnapshot.data()["ownerId"],
-                                ),
-                          ),
-                        );
-                      },
-                      child: CachedImage(
-                        image.first,)
-                  ),
-                )
-            );
-          },
-        query: FirebaseFirestore.instance.collection('Resale')
-            .doc(widget.profileId)
-            .collection('userResale')
-            .orderBy('timestamp', descending: true)
+            return
+              Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ResaleScreen(
+                                    postId:  documentSnapshot.data()["resaleId"],
+                                    userId:  documentSnapshot.data()["ownerId"],
+                                  ),
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                          image.first,)
+                    ),
+                  )
+              );
+            },
+          query: FirebaseFirestore.instance.collection('Resale')
+              .doc(widget.profileId)
+              .collection('userResale')
+              .orderBy('timestamp', descending: true)
 
+      ),
     );
 
   }
 Collections() {
-    return  PaginateFirestore(
+    return PaginateView(child: PaginateFirestore(
         isLive: true,
         emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -1544,75 +1549,77 @@ Collections() {
             .collection('userCollections')
             .orderBy('timestamp', descending: true)
 
-    );
+    ));
 
   }
 Edits() {
-    return  PaginateFirestore(
-        isLive: true,
-        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),)),
-        itemBuilderType:
-        PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot)   {
+    return  PaginateView(
+      child: PaginateFirestore(
+          isLive: true,
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),)),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
-          List IM = documentSnapshot.data()["blogmediaUrl"];
-          return
+            List IM = documentSnapshot.data()["blogmediaUrl"];
+            return
 
-            Padding(
-                padding: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              BlogScreen(
-                                blogId: documentSnapshot.data()["blogId"],
-                                userId: documentSnapshot.data()["ownerId"],
-                              ),
-                        ),
-                      );
-                    },
-                    child: Card(
-                      child: Column(
-                        children: <Widget>[
-
-                          Container(
-                              margin: EdgeInsets.all(10.0),
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 2,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                              ),
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width,
-                              child:
-                              CachedImage(
-                                IM.first,)
-
+              Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                BlogScreen(
+                                  blogId: documentSnapshot.data()["blogId"],
+                                  userId: documentSnapshot.data()["ownerId"],
+                                ),
                           ),
-                          Text(documentSnapshot.data()["title"],
-                            style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
-                        ]),
+                        );
+                      },
+                      child: Card(
+                        child: Column(
+                          children: <Widget>[
+
+                            Container(
+                                margin: EdgeInsets.all(10.0),
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 2,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
+                                child:
+                                CachedImage(
+                                  IM.first,)
+
+                            ),
+                            Text(documentSnapshot.data()["title"],
+                              style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
+                          ]),
+                        ),
                       ),
+
                     ),
+              );
+            },
+          query:  blogRef
+              .doc(widget.profileId)
+              .collection('userBlog')
+              .orderBy('timestamp', descending: true)
 
-                  ),
-            );
-          },
-        query:  blogRef
-            .doc(widget.profileId)
-            .collection('userBlog')
-            .orderBy('timestamp', descending: true)
-
+      ),
     );
 
   }

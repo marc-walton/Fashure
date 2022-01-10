@@ -11,7 +11,7 @@ import 'package:fashow/Live/user_bids.dart';
 import 'package:fashow/Live/wish_auctions.dart';
 import 'package:fashow/Resale/address_auction.dart';
 // import 'package:fashow/Live/video_comments.dart';
-import 'package:flutter_youtube_vimeo/flutter_youtube_vimeo.dart';
+// import 'package:flutter_youtube_vimeo/flutter_youtube_vimeo.dart';
 import 'package:fashow/post.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -42,7 +42,7 @@ class LiveTv extends StatefulWidget {
 class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
   final String currentUserId = currentUser?.id;
 
-  final FlareControls flareControls = FlareControls();
+  // final FlareControls flareControls = FlareControls();
   final databaseReference = FirebaseFirestore.instance;
   String videoId;
   String mediaUrl;
@@ -291,8 +291,9 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(children: [
-              Container(height:200,width:50, child: YoutubeViewer('mhJRzQsLZGg')),
-              YoutubeVideo(url:'https://www.youtube.com/watch?v=PLKr1BORQNM'),
+              Container(height:200,width:50, child:getStories(),
+              ),
+              // YoutubeVideo(url:'https://www.youtube.com/watch?v=PLKr1BORQNM'),
               // ytPlayer("ip_szEM-qqo"),
               // SizedBox(height: 8),
               // Row(
@@ -352,211 +353,214 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // loadSharedPref();
-    // list = [];
-    // liveUser = new Live(username: name, me: true, image: image);
-    // setState(() {
-    //   list.add(liveUser);
-    // });
-    // dbChangeListen();
+    loadSharedPref();
+    list = [];
+    liveUser = new Live(username: name, me: true, image: image,ownerId: ownerId );
+    setState(() {
+      list.add(liveUser);
+      print('>>>>>>>>>>>>>>>>${liveUser.channelId}');
+    });
+    dbChangeListen();
 
   }
 
-  // Future<void> loadSharedPref() async {
-  //   // final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     name = currentUser.displayName;
-  //     username = currentUser.id;
-  //     image = currentUser.photoUrl;
-  //     ownerId = currentUser.id;
-  //   });
-  // }
+  Future<void> loadSharedPref() async {
+    // final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = currentUser.displayName;
+      username = currentUser.id;
+      image = currentUser.photoUrl;
+      ownerId = currentUser.id;
+    });
+  }
 
-  // void dbChangeListen() {
-  //   databaseReference
-  //       .collection('liveuser')
-  //       .orderBy("time", descending: true)
-  //       .snapshots()
-  //       .listen((result) {
-  //     // Listens to update in appointment collection
-  //
-  //     setState(() {
-  //       list = [];
-  //       liveUser =
-  //           new Live(username: name, me: true, image: image, ownerId: ownerId);
-  //       list.add(liveUser);
-  //     });
-  //     result.docs.forEach((result) {
-  //       setState(() {
-  //         list.add(new Live(
-  //             username: result.data()['name'],
-  //             image: result.data()['image'],
-  //             channelId: result.data()['channel'],
-  //             me: false));
-  //       });
-  //     });
-  //   });
-  // }
-//
-//   Widget getStories() {
-//     return ListView(
-//         scrollDirection: Axis.horizontal, children: getUserStories());
-//   }
-//
-//   List<Widget> getUserStories() {
-//     List<Widget> stories = [];
-//     for (Live users in list) {
-//       stories.add(getStory(users));
-//     }
-//     return stories;
-//   }
-//
-//   Widget getStory(Live users) {
-//     return Container(
-//       margin: EdgeInsets.only(left: 1.0, right: 4.0, bottom: 1.0, top: 1.0),
-//       child: Column(
-//         children: <Widget>[
-//           Container(
-//               height: 150,
-//               width: 150,
-//               child: GestureDetector(
-//                 onTap: () {
-//                   if (users.me == true) {
-//                     // Host function
-//                     onCreate(username: users.username, image: users.image);
-//                   } else {
-//                     // Join function
-//                     onJoin(
-//                         channelName: users.username,
-//                         channelId: users.channelId,
-//                         username: username,
-//                         hostImage: users.image,
-//                         userImage: image);
-//                   }
-//                 },
-//                 child: Stack(
-//                   alignment: Alignment(0, 0),
-//                   children: <Widget>[
-//                     !users.me
-//                         ? Container(
-//                             height: 150,
-//                             width: 150,
-//                             child: Container(
-//                               decoration: BoxDecoration(
-//                                 shape: BoxShape.rectangle,
-//                                 gradient: LinearGradient(
-//                                     colors: [
-//                                       Colors.indigo,
-//                                       Colors.blue,
-//                                       Colors.cyan
-//                                     ],
-//                                     begin: Alignment.topLeft,
-//                                     end: Alignment.bottomRight),
-//                               ),
-//                             ),
-//                           )
-//                         : SizedBox(
-//                             height: 0,
-//                           ),
-//                     CachedNetworkImage(
-//                       imageUrl: users.image,
-//                       imageBuilder: (context, imageProvider) => ClipRRect(
-//                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-//                         child: Container(
-//                           width: 92.0,
-//                           height: 92.0,
-//                           decoration: BoxDecoration(
-//                             shape: BoxShape.rectangle,
-//                             image: DecorationImage(
-//                                 image: imageProvider, fit: BoxFit.cover),
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                     users.me
-//                         ? Container(
-//                             height: 95,
-//                             width: 95,
-//                             alignment: Alignment.bottomRight,
-//                             child: Container(
-//                               decoration: new BoxDecoration(
-//                                 color: Colors.blue,
-//                                 shape: BoxShape.circle,
-//                                 border: Border.all(
-//                                   color: Colors.black,
-//                                   width: 1,
-//                                 ),
-//                               ),
-//                               child: Icon(
-//                                 Icons.add,
-//                                 size: 13.5,
-//                                 color: Colors.white,
-//                               ),
-//                             ))
-//                         : Container(
-//                             height: 100,
-//                             width: 100,
-//                             alignment: Alignment.bottomCenter,
-//                             child: Stack(
-//                               alignment: Alignment.center,
-//                               children: <Widget>[
-//                                 Container(
-//                                   height: 17,
-//                                   width: 25,
-//                                   decoration: new BoxDecoration(
-//                                     shape: BoxShape.rectangle,
-//                                     borderRadius: BorderRadius.all(
-//                                         Radius.circular(
-//                                             4.0) //         <--- border radius here
-//                                         ),
-//                                     gradient: LinearGradient(
-//                                         colors: [Colors.black, Colors.black],
-//                                         begin: Alignment.centerLeft,
-//                                         end: Alignment.centerRight),
-//                                   ),
-//                                 ),
-//                                 Container(
-//                                     decoration: new BoxDecoration(
-//                                       shape: BoxShape.rectangle,
-//                                       borderRadius: BorderRadius.all(
-//                                           Radius.circular(
-//                                               2.0) //         <--- border radius here
-//                                           ),
-//                                       gradient: LinearGradient(
-//                                           colors: [
-//                                             Colors.indigo,
-//                                             Colors.blueAccent
-//                                           ],
-//                                           begin: Alignment.centerLeft,
-//                                           end: Alignment.centerRight),
-//                                     ),
-//                                     child: Padding(
-//                                       padding: const EdgeInsets.all(3.0),
-//                                       child: Text(
-//                                         'LIVE',
-//                                         style: TextStyle(
-//                                             fontSize: 7,
-//                                             color: Colors.white,
-//                                             fontWeight: FontWeight.bold),
-//                                       ),
-//                                     )),
-//                               ],
-//                             ))
-//                   ],
-//                 ),
-//               )),
-//           SizedBox(
-//             height: 3,
-//           ),
-//           Text(
-//             users.username ?? '',
-//             style: TextStyle(color: kText),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-//
+  void dbChangeListen() {
+    databaseReference
+        .collection('liveuser')
+        .orderBy("time", descending: true)
+        .snapshots()
+        .listen((result) {
+      // Listens to update in appointment collection
+
+      setState(() {
+        list = [];
+        liveUser =
+            new Live(username: name, me: true, image: image, ownerId: ownerId);
+        list.add(liveUser);
+      });
+      result.docs.forEach((result) {
+        setState(() {
+          list.add(new Live(
+              username: result.data()['name'],
+              image: result.data()['image'],
+              channelId: result.data()['channel'],
+              ownerId: result.data()['ownerId'],
+
+              me: false));
+        });
+      });
+    });
+  }
+
+  Widget getStories() {
+    return ListView(
+        scrollDirection: Axis.horizontal, children: getUserStories());
+  }
+
+  List<Widget> getUserStories() {
+    List<Widget> stories = [];
+    for (Live users in list) {
+      stories.add(getStory(users));
+    }
+    return stories;
+  }
+
+  Widget getStory(Live users) {
+    return Container(
+      margin: EdgeInsets.only(left: 1.0, right: 4.0, bottom: 1.0, top: 1.0),
+      child: Column(
+        children: <Widget>[
+          Container(
+              height: 150,
+              width: 150,
+              child: GestureDetector(
+                onTap: () {
+                  if (users.me == true) {
+                    // Host function
+                    onCreate(username: users.username, image: users.image);
+                  } else {
+                    // Join function
+                    onJoin(
+                        channelName: users.username,
+                        channelId: users.channelId,
+                        username: currentUser.displayName,
+                        hostImage: users.image,
+                        userImage: currentUser.photoUrl);
+                  }
+                },
+                child: Stack(
+                  alignment: Alignment(0, 0),
+                  children: <Widget>[
+                    !users.me
+                        ? Container(
+                            height: 150,
+                            width: 150,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.indigo,
+                                      Colors.blue,
+                                      Colors.cyan
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            height: 0,
+                          ),
+                    CachedNetworkImage(
+                      imageUrl: users.image,
+                      imageBuilder: (context, imageProvider) => ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        child: Container(
+                          width: 92.0,
+                          height: 92.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                      ),
+                    ),
+                    users.me
+                        ? Container(
+                            height: 95,
+                            width: 95,
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                color: Colors.blue,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                size: 13.5,
+                                color: Colors.white,
+                              ),
+                            ))
+                        : Container(
+                            height: 100,
+                            width: 100,
+                            alignment: Alignment.bottomCenter,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 17,
+                                  width: 25,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            4.0) //         <--- border radius here
+                                        ),
+                                    gradient: LinearGradient(
+                                        colors: [Colors.black, Colors.black],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight),
+                                  ),
+                                ),
+                                Container(
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              2.0) //         <--- border radius here
+                                          ),
+                                      gradient: LinearGradient(
+                                          colors: [
+                                            Colors.indigo,
+                                            Colors.blueAccent
+                                          ],
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Text(
+                                        'LIVE',
+                                        style: TextStyle(
+                                            fontSize: 7,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              ],
+                            ))
+                  ],
+                ),
+              )),
+          SizedBox(
+            height: 3,
+          ),
+          Text(
+            users.username ?? '',
+            style: TextStyle(color: kText),
+          )
+        ],
+      ),
+    );
+  }
+
 //   Widget getvid() {
 //     return Center(
 //       child: Padding(
@@ -1493,50 +1497,50 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
 //         .update({
 //       "hasEnded":true,});
 //   }
-//   Future<void> onJoin(
-//       {channelName, channelId, username, hostImage, userImage}) async {
-//     // update input validation
-//     if (channelName.isNotEmpty) {
-//       // push video page with given channel name
-//       await Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => JoinPage(
-//             channelName: channelName,
-//             channelId: channelId,
-//             username: username,
-//             hostImage: hostImage,
-//             userImage: userImage,
-//           ),
-//         ),
-//       );
-//     }
-//   }
-//
-//   Future<void> onCreate({username, image}) async {
-//     // await for camera and mic permissions before pushing video page
-//     await _handleCameraAndMic();
-//     var date = DateTime.now();
-//     var currentTime = '${DateFormat("dd-MM-yyyy hh:mm:ss").format(date)}';
-//     // push video page with given channel name
-//     await Navigator.push(
-//       context,
-//       MaterialPageRoute(
-//         builder: (context) => CallPage(
-//           channelName: currentUser.displayName,
-//           time: currentTime,
-//           uid:currentUser.id,
-//           image: currentUser.photoUrl,
-//         ),
-//       ),
-//     );
-//   }
-//
-//   Future<void> _handleCameraAndMic() async {
-//     await PermissionHandler().requestPermissions(
-//       [PermissionGroup.camera, PermissionGroup.microphone],
-//     );
-//   }
+  Future<void> onJoin(
+      {channelName, channelId, username, hostImage, userImage}) async {
+    // update input validation
+    if (channelName.isNotEmpty) {
+      // push video page with given channel name
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => JoinPage(
+            channelName: channelName,
+            channelId: channelId,
+            username: username,
+            hostImage: hostImage,
+            userImage: userImage,
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> onCreate({username, image}) async {
+    // await for camera and mic permissions before pushing video page
+    await _handleCameraAndMic();
+    var date = DateTime.now();
+    var currentTime = '${DateFormat("dd-MM-yyyy hh:mm:ss").format(date)}';
+    // push video page with given channel name
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CallPage(
+          channelName: currentUser.displayName,
+          time: currentTime,
+          uid:currentUser.id,
+          image: currentUser.photoUrl,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _handleCameraAndMic() async {
+    await PermissionHandler().requestPermissions(
+      [PermissionGroup.camera, PermissionGroup.microphone],
+    );
+  }
 }
 class ExpandableText extends StatefulWidget {
   ExpandableText({this.text, this.color, this.size});

@@ -524,55 +524,52 @@ getLink(){
         ),
       ),
       bottomNavigationBar:
-      BottomBar(
-        backgroundColor: Colors.black,
-        selectedIndex: pageIndex,
+      BottomNavigationBar(
+        backgroundColor: Colors.white,
+        currentIndex: pageIndex,
+        selectedItemColor: Colors.black,
+        selectedLabelStyle:TextStyle(color:Colors.black),
         onTap: (int index) {
           pageController.jumpToPage(index);
           setState(() => pageIndex = index);
         },
-        items: <BottomBarItem>[
-          BottomBarItem(
-            icon: Icon(Icons.weekend),
-            title: Text('Home',style: TextStyle(color: Colors.white),),
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
+        items: [
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.weekend,color: Colors.grey,),
+            label: 'Home',
+            activeIcon:Icon(Icons.weekend,color: Colors.black,),
 
           ),
-          BottomBarItem(
-            icon:    Icon(Icons.store,),
+          BottomNavigationBarItem(
+            icon:    Icon(Icons.store,color: Colors.grey,),
+            label: 'Shop',
+            activeIcon:Icon(Icons.store,color: Colors.black,),
 
-            title: Text('Shop',style: TextStyle(color: Colors.white),),
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
-          ), BottomBarItem(
-            icon: Icon(FontAwesomeIcons.swatchbook),
-            title: Text('Freelancers',style: TextStyle(color: Colors.white),),
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
           ),
-          BottomBarItem(
-            icon:Icon(Icons.play_arrow),
-            title: Text('FashureTV',style: TextStyle(color: Colors.white),),
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.swatchbook,color: Colors.grey,),
+            label: 'Freelancers',
+            activeIcon:Icon(FontAwesomeIcons.swatchbook,color: Colors.black,),
+
           ),
-          BottomBarItem(
-            icon:      FittedBox(
-              child: Row(
+          BottomNavigationBarItem(
+            icon:Icon(Icons.play_arrow,color: Colors.grey,),
+            label: 'FashureTV',
+            activeIcon:Icon(Icons.play_arrow,color: Colors.black,),
+
+          ),
+          BottomNavigationBarItem(
+            icon: Row(
               children: [
+                Icon(Icons.inbox,color: Colors.grey,),
+                currentUser == null?  Container():badgescount(),
 
-               currentUser == null?  Container(
-
-    ):badgescount(),
-                Icon(Icons.inbox,),
               ],
-          ),
             ),
+            label: 'Settings',
+activeIcon:Icon(Icons.inbox,color: Colors.black,),
 
-            title: Text('Settings',style: TextStyle(color: Colors.white),),
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
 
           ),
         ],

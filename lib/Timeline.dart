@@ -62,7 +62,6 @@ import 'package:share/share.dart';
 import 'package:simple_polls/simple_polls.dart';
 
 import 'Communities/Share_button.dart';
-final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
   class Timeline extends StatefulWidget {
     // final String postId;
@@ -264,6 +263,7 @@ ScrollController _scrollController = ScrollController();
               preferredSize: Size.fromHeight(130.0),
               child: AppBar(backgroundColor: appbar,
                   automaticallyImplyLeading: false,
+                  elevation:0.0,
 
                   title: FittedBox(
                     fit:BoxFit.cover,
@@ -284,6 +284,8 @@ ScrollController _scrollController = ScrollController();
                     labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
                     ///outline
                     unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                    indicatorWeight: 0.001,
+
                     // indicatorSize:TabBarIndicatorSize.tab,
                     // indicator:BubbleTabIndicator(indicatorHeight:40.0,
                     //   indicatorColor: kblue,
@@ -358,8 +360,8 @@ ScrollController _scrollController = ScrollController();
         child:     RefreshIndicator(
                 onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
           Feed(currentUser: currentUser),
-          Collection(),
-          Blog(),
+          Collections(),
+          Blogs(),
 
         ]),
         ),
@@ -400,7 +402,7 @@ ScrollController _scrollController = ScrollController();
   }
 
 
-class Collection extends StatelessWidget {
+class Collections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -490,7 +492,7 @@ class Collection extends StatelessWidget {
   }
 }
 
-class Blog extends StatelessWidget {
+class Blogs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return  PaginateView(
@@ -1894,6 +1896,24 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
   DocumentSnapshot lastDocument; // flag for last document from where next 10 records to be fetched
 
   ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    getFfollowing();
+
+
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    // _tabController.addListener(_handleTabIndex);
+  }
+
+  @override
+  void dispose() {
+    // _tabController.removeListener(_handleTabIndex);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
   pics({String userid,String prodid}){
     return
       FutureBuilder<QuerySnapshot> (
@@ -1951,7 +1971,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                             .data.docs[index].data()['mediaUrl'][i]),
                       ));
                     }
-                    return Column(
+                    return Stack(
                       children: <Widget>[
                         Container(
 
@@ -2962,10 +2982,6 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                   }
                 },
               ),
-              IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                  onPressed: () {
-                    print(postId);
-                  }),
               SizedBox( height:3.0,),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -3100,7 +3116,6 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                 ],
               ),
 
-//            SizedBox( height:10.0,),
 
             ],
 
@@ -3181,6 +3196,8 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     return Scaffold(
           appBar:AppBar(
             toolbarHeight: 50.0 ,
+            elevation:0.0,
+
             backgroundColor: Colors.white,
             bottom:  PreferredSize(
               preferredSize: Size.fromHeight(100.0),
@@ -3190,7 +3207,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
                 height: 50,
                 child: TabBar(
-
+indicatorWeight: 0.001,
                   controller:_tabController,
 
                   isScrollable: true,

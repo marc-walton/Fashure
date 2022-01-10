@@ -32,7 +32,6 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class Shop extends StatefulWidget {
 
   final Users currentUser;
