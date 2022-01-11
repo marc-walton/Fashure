@@ -214,14 +214,21 @@ class _UploadEditState extends State<UploadEdit>
               padding: const EdgeInsets.only(left: 8.0,right: 8.0),
               child:      Column(
                 children: <Widget>[
-                  carousel(),
-                  SizedBox(height:20),
                   TextFormField(controller: titleController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: InputDecoration(labelText: 'Title of the blog',
                           fillColor: transwhite,
                           border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                  SizedBox(height:20),
+                  carousel(),
+                  ElevatedButton(
+                    style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
+                    child: Text("Add content"),
+                    onPressed: (){
+
+                    },
+                  ),
                   ZefyrToolbar.basic(controller: _controller),
                   ZefyrEditor(
                     maxHeight: 900,

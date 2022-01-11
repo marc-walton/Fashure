@@ -539,24 +539,28 @@ getLink(){
             icon: Icon(Icons.weekend,color: Colors.grey,),
             label: 'Home',
             activeIcon:Icon(Icons.weekend,color: Colors.black,),
+            backgroundColor: Colors.white,
 
           ),
           BottomNavigationBarItem(
             icon:    Icon(Icons.store,color: Colors.grey,),
             label: 'Shop',
             activeIcon:Icon(Icons.store,color: Colors.black,),
+            backgroundColor: Colors.white,
 
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.swatchbook,color: Colors.grey,),
             label: 'Freelancers',
             activeIcon:Icon(FontAwesomeIcons.swatchbook,color: Colors.black,),
+            backgroundColor: Colors.white,
 
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.play_arrow,color: Colors.grey,),
             label: 'FashureTV',
             activeIcon:Icon(Icons.play_arrow,color: Colors.black,),
+            backgroundColor: Colors.white,
 
           ),
           BottomNavigationBarItem(
@@ -569,6 +573,7 @@ getLink(){
             ),
             label: 'Settings',
 activeIcon:Icon(Icons.inbox,color: Colors.black,),
+            backgroundColor: Colors.white,
 
 
           ),

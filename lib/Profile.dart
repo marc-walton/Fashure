@@ -1497,7 +1497,7 @@ Collections() {
           return
 
             Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.only(top:1.0,left:5.0,right:5.0,),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: GestureDetector(
@@ -1516,7 +1516,8 @@ Collections() {
                     child: Card(
                       child: Column(
                         children: <Widget>[
-
+                          Text(documentSnapshot.data()["title"],
+                            style:  GoogleFonts.michroma(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
                           Container(
                               margin: EdgeInsets.all(10.0),
                               height: MediaQuery
@@ -1535,8 +1536,7 @@ Collections() {
                                 image.first,)
 
                           ),
-                          Text(documentSnapshot.data()["title"],
-                            style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
+
                         ],
                       ),
                     ),
@@ -1567,7 +1567,7 @@ Edits() {
             return
 
               Padding(
-                  padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.only(top:1.0,left:5.0,right:5.0,),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: GestureDetector(
@@ -1586,6 +1586,8 @@ Edits() {
                       child: Card(
                         child: Column(
                           children: <Widget>[
+                            Text(documentSnapshot.data()["title"],
+                              style:  GoogleFonts.playfairDisplay(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
 
                             Container(
                                 margin: EdgeInsets.all(10.0),
@@ -1605,8 +1607,6 @@ Edits() {
                                   IM.first,)
 
                             ),
-                            Text(documentSnapshot.data()["title"],
-                              style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
                           ]),
                         ),
                       ),

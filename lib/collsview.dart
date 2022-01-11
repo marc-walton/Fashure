@@ -461,258 +461,251 @@ return
   }
 buildPostHeader(CTX) {
   bool isPostOwner = currentUserId == ownerId;
-  return  ListView(
-      shrinkWrap: true,
-      scrollDirection:Axis.vertical,
-
-      children: [Column(
-        children: <Widget>[
-          ListTile(
-            leading:  GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(photoUrl),
-                backgroundColor: Colors.grey,
-              ),
+  return  Column(
+    children: <Widget>[
+      ListTile(
+        leading:  GestureDetector(
+          onTap: () => showProfile(context, profileId: ownerId),
+          child: CircleAvatar(
+            backgroundImage: CachedNetworkImageProvider(photoUrl),
+            backgroundColor: Colors.grey,
+          ),
+        ),
+        title:  GestureDetector(
+          onTap: () => showProfile(context, profileId:ownerId),
+          child: Text(
+            username,
+            style: TextStyle(
+              color:kText,
+              fontWeight: FontWeight.bold,
             ),
-            title:  GestureDetector(
-              onTap: () => showProfile(context, profileId:ownerId),
-              child: Text(
-                username,
-                style: TextStyle(
-                  color:kText,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            trailing: IconButton(icon: Icon(Icons.more_horiz,color:kText,),
-                onPressed: () {
-                  !isPostOwner?showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: kSecondaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0)), //this right here
-                          child: GestureDetector(
-                            onTap: (){report();
-                            Navigator.pop(context);},
-                            child: Container(
-                              height: 100,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
+          ),
+        ),
+        trailing: IconButton(icon: Icon(Icons.more_horiz,color:kText,),
+            onPressed: () {
+              !isPostOwner?showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      backgroundColor: kSecondaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(20.0)), //this right here
+                      child: GestureDetector(
+                        onTap: (){report();
+                        Navigator.pop(context);},
+                        child: Container(
+                          height: 100,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
 
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text('Report this post?',style: TextStyle(
-                                              color: Colors.blueAccent,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20.0),)),),
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text('Report this post?',style: TextStyle(
+                                          color: Colors.blueAccent,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),)),),
 
-                                  ],
-                                ),
-                              ),
+                              ],
                             ),
                           ),
-                        );
-                        // ignore: unnecessary_statements
-                      }):handleDeletePost(context);
-                }),
-          ),
-          Text(title,
-            style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
-
-          pics()  ,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: collmediaUrl.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _ccontroller.animateToPage(entry.key),
-                child: Container(
-                  width: 6.0,
-                  height: 6.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                ),
-              );
-            }).toList(),
-          ),
-
-          FutureBuilder(
-            future:  collRef
-                .doc(ownerId)
-                .collection("userCollections")
-                .doc(collId)
-                .collection("tags")
-                .orderBy('timestamp',descending: true).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-                return Container();
-              }
-              else {
-                return  Row(
-                  children: [
-                    SizedBox(width:12.0),
-                    GFButton(
-                      color: Colors.black,
-                      shape:  GFButtonShape.pills,
-                      textColor: Colors.black,
-                      type : GFButtonType.outline,
-                      onPressed: viewProducts,
-                      text:"View Products",
-                      icon: Icon(
-                        Icons.add_shopping_cart,
-                        // color: Colors.white,
-                        size: 20.0,
+                        ),
                       ),
-
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
-          ListTile(
-            leading: Text(source,
-              style: TextStyle(
-                color:kText,
-                fontWeight: FontWeight.bold,
-              ),),
-          ),
-
-          Row(
-
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-              GestureDetector(
-                onTap: handleLikePost,
-
-                child: ImageIcon(
-                  isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                  color: kText,
-                ),
-              ),
-              SizedBox(width: 15.0,),
-
-              GestureDetector(
-                onTap: () => showComments(
-                  context,
-                  collId: collId,
-                  ownerId: ownerId,
-                  mediaUrl: collmediaUrl.first,
-                ),
-                child: Icon(
-                  Icons.mode_comment_outlined,
-                  size: 28.0,
-                  color: kText,
-                ),
-
-              ),
-              SizedBox(width: 15.0,),
-              IconButton(
-                color: Colors.black,
-                onPressed: () {
-                  showModalBottomSheet(context: CTX, builder:(CTX) {
-                    return Center(child:
-                    Column(
-
-                        children:[
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation : 0.1,
-                              side: BorderSide.none,
-
-                              primary:  Colors.black, // background
-                            ),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                  ShareButton(
-                                    postId:collId,
-                                    ownerId:ownerId,
-                                    type:"SharedColl",
-                                    imageURL:collmediaUrl.first,
-                                    productname:title,
-
-                                  ),
-                              ));
-                            },
-                            child: Text("Share to community",style: TextStyle(color: kText),),
-                          ),
-                          FutureBuilder<Uri>(
-                              future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
-                              builder: (context, snapshot) {
-                                if(snapshot.hasData) {
-                                  Uri uri = snapshot.data;
-                                  return  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation : 0.1,
-                                      side: BorderSide.none,
-
-                                      primary:  Colors.black, // background
-                                    ),
-                                    onPressed: () {
-                                      Share.share(uri.toString());},
-                                    child: Text("Share to External Apps",style: TextStyle(color: kText),),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-
-                              }
-                          ),
-
-
-
-
-                        ])
                     );
-                  });
-                },
-                // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
-                icon: Icon(Icons.send),
-              ),
+                    // ignore: unnecessary_statements
+                  }):handleDeletePost(context);
+            }),
+      ),
+      Text(title,
+        style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
 
-
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: collmediaUrl.first,),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "$likeCount ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-                 fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-        ],
-
+      pics()  ,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: collmediaUrl.asMap().entries.map((entry) {
+          return GestureDetector(
+            onTap: () => _ccontroller.animateToPage(entry.key),
+            child: Container(
+              width: 6.0,
+              height: 6.0,
+              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: (Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black)
+                      .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+            ),
+          );
+        }).toList(),
       ),
 
-      ]
+      FutureBuilder(
+        future:  collRef
+            .doc(ownerId)
+            .collection("userCollections")
+            .doc(collId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
+          }
+          else {
+            return  Row(
+              children: [
+                SizedBox(width:12.0),
+                GFButton(
+                  color: Colors.black,
+                  shape:  GFButtonShape.pills,
+                  textColor: Colors.black,
+                  type : GFButtonType.outline,
+                  onPressed: viewProducts,
+                  text:"View Products",
+                  icon: Icon(
+                    Icons.add_shopping_cart,
+                    // color: Colors.white,
+                    size: 20.0,
+                  ),
+
+                ),
+              ],
+            );
+          }
+        },
+      ),
+      ListTile(
+        leading: Text(source,
+          style: TextStyle(
+            color:kText,
+            fontWeight: FontWeight.bold,
+          ),),
+      ),
+
+      Row(
+
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+          GestureDetector(
+            onTap: handleLikePost,
+
+            child: ImageIcon(
+              isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+              color: kText,
+            ),
+          ),
+          SizedBox(width: 15.0,),
+
+          GestureDetector(
+            onTap: () => showComments(
+              context,
+              collId: collId,
+              ownerId: ownerId,
+              mediaUrl: collmediaUrl.first,
+            ),
+            child: Icon(
+              Icons.mode_comment_outlined,
+              size: 28.0,
+              color: kText,
+            ),
+
+          ),
+          SizedBox(width: 15.0,),
+          IconButton(
+            color: Colors.black,
+            onPressed: () {
+              showModalBottomSheet(context: CTX, builder:(CTX) {
+                return Center(child:
+                Column(
+
+                    children:[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.1,
+                          side: BorderSide.none,
+
+                          primary:  Colors.black, // background
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              ShareButton(
+                                postId:collId,
+                                ownerId:ownerId,
+                                type:"SharedColl",
+                                imageURL:collmediaUrl.first,
+                                productname:title,
+
+                              ),
+                          ));
+                        },
+                        child: Text("Share to community",style: TextStyle(color: kText),),
+                      ),
+                      FutureBuilder<Uri>(
+                          future: _dynamicLinkService.createDynamicLink( postId:collId,ownerId: ownerId,Description: title,type: "collection",imageURL:collmediaUrl.first),
+                          builder: (context, snapshot) {
+                            if(snapshot.hasData) {
+                              Uri uri = snapshot.data;
+                              return  ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation : 0.1,
+                                  side: BorderSide.none,
+
+                                  primary:  Colors.black, // background
+                                ),
+                                onPressed: () {
+                                  Share.share(uri.toString());},
+                                child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                              );
+                            } else {
+                              return Container();
+                            }
+
+                          }
+                      ),
+
+
+
+
+                    ])
+                );
+              });
+            },
+            // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+            icon: Icon(Icons.send),
+          ),
+
+
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: collmediaUrl.first,),
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+            child: Text(
+              "$likeCount ",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+             fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+
+    ],
+
   );
 
   }

@@ -416,32 +416,17 @@ class Collections extends StatelessWidget {
        String username =   documentSnapshot.data()['username'];
       String photoUrl =   documentSnapshot.data()['photoUrl'];
       return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top:1.0,left:5.0,right:5.0,),
 
           child:  ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
 
-              child: Column(children: <Widget>[
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                  ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: Text(
-                      username,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+            child:Column(children:[  Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text(documentSnapshot.data()['title'],
+                style:  GoogleFonts.michroma(color:Colors.white,fontSize: 20.0,fontWeight: FontWeight.normal),),
+            ),
                 GestureDetector(
                   onTap:() {
                     Navigator.push(
@@ -464,26 +449,36 @@ class Collections extends StatelessWidget {
                             imageUrl: images.first,
                           )
                       ),
-                      Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
 
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Text(documentSnapshot.data()['title'],
-                                style:  GoogleFonts.balooBhai(color:Colors.white,fontSize: 20.0,fontWeight: FontWeight.normal),),
-                            ),
-                          ) ),
 
                     ],
                   ),
                 ),
+        ListTile(
+        leading: GestureDetector(
+        onTap: () => showProfile(context, profileId: ownerId),
+        child: CircleAvatar(
+        backgroundImage: CachedNetworkImageProvider(photoUrl),
+        backgroundColor: Colors.grey,
+        ),
+        ),
+        title: GestureDetector(
+        onTap: () => showProfile(context, profileId: ownerId),
+        child: Text(
+        username,
+        style: TextStyle(
+        color: kText,
+        fontWeight: FontWeight.bold,
+        ),
+        ),
+        ),
+        ),
 
               ],
-
+            ),
               ),
             ),
-          ));
+          );
       },
       query:  FirebaseFirestore.instance.collectionGroup('userCollections').orderBy('timestamp',descending: true),
     )
@@ -502,33 +497,18 @@ class Blogs extends StatelessWidget {
           itemBuilder: (index, context, documentSnapshot) {
             List<dynamic> blogMedia =  documentSnapshot.data()['blogmediaUrl'];
             return     Padding(
-              padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top:1.0,left:5.0,right:5.0,),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Card(
                 child: Column(children: <Widget>[
-                GestureDetector(                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(documentSnapshot.data()["title"],
+                      style:  GoogleFonts.playfairDisplay(fontSize: 25.0,fontWeight: FontWeight.bold),),
+                  ) ,
 
-                  child: ListTile(
-                    leading: GestureDetector(
-                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
-                        backgroundColor: Colors.grey,
-                      ),
-                    ),
-                    title: GestureDetector(
-                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                      child: Text(
-                        documentSnapshot.data()['username'],
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+
                   GestureDetector(
                     onTap:() {
                       Navigator.push(
@@ -551,12 +531,29 @@ class Blogs extends StatelessWidget {
                     ),
 
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(documentSnapshot.data()["title"],
-                      style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),),
-                  ) ,
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
 
+                    child: ListTile(
+                      leading: GestureDetector(
+                        onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                        child: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
+                          backgroundColor: Colors.grey,
+                        ),
+                      ),
+                      title: GestureDetector(
+                        onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                        child: Text(
+                          documentSnapshot.data()['username'],
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
           ],
 
           ),
@@ -1685,10 +1682,6 @@ var total =  documentSnapshot.data()['total'];
                     }
                   },
                 ),
-                IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                    onPressed: () {
-              print(postId);
-                    }),
                 SizedBox( height:3.0,),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
