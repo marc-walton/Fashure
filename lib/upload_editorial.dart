@@ -4,7 +4,9 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/methods/Empty_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -32,6 +34,7 @@ import 'package:image/image.dart' as Im;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 import 'package:zefyrka/zefyrka.dart';
+
 class UploadEdit extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
   final Users currentUser;
@@ -54,7 +57,9 @@ class _UploadEditState extends State<UploadEdit>
   int pageChanged  = 0;
   String _error = 'No Error Dectected';
   TextEditingController titleController = TextEditingController();
-  TextEditingController sourceController = TextEditingController();
+  TextEditingController bodyController = TextEditingController();
+  TextEditingController contentTitle = TextEditingController();
+  TextEditingController contentBody = TextEditingController();
   bool _inProcess = false;
 
   File file;
@@ -64,7 +69,7 @@ class _UploadEditState extends State<UploadEdit>
   String U;
   List<String> imageUrls = <String>[];
 
-
+File file1;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
@@ -139,7 +144,6 @@ class _UploadEditState extends State<UploadEdit>
   tag(){
     return
       showMaterialModalBottomSheet(
-        expand:true,
         context: context,
         builder: (BuildContext context)
         {
@@ -155,7 +159,9 @@ class _UploadEditState extends State<UploadEdit>
                         .size
                         .height * 0.75,
 
-                    child: SearchTag(prodId:blogId),
+                    child: TagItem(
+
+                  ),
 
                   );
               }
@@ -167,32 +173,250 @@ class _UploadEditState extends State<UploadEdit>
 
   }
   tagView(){
+    return new ListView.builder(
+        itemCount: 1,
+        itemBuilder: (context, index) {
+          return TagItem(
+
+
+          );
+        }
+    );
+
+
+  }
+
+  Widget getImageWidget1() {
+    if (file1 != null) {
+      return Stack(
+        children: [
+          InkWell(
+            onTap:()=>getImage1(),
+            child: Image.file(
+              file1,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/3,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            bottom: 10.0,
+            left: 10.0,
+            child:     ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary:Colors.black,
+                onPrimary:Colors.white,// foreground
+              ),
+              onPressed: () {
+                tag();
+              },
+
+              child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
+                  ,color:kText),),
+            ),
+
+          ),
+        ],
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage1(),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height/3,
+            child: Column(
+              mainAxisAlignment:MainAxisAlignment.center ,
+              children: [
+                Icon(
+                  Icons.add,
+                  size:50,
+                ),
+                Text("Add image(optional)")
+
+              ],
+            ),
+          ));
+    }
+  }
+
+  getImage1() async {
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file1 = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  compressImage1() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
+    final compressedImageFile = File('$path/img1_$blogId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file1 = compressedImageFile;
+    });
+  }
+  Future<String> uploadImage1(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+    // images.add(downloadUrl);
+    return downloadUrl;
+  }
+  Widget getImageWidget() {
+    if (file != null) {
+      return InkWell(
+        onTap:()=>getImage(),
+        child: Image.file(
+          file,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height/3,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+          onTap:()=>getImage(),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height/3,
+            child: Column(
+              mainAxisAlignment:MainAxisAlignment.center ,
+
+              children: [
+                Icon(
+                  Icons.add,
+                  size:50,
+                ),
+                Text("Add image")
+
+              ],
+            ),
+          ));
+    }
+  }
+  getImage() async {
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file = cropped;
+        _inProcess = true;
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  compressImage() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
+    final compressedImageFile = File('$path/img1_$blogId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      file = compressedImageFile;
+    });
+  }
+  Future<String> uploadImage(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+    // images.add(downloadUrl);
+    return downloadUrl;
+  }
+clearContent() {
+  contentTitle.clear();
+  contentBody.clear();
+  file1 = null;
+}
+  contentView(){
     return
       StreamBuilder(
-        stream: blogRef
-            .doc(currentUser.id).collection("userBlog").doc(blogId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).snapshots(),
+        stream:  blogRef
+            .doc(currentUser.id)
+            .collection('userBlog')
+            .doc(blogId)
+            .collection('content')
+            .orderBy('timestamp',descending: false).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data.docs.isEmpty){
             return
               Container();
           } else {
             return new ListView.builder(
+              shrinkWrap: true,
+// physics: RangeMaintainingScrollPhysics(),
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.docs[index];
-                  return TagItem(
-                    Id: ds['prodId'],
-                    ownerId: ds['ownerId'],
-                    name: ds['name'],
-                    usd: ds['usd'],
-                    inr: ds['inr'],
-                    eur: ds['eur'],
-                    gbp: ds['gbp'],
+                  return contentItem(
+
+                    Id: ds['Id'],
+                  title: ds['title'],
+                  body: ds['body'],
+
+                  blogId: blogId,
 
                     image: ds['image'],
-                    prodId: blogId,
 
                   );
                 }
@@ -203,163 +427,307 @@ class _UploadEditState extends State<UploadEdit>
 
   }
 
+  addContent(){
+    return
+  showMaterialModalBottomSheet(
+    expand:true,
+    context: context,
+    builder: (BuildContext context)
+    {
+      SizeConfig().init(context);
+
+      return
+        Builder(builder: (BuildContext context) {
+          return StatefulBuilder(builder: (BuildContext context, State) {
+            bool adding =  false;
+            Widget getImageWidget1() {
+              if (file1 != null) {
+                return InkWell(
+                  onTap:() async {
+                    State(() {
+                    _inProcess = true;
+                  });
+                  File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+                  if (image != null) {
+                  File cropped = await ImageCropper.cropImage(
+                  sourcePath: image.path,
+                  aspectRatio: CropAspectRatio(
+                  ratioX: 1, ratioY: 1),
+                  compressQuality: 100,
+                  maxWidth: 700,
+                  maxHeight: 700,
+                  compressFormat: ImageCompressFormat.jpg,
+                  androidUiSettings: AndroidUiSettings(
+                  toolbarColor: Colors.deepOrange,
+                  toolbarTitle: "RPS Cropper",
+                  statusBarColor: Colors.deepOrange.shade900,
+                  backgroundColor: Colors.white,
+                  )
+                  );
+
+                 State(() {
+                  file1 = cropped;
+                  _inProcess = true;
+                  });
+                  } else {
+                  State(() {
+                  _inProcess = false;
+                  });
+                  }},
+                  child: Image.file(
+                    file1,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height/3,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              } else {
+                return InkWell(
+                    onTap:() async {
+                     State(() {
+                        _inProcess = true;
+                      });
+                      File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+                      if (image != null) {
+                        File cropped = await ImageCropper.cropImage(
+                            sourcePath: image.path,
+                            aspectRatio: CropAspectRatio(
+                                ratioX: 1, ratioY: 1),
+                            compressQuality: 100,
+                            maxWidth: 700,
+                            maxHeight: 700,
+                            compressFormat: ImageCompressFormat.jpg,
+                            androidUiSettings: AndroidUiSettings(
+                              toolbarColor: Colors.deepOrange,
+                              toolbarTitle: "RPS Cropper",
+                              statusBarColor: Colors.deepOrange.shade900,
+                              backgroundColor: Colors.white,
+                            )
+                        );
+
+                        State(() {
+                          file1 = cropped;
+                          _inProcess = true;
+                        });
+                      } else {
+                        State(() {
+                          _inProcess = false;
+                        });
+                      }},
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height/3,
+                      child: Column(
+                        mainAxisAlignment:MainAxisAlignment.center ,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size:50,
+                          ),
+                          Text("Add image(optional)")
+
+                        ],
+                      ),
+                    ));
+              }
+            }
+
+            compressImage1() async {
+              final tempDir = await getTemporaryDirectory();
+              final path = tempDir.path;
+              Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
+              final compressedImageFile = File('$path/img1_$blogId.jpg')
+                ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+              if (!mounted) return; setState(() {
+                file1 = compressedImageFile;
+              });
+            }
+            Future<String> uploadImage1(imageFile) async {
+              String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+              Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+              UploadTask uploadTask = reference.putFile(imageFile);
+
+              TaskSnapshot storageSnap = await uploadTask;
+              String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+              // images.add(downloadUrl);
+              return downloadUrl;
+            }
+            return
+              ModalProgressHUD(
+                inAsyncCall: adding,
+                child: Scaffold(
+                  appBar: AppBar(backgroundColor:Colors.black,automaticallyImplyLeading: false,
+                      actions:[IconButton(icon: Icon(Icons.close),onPressed:() =>Navigator.pop(context),)]),
+                  body: Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height,
+
+                    child:                   SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          children: [
+                            TextFormField(controller: contentTitle,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                decoration: InputDecoration(labelText: 'heading',
+                                    fillColor: transwhite,
+                                    border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                            SizedBox(height:10),
+                            getImageWidget1(),
+                            SizedBox(height:10),
+
+                            TextFormField(controller: contentBody,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+
+                                decoration: InputDecoration(labelText: 'body',
+                                    fillColor: transwhite,
+                                    border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                            SizedBox(height:10),
+
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+
+                                  primary:Colors.black,
+                                  onPrimary:Colors.white,// foreground
+                                ),
+                                onPressed:()async{
+                                 State((){adding =  true;});
+                              String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+                              file1!=null? await compressImage1():null;
+                              String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
+                            await  blogRef
+                                  .doc(currentUser.id)
+                                  .collection('userBlog')
+                                  .doc(blogId)
+                                  .collection('content')
+                                  .doc(fileName)
+                                  .set({
+                                "title":contentTitle.text??"",
+                                "body":contentBody.text??"",
+                                "image":mediaUrl1??"",
+
+"Id":fileName,
+                                "timestamp":timestamp,
+
+                              });
+                              clearContent();
+                              Navigator.pop(context);
+                                 State((){adding =  false;});
+                            }, child: Text("Done"))
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  ),
+                ),
+              );
+          }
+          );
+        }
+        );
+    },
+  );
+}
   page0(){
 
     return
-      SingleChildScrollView(
-        reverse: true,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-              child:      Column(
-                children: <Widget>[
-                  TextFormField(controller: titleController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: InputDecoration(labelText: 'Title of the blog',
-                          fillColor: transwhite,
-                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-                  SizedBox(height:20),
-                  carousel(),
-                  ElevatedButton(
-                    style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
-                    child: Text("Add content"),
-                    onPressed: (){
+      Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:      Column(
+                  children: <Widget>[
+                    TextFormField(controller: titleController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(labelText: 'Title of the blog',
+                            fillColor: transwhite,
+                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return 'Title is empty';
+                        }
+                        return null;
+                      },),
+                    SizedBox(height:20),
+                    getImageWidget(),
+                    TextFormField(controller: bodyController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        autofocus: false,
+                        decoration: InputDecoration(labelText: 'body of the blog',
+                            fillColor: transwhite,
+                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return 'body is empty';
+                        }
+                        return null;
+                      },),
 
+
+                  ],
+                ),
+              ),
+              SizedBox(height:20),
+
+              Container(
+                  height:MediaQuery.of(context).size.height,
+                  child: contentView()),
+              SizedBox(height:20),
+
+              ElevatedButton(
+                style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
+                child: Text("Add content"),
+                onPressed: (){
+                  addContent();
+                },
+              ),
+
+              Row(
+                mainAxisAlignment:MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                  onTap: () async {
+
+                      titleController.text == ''||bodyController.text ==''?
+                      Fluttertoast.showToast(
+                          msg: "Fill the required fields", timeInSecForIos: 4):
+                      isUploading ? null : handleSubmit();
                     },
-                  ),
-                  ZefyrToolbar.basic(controller: _controller),
-                  ZefyrEditor(
-                    maxHeight: 900,
-                    scrollPhysics: ClampingScrollPhysics(),
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    autofocus: false,
-                     ),
+                    child: FittedBox(
+                      fit:  BoxFit.fitHeight,
+                      child: Container(
+                        alignment:Alignment.center,
+                        height:MediaQuery. of(context). size. height *0.06,
 
-                  SizedBox(height:20),
+                        width:MediaQuery. of(context). size. width *0.5,
+
+                        //icon: Icon(Icons.drag_handle),
+                        child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                      ),
+                    ),
+                  ),
+
 
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: (){
 
-                    titleController.text == '' ||       _controller.document == "" ?
-                    Fluttertoast.showToast(
-                        msg: "Fill the required fields", timeInSecForIos: 4):
-                    pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-
-                  },
-                  child: FittedBox(
-                    fit:  BoxFit.fitHeight,
-                    child: Container(
-                      alignment:Alignment.center,
-                      height:MediaQuery. of(context). size. height *0.06,
-
-                      width:MediaQuery. of(context). size. width *0.5,
-
-                      //icon: Icon(Icons.drag_handle),
-                      child:Text("Next",style:TextStyle(color: Colors.black)),
-
-                    ),
-                  ),
-                ),
-
-
-              ],
-            ),
-
-          ],
-        ),
-      );
-
-  }
-  page1(){
-    SizeConfig().init(context);
-    return
-      SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            isUploading ? linearProgress() : Text(""),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.center,
-
-              children: [
-                ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary:kButton, // foreground
-                  ),
-                  onPressed: () {
-                    tag();
-                  },
-
-                  child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
-                      ,color:kText),),
-                ),
-                SizedBox(width: 10,)  ,
-
-                Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
-                    ,color:kText),),
-              ],
-            ),
-            Container(
-              height:SizeConfig.screenHeight*0.75,
-              child: tagView(),
-            ),
-            Row(
-              children: [
-                InkWell(
-                  onTap: (){
-                    pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                  },
-                  child: FittedBox(
-                    fit:  BoxFit.fitHeight,
-                    child: Container(
-                      alignment:Alignment.center,
-                      height:MediaQuery. of(context). size. height *0.06,
-
-                      width:MediaQuery. of(context). size. width *0.5,
-
-                      //icon: Icon(Icons.drag_handle),
-                      child:Text("Previous",style:TextStyle(color: Colors.black)),
-
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () async {
-                    isUploading ? null : handleSubmit();
-                  },
-                  child: FittedBox(
-                    fit:  BoxFit.fitHeight,
-                    child: Container(
-                      alignment:Alignment.center,
-                      height:MediaQuery. of(context). size. height *0.06,
-
-                      width:MediaQuery. of(context). size. width *0.5,
-
-                      //icon: Icon(Icons.drag_handle),
-                      child:Text("Post",style:TextStyle(color: Colors.black)),
-
-                    ),
-                  ),
-                ),
-
-
-              ],
-            ),
-
-
-
-
-          ],
+            ],
+          ),
         ),
       );
 
@@ -380,10 +748,13 @@ class _UploadEditState extends State<UploadEdit>
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
+                  child: ElevatedButton(
+                    style:ElevatedButton.styleFrom( shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
+                      primary: Colors.black,
+                    ),
+
                     child: Text(
 
                       "Select images",
@@ -392,8 +763,7 @@ class _UploadEditState extends State<UploadEdit>
                         fontSize: 22.0,
                       ),
                     ),
-                    color: Colors.deepOrange,
-                    onPressed: ()  =>loadAssets(),
+                    onPressed: ()  =>getImage(),
                     // selectImage(context),
                   ),
                 ),
@@ -404,206 +774,56 @@ class _UploadEditState extends State<UploadEdit>
       );
   }
 
-  Future<dynamic> postImage(Asset imageFile) async {
-//    ByteData byteData = await imageFile.requestOriginal(quality: 75);
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
-    TaskSnapshot storageTaskSnapshot = await uploadTask;
-//    print(storageTaskSnapshot.ref.getDownloadURL());
-    return storageTaskSnapshot.ref.getDownloadURL();
-  }
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
     });
+    file1!=null? await compressImage1():null;
+    String mediaUrl =  file1!=null?await uploadImage1(file1):"";
+    blogRef
+        .doc(widget.currentUser.id)
+        .collection("userBlog")
+        .doc(blogId)
+        .update({
+      "blogId": blogId,
+      "ownerId": widget.currentUser.id,
+      "username": widget.currentUser.displayName,
+      "photoUrl": widget.currentUser.photoUrl,
+      "currency":  currentUser.currency,
 
+      "blogmediaUrl": mediaUrl??"",
+      "title":  titleController.text,
+      "body": bodyController.text,
 
-    for ( var imageFile in images) {
-      postImage(imageFile).then((downloadUrl) {
-        imageUrls.add(downloadUrl.toString());
-        if(imageUrls.length==images.length){
-          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-          // jsonEncode(_controller.doc.toDelta().toJson());
-          final contents = jsonEncode(_controller.document);
+      "timestamp": timestamp,
+      "claps": {},
+    });
 
-          blogRef
-              .doc(widget.currentUser.id)
-              .collection("userBlog")
-              .doc(blogId)
-              .update({
-            "blogId": blogId,
-            "ownerId": widget.currentUser.id,
-            "username": widget.currentUser.displayName,
-            "photoUrl": widget.currentUser.photoUrl,
-            "currency":  currentUser.currency,
+    setState(() {
+      isUploading = false;
+      _inProcess = false;
+      clearImage() ;
 
-            "blogmediaUrl": imageUrls,
-            "title":  titleController.text,
-            "content":contents,
-
-            "timestamp": timestamp,
-            "claps": {},
-          }).then((_){
-
-            setState(() {
-              images = [];
-              imageUrls = [];
-              delete();
-              clearImage();
-              setState(() {
-                isUploading = false;
-                _inProcess = false;
-            });
-          });});
-        }
-      }).catchError((err) {
-        print(err);
-
-
-      });
-    }
+      clearContent();
+    });
     Navigator.pop(context);
 
   }
 
-  carousel(){
-
-    return
-      CarouselSlider(
-          options: CarouselOptions(
-            height:500,
-            enableInfiniteScroll: false,
-          ),
-          items: images.map((e) => Container(
-
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AssetThumb(
-                asset: e,
-                width: 500,
-                height: 400,
-              ),
-            ),
-          ), ).toList()
-
-      );
-
-  }
-  getImage(ImageSource source) async {
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = await ImagePicker.pickImage(source: source);
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        file = cropped;
-        _inProcess = false;
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
 
 
 
-  selectImage(parentContext) {
-    return showDialog(
-        context: parentContext,
-        builder: (context) {
-          return SimpleDialog(
-            title: Text('Create Post',style:
-        TextStyle(color:
-              Colors.white),),
-            children: <Widget>[
-              SimpleDialogOption(
-                  child:  Text('Photo with Camera',),
-                  onPressed: () {
-                    getImage(ImageSource.camera);
-                    Navigator.pop(context);
-                  }),
-              SimpleDialogOption(
-                  child:  Text('Image from Gallery'),
-                  onPressed: () {
-                    getImage(ImageSource.gallery);
-                    Navigator.pop(context);
-                  }
-              ),
-              SimpleDialogOption(
-                child:  Text('Cancel',),
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          );
-        });
-  }
 
-  Widget getImageWidget() {
-    if (file != null) {
-      return Image.file(
-        file,
-        width: 250,
-        height: 250,
-        fit: BoxFit.cover,
-      );
-    } else {
-      return Image.asset(
-        "assets/placeholder.jpg",
-        width: 250,
-        height: 250,
-        fit: BoxFit.cover,
-      );
-    }
-  }
 
-  compressImage() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
-    final compressedImageFile = File('$path/img_$blogId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
-      file = compressedImageFile;
-    });
-  }
+
   clearImage() {
     setState(() {
       file = null;
+      file1 = null;
+
     });
   }
-  Future<String> uploadImage(imageFile) async {
-    UploadTask uploadTask =
-    storageRef.child("blog_$blogId.jpg").putFile(imageFile);
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  _launchRF({String rl}) async {
-    String url = rl;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+
 
 
   delete()async {
@@ -700,26 +920,8 @@ class _UploadEditState extends State<UploadEdit>
             ),
             body:
 
-            PageView(
-              physics:new NeverScrollableScrollPhysics(),
-              pageSnapping: true,
-              controller: pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  pageChanged = index;
-                });
-                print(pageChanged);
-              },
-              children: [
-                Container(
-                  child: page0(),
-                ),
-                Container(
-                  child: page1(),
-                ),
-
-
-              ],
+            Container(
+              child: page0(),
             ),
           ),
         ),
@@ -734,14 +936,16 @@ class _UploadEditState extends State<UploadEdit>
   @override
   Widget build(BuildContext context) {
 
-    return images.isEmpty ? buildSplashScreen() : builduploadForm();
+    return file == null ? buildSplashScreen() : builduploadForm();
   }
 /// Loads the document to be edited in Zefyr.
 }
 
 class SearchTag extends StatefulWidget {
   final String prodId;
-  SearchTag({this.prodId});
+   final String Id;
+
+  SearchTag({this.prodId,this.Id});
   @override
   _SearchTagState createState() => _SearchTagState();
 }
@@ -856,7 +1060,7 @@ class _SearchTagState extends State<SearchTag> {
       ),
     );
   }
-  df({String ownerId,String prodId}){
+  df({String ownerId,String prodId,String Id}){
     return
       showMaterialModalBottomSheet(
         expand:true,
@@ -875,7 +1079,7 @@ class _SearchTagState extends State<SearchTag> {
                         .size
                         .height * 0.75,
 
-                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId),
+                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId,Id:Id),
 
                   );
               }
@@ -912,7 +1116,7 @@ class _SearchTagState extends State<SearchTag> {
 
           onTap: ()  {
             Get.back();
-            df(ownerId: user.id,prodId: widget.prodId);},
+            df(ownerId: user.id,prodId: widget.prodId,Id:widget.Id);},
         ),
       ),
     );
@@ -924,7 +1128,9 @@ class _SearchTagState extends State<SearchTag> {
 class SearchTagProduct extends StatefulWidget {
   final String ownerId;
   final String prodId;
-  SearchTagProduct({this.ownerId, this.prodId});
+  final String Id;
+
+  SearchTagProduct({this.ownerId, this.prodId,this.Id});
   @override
   _SearchTagProductState createState() => _SearchTagProductState();
 }
@@ -1030,7 +1236,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
                 child: ListView.builder(
                   itemCount: _resultsList.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      buprod(context, _resultsList[index],widget.prodId),
+                      buprod(context, _resultsList[index],widget.prodId,widget.Id),
                 )
 
             ),
@@ -1041,7 +1247,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
   }
 }
 
-Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
+Widget buprod(BuildContext context, DocumentSnapshot document,prodId,Id) {
   final prod = Prod.fromDocument(document);
   // final tripType = trip.types();
 
@@ -1071,6 +1277,8 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
               .doc(currentUser.id)
               .collection('userBlog')
               .doc(prodId)
+              .collection('content')
+              .doc(Id)
               .collection('tags')
               .doc(prod.prodId)
               .set({
@@ -1086,39 +1294,43 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
             "taggerImg":currentUser.photoUrl,
             "taggerName":currentUser.username,
             "taggerCurrency":currentUser.currency,
+"Id":Id,
 
             "timestamp":timestamp,
 
           });
-          Get.back();},
+          Get.back();
+         },
       ),
     ),
   );
 }
-class TagItem extends StatelessWidget {
-  final String ownerId ;
-  final String prodId ;
 
-  final String Id ;
+
+
+class TagItem extends StatelessWidget {
+  final String blogId;
+  final String Id;
+ final String prodId;
   final String image ;
   final String name;
   final usd ;
   final inr ;
   final gbp ;
   final eur ;
-
-
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
+  const TagItem({Key key, this.blogId, this.prodId, this.Id, this.image, this.name, this.usd, this.inr, this.gbp, this.eur}) : super(key: key);
 
   delete(){
-    var  docReference =  blogRef
+
+   var docRefernce = blogRef
         .doc(currentUser.id)
         .collection('userBlog')
-        .doc(prodId)
+        .doc(blogId)
+        .collection('content')
+        .doc(Id)
         .collection('tags')
-        .doc(Id);
-    docReference.delete();
-
+        .doc(prodId);
+   docRefernce.delete();
   }
   @override
   Widget build(BuildContext context) {
@@ -1179,7 +1391,6 @@ class TagItem extends StatelessWidget {
                           )),
                     ],
                   ),
-
                 ],
               ),
 
@@ -1196,6 +1407,237 @@ class TagItem extends StatelessWidget {
             ),
           ),
         ]
+    );
+  }
+}
+class contentItem extends StatelessWidget {
+final String image;
+final String title;
+final String body;
+
+final String blogId;
+final String Id;
+
+
+   contentItem({ this.image, this.title, this.body,this.blogId, this.Id,  });
+
+
+
+  delete(){
+
+  var docReference =   blogRef
+        .doc(currentUser.id)
+        .collection('userBlog')
+        .doc(blogId)
+        .collection('content')
+    .doc(Id);
+    docReference.delete();
+  blogRef
+      .doc(currentUser.id)
+      .collection('userBlog')
+      .doc(blogId)
+      .collection('content')
+      .doc(Id) .collection('tags').get().then((snapshot) {
+    for(DocumentSnapshot doc in snapshot.docs ){
+    doc.reference.delete();
+
+    }
+    });
+  }
+
+tag(ctx){
+  return
+    showMaterialModalBottomSheet(
+      expand:true,
+      context: ctx,
+      builder: (BuildContext context)
+      {
+        SizeConfig().init(context);
+
+        return
+          Builder(builder: (BuildContext context) {
+            return StatefulBuilder(builder: (BuildContext context, State) {
+              return
+                Container(
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.75,
+
+                  child:
+
+                  SearchTag(prodId:blogId,Id:Id),
+
+                );
+            }
+            );
+          }
+          );
+      },
+    );
+
+}
+tags(ctx){
+  return
+    showMaterialModalBottomSheet(
+      expand:true,
+      context: ctx,
+      builder: (BuildContext context)
+      {
+        SizeConfig().init(context);
+
+        return
+          Builder(builder: (BuildContext context) {
+            return StatefulBuilder(builder: (BuildContext context, State) {
+              return
+                Scaffold(
+                  appBar: AppBar(backgroundColor:Colors.black,automaticallyImplyLeading: false,
+                      actions:[IconButton(icon: Icon(Icons.close),onPressed:() =>Navigator.pop(context),)]),
+                  body:
+                    SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment:MainAxisAlignment.center,
+
+                            children: [
+                              ElevatedButton(
+
+                                style: ElevatedButton.styleFrom(
+
+                                  primary:kButton, // foreground
+                                ),
+                                onPressed: () {
+                                  tag(ctx);
+                                },
+
+                                child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
+                                    ,color:kText),),
+                              ),
+                              SizedBox(width: 10,)  ,
+                              Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
+                                  ,color:kText),),
+                            ],
+                          ),
+                          Container(
+                            height:MediaQuery. of(context). size. height *0.75,
+                            child: tagView(),
+                          ),
+
+
+
+
+                        ],
+                      ),
+
+
+                  ),
+                );
+            }
+            );
+          }
+          );
+      },
+    );
+
+}
+
+tagView(){
+  return
+    StreamBuilder(
+      stream:blogRef
+          .doc(currentUser.id)
+          .collection('userBlog')
+          .doc(blogId)
+          .collection('content')
+          .doc(Id)
+          .collection("tags")
+          .orderBy('timestamp',descending: true).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+          return
+            Container();
+        } else {
+          return new ListView.builder(
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot ds = snapshot.data.docs[index];
+                return TagItem(
+                  Id: ds['Id'],
+prodId: ds['prodId'],
+                  name: ds['name'],
+                  usd: ds['usd'],
+                  inr: ds['inr'],
+                  eur: ds['eur'],
+                  gbp: ds['gbp'],
+
+                  image: ds['image'],
+                  blogId: blogId,
+
+                );
+              }
+          );
+        }
+      },
+    );
+
+}
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment:CrossAxisAlignment.start,
+          children: [
+            Text(title,
+                style:  GoogleFonts.notoSerif(fontSize: SizeConfig.safeBlockHorizontal * 8,fontWeight: FontWeight.bold),
+              ),
+            SizedBox(height:10),
+            Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: EmptyImage(image)),
+
+              ],
+            ),
+
+            SizedBox(height:10),
+            Text(body,
+                style: TextStyle(color: kText,
+                  fontSize: SizeConfig.safeBlockHorizontal * 6,
+                )),
+            SizedBox(height:10),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                FloatingActionButton.extended(
+                  backgroundColor:Colors.white.withOpacity(0.5),
+                  onPressed:()=> tags(context),
+                    elevation:0.1,
+                    icon: Icon(Icons.shopping_cart_outlined,color:Colors.black),
+                    label:Text("Tag Products",style:TextStyle(color:Colors.black))
+
+                ),
+
+                FloatingActionButton.extended(
+                  backgroundColor:Colors.white.withOpacity(0.5),
+                  onPressed:()=> delete(),
+                  elevation:0.1,
+                  icon: Icon(Icons.delete,color:Colors.red),
+                  label:Text("Delete",style:TextStyle(color:Colors.black))
+                ),
+              ],
+            ),
+
+          ],
+        ),
+      ),
     );
   }
 }
