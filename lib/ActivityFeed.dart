@@ -265,20 +265,22 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
     return SafeArea(
       child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(130.0),
+            preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/7),
             child: AppBar(title:  FittedBox(
                 fit: BoxFit.contain,child: Text(_myHandler.title,style: TextStyle(fontFamily: 'MajorMonoDisplay'),)),
                 backgroundColor: _myHandler.color,
 
                 bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(100.0),
+                  preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/7),
                   child:Container(
-                    height: 80.0,
+                    height: MediaQuery.of(context).size.height/16,
                     child: TabBar(
-                      indicatorSize:TabBarIndicatorSize.tab,
-                      indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                        indicatorColor: kblue,
-                      ),
+                      ///filled
+                      labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                      ///outline
+                      unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                      indicatorWeight: 0.001,
+
                       controller: _controller,
                       tabs: <Widget>[
                         FittedBox(

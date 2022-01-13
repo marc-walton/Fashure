@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/Timeline.dart';
 import 'package:fashow/chat_screen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/clientreview.dart';
@@ -704,7 +705,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/9),
           child: AppBar(
               title: FittedBox(
                   fit: BoxFit.contain,
@@ -1097,61 +1098,6 @@ class _BItemState extends State<BItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
 
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
@@ -1417,8 +1363,17 @@ class _BItemState extends State<BItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
+
             ],
           ),
         ),
@@ -1460,63 +1415,6 @@ class _DItemState extends State<DItem> {
     getFollowers();
     g();
     reviews();
-  }
-
-  getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-            return Container(
-              alignment:Alignment.centerLeft,
-              height: 200,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  List  url = snapshot.data.docs[index]["mediaUrl"];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
-                              ),
-                            );
-                          },
-                          child: CachedImage(
-                            url.first,
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width/2,
-
-                          )
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );}
-        });
   }
 
 
@@ -1779,7 +1677,15 @@ class _DItemState extends State<DItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -1848,61 +1754,6 @@ class _IItemState extends State<IItem> {
 
   }
 
-  getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-            return Container(
-              alignment:Alignment.centerLeft,
-              height: 200,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  List  url = snapshot.data.docs[index]["mediaUrl"];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
-                              ),
-                            );
-                          },
-                          child: CachedImage(
-                            url.first,
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width/2,
-                          )
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -2167,7 +2018,15 @@ class _IItemState extends State<IItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -2236,61 +2095,6 @@ class _SItemState extends State<SItem> {
 
   }
 
-  getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-            return Container(
-              alignment:Alignment.centerLeft,
-              height: 200,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  List  url = snapshot.data.docs[index]["mediaUrl"];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
-                              ),
-                            );
-                          },
-                          child: CachedImage(
-                            url.first,
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width/2,
-                          )
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -2554,7 +2358,15 @@ class _SItemState extends State<SItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -2622,61 +2434,6 @@ class _PItemState extends State<PItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -2941,7 +2698,15 @@ class _PItemState extends State<PItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -3010,61 +2775,6 @@ class _MAItemState extends State<MAItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -3329,7 +3039,15 @@ class _MAItemState extends State<MAItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -3398,61 +3116,6 @@ class _MItemState extends State<MItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
 
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
@@ -3718,7 +3381,15 @@ class _MItemState extends State<MItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -3787,61 +3458,6 @@ class _HItemState extends State<HItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -4106,7 +3722,15 @@ class _HItemState extends State<HItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -4175,62 +3799,6 @@ class _AItemState extends State<AItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -4496,7 +4064,15 @@ class _AItemState extends State<AItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -4564,61 +4140,6 @@ class _CItemState extends State<CItem> {
 
   }
 
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -4883,7 +4404,15 @@ class _CItemState extends State<CItem> {
                 ),
               ),
               Container(
-                child: getPost(),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height/4 ,
+                child: getPost(user.id),
               )
             ],
           ),
@@ -4934,4 +4463,51 @@ clients(client) {
       ],
     ),
   );
+}
+getPost(id){
+  return  PaginateView(
+    child: PaginateFirestore(
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        scrollDirection: Axis.horizontal,//Change types accordingly
+        itemBuilder: (index, context, documentSnapshot) {
+          List  url =documentSnapshot.data()["mediaUrl"];
+
+          return    Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PostScreen(
+                          postId: documentSnapshot.data()["postId"],
+                          userId: documentSnapshot.data()["ownerId"],
+                        ),
+                      ),
+                    );
+                  },
+                  child: CachedImage(
+                    url.first,
+
+
+                  )
+              ),
+            ),
+          );
+
+
+        },
+
+
+        query: postsRef
+            .doc(id)
+            .collection('userPosts')
+            .orderBy('timestamp', descending: true)
+
+    ),
+  );
+
 }

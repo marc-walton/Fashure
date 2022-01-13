@@ -404,7 +404,7 @@ clearContent() {
           } else {
             return new ListView.builder(
               shrinkWrap: true,
-// physics: RangeMaintainingScrollPhysics(),
+physics:NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.docs[index];
@@ -434,12 +434,11 @@ clearContent() {
     context: context,
     builder: (BuildContext context)
     {
+      bool adding =  false;
+
       SizeConfig().init(context);
 
-      return
-        Builder(builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, State) {
-            bool adding =  false;
             Widget getImageWidget1() {
               if (file1 != null) {
                 return InkWell(
@@ -556,83 +555,97 @@ clearContent() {
               return downloadUrl;
             }
             return
-              ModalProgressHUD(
-                inAsyncCall: adding,
-                child: Scaffold(
-                  appBar: AppBar(backgroundColor:Colors.black,automaticallyImplyLeading: false,
-                      actions:[IconButton(icon: Icon(Icons.close),onPressed:() =>Navigator.pop(context),)]),
-                  body: Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height,
+              Scaffold(
+                appBar: AppBar(backgroundColor:Colors.black,automaticallyImplyLeading: false,
+                    actions:[IconButton(icon: Icon(Icons.close),onPressed:() =>Navigator.pop(context),)]),
+                body:               Stack(
+                  children: [
+                   adding?Center(
+                     child: Column(
+                       mainAxisAlignment:MainAxisAlignment.center ,
+crossAxisAlignment: CrossAxisAlignment.center,
+                       children: [
+                         CircularProgressIndicator(),
+                         Text("Please wait...."),
+                       ],
+                     ),
+                   ): Container(
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height,
 
-                    child:                   SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          children: [
-                            TextFormField(controller: contentTitle,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                decoration: InputDecoration(labelText: 'heading',
-                                    fillColor: transwhite,
-                                    border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-                            SizedBox(height:10),
-                            getImageWidget1(),
-                            SizedBox(height:10),
+                      child:                   SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              TextFormField(controller: contentTitle,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  decoration: InputDecoration(labelText: 'heading',
+                                      fillColor: transwhite,
+                                      border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                              SizedBox(height:10),
+                              getImageWidget1(),
+                              SizedBox(height:10),
 
-                            TextFormField(controller: contentBody,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
+                              TextFormField(controller: contentBody,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
 
-                                decoration: InputDecoration(labelText: 'body',
-                                    fillColor: transwhite,
-                                    border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-                            SizedBox(height:10),
+                                  decoration: InputDecoration(labelText: 'body',
+                                      fillColor: transwhite,
+                                      border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                              SizedBox(height:10),
 
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
 
-                                  primary:Colors.black,
-                                  onPrimary:Colors.white,// foreground
-                                ),
-                                onPressed:()async{
-                                 State((){adding =  true;});
-                              String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-                              file1!=null? await compressImage1():null;
-                              String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
-                            await  blogRef
-                                  .doc(currentUser.id)
-                                  .collection('userBlog')
-                                  .doc(blogId)
-                                  .collection('content')
-                                  .doc(fileName)
-                                  .set({
-                                "title":contentTitle.text??"",
-                                "body":contentBody.text??"",
-                                "image":mediaUrl1??"",
+                                    primary:Colors.black,
+                                    onPrimary:Colors.white,// foreground
+                                  ),
+                                  onPressed:()async{
+                                    print("||||||||||||||||||||||||||||$adding");
+                                   State((){adding =  true;});
+                                    print("||||||||||||||||||||||||||||$adding");
+
+                                    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+                                file1!=null? await compressImage1():null;
+                                String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
+                              await  blogRef
+                                    .doc(currentUser.id)
+                                    .collection('userBlog')
+                                    .doc(blogId)
+                                    .collection('content')
+                                    .doc(fileName)
+                                    .set({
+                                  "title":contentTitle.text??"",
+                                  "body":contentBody.text??"",
+                                  "image":mediaUrl1??"",
 
 "Id":fileName,
-                                "timestamp":timestamp,
+                                  "timestamp":timestamp,
 
-                              });
-                              clearContent();
-                              Navigator.pop(context);
-                                 State((){adding =  false;});
-                            }, child: Text("Done"))
-                          ],
+                                });
+                                clearContent();
+                                Navigator.pop(context);
+                                   State((){adding =  false;});
+                                    print("||||||||||||||||||||||||||||$adding");
+
+                                  }, child: Text("Done"))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
 
-                  ),
+                    ),
+                  ],
                 ),
               );
           }
           );
-        }
-        );
+
     },
   );
 }
@@ -641,93 +654,65 @@ clearContent() {
     return
       Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:      Column(
-                  children: <Widget>[
-                    TextFormField(controller: titleController,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        decoration: InputDecoration(labelText: 'Title of the blog',
-                            fillColor: transwhite,
-                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
-                      textAlign: TextAlign.center,
-                      validator: (text) {
-                        if (text.isEmpty) {
-                          return 'Title is empty';
-                        }
-                        return null;
-                      },),
-                    SizedBox(height:20),
-                    getImageWidget(),
-                    TextFormField(controller: bodyController,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        autofocus: false,
-                        decoration: InputDecoration(labelText: 'body of the blog',
-                            fillColor: transwhite,
-                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
-                      validator: (text) {
-                        if (text.isEmpty) {
-                          return 'body is empty';
-                        }
-                        return null;
-                      },),
-
-
-                  ],
-                ),
-              ),
-              SizedBox(height:20),
-
-              Container(
-                  height:MediaQuery.of(context).size.height,
-                  child: contentView()),
-              SizedBox(height:20),
-
-              ElevatedButton(
-                style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
-                child: Text("Add content"),
-                onPressed: (){
-                  addContent();
-                },
-              ),
-
-              Row(
-                mainAxisAlignment:MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                  onTap: () async {
-
-                      titleController.text == ''||bodyController.text ==''?
-                      Fluttertoast.showToast(
-                          msg: "Fill the required fields", timeInSecForIos: 4):
-                      isUploading ? null : handleSubmit();
-                    },
-                    child: FittedBox(
-                      fit:  BoxFit.fitHeight,
-                      child: Container(
-                        alignment:Alignment.center,
-                        height:MediaQuery. of(context). size. height *0.06,
-
-                        width:MediaQuery. of(context). size. width *0.5,
-
-                        //icon: Icon(Icons.drag_handle),
-                        child:Text("Next",style:TextStyle(color: Colors.black)),
-
-                      ),
-                    ),
-                  ),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:      Column(
+                children: <Widget>[
+                  TextFormField(controller: titleController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(labelText: 'Title of the blog',
+                          fillColor: transwhite,
+                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
+                    textAlign: TextAlign.center,
+                    validator: (text) {
+                      if (text.isEmpty) {
+                        return 'Title is empty';
+                      }
+                      return null;
+                    },),
+                  SizedBox(height:20),
+                  getImageWidget(),
+                  TextFormField(controller: bodyController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      autofocus: false,
+                      decoration: InputDecoration(labelText: 'body of the blog',
+                          fillColor: transwhite,
+                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
+                    validator: (text) {
+                      if (text.isEmpty) {
+                        return 'body is empty';
+                      }
+                      return null;
+                    },),
 
 
                 ],
               ),
+            ),
+            SizedBox(height:20),
 
-            ],
-          ),
+            Expanded(
+              child: Container(
+                  // height:MediaQuery.of(context).size.height,
+                  child: contentView()),
+            ),
+            SizedBox(height:20),
+
+            ElevatedButton(
+              style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
+              child: Text("Add content"),
+              onPressed: (){
+                addContent();
+              },
+            ),
+
+
+
+          ],
         ),
       );
 
@@ -778,9 +763,9 @@ clearContent() {
     setState(() {
       isUploading = true;
     });
-    file1!=null? await compressImage1():null;
-    String mediaUrl =  file1!=null?await uploadImage1(file1):"";
-    blogRef
+    file!=null? await compressImage():null;
+    String mediaUrl =  file!=null?await uploadImage(file):"";
+   await blogRef
         .doc(widget.currentUser.id)
         .collection("userBlog")
         .doc(blogId)
@@ -916,7 +901,16 @@ clearContent() {
                     ),
                   ) ??
                       false),
+actions: [ElevatedButton(style:ElevatedButton.styleFrom(
+  primary:Colors.black,
+  onPrimary:Colors.white,
+),
+  child: Text("Post"),onPressed: () async {
 
+  titleController.text == ''||bodyController.text ==''?
+  Fluttertoast.showToast(
+      msg: "Fill the required fields", timeInSecForIos: 4):
+  isUploading ? null : handleSubmit();},)],
             ),
             body:
 
@@ -1341,7 +1335,7 @@ class TagItem extends StatelessWidget {
             child: Column(children:[
               ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: CachedImage(image)),
+                  child: CachedImage(image,height: MediaQuery.of(context).size.height/3,)),
               Row(
                 children: [
                   Text(name,

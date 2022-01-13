@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/HomePage.dart';
 import 'package:fashow/methods/chat_method.dart';
 import 'package:fashow/model/contact_model.dart';
 import 'package:fashow/model/user_model.dart';
@@ -41,11 +42,8 @@ class ChatListContainer extends StatefulWidget {
 }
 
 class _ChatListContainerState extends State<ChatListContainer> {
-  String id;
-  String userDisplayName;
-  String userPhotoUrl;
+
   final ChatMethods _chatMethods = ChatMethods();
-  SharedPreferences myPrefs;
   UserModel me;
   @override
   void initState() {
@@ -55,16 +53,13 @@ class _ChatListContainerState extends State<ChatListContainer> {
 
   }
   readLocal() async {
-    myPrefs = await SharedPreferences.getInstance();
-    id = myPrefs.getString('id') ?? '';
-    userDisplayName = myPrefs.getString('displayName') ?? '';
-    userPhotoUrl = myPrefs.getString('photoUrl') ?? '';
+
 //    print(id);
   setState(() {
     me = UserModel(
-      id: id,
-      displayName: userDisplayName,
-      photoUrl: userPhotoUrl,
+      id: currentUser.id,
+      displayName: currentUser.displayName,
+      photoUrl: currentUser.photoUrl,
     );
   });
   }
@@ -76,7 +71,7 @@ class _ChatListContainerState extends State<ChatListContainer> {
     return Container(
       child: StreamBuilder<QuerySnapshot>(
           stream: _chatMethods.fetchContacts(
-            userId: id,
+            userId: currentUser.id,
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData) {

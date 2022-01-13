@@ -9,6 +9,7 @@ import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/methods/Empty_image.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,9 @@ class Blog extends StatefulWidget {
   final String blogId;
   final String ownerId;
   final String username;
-  final List blogmediaUrl;
+  final String blogmediaUrl;
   final String title;
-  final String content;
-  final String source;
+  final String body;
     final String photoUrl;
 final String currency;
 
@@ -58,23 +58,13 @@ final String currency;
     this.currency,
 
     this.title,
-    this.content,
-    this.source,
+    this.body,
     this.likes,
      this.photoUrl,
 
   });
 
   factory Blog.fromDocument(DocumentSnapshot doc) {
-//    var ret = new List();
-//         _listOfImages = [];
-//         for (int i = 0;
-//         i <
-//         doc.data()['blogmediaUrl']
-//         .length;
-//         i++) {
-//           _listOfImages.add(NetworkImage(doc.data()['blogmediaUrl'][i]));
-//     }
     return Blog(
 
       blogId: doc.data()['blogId'],
@@ -82,8 +72,7 @@ final String currency;
       username: doc.data()['username'],
       blogmediaUrl:   doc.data()['blogmediaUrl'],
       title: doc.data()['title'],
-      content: doc.data()['content'],
-      source:doc.data()['source'],
+      body: doc.data()['body'],
       likes: doc.data()['claps'],
       photoUrl: doc.data()['photoUrl'],
       currency: doc.data()['currency'],
@@ -113,8 +102,7 @@ final String currency;
     username: this.username,
     blogmediaUrl: this.blogmediaUrl,
     title: this.title,
-    content: this.content,
-    source:this.source,
+    body: this.body,
     likes: this.likes,
     photoUrl: this.photoUrl,
     currency: this.currency,
@@ -131,10 +119,9 @@ class _BlogState extends State<Blog> {
   final String blogId;
   final String ownerId;
   final String username;
-  final List blogmediaUrl;
+  final String blogmediaUrl;
   final String title;
-  final String source;
-  final String content;
+  final String body;
     final String photoUrl;
      final String currency;
 
@@ -158,9 +145,8 @@ class _BlogState extends State<Blog> {
     this.username,
     this.blogmediaUrl,
     this.title,
-    this.content,
     this.likes,
-    this.source,
+    this.body,
     this.likeCount,
       this.photoUrl,
  this.currency,
@@ -168,139 +154,11 @@ class _BlogState extends State<Blog> {
   });
 
 
-  pics({String userid,String prodid,parentContext}){
-    return
-      FutureBuilder<QuerySnapshot> (
-          future:    blogRef
-              .doc(userid)
-              .collection("userBlog")
-              .where('blogId' ,isEqualTo: '$prodid')
-          // .where('ownerId' ,isEqualTo: '$ownerId')
-              .get(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return new ListView.builder(
-                  padding: EdgeInsets.all(0),
-                  physics:NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection:Axis.vertical,
-                  itemCount: snapshot.data.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-                    listOfImages = [];
-                    for (int i = 0;
-                    i <
-                        snapshot.data.docs[index].data()['blogmediaUrl']
-                            .length;
-                    i++) {
-                      listOfImages.add(GestureDetector(
-                        onTap: (){
-                          showDialog<void>(
-                            context: context,
-                            // useRootNavigator:true,
-
-                            barrierDismissible: true,
-                            // false = user must tap button, true = tap outside dialog
-                            builder: (BuildContext dialogContext) {
-                              return
-                                Dialog(
-
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),),
-                                  child: Container(
-                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
-                                      (snapshot
-                                        .data.docs[index].data()['blogmediaUrl'][i])),),
-                                );
-                            },
-                          );
-                        },
-                        child: CachedNetworkImage(imageUrl:snapshot
-                            .data.docs[index].data()['blogmediaUrl'][i]),
-                      ));
-                    }
-                    return Column(
-                      children: <Widget>[
-                        Container(
-
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-
-                            child:
-                            CarouselSlider(
-
-                                items: listOfImages,
-                                options: CarouselOptions(
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _current = index;
-                                    });
-                                  },
-                                  height: 400,
-                                  pauseAutoPlayOnManualNavigate: true,
-                                  pauseAutoPlayOnTouch: true,
-                                  aspectRatio: 16/9,
-                                  viewportFraction: 0.8,
-                                  initialPage: 0,
-                                  enableInfiniteScroll: false,
-                                  reverse: false,
-                                  autoPlay: false,
-                                  autoPlayInterval: Duration(seconds: 3),
-                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                  autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
-                                  // onPageChanged: callbackFunction,
-                                  scrollDirection: Axis.horizontal,
-                                )
-                            )
-                        ),
-
-                      ],
-                    );
-                  }
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-
-          });
-
-  }
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
-    _loadFromAssets();
-  }
-
-  carousel(){
-
-    return
-      CarouselSlider(
-          options: CarouselOptions(
-            height:500,
-            enableInfiniteScroll: false,
-          ),
-          items: blogmediaUrl.map((e) => Container(
-
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AssetThumb(
-                asset: e,
-                width: 500,
-                height: 400,
-              ),
-            ),
-          ), ).toList()
-
-      );
 
   }
+
 
 
   handleDeletePost(BuildContext parentContext) {
@@ -347,12 +205,9 @@ class _BlogState extends State<Blog> {
         doc.reference.delete();
       }
     });
-    // delete uploaded image for the post
-//    storageRef.child("postnow${postId}").delete();
 
-    for ( var imageFile in blogmediaUrl) {
-      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
-      await photo.delete();}
+      var photo =  FirebaseStorage.instance.refFromURL(blogmediaUrl) ;
+      await photo.delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
         .doc(ownerId)
@@ -370,10 +225,34 @@ class _BlogState extends State<Blog> {
         .collection('comments')
         .get();
     commentsSnapshot.docs.forEach((doc) {
+
       if (doc.exists) {
         doc.reference.delete();
       }
     });
+    QuerySnapshot snapshot = await  blogRef
+        .doc(currentUser.id)
+        .collection('userBlog')
+        .doc(blogId)
+        .collection('content').get();
+    commentsSnapshot.docs.forEach((doc) async {
+      if (doc.exists) {
+        for ( var imageFile in doc.data()["Id"]) {
+         await blogRef
+              .doc(currentUser.id)
+              .collection('userBlog')
+              .doc(blogId)
+              .collection('content')
+              .doc(imageFile) .collection('tags').get().then((snapshot) {
+            for(DocumentSnapshot doc in snapshot.docs ){
+              doc.reference.delete();
+
+            }
+          });         }
+        doc.reference.delete();
+      }
+    });
+
   }
 
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
@@ -450,62 +329,7 @@ class _BlogState extends State<Blog> {
       });
     }
   }
-  // final defaultStyle = DefaultTextStyle.of(context);
-  tagView(){
-    return
-      StreamBuilder(
-        stream:  blogRef
-            .doc(ownerId)
-            .collection("userBlog")
-        .doc(blogId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-            return
-              Container();
-          } else {
-            return new ListView.builder(
-                scrollDirection :Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.docs[index];
-                  return TagItem(
-                    Id: ds['prodId'],
-                    ownerId: ds['ownerId'],
-                    name: ds['name'],
-                    usd: ds['usd'],
-                    inr: ds['inr'],
-                    eur: ds['eur'],
-                    gbp: ds['gbp'],
-                    taggerId : ds['taggerId'],
-                    taggerImg : ds['taggerImg'],
-                    taggerName : ds['taggerName'],
-                    taggerCurrency : ds['taggerCurrency'],
-                    TaggerProdId: ds['prodId'],
-                    TaggerOwnerId: ds['ownerId'],
-                    image: ds['image'],
-                    prodId: blogId,
 
-                  );
-                }
-            );
-          }
-        },
-      );
-
-  }
-viewProducts(){
-return  showMaterialModalBottomSheet(
-      context: context,
-      builder: (BuildContext context)
-      {
-        SizeConfig().init(context);
-
-        return
-          Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
-      });
-}
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
@@ -520,23 +344,48 @@ return  showMaterialModalBottomSheet(
       "timestamp": timestamp,
     });
   }
-  Future<void> _loadFromAssets() async {
-    try {
-      final result = content;
-      final doc = NotusDocument.fromJson(jsonDecode(result));
-      setState(() {
-        _controller = ZefyrController(doc);
-      });
-    } catch (error) {
-      final doc = NotusDocument()..insert(0, 'Empty asset');
-      setState(() {
-        _controller = ZefyrController(doc);
-      });
-    }
+  contentView(){
+    return
+      StreamBuilder(
+        stream:  blogRef
+            .doc(currentUser.id)
+            .collection('userBlog')
+            .doc(blogId)
+            .collection('content')
+            .orderBy('timestamp',descending: false).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
+          } else {
+            return new ListView.builder(
+                shrinkWrap: true,
+                physics:NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return contentItem(
+
+                    Id: ds['Id'],
+                    title: ds['title'],
+                    body: ds['body'],
+
+                    blogId: blogId,
+
+                    image: ds['image'],
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
   }
+
   buildPostHeader(CTX) {
     bool isPostOwner = currentUserId == ownerId;
-    return   Column(
+    return   ListView(
       children: (<Widget>[
       GestureDetector(
         onTap: () => showProfile(context, profileId: ownerId),
@@ -595,79 +444,32 @@ return  showMaterialModalBottomSheet(
 
         ),
       ),
-        Text(title,
-          style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
-        ClipRRect(
-          borderRadius: BorderRadius.only
-            (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-          child: Container(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(title,
+            style:  GoogleFonts.playfairDisplay(fontSize: MediaQuery.of(context).size.width/9,fontWeight: FontWeight.bold),),
+        ) ,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only
+              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+            child: Container(
 
-              width:     MediaQuery.of(context).size.width,
-              child: pics(userid:ownerId,prodid:blogId,))),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: blogmediaUrl.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () => _ccontroller.animateToPage(entry.key),
-              child: Container(
-                width: 6.0,
-                height: 6.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: (Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black)
-                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-              ),
-            );
-          }).toList(),
+                width:     MediaQuery.of(context).size.width,
+                child: CachedImage(blogmediaUrl,height:MediaQuery.of(context).size.height/3))),
         ),
-      FutureBuilder(
-        future:  blogRef
-            .doc(ownerId)
-            .collection("userBlog")
-            .doc(blogId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else {
-            return  Row(
-              children: [
-                SizedBox(width:12.0),
-                GFButton(
-                  color: Colors.black,
-                  shape:  GFButtonShape.pills,
-                  textColor: Colors.black,
-            type : GFButtonType.outline,
-                  onPressed: viewProducts,
-                    text:"View Products",
-                    icon: Icon(
-                      Icons.add_shopping_cart,
-                     // color: Colors.white,
-                      size: 20.0,
-                    ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(body,
+            style:  TextStyle(fontSize: MediaQuery.of(context).size.width/18,),),
+        ) ,
+        Expanded(
+          child: Container(
+              child: contentView()),
+        ),
 
-                ),
-              ],
-            );
-          }
-        },
-      ),
 
-      Container(
-          child: ZefyrEditor(
-
-            controller: _controller,
-            focusNode: _focusNode,
-            autofocus: false,
-            readOnly: true,
-          )
-      ),
-//            Divider(color: kGrey,),
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -686,7 +488,7 @@ return  showMaterialModalBottomSheet(
               context,
               blogId: blogId,
               ownerId: ownerId,
-              mediaUrl: blogmediaUrl.first,
+              mediaUrl: blogmediaUrl,
             ),
             child: Icon(
               Icons.mode_comment_outlined,
@@ -717,7 +519,7 @@ return  showMaterialModalBottomSheet(
                                 postId:blogId,
                                 ownerId:ownerId,
                                 type:"SharedBlog",
-                                imageURL:blogmediaUrl.first,
+                                imageURL:blogmediaUrl,
                                 productname:title,
 
                               ),
@@ -726,7 +528,7 @@ return  showMaterialModalBottomSheet(
                         child: Text("Share to community",style: TextStyle(color: kText),),
                       ),
                       FutureBuilder<Uri>(
-                          future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl.first),
+                          future: _dynamicLinkService.createDynamicLink( postId:blogId,ownerId: ownerId,Description: title,type: "blog",imageURL:blogmediaUrl),
                           builder: (context, snapshot) {
                             if(snapshot.hasData) {
                               Uri uri = snapshot.data;
@@ -758,12 +560,10 @@ return  showMaterialModalBottomSheet(
             // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
             icon: Icon(Icons.send),
           ),
-
-
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: blogmediaUrl.first,),
+            child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: blogmediaUrl,),
           ),//
         ],
       ),
@@ -786,24 +586,11 @@ return  showMaterialModalBottomSheet(
 
     );
   }
-//  NotusDocument _loadDocument() {
- //   return NotusDocument.fromJson(jsonDecode(content));
-//  }
-   _saveDocument() {
-    // Notus documents can be easily serialized to JSON by passing to
-    // `jsonEncode` directly:
-    final contents = jsonDecode(content);
-    // For this example we save our document to a temporary file.
-    return contents;
-  }  @override
+
+  @override
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(context),
-      ],
-    );
+    return         buildPostHeader(context);
   }
 }
 
@@ -931,6 +718,156 @@ class TagItem extends StatelessWidget {
             ]),
           ),
         ]
+    );
+  }
+}
+class contentItem extends StatelessWidget {
+  final String image;
+  final String title;
+  final String body;
+
+  final String blogId;
+  final String Id;
+
+
+  contentItem({ this.image, this.title, this.body,this.blogId, this.Id,  });
+
+
+
+
+  tags(ctx){
+    return
+      showMaterialModalBottomSheet(
+
+        context: ctx,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Container(height:MediaQuery.of(context).size.height/1.5,
+                child:tagView());
+        },
+      );
+
+  }
+tag(){
+    return
+      FutureBuilder(
+        future: blogRef
+            .doc(currentUser.id)
+            .collection('userBlog')
+            .doc(blogId)
+            .collection('content')
+            .doc(Id)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
+          }
+          else {
+            return  Row(
+              children: [
+                SizedBox(width:12.0),
+                FloatingActionButton(
+                  mini:true,
+                  backgroundColor:Colors.white.withOpacity(0.5),
+                  onPressed:()=> tags(context),
+                  elevation:0.1,
+                  child: Icon(Icons.shopping_cart_outlined,color:Colors.black),
+
+
+                ),
+              ],
+            );
+          }
+        },
+      );
+}
+  tagView(){
+    return
+      StreamBuilder(
+        stream:blogRef
+            .doc(currentUser.id)
+            .collection('userBlog')
+            .doc(blogId)
+            .collection('content')
+            .doc(Id)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
+          } else {
+            return new ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+                    taggerId : ds['taggerId'],
+                    taggerImg : ds['taggerImg'],
+                    taggerName : ds['taggerName'],
+                    taggerCurrency : ds['taggerCurrency'],
+                    TaggerProdId: ds['prodId'],
+                    TaggerOwnerId: ds['ownerId'],
+                    image: ds['image'],
+                    prodId: blogId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment:CrossAxisAlignment.start,
+          children: [
+            Text(title,
+              style:  GoogleFonts.notoSerif(fontSize: MediaQuery.of(context).size.width/13,fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height:10),
+            Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: EmptyImage(image)),
+Positioned(
+  bottom: 10.0,
+  left:10.0,
+  child: tag(),
+)
+              ],
+            ),
+
+            SizedBox(height:10),
+            Text(body,
+                style: TextStyle(color: kText,
+                  fontSize:MediaQuery.of(context).size.width/18,
+                )),
+
+
+          ],
+        ),
+      ),
     );
   }
 }

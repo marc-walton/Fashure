@@ -260,7 +260,7 @@ ScrollController _scrollController = ScrollController();
     Widget build(BuildContext context) {
           return Scaffold( backgroundColor: kPrimaryColor,
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(130.0),
+              preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/6),
               child: AppBar(backgroundColor: appbar,
                   automaticallyImplyLeading: false,
                   elevation:0.0,
@@ -270,15 +270,15 @@ ScrollController _scrollController = ScrollController();
                     child: Text(   'FASHURE',
                       style: TextStyle(
                           fontFamily :"Neoneon",
-                          fontSize: 40,
+                          fontSize: MediaQuery.of(context).size.width/10,
                           color: Colors.white),),
                   ),
                   iconTheme: new IconThemeData(color: kIcon),
 
               bottom:  PreferredSize(
-                preferredSize: Size.fromHeight(100.0),
+                preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/6),
                 child: Container(
-                  height: 80.0,
+                  height: MediaQuery.of(context).size.height/16,
                   child: TabBar(
                     ///filled
                     labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
@@ -286,9 +286,6 @@ ScrollController _scrollController = ScrollController();
                     unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
                     indicatorWeight: 0.001,
 
-                    // indicatorSize:TabBarIndicatorSize.tab,
-                    // indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                    //   indicatorColor: kblue,
                     controller: _tabController,
                     tabs: <Widget>[
 
@@ -495,7 +492,6 @@ class Blogs extends StatelessWidget {
           itemBuilderType:
           PaginateBuilderType.listView, //Change types accordingly
           itemBuilder: (index, context, documentSnapshot) {
-            List<dynamic> blogMedia =  documentSnapshot.data()['blogmediaUrl'];
             return     Padding(
                 padding: const EdgeInsets.only(top:1.0,left:5.0,right:5.0,),
               child: ClipRRect(
@@ -505,7 +501,8 @@ class Blogs extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(documentSnapshot.data()["title"],
-                      style:  GoogleFonts.playfairDisplay(fontSize: 25.0,fontWeight: FontWeight.bold),),
+                      style:  GoogleFonts.playfairDisplay(fontSize:MediaQuery.of(context).size.width/13
+                        ,fontWeight: FontWeight.bold),),
                   ) ,
 
 
@@ -526,7 +523,7 @@ class Blogs extends StatelessWidget {
 
                       width: MediaQuery.of(context).size.width,
 
-                      child:  CachedNetworkImage( imageUrl: blogMedia.first),
+                      child:  CachedNetworkImage( imageUrl:documentSnapshot.data()['blogmediaUrl']),
 
                     ),
 

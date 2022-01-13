@@ -75,8 +75,7 @@ class _SettingState extends State<Setting> {
             child: ListTile(
               leading :  Text("Edit Profile",
                 style: TextStyle(
-                    fontFamily :"MajorMonoDisplay",
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText),),
             ),
             // Text('', style: TextStyle(
@@ -92,8 +91,7 @@ class _SettingState extends State<Setting> {
             child: ListTile(
               leading :  Text("My Orders",
                 style: TextStyle(
-                    fontFamily :"MajorMonoDisplay",
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText
                 ),),
             ),
@@ -119,7 +117,7 @@ class _SettingState extends State<Setting> {
                 leading :
                 Text("Credits",
                   style: TextStyle(
-                      fontSize:  15.0 ,
+                      fontSize:  MediaQuery.of(context).size.width/21 ,
                       color: kText),)
             ),
           ),
@@ -144,7 +142,7 @@ class _SettingState extends State<Setting> {
             child: ListTile(
               leading : Text("Gift Cards",
                 style: TextStyle(
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText),),
 
             ),
@@ -153,7 +151,7 @@ class _SettingState extends State<Setting> {
           ListTile(
             leading :  Text("More",
               style: TextStyle(
-                  fontSize:  10.0 ,
+                  fontSize:  MediaQuery.of(context).size.width/27 ,
                   color: kText),
             ),),
 
@@ -162,7 +160,7 @@ class _SettingState extends State<Setting> {
             child: ListTile(
               leading : Text("Log Out",
                 style: TextStyle(
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText),),
             ),),
 
@@ -175,7 +173,7 @@ class _SettingState extends State<Setting> {
             child: ListTile(
               leading : Text("Terms of Service",
                 style: TextStyle(
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText),),
             ),),
           Text('', style: TextStyle(
@@ -192,7 +190,7 @@ class _SettingState extends State<Setting> {
               leading :
               Text("Privacy Policy",
                 style: TextStyle(
-                    fontSize:  15.0 ,
+                    fontSize:  MediaQuery.of(context).size.width/21 ,
                     color: kText),),
 
             ),
@@ -204,7 +202,7 @@ class _SettingState extends State<Setting> {
 
                 leading :  Text("Refund Policy",
                   style: TextStyle(
-                      fontSize:  15.0 ,
+                      fontSize:  MediaQuery.of(context).size.width/21 ,
                       color: kText),)
 
               // Text('', style: TextStyle(
@@ -220,7 +218,7 @@ class _SettingState extends State<Setting> {
 
                 leading : Text("Help",
                   style: TextStyle(
-                      fontSize:  15.0 ,
+                      fontSize:  MediaQuery.of(context).size.width/21 ,
                       color: kText),)
 
             ),
@@ -231,12 +229,12 @@ class _SettingState extends State<Setting> {
             child: ListTile(
                 leading : Text("App Version",
                   style: TextStyle(
-                      fontSize:  15.0 ,
+                      fontSize:  MediaQuery.of(context).size.width/21 ,
                       color: kText),),
 
                 trailing :Text("0.0.1",
                   style: TextStyle(
-                      fontSize:  15.0 ,
+                      fontSize:  MediaQuery.of(context).size.width/21 ,
                       color: kText),)
 
 

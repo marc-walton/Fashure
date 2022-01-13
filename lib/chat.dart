@@ -77,7 +77,6 @@ class ChatScreenState extends State<ChatScreen> {
 
   var listMessage;
   String groupChatId;
-  SharedPreferences myPrefs;
 
   File iFile;
   bool isLoading;
@@ -112,8 +111,8 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   readLocal() async {
-    myPrefs = await SharedPreferences.getInstance();
-    id = myPrefs.getString('id') ?? '';
+
+    id =currentUser.id;
 //    currentUser.id = userId;
     if (id.hashCode <= peerId.hashCode) {
       groupChatId = '$id-$peerId';

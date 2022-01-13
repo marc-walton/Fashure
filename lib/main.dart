@@ -24,8 +24,7 @@ class FaShow extends StatefulWidget {
 
 class _FaShowState extends State<FaShow> {
   bool isAuth = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   dynamic user;
 dynamic photo;
 
@@ -35,22 +34,6 @@ dynamic photo;
 
     auth();
 
-
-
-    // Detects when user signed in
-    // googleSignIn.onCurrentUserChanged.listen((account) {
-    //   handleSignIn(account);
-    // }, onError: (err) {
-    //   print('Error signing in: $err');
-    // });
-    // // Reauthenticate user when app is opened
-    // googleSignIn.signInSilently(suppressErrors: false).then((account) {
-    //   handleSignIn(account);
-    // }).catchError((err) {
-    //   print('Error signing in: $err');
-    // });
-    //
-    // WidgetsBinding.instance.addObserver(this);
   }
 
   auth() async {

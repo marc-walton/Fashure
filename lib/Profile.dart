@@ -500,8 +500,10 @@ else{
                   ),]
                   ,borderRadius: BorderRadius.all(Radius.circular(10.0))
               ),
-              height: 60,
-              width: 60,
+              height:  MediaQuery.of(context).size.width/21 ,
+
+              width:  MediaQuery.of(context).size.width/21 ,
+
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -749,7 +751,7 @@ else{
 
         Text(
           count.toString(),
-          style: TextStyle(fontSize: MediaQuery.of(context).size.width/30, fontWeight: FontWeight.bold,
+          style: TextStyle(fontSize: MediaQuery.of(context).size.width/20, fontWeight: FontWeight.bold,
           color: kIcon),
         ),
 
@@ -759,7 +761,7 @@ else{
               label,
               style: TextStyle(
                   color: kGrey,
-                  fontSize: MediaQuery.of(context).size.width/40,
+                  fontSize: MediaQuery.of(context).size.width/30,
                  ),
             ),
           ),
@@ -1674,7 +1676,7 @@ Edits() {
                           tabs: [
                             Tab( child: Text("Feed",style: TextStyle(color:Colors.black),)),
                             Tab( child: Text("Shop",style: TextStyle(color:Colors.black),)),
-                            Tab( child: Text("Recycle",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Thrift shop",style: TextStyle(color:Colors.black),)),
 
                             Tab( child: Text("Collections",style: TextStyle(color:Colors.black),)),
                             Tab( child: Text("Editorial",style: TextStyle(color:Colors.black),)),

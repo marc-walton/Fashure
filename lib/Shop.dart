@@ -108,9 +108,9 @@ class _ShopState extends State<Shop>  with  TickerProviderStateMixin{
         backgroundColor: Colors.black,
 
         bottom:  PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/15),
           child: Container(
-            height: 80.0,
+            height: MediaQuery.of(context).size.height/15,
             child: new TabBar(
 controller: _Tabcontroller,
               ///filled
@@ -121,7 +121,7 @@ controller: _Tabcontroller,
               tabs: <Widget>[
                 FittedBox(
                   fit:BoxFit.fitWidth,
-                  child: Text('Men',
+                  child: Text('Shop',
                     style: TextStyle(
 
                    // fontSize:    SizeConfig.blockSizeHorizontal*4,
@@ -129,7 +129,7 @@ controller: _Tabcontroller,
                 ),
                 FittedBox(
                   fit:BoxFit.fitWidth,
-                  child: Text(   'Women',
+                  child: Text(   'Thrift shop',
                     style: TextStyle(
 
                         // fontSize:    SizeConfig.blockSizeHorizontal*4,

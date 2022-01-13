@@ -1849,158 +1849,144 @@ class _ResaleShopState extends State<ResaleShop>  with  TickerProviderStateMixin
   }
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return  Column(
       children: [
-        RotatedBox(
-          quarterTurns: 3,
-          child: Container(
-            decoration: new BoxDecoration(color: Colors.black),
-            width: MediaQuery.of(context).size.height,
-            height: MediaQuery.of(context).size.height/20,
-            child: new TabBar(
-
-              ///filled
-              labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
-              ///outline
-              unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
-              isScrollable: true,
-              controller: _controller,
-              tabs: <Widget>[
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Women',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text('Men',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Baby-Boys',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Baby-Girls',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Kids-Boys',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Kids-Girls',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Teen-Boys',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Teen-Girls',
-                    style: TextStyle(
-
-                        fontSize:    SizeConfig.blockSizeHorizontal*4,
-                        color: Colors.white),),
-                ),
-              ],
-            ),
-          ),
-        ),
         Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.height/2.3,
+          decoration: new BoxDecoration(color: Colors.black),
+          width: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height/20,
+          child: new TabBar(
 
-          child: Column(
-            children: [
-              Container(
-                  height:MediaQuery.of(context).size.height/19,
-                  child:Row(
-                    children: [
-                      Filter(),
-                      InkWell(
-                        onTap: (){ setState(() {
-                          tabs = !tabs ;
-                        });   },
-                        child: FittedBox(
-                          fit:  BoxFit.fitHeight,
-                          child: Container(
+            ///filled
+            labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+            ///outline
+            unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+            isScrollable: true,
+            controller: _controller,
+            tabs: <Widget>[
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Women',
+                  style: TextStyle(
 
-                            width:MediaQuery.of(context).size.height/5,
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
 
-                            //icon: Icon(Icons.drag_handle),
-                            child:Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Category",style:TextStyle(color: Colors.black)),
-                                SizedBox(width: 5,),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text('Men',
+                  style: TextStyle(
 
-                                Icon(Icons.sort),
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Baby-Boys',
+                  style: TextStyle(
 
-                              ],
-                            ),
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Baby-Girls',
+                  style: TextStyle(
 
-                          ),
-                        ),
-                      ),
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Kids-Boys',
+                  style: TextStyle(
 
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Kids-Girls',
+                  style: TextStyle(
 
-                    ],
-                  )),
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
 
-              Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height*0.65,
-                width:MediaQuery.of(context).size.height*0.97,
-                child: Expanded(
-                  child: TabBarView(
-                    controller: _controller,
-                    children: [
-                      Women(),
-                      Men(),
+                fit:BoxFit.fitWidth,
+                child: Text(   'Teen-Boys',
+                  style: TextStyle(
 
-                      BabyBoy(),
-                      BabyGirl(),
-                      KidBoy(),
-                      KidGirl(),
-                      TeenBoy(),
-                      TeenGirl(),
-                    ],
-                  ),
-                ),
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
+              ),
+              FittedBox(
+                fit:BoxFit.fitWidth,
+                child: Text(   'Teen-Girls',
+                  style: TextStyle(
+
+                      fontSize:    SizeConfig.blockSizeHorizontal*4,
+                      color: Colors.white),),
               ),
             ],
           ),
         ),
+        Container(
+          height:MediaQuery.of(context).size.height/18,
+
+
+          child: Row(
+            children: [
+              Filter(),
+              InkWell(
+                onTap: (){ setState(() {
+                  tabs = !tabs ;
+                });   },
+                child: FittedBox(
+                  fit:  BoxFit.fitHeight,
+                  child: Container(
+
+                    width:MediaQuery.of(context).size.height/5,
+
+                    //icon: Icon(Icons.drag_handle),
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Category",style:TextStyle(color: Colors.black)),
+                        SizedBox(width: 5,),
+
+                        Icon(Icons.sort),
+
+                      ],
+                    ),
+
+                  ),
+                ),
+              ),
+
+
+            ],
+          ),
+        ),
+        Flexible(
+          child: TabBarView(
+            controller: _controller,
+            children: [
+              Women(),
+              Men(),
+
+              BabyBoy(),
+              BabyGirl(),
+              KidBoy(),
+              KidGirl(),
+              TeenBoy(),
+              TeenGirl(),
+            ],
+          ),
+        ),
+
       ],
     );
   }

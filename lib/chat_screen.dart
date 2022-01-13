@@ -57,7 +57,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   UserModel sender;
   UserModel receive;
-  SharedPreferences myPrefs;
 //  String _currentUserId;
   String peerId;
   String peerAvatar;
@@ -468,7 +467,7 @@ model = doc.data()['model'] ?? false;
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Row(
                     children: <Widget>[
-                      FlatButton(
+                      TextButton(
                         child: Icon(
                           Icons.close,
                         ),
