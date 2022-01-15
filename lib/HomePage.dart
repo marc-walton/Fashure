@@ -230,8 +230,7 @@ getLink(){
   }
 
   loginuser()async{
-    DocumentSnapshot doc = await usersRef.doc(widget.userid).get();
-    currentUser = Users.fromDocument(doc);
+
     if(currentUser.ban == true){
       logO();
     }

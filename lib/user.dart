@@ -72,6 +72,7 @@ class Users{
 
  String countryISO;
 List communityId;
+List hashTags;
 
 
 
@@ -145,6 +146,7 @@ this.photographerGbp,
 this.bloggerGbp,
 this.stylistGbp,
 this.communityId,
+this.hashTags,
 
   this.designer,
 this.illustrator,
@@ -230,6 +232,7 @@ this.Bidding,
       photographerGbp: doc.data()['photographerGbp'],
       bloggerGbp: doc.data()['bloggerGbp'],
       stylistGbp: doc.data()['stylistGbp'],
+      hashTags: doc.data()['hashTags'],
 
     designer: doc.data()['designer'],
       illustrator: doc.data()['illustrator'],

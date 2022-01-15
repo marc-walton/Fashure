@@ -47,6 +47,8 @@ class Blog extends StatefulWidget {
   final String body;
     final String photoUrl;
 final String currency;
+final List hashTags;
+final bool hasHashTags;
 
   final dynamic likes;
 
@@ -56,6 +58,8 @@ final String currency;
     this.username,
     this.blogmediaUrl,
     this.currency,
+ this.hashTags,
+ this.hasHashTags,
 
     this.title,
     this.body,
@@ -76,6 +80,8 @@ final String currency;
       likes: doc.data()['claps'],
       photoUrl: doc.data()['photoUrl'],
       currency: doc.data()['currency'],
+      hashTags: doc.data()['hashTags'],
+      hasHashTags: doc.data()['hasHashTags'],
 
     );
   }
@@ -106,6 +112,8 @@ final String currency;
     likes: this.likes,
     photoUrl: this.photoUrl,
     currency: this.currency,
+    hashTags: this.hashTags,
+    hasHashTags: this.hasHashTags,
 
     likeCount: getLikeCount(this.likes),
 
@@ -124,6 +132,8 @@ class _BlogState extends State<Blog> {
   final String body;
     final String photoUrl;
      final String currency;
+ final List hashTags;
+ final bool hasHashTags;
 
   var contents ;
   int likeCount;
@@ -150,6 +160,8 @@ class _BlogState extends State<Blog> {
     this.likeCount,
       this.photoUrl,
  this.currency,
+ this.hashTags,
+ this.hasHashTags,
 
   });
 
@@ -469,6 +481,40 @@ class _BlogState extends State<Blog> {
               child: contentView()),
         ),
 
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(bottom: 10.0),
+              margin: EdgeInsets.only(left: 20.0),
+              child: ListView.builder(
+                  itemCount: hashTags.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        TextButton(
+                          onPressed:() async {
+                            DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
+                            currentUser = Users.fromDocument(doc);
+                            List tags = currentUser.hashTags;
+                            tags.add(hashTags[index]);
+                            usersRef.doc(currentUser.id).update({"hashTags":tags});
+                          },
+                          child: Text(
+                            "#${hashTags[index]}",
+                            style: TextStyle(
+                              color: kText,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+              ),
+            ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+          ],
+        ),
 
       Row(
         mainAxisAlignment: MainAxisAlignment.start,

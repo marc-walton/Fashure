@@ -87,6 +87,9 @@ class Prod extends StatefulWidget {
   final String variation10img;
 final String gender;
 final String country;
+final List hashTags;
+final bool hasHashTags;
+
 //   final String customName1;
 //   final String customName2;
 //   final String customName3;
@@ -453,6 +456,9 @@ this.country,
     this.variation8img,
     this.variation9img,
     this.variation10img,
+     this.hashTags,
+     this.hasHashTags,
+
 //     this.customQuantity1,
 //     this.customQuantity2,
 //     this.customQuantity3,
@@ -767,6 +773,8 @@ freeship: doc.data()['freeship'],
       country: doc.data()['country'],
       sizechartBool: doc.data()['sizechartBool'],
       sizeChart: doc.data()['sizeChart'],
+      hashTags: doc.data()['hashTags'],
+      hasHashTags: doc.data()['hasHashTags'],
 
      eur: doc.data()['eur'],
       usd: doc.data()['usd'],
@@ -1161,6 +1169,8 @@ freeship: doc.data()['freeship'],
     shipcostintergbp:this.shipcostintergbp,
     shipcostgbp:this.shipcostgbp,
     sizeChart:this.sizeChart,
+    hashTags:this.hashTags,
+    hasHashTags:this.hasHashTags,
 
 country:this.country,
 currency:this.currency,
@@ -1529,6 +1539,8 @@ final bool worldship;
 final bool freeworldship;
 final bool freeship;
 final bool sizechartBool;
+final List hashTags;
+final bool hasHashTags;
 
 //
 //   final String custom1img;
@@ -1909,6 +1921,8 @@ this.shipcostintergbp,
 this.shipcostgbp,
 this.sizechartBool,
 this.sizeChart,
+this.hashTags,
+this.hasHashTags,
 
 this.country,
 this.currency,
@@ -10348,6 +10362,41 @@ backgroundColor: Colors.black,
                     children: <Widget>[
                       ExpandableText(text:details,color:Colors.black,size:15.0,),
                       SizedBox(height: 8,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            margin: EdgeInsets.only(left: 20.0),
+                            child: ListView.builder(
+                                itemCount: hashTags.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed:() async {
+                                          DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
+                                          currentUser = Users.fromDocument(doc);
+                                          List tags = currentUser.hashTags;
+                                          tags.add(hashTags[index]);
+                                          usersRef.doc(currentUser.id).update({"hashTags":tags});
+                                        },
+                                        child: Text(
+                                          "#${hashTags[index]}",
+                                          style: TextStyle(
+                                            color: kText,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                            ),
+                          ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                        ],
+                      ),
+
                       SizedBox(height: 8,),
                       Text('Composition:',style: TextStyle(
                         color: kText.withOpacity(0.5),

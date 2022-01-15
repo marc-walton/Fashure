@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/provider/image_upload_provider.dart';
 import 'package:fashow/user.dart';
 import 'package:neon/neon.dart';
@@ -24,7 +25,7 @@ class FaShow extends StatefulWidget {
 
 class _FaShowState extends State<FaShow> {
   bool isAuth = false;
-
+  DocumentSnapshot doc;
   dynamic user;
 dynamic photo;
 
@@ -52,7 +53,8 @@ dynamic photo;
         {
           user= users.uid,
           photo= users.photoURL,
-
+         doc = await usersRef.doc(users.uid).get(),
+    currentUser = Users.fromDocument(doc),
           setState(() {
             isAuth = true;
 

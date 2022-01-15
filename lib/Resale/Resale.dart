@@ -11,6 +11,7 @@ import 'package:fashow/Resale/resaleCommenrs.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/user.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,7 +74,11 @@ class Resale extends StatefulWidget {
   var shipinterfrom;
   var shipinterto;
 
+
   final List images;
+  final List hashTags;
+  final bool hasHashTags;
+
   final dynamic likes;
 
    Resale({
@@ -99,6 +104,8 @@ class Resale extends StatefulWidget {
      this.shipinterfrom,
      this.shipinterto,
       this.sold,
+this.hashTags,
+this.hasHashTags,
 
    }) ;
 
@@ -139,6 +146,8 @@ class Resale extends StatefulWidget {
         shipinterto: doc.data()['shipinterto'],
         images: doc.data()['images'],
 sold: doc.data()['sold'],
+      hashTags: doc.data()['hashTags'],
+hasHashTags: doc.data()['hasHashTags'],
 
 
     );
@@ -196,6 +205,8 @@ sold: doc.data()['sold'],
       shipinterto: this.shipinterto,
       images: this.images,
  sold: this.sold,
+    hashTags: this.hashTags,
+    hasHashTags: this.hasHashTags,
 
     likeCount: getLikeCount(this.likes),
 
@@ -224,6 +235,8 @@ class _ResaleState extends State<Resale> {
   final bool freeworldship;
   final bool freeship;
    final bool sold;
+ final List hashTags;
+ final bool hasHashTags;
 
   var usd;
   var eur;
@@ -298,6 +311,8 @@ class _ResaleState extends State<Resale> {
       this.shipcostinterninr,
       this.round,
     this.sold,
+ this.hashTags,
+ this.hasHashTags,
 
       this.shipfrom,
       this.shipto,
@@ -1585,6 +1600,40 @@ onPressed:(){FirebaseFirestore.instance.collection('Resale')
 //                          fontWeight: FontWeight.bold,
                             ),),
                             SizedBox(height: 8,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 10.0),
+                                  margin: EdgeInsets.only(left: 20.0),
+                                  child: ListView.builder(
+                                      itemCount: hashTags.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            TextButton(
+                                              onPressed:() async {
+                                                DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
+                                                currentUser = Users.fromDocument(doc);
+                                                List tags = currentUser.hashTags;
+                                                tags.add(hashTags[index]);
+                                                usersRef.doc(currentUser.id).update({"hashTags":tags});
+                                              },
+                                              child: Text(
+                                                "#${hashTags[index]}",
+                                                style: TextStyle(
+                                                  color: kText,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                  ),
+                                ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+                              ],
+                            ),
 
                           ],
                         ),

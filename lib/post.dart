@@ -37,6 +37,9 @@ class Post extends StatefulWidget {
   final String location;
   final String description;
   final List mediaUrl;
+   final List hashTags;
+   final bool hasHashTags;
+
   final dynamic likes;
 
   Post({
@@ -46,7 +49,9 @@ class Post extends StatefulWidget {
     this.location,
     this.description,
     this.mediaUrl,
-    this.likes, this.photoUrl, this.currency,
+    this.likes,
+    this.photoUrl, this.currency,
+this.hashTags, this.hasHashTags,
 
   });
 
@@ -61,6 +66,8 @@ class Post extends StatefulWidget {
       likes: doc.data()['likes'],
         currency: doc.data()['currency'],
         photoUrl: doc.data()['photoUrl'],
+      hashTags: doc.data()['hashTags'],
+      hasHashTags: doc.data()['hasHashTags'],
 
 
     );
@@ -92,6 +99,8 @@ class Post extends StatefulWidget {
     likes: this.likes,
       photoUrl: this.photoUrl,
       currency: this.currency,
+    hashTags: this.hashTags,
+    hasHashTags: this.hasHashTags,
 
     likeCount: getLikeCount(this.likes),
   );
@@ -105,6 +114,9 @@ class _PostState extends State<Post> {
   final String location;
   final String description;
   final List mediaUrl;
+   final List hashTags;
+   final bool hasHashTags;
+
   final DynamicLinkService _dynamicLinkService = DynamicLinkService();
 
   final String photoUrl;
@@ -127,6 +139,8 @@ class _PostState extends State<Post> {
     this.likes,
     this.likeCount,
     this.photoUrl, this.currency,
+     this.hashTags, this.hasHashTags,
+
   });
 
 
@@ -606,6 +620,41 @@ class _PostState extends State<Post> {
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
             ],
           ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                margin: EdgeInsets.only(left: 20.0),
+                child: ListView.builder(
+                  itemCount: hashTags.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        TextButton(
+                          onPressed:() async {
+                            DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
+                            currentUser = Users.fromDocument(doc);
+                            List tags = currentUser.hashTags;
+                            tags.add(hashTags[index]);
+                            usersRef.doc(currentUser.id).update({"hashTags":tags});
+                          },
+                          child: Text(
+                            "#${hashTags[index]}",
+                            style: TextStyle(
+                              color: kText,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                ),
+              ),
+//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
+            ],
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
