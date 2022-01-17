@@ -9,12 +9,11 @@ import 'package:fashow/Products.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/size_config.dart';
-import 'package:get/get.dart';
-import 'package:textfield_tags/textfield_tags.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
+import 'package:get/get.dart';
 
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -925,67 +924,67 @@ clearImage();
          ),
          SizedBox( height:MediaQuery. of(context). size. width *0.5,
          ),
-         TextFieldTags(
-             textSeparators: <String> [
-               //text tag seperators
-               //Default = " ", ","
-             ],
-             // tags: <String>[
-             //   // List of tags
-             //   // Provide a list of initial tags to initialize it
-             // ],
-             textFieldStyler: TextFieldStyler(
-               //These are properties you can tweek for customization
-
-               // bool textFieldFilled = false,
-               // Icon icon,
-               helperText :'Add #Tags',
-               // TextStyle helperStyle,
-               // String hintText = 'Got tags?',
-               // TextStyle hintStyle,
-               // EdgeInsets contentPadding,
-               // Color textFieldFilledColor,
-               // bool isDense = true,
-               // bool textFieldEnabled = true,
-               // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-               // OutlineInputBorder textFieldFocusedBorder,
-               // OutlineInputBorder textFieldDisabledBorder,
-               // OutlineInputBorder textFieldEnabledBorder
-             ),
-             tagsStyler: TagsStyler(
-               //These are properties you can tweek for customization
-
-               showHashtag : true,
-               // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-               // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-               // BoxDecoration tagDecoration = const BoxDecoration(color: Color.fromARGB(255, 74, 137, 92)),
-               // TextStyle tagTextStyle,
-               // Icon tagCancelIcon = const Icon(Icons.cancel, size: 18.0, color: Colors.green)
-             ),
-             onTag: (tag) {
-               //This give you the tag that was entered
-               //print(tag)
-               hashTags.add(tag);
-               print(hashTags);
-
-             },
-
-             onDelete: (tag){
-               //This gives you the tag that was deleted
-               //print(tag)
-               hashTags.remove(tag);
-               print(hashTags);
-             },
-             validator: (tag){
-               if(tag.length>20){
-                 return "hey that's too long";
-               }
-               return null;
-             }
-           //tagsDistanceFromBorderEnd: 0.725,
-           //scrollableTagsMargin: EdgeInsets.only(left: 9),
-           //scrollableTagsPadding: EdgeInsets.only(left: 9),
-         ),
+         // TextFieldTags(
+         //     textSeparators: <String> [
+         //       //text tag seperators
+         //       //Default = " ", ","
+         //     ],
+         //     // tags: <String>[
+         //     //   // List of tags
+         //     //   // Provide a list of initial tags to initialize it
+         //     // ],
+         //     textFieldStyler: TextFieldStyler(
+         //       //These are properties you can tweek for customization
+         //
+         //       // bool textFieldFilled = false,
+         //       // Icon icon,
+         //       helperText :'Add #Tags',
+         //       // TextStyle helperStyle,
+         //       // String hintText = 'Got tags?',
+         //       // TextStyle hintStyle,
+         //       // EdgeInsets contentPadding,
+         //       // Color textFieldFilledColor,
+         //       // bool isDense = true,
+         //       // bool textFieldEnabled = true,
+         //       // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
+         //       // OutlineInputBorder textFieldFocusedBorder,
+         //       // OutlineInputBorder textFieldDisabledBorder,
+         //       // OutlineInputBorder textFieldEnabledBorder
+         //     ),
+         //     tagsStyler: TagsStyler(
+         //       //These are properties you can tweek for customization
+         //
+         //       showHashtag : true,
+         //       // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
+         //       // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
+         //       // BoxDecoration tagDecoration = const BoxDecoration(color: Color.fromARGB(255, 74, 137, 92)),
+         //       // TextStyle tagTextStyle,
+         //       // Icon tagCancelIcon = const Icon(Icons.cancel, size: 18.0, color: Colors.green)
+         //     ),
+         //     onTag: (tag) {
+         //       //This give you the tag that was entered
+         //       //print(tag)
+         //       hashTags.add(tag);
+         //       print(hashTags);
+         //
+         //     },
+         //
+         //     onDelete: (tag){
+         //       //This gives you the tag that was deleted
+         //       //print(tag)
+         //       hashTags.remove(tag);
+         //       print(hashTags);
+         //     },
+         //     validator: (tag){
+         //       if(tag.length>20){
+         //         return "hey that's too long";
+         //       }
+         //       return null;
+         //     }
+         //   //tagsDistanceFromBorderEnd: 0.725,
+         //   //scrollableTagsMargin: EdgeInsets.only(left: 9),
+         //   //scrollableTagsPadding: EdgeInsets.only(left: 9),
+         // ),
          Row(
            mainAxisAlignment:MainAxisAlignment.end,
 

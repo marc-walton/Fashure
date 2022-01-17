@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/model/tags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
@@ -314,13 +315,30 @@ class _SearchState extends State<Search> {
   }
 
   Widget build(BuildContext context) {
+    tags.shuffle();
     return Scaffold(
       appBar: buildSearchField(),
       body: Container(
         child: Column(
           children: <Widget>[
             Expanded(
-                child: ListView.builder(
+                child:
+       tags.isEmpty? ListView.builder(
+          itemCount: _resultsList.length,
+          itemBuilder: (BuildContext context, int index) =>
+              buildCard(context, _resultsList[index]),
+        ):_searchController.text ==""? Container(
+         height:MediaQuery.of(context).size.height,
+          child: GridView.count(
+          crossAxisCount: 3,
+          childAspectRatio: 1.0,
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+          shrinkWrap: true,
+          // physics: NeverScrollableScrollPhysics(),
+          children: tags,
+      ),
+        ):ListView.builder(
                   itemCount: _resultsList.length,
                   itemBuilder: (BuildContext context, int index) =>
                       buildCard(context, _resultsList[index]),

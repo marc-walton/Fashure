@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/model/tags.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -84,6 +85,7 @@ final tagsRef = FirebaseFirestore.instance.collection("tags");
 
 final DateTime timestamp = DateTime.now().toUtc();
 Users currentUser;
+List<Tag_Model>tags = <Tag_Model>[];
 
 class Homepage extends StatefulWidget {
   final userid;
@@ -105,14 +107,14 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
 
   int data;
   int serdata;
-  // String reviewId = Uuid().v4();
+   String s;
 
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   bool isAuth ;
   bool h = true;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User loggedInUser;
-
+List hashTagList;
   PageController pageController;
   int pageIndex = 0;
   SharedPreferences myPrefs;
@@ -171,6 +173,7 @@ void handleLink()async {
     loginuser();
     print("initState");
     handleLink();
+    getInitialHashTags();
     // Detects when user signed in
     // googleSignIn.onCurrentUserChanged.listen((account) {
     //   handleSignIn(account);
@@ -212,7 +215,127 @@ getLink(){
       },
     );
   }
+getInitialHashTags() async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('users')
+      .doc(widget.userid)
+      .collection('hashTags')
+  .orderBy('timestamp',descending: true)
+  .limit(10)
+      .get();
+  setState(() {
+    hashTagList = snapshot.docs.map((doc) => doc.id).toList();
+  });
+  getHashTagData();
+}
+getHashTagData()async{
 
+  for(int i =0;i<hashTagList.length;i++)
+  {
+    QuerySnapshot snapshot = await postsRef
+      .doc(widget.userid)
+      .collection('userPosts')
+    .where("hashTags",arrayContains: hashTagList[i])
+      .orderBy('timestamp',descending: true)
+      .limit(30)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc) {
+      Tag_Model   assign = Tag_Model(type: "post",
+      ownerId:doc.data()["ownerId"],
+      postId:doc.data()["postId"],
+      imgUrl:doc.data()["mediaUrl"],
+    );
+    tags.add(assign);
+    });
+
+  });
+  }
+for(int i =0;i<hashTagList.length;i++)
+  {
+    QuerySnapshot snapshot = await productsRef
+      .doc(widget.userid)
+      .collection('userProducts')
+        .where("hashTags",arrayContains: hashTagList[i])
+        .orderBy('timestamp',descending: true)
+      .limit(30)
+      .get();
+  setState(() {
+    snapshot.docs.forEach((doc){
+Tag_Model assign = Tag_Model(type: "shop",
+ownerId:doc.data()["ownerId"],
+  postId:doc.data()["prodId"],
+  imgUrl:doc.data()["shopmediaUrl"],
+);
+tags.add(assign);
+    });
+  });
+  }
+for(int i =0;i<hashTagList.length;i++)
+  {
+    QuerySnapshot snapshot = await blogRef
+      .doc(widget.userid)
+      .collection('userBlog')
+        .where("hashTags",arrayContains: hashTagList[i])
+        .orderBy('timestamp',descending: true)
+      .limit(30)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+Tag_Model assign = Tag_Model(type: "editorial",
+ownerId:doc.data()["ownerId"],
+  postId:doc.data()["blogId"],
+  imgUrl:doc.data()["blogmediaUrl"],
+);
+tags.add(assign);
+    });
+  });
+  }
+for(int i =0;i<hashTagList.length;i++)
+  {
+    QuerySnapshot snapshot = await collRef
+      .doc(widget.userid)
+      .collection('userCollections')
+        .where("hashTags",arrayContains: hashTagList[i])
+        .orderBy('timestamp',descending: true)
+      .limit(30)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+Tag_Model assign = Tag_Model(type: "collection",
+ownerId:doc.data()["ownerId"],
+  postId:doc.data()["collId"],
+  imgUrl:doc.data()["collmediaUrl"],
+);
+tags.add(assign);
+    });
+  });
+  }
+for(int i =0;i<hashTagList.length;i++)
+  {
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Resale')
+      .doc(widget.userid)
+      .collection('userResale')
+        .where("hashTags",arrayContains: hashTagList[i])
+        .orderBy('timestamp',descending: true)
+      .limit(30)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+Tag_Model assign = Tag_Model(type: "resale",
+ownerId:doc.data()["ownerId"],
+  postId:doc.data()["resaleId"],
+  imgUrl:doc.data()["images"],
+);
+tags.add(assign);
+    });
+  });
+  }
+
+}
   logO() async {
     // await googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();

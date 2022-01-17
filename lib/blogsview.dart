@@ -11,6 +11,7 @@ import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/methods/Empty_image.dart';
 import 'package:fashow/size_config.dart';
+import 'package:fashow/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';

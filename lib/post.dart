@@ -534,7 +534,8 @@ class _PostState extends State<Post> {
                       }):handleDeletePost(context);
                 }),
 
-          ),SizedBox( height:0.0,),
+          ),
+          SizedBox( height:0.0,),
           GestureDetector(
               onDoubleTap: handleLikePost,
               child: Stack(
