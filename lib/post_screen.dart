@@ -40,7 +40,7 @@ class PostScreen extends StatelessWidget {
             body: ListView(
               children: <Widget>[
                  Container(
-                                  child: post,
+                   child: post,
                   ),
               ],
             ),

@@ -14,6 +14,7 @@ import 'package:fashow/methods/card_user.dart';
 
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
+import 'package:lazy_loading_list/lazy_loading_list.dart';
 
 class SearchU extends StatefulWidget {
   @override
@@ -329,15 +330,12 @@ class _SearchState extends State<Search> {
               buildCard(context, _resultsList[index]),
         ):_searchController.text ==""? Container(
          height:MediaQuery.of(context).size.height,
-          child: GridView.count(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
-          shrinkWrap: true,
-          // physics: NeverScrollableScrollPhysics(),
-          children: tags,
-      ),
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:3),
+              itemCount: tags.length,
+              itemBuilder:( context,index){
+                return LazyLoadingList( child: ListView(children: tags,), index: index,);
+              } ),
         ):ListView.builder(
                   itemCount: _resultsList.length,
                   itemBuilder: (BuildContext context, int index) =>

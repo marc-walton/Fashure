@@ -236,7 +236,7 @@ getHashTagData()async{
       .collection('userPosts')
     .where("hashTags",arrayContains: hashTagList[i])
       .orderBy('timestamp',descending: true)
-      .limit(30)
+      .limit(300)
       .get();
 
   setState(() {
@@ -258,7 +258,7 @@ for(int i =0;i<hashTagList.length;i++)
       .collection('userProducts')
         .where("hashTags",arrayContains: hashTagList[i])
         .orderBy('timestamp',descending: true)
-      .limit(30)
+      .limit(300)
       .get();
   setState(() {
     snapshot.docs.forEach((doc){
@@ -278,7 +278,7 @@ for(int i =0;i<hashTagList.length;i++)
       .collection('userBlog')
         .where("hashTags",arrayContains: hashTagList[i])
         .orderBy('timestamp',descending: true)
-      .limit(30)
+      .limit(300)
       .get();
 
   setState(() {
@@ -299,7 +299,7 @@ for(int i =0;i<hashTagList.length;i++)
       .collection('userCollections')
         .where("hashTags",arrayContains: hashTagList[i])
         .orderBy('timestamp',descending: true)
-      .limit(30)
+      .limit(300)
       .get();
 
   setState(() {
@@ -320,7 +320,7 @@ for(int i =0;i<hashTagList.length;i++)
       .collection('userResale')
         .where("hashTags",arrayContains: hashTagList[i])
         .orderBy('timestamp',descending: true)
-      .limit(30)
+      .limit(300)
       .get();
 
   setState(() {

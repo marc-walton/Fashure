@@ -621,39 +621,38 @@ class _PostState extends State<Post> {
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                margin: EdgeInsets.only(left: 20.0),
-                child: ListView.builder(
-                  itemCount: hashTags.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        TextButton(
-                          onPressed:() async {
-                            DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                            currentUser = Users.fromDocument(doc);
-                            List tags = currentUser.hashTags;
-                            tags.add(hashTags[index]);
-                            usersRef.doc(currentUser.id).update({"hashTags":tags});
-                          },
-                          child: Text(
-                            "#${hashTags[index]}",
-                            style: TextStyle(
-                              color: kText,
-                            ),
+          Container(
+            padding: EdgeInsets.only(bottom: 10.0),
+            margin: EdgeInsets.only(left: 20.0),
+            child: ListView.builder(
+              shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: hashTags.length,
+                itemBuilder: (context, index) {
+                  return  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      TextButton(
+                        onPressed:() async {
+                          // DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
+                          // currentUser = Users.fromDocument(doc);
+                          // List tags = currentUser.hashTags;
+                          // tags.add(hashTags[index]);
+                          // usersRef.doc(currentUser.id).update({"hashTags":tags});
+                        },
+                        child: Text(
+                          "${hashTags[index]}",
+                          style: TextStyle(
+                            color: kText,
                           ),
                         ),
-                      ],
-                    );
-                  }
-                ),
-              ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-            ],
+
+                      ),
+                    ],
+                  );
+                }
+            ),
           ),
 
           Row(
