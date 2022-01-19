@@ -159,6 +159,7 @@ import 'package:fashow/methods/card_prod.dart';
 
 import 'Categories/Kids/teen/boy/Jewellery.dart';
 import 'Categories/Kids/teen/girl/Jwellery.dart';
+TextEditingController _searchController = TextEditingController();
 
 class ShopSearch extends StatefulWidget {
   @override
@@ -4921,7 +4922,6 @@ else{return null;}
                         child: AutoSearchInput(
                             unSelectedTextColor: Colors.grey,
                             selectedTextColor: Colors.black,
-                            
                             hintText: 'Search',
                             itemsShownAtStart: 20,
                             singleItemHeight: 60.0,
@@ -4956,9 +4956,7 @@ class SearchDesigner extends StatefulWidget {
 }
 
 class _SearchDesignerState extends State<SearchDesigner> {
-  TextEditingController _searchController = TextEditingController();
-
-  Future resultsLoaded;
+Future resultsLoaded;
   List _allResults = [];
   List _resultsList = [];
 
@@ -5081,9 +5079,7 @@ class SearchProduct extends StatefulWidget {
 }
 
 class _SearchProductState extends State<SearchProduct> {
-  TextEditingController _searchController = TextEditingController();
-
-  Future resultsLoaded;
+Future resultsLoaded;
   List _allResults = [];
   List _resultsList = [];
 

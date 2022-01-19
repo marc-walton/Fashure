@@ -15,6 +15,7 @@ import 'package:fashow/methods/card_user.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
 import 'package:lazy_loading_list/lazy_loading_list.dart';
+TextEditingController _searchController = TextEditingController();
 
 class SearchU extends StatefulWidget {
   @override
@@ -222,7 +223,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  TextEditingController _searchController = TextEditingController();
 
   Future resultsLoaded;
   List _allResults = [];
@@ -334,7 +334,7 @@ class _SearchState extends State<Search> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:3),
               itemCount: tags.length,
               itemBuilder:( context,index){
-                return LazyLoadingList( child: ListView(children: tags,), index: index,);
+                return LazyLoadingList( child: ListView(children: [tags[index]],), index: index,);
               } ),
         ):ListView.builder(
                   itemCount: _resultsList.length,

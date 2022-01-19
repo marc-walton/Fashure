@@ -3,6 +3,7 @@ import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/model/hashTag_screen.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -22,6 +23,7 @@ import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
@@ -48,6 +50,8 @@ final bool hasHashTags;
   final String source;
   final dynamic likes;
 int index;
+
+
   Coll({
     this.collId,
     this.ownerId,
@@ -122,7 +126,8 @@ class _CollState extends State<Coll> {
   final String username;
    final String currency;
 final String photoUrl;
-
+  var randomTag1;
+  var randomTag2;
   final List collmediaUrl;
   final List hashTags;
   final bool hasHashTags;
@@ -233,36 +238,44 @@ final String photoUrl;
   }
 
   handleLikePost() {
-    bool _isLiked = likes[currentUserId] == true;
+    bool _isLiked = isLiked;
 
     if (_isLiked) {
       collRef
-
+          .doc(ownerId)
+          .collection('userCollections')
           .doc(collId)
-          .update({'claps.$currentUserId': false});
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // collRef
+      //
+      //     .doc(collId)
+      //     .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       collRef
-
+          .doc(ownerId)
+          .collection('userCollections')
           .doc(collId)
-          .update({'claps.$currentUserId': true});
+          .collection("likes")
+          .doc(currentUserId).set({});
      addLikeToActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
       setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
-//        showHeart = true;
+        // likes[currentUserId] = true;
       });
-//      Timer(Duration(milliseconds: 500), () {
-//        setState(() {
-//          showHeart = false;
-//        });
-//      });
     }
   }
 
@@ -599,39 +612,35 @@ buildPostHeader(CTX) {
             fontWeight: FontWeight.bold,
           ),),
       ),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(bottom: 10.0),
-            margin: EdgeInsets.only(left: 20.0),
-            child: ListView.builder(
-                itemCount: hashTags.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      TextButton(
-                        onPressed:() async {
-                          DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                          currentUser = Users.fromDocument(doc);
-                          List tags = currentUser.hashTags;
-                          tags.add(hashTags[index]);
-                          usersRef.doc(currentUser.id).update({"hashTags":tags});
-                        },
-                        child: Text(
-                          "#${hashTags[index]}",
-                          style: TextStyle(
-                            color: kText,
-                          ),
-                        ),
+      Container(
+        padding: EdgeInsets.only(bottom: 10.0),
+        margin: EdgeInsets.only(left: 20.0),
+        child: ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: hashTags.length,
+            itemBuilder: (context, index) {
+              return  Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  GestureDetector(
+                    onTap:() async {
+                      usersRef.doc(currentUser.id).collection("hashTags").doc(hashTags[index]).set({"timestamp":timestamp});
+                      Get.to(()=>HashTagScreen(hashTag:hashTags[index]));
+                    },
+                    child: Text(
+                      "${hashTags[index]}",
+                      style: TextStyle(
+                        color: Colors.blue,
                       ),
-                    ],
-                  );
-                }
-            ),
-          ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-        ],
+                    ),
+
+                  ),
+                ],
+              );
+            }
+        ),
       ),
 
       Row(
@@ -759,7 +768,22 @@ buildPostHeader(CTX) {
 
   @override
   Widget build(BuildContext context) {
-    isLiked = (likes[currentUserId] == true);
+    collRef
+        .doc(ownerId)
+        .collection('userCollections')
+        .doc(collId)
+        .collection("likes")
+        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+        collRef
+        .doc(ownerId)
+        .collection('userCollections')
+        .doc(collId)
+        .collection("likes")
+            .get().then((doc) => doc.docs.length=likeCount);
+
+    // isLiked = (likes[currentUserId] == true);
+     randomTag1 = (hashTags.toList()..shuffle()).first;
+     randomTag2 = (hashTags.toList()..shuffle()).last;
     return
       buildPostHeader(context);
   }

@@ -10,6 +10,7 @@ import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/methods/Empty_image.dart';
+import 'package:fashow/model/hashTag_screen.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -23,6 +24,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
@@ -144,6 +146,8 @@ class _BlogState extends State<Blog> {
    bool tags = false;
   int _current = 0;
   final CarouselController _ccontroller = CarouselController();
+  var randomTag1;
+  var randomTag2;
 
   List <Widget>listOfImages = <Widget>[];
   ZefyrController _controller;
@@ -271,31 +275,49 @@ class _BlogState extends State<Blog> {
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
 
   handleLikePost() {
-    bool _isLiked = likes[currentUserId] == true;
+    bool _isLiked = isLiked;
 
     if (_isLiked) {
       blogRef
           .doc(ownerId)
           .collection('userBlog')
           .doc(blogId)
-          .update({'claps.$currentUserId': false});
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // blogRef
+      //     .doc(ownerId)
+      //     .collection('userBlog')
+      //     .doc(blogId)
+      //     .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       blogRef
           .doc(ownerId)
           .collection('userBlog')
           .doc(blogId)
-          .update({'claps.$currentUserId': true});
-     addLikeToActivityFeed();
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // blogRef
+      //     .doc(ownerId)
+      //     .collection('userBlog')
+      //     .doc(blogId)
+      //     .update({'claps.$currentUserId': true});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
+      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
 //        showHeart = true;
       });
 //      Timer(Duration(milliseconds: 500), () {
@@ -482,39 +504,35 @@ class _BlogState extends State<Blog> {
               child: contentView()),
         ),
 
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(bottom: 10.0),
-              margin: EdgeInsets.only(left: 20.0),
-              child: ListView.builder(
-                  itemCount: hashTags.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        TextButton(
-                          onPressed:() async {
-                            DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                            currentUser = Users.fromDocument(doc);
-                            List tags = currentUser.hashTags;
-                            tags.add(hashTags[index]);
-                            usersRef.doc(currentUser.id).update({"hashTags":tags});
-                          },
-                          child: Text(
-                            "#${hashTags[index]}",
-                            style: TextStyle(
-                              color: kText,
-                            ),
-                          ),
+        Container(
+          padding: EdgeInsets.only(bottom: 10.0),
+          margin: EdgeInsets.only(left: 20.0),
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: hashTags.length,
+              itemBuilder: (context, index) {
+                return  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    GestureDetector(
+                      onTap:() async {
+                        usersRef.doc(currentUser.id).collection("hashTags").doc(hashTags[index]).set({"timestamp":timestamp});
+                        Get.to(()=>HashTagScreen(hashTag:hashTags[index]));
+                      },
+                      child: Text(
+                        "${hashTags[index]}",
+                        style: TextStyle(
+                          color: Colors.blue,
                         ),
-                      ],
-                    );
-                  }
-              ),
-            ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-          ],
+                      ),
+
+                    ),
+                  ],
+                );
+              }
+          ),
         ),
 
       Row(
@@ -636,7 +654,22 @@ class _BlogState extends State<Blog> {
 
   @override
   Widget build(BuildContext context) {
-    isLiked = (likes[currentUserId] == true);
+    blogRef
+        .doc(ownerId)
+        .collection('userBlog')
+        .doc(blogId)
+        .collection("likes")
+        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+      blogRef
+        .doc(ownerId)
+        .collection('userBlog')
+        .doc(blogId)
+        .collection("likes")
+          .get().then((doc) => doc.docs.length=likeCount);
+
+    // isLiked = (likes[currentUserId] == true);
+     randomTag1 = (hashTags.toList()..shuffle()).first;
+     randomTag2 = (hashTags.toList()..shuffle()).last;
     return         buildPostHeader(context);
   }
 }

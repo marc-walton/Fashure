@@ -11,6 +11,7 @@ import 'package:fashow/Resale/resaleCommenrs.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/model/hashTag_screen.dart';
 import 'package:fashow/user.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,6 +23,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
+import 'package:get/get.dart';
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
@@ -286,6 +288,8 @@ class _ResaleState extends State<Resale> {
   bool isLiked;
   bool loading;
   String id = Uuid().v4();
+  var randomTag1;
+   var randomTag2;
 
   bool showHeart = false;
   List <Widget>listOfImages = <Widget>[];
@@ -546,28 +550,43 @@ shipBool = currentUser.country == country?freeship:freeworldship;
   }
 
   handleLikePost() {
-    bool _isLiked = likes[currentUserId] == true;
+    bool _isLiked = isLiked;
 
     if (_isLiked) {
       FirebaseFirestore.instance.collection('Resale')
           .doc(ownerId)
           .collection('userResale')
-          .doc(resaleId)
-          .update({'likes.$currentUserId': false});
+          .doc(ownerId)
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // FirebaseFirestore.instance.collection('Resale')
+      //     .doc(ownerId)
+      //     .collection('userResale')
+      //     .doc(resaleId)
+      //     .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
       var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(resaleId);
       docReference.delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       FirebaseFirestore.instance.collection('Resale')
           .doc(ownerId)
           .collection('userResale')
-          .doc(resaleId)
-          .update({'likes.$currentUserId': true});
+          .doc(ownerId)
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // FirebaseFirestore.instance.collection('Resale')
+      //     .doc(ownerId)
+      //     .collection('userResale')
+      //     .doc(resaleId)
+      //     .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
       favRef.doc(currentUser.id).collection("userWishlist")
           .doc(resaleId)
@@ -585,10 +604,13 @@ shipBool = currentUser.country == country?freeship:freeworldship;
         "title": title,
         "images": images.first,
       });
-      setState(() {
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+ usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
+    setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
 //        showHeart = true;
       });
     }
@@ -1600,39 +1622,35 @@ onPressed:(){FirebaseFirestore.instance.collection('Resale')
 //                          fontWeight: FontWeight.bold,
                             ),),
                             SizedBox(height: 8,),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.only(bottom: 10.0),
-                                  margin: EdgeInsets.only(left: 20.0),
-                                  child: ListView.builder(
-                                      itemCount: hashTags.length,
-                                      itemBuilder: (context, index) {
-                                        return Column(
-                                          children: [
-                                            TextButton(
-                                              onPressed:() async {
-                                                DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                                                currentUser = Users.fromDocument(doc);
-                                                List tags = currentUser.hashTags;
-                                                tags.add(hashTags[index]);
-                                                usersRef.doc(currentUser.id).update({"hashTags":tags});
-                                              },
-                                              child: Text(
-                                                "#${hashTags[index]}",
-                                                style: TextStyle(
-                                                  color: kText,
-                                                ),
-                                              ),
+                            Container(
+                              padding: EdgeInsets.only(bottom: 10.0),
+                              margin: EdgeInsets.only(left: 20.0),
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: hashTags.length,
+                                  itemBuilder: (context, index) {
+                                    return  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                                      children: [
+                                        GestureDetector(
+                                          onTap:() async {
+                                            usersRef.doc(currentUser.id).collection("hashTags").doc(hashTags[index]).set({"timestamp":timestamp});
+                                            Get.to(()=>HashTagScreen(hashTag:hashTags[index]));
+                                          },
+                                          child: Text(
+                                            "${hashTags[index]}",
+                                            style: TextStyle(
+                                              color: Colors.blue,
                                             ),
-                                          ],
-                                        );
-                                      }
-                                  ),
-                                ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-                              ],
+                                          ),
+
+                                        ),
+                                      ],
+                                    );
+                                  }
+                              ),
                             ),
 
                           ],
@@ -1709,8 +1727,22 @@ addingToList(){
 }
   @override
   Widget build(BuildContext context) {
-    isLiked = (likes[currentUserId] == true);
+    FirebaseFirestore.instance.collection('Resale')
+        .doc(ownerId)
+        .collection('userResale')
+        .doc(ownerId)
+        .collection("likes")
+        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+      FirebaseFirestore.instance.collection('Resale')
+        .doc(ownerId)
+        .collection('userResale')
+        .doc(ownerId)
+        .collection("likes")
+     .get().then((doc) => doc.docs.length=likeCount);
 
+    // isLiked = (likes[currentUserId] == true);
+     randomTag1 = (hashTags.toList()..shuffle()).first;
+     randomTag2 = (hashTags.toList()..shuffle()).last;
     return Column(children:[
       posteurope(context),
 

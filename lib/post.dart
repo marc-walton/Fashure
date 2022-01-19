@@ -7,6 +7,7 @@ import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/model/hashTag_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,6 +20,7 @@ import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/comments.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
@@ -129,6 +131,9 @@ class _PostState extends State<Post> {
   String media;
   int _current = 0;
   final CarouselController _ccontroller = CarouselController();
+  var randomTag1;
+   var randomTag2;
+
   _PostState( {
     this.postId,
     this.ownerId,
@@ -331,31 +336,48 @@ class _PostState extends State<Post> {
   }
 
   handleLikePost() {
-    bool _isLiked = likes[currentUserId] == true;
-
+    bool _isLiked = isLiked;
     if (_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': false});
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': true});
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
       setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
 //        showHeart = true;
       });
     }
@@ -633,18 +655,15 @@ class _PostState extends State<Post> {
                     crossAxisAlignment: CrossAxisAlignment.start,
 
                     children: [
-                      TextButton(
-                        onPressed:() async {
-                          // DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                          // currentUser = Users.fromDocument(doc);
-                          // List tags = currentUser.hashTags;
-                          // tags.add(hashTags[index]);
-                          // usersRef.doc(currentUser.id).update({"hashTags":tags});
+                      GestureDetector(
+                        onTap:() async {
+                         usersRef.doc(currentUser.id).collection("hashTags").doc(hashTags[index]).set({"timestamp":timestamp});
+                       Get.to(()=>HashTagScreen(hashTag:hashTags[index]));
                         },
                         child: Text(
                           "${hashTags[index]}",
                           style: TextStyle(
-                            color: kText,
+                            color: Colors.blue,
                           ),
                         ),
 
@@ -780,7 +799,21 @@ class _PostState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
-    isLiked = (likes[currentUserId] == true);
+    postsRef
+        .doc(ownerId)
+        .collection('userPosts')
+        .doc(postId)
+    .collection("likes")
+    .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+    postsRef
+        .doc(ownerId)
+        .collection('userPosts')
+        .doc(postId)
+    .collection("likes")
+        .get().then((doc) => doc.docs.length=likeCount);
+    // isLiked = (likes[currentUserId] == true);
+     randomTag1 = (hashTags.toList()..shuffle()).first;
+     randomTag2 = (hashTags.toList()..shuffle()).last;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

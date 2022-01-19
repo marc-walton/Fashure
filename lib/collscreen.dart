@@ -15,7 +15,6 @@ class CollScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: collRef
-
           .doc(userId)
       .collection('userCollections')
           .doc(collId)

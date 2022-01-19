@@ -6,6 +6,7 @@ import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/model/addressbuynow.dart';
+import 'package:fashow/model/hashTag_screen.dart';
 import 'package:fashow/model/tags.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -1507,6 +1508,8 @@ class _ProdState extends State<Prod> {
   String usersize = "";
   String usercolor = "";
   var userCustomQuantity;
+  var randomTag1;
+  var randomTag2;
 
   var userVariationQuantity;
   var userSizeQuantity;
@@ -10362,39 +10365,35 @@ backgroundColor: Colors.black,
                     children: <Widget>[
                       ExpandableText(text:details,color:Colors.black,size:15.0,),
                       SizedBox(height: 8,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10.0),
-                            margin: EdgeInsets.only(left: 20.0),
-                            child: ListView.builder(
-                                itemCount: hashTags.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      TextButton(
-                                        onPressed:() async {
-                                          DocumentSnapshot doc = await usersRef.doc(currentUser.id).get();
-                                          currentUser = Users.fromDocument(doc);
-                                          List tags = currentUser.hashTags;
-                                          tags.add(hashTags[index]);
-                                          usersRef.doc(currentUser.id).update({"hashTags":tags});
-                                        },
-                                        child: Text(
-                                          "#${hashTags[index]}",
-                                          style: TextStyle(
-                                            color: kText,
-                                          ),
-                                        ),
+                      Container(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        margin: EdgeInsets.only(left: 20.0),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: hashTags.length,
+                            itemBuilder: (context, index) {
+                              return  Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+
+                                children: [
+                                  GestureDetector(
+                                    onTap:() async {
+                                      usersRef.doc(currentUser.id).collection("hashTags").doc(hashTags[index]).set({"timestamp":timestamp});
+                                      Get.to(()=>HashTagScreen(hashTag:hashTags[index]));
+                                    },
+                                    child: Text(
+                                      "${hashTags[index]}",
+                                      style: TextStyle(
+                                        color: Colors.blue,
                                       ),
-                                    ],
-                                  );
-                                }
-                            ),
-                          ),
-//                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-                        ],
+                                    ),
+
+                                  ),
+                                ],
+                              );
+                            }
+                        ),
                       ),
 
                       SizedBox(height: 8,),
@@ -10580,14 +10579,24 @@ backgroundColor: Colors.black,
 
   handleLikePost() {
 
-    bool _isFav = likes[currentUserId] == true;
+    bool _isFav = isfav;
+
     if(!_isFav) {
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .update({'likes.$currentUserId': true});
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // productsRef
+      //     .doc(ownerId)
+      //     .collection('userProducts')
+      //     .doc(prodId)
+      //     .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
       favRef.doc(currentUser.id).collection("userFav")
           .doc(prodId)
           .set({
@@ -10607,22 +10616,30 @@ backgroundColor: Colors.black,
       setState(() {
 
         isfav = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
       });
     } else if (_isFav) {
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .update({'likes.$currentUserId': false});
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // productsRef
+      //     .doc(ownerId)
+      //     .collection('userProducts')
+      //     .doc(prodId)
+      //     .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
 
       var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
       docReference.delete();
       setState(() {
 
         isfav = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
     }
 
@@ -10671,7 +10688,22 @@ backgroundColor: Colors.black,
 
   @override
   Widget build(BuildContext context) {
-    isfav = (likes[currentUserId] == true);
+    productsRef
+        .doc(ownerId)
+        .collection('userProducts')
+        .doc(prodId)
+        .collection("likes")
+        .doc(currentUserId).get().then((doc) => doc.exists?isfav=true:false);
+        productsRef
+        .doc(ownerId)
+        .collection('userProducts')
+        .doc(prodId)
+        .collection("likes")
+            .get().then((doc) => doc.docs.length=likeCount);
+
+    // isfav = (likes[currentUserId] == true);
+     randomTag1 = (hashTags.toList()..shuffle()).first;
+     randomTag2 = (hashTags.toList()..shuffle()).last;
     return    Column(
 
       mainAxisSize: MainAxisSize.min,
