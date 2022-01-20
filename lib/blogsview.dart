@@ -670,6 +670,9 @@ class _BlogState extends State<Blog> {
     // isLiked = (likes[currentUserId] == true);
      randomTag1 = (hashTags.toList()..shuffle()).first;
      randomTag2 = (hashTags.toList()..shuffle()).last;
+    usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+    usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
     return         buildPostHeader(context);
   }
 }

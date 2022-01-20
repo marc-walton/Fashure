@@ -46,6 +46,7 @@ class _UploadCollState extends State<UploadColl>
 
   TextEditingController titleController = TextEditingController();
   TextEditingController sourceController = TextEditingController();
+ TextEditingController tagController = TextEditingController();
 
   File file;
   bool isUploading = false;
@@ -260,7 +261,16 @@ class _UploadCollState extends State<UploadColl>
             //
             // SizedBox( height:MediaQuery. of(context). size. width *0.5,
             // ),
+            Container(
+              width: 250.0,
+              child: TextField(
+                style:TextStyle(color: kText),
 
+                controller: tagController,
+                decoration: InputDecoration(
+                    hintText: "add hastags", border: InputBorder.none),
+              ),
+            ),
             Row(
               mainAxisAlignment:MainAxisAlignment.end,
 
@@ -573,13 +583,16 @@ Carousel(){
         );
 
 }
+  tagList(tagsList){
+
+    hashTags = tagsList.split('');
+  }
 
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
     });
-   // await compressImage();
-   // String headerImage = await uploadImage(file);
+    tagController.text == ""?null:tagList(tagController.text);
     for ( var imageFile in images) {
      postImage(imageFile).then((downloadUrl) {
        imageUrls.add(downloadUrl.toString());

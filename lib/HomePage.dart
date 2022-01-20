@@ -220,12 +220,12 @@ getInitialHashTags() async {
       .doc(widget.userid)
       .collection('hashTags')
   .orderBy('timestamp',descending: true)
-  .limit(10)
+  .limit(20)
       .get();
   setState(() {
     hashTagList = snapshot.docs.map((doc) => doc.id).toList();
   });
-  getHashTagData();
+  hashTagList.isNotEmpty? getHashTagData():getHashTagNonePosts();
 }
 getHashTagData()async{
 
@@ -336,6 +336,122 @@ tags.add(assign);
   }
 
 }
+  getHashTagNonePosts()async{
+
+    QuerySnapshot snapshot = await postsRef
+      .doc(widget.userid)
+      .collection('userPosts')
+      .orderBy('timestamp',descending: true)
+      .limit(300)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc) {
+      Tag_Model   assign = Tag_Model(type: "post",
+      ownerId:doc.data()["ownerId"],
+      postId:doc.data()["postId"],
+      imgUrl:doc.data()["mediaUrl"],
+    );
+    tags.add(assign);
+    });
+
+  });
+
+    getHashTagNoneProducts();
+    getHashTagNoneCollections();
+    getHashTagNoneBlogs();
+     getHashTagNoneResale();
+
+}
+
+getHashTagNoneProducts()async{
+
+
+  QuerySnapshot snapshot = await productsRef
+      .doc(widget.userid)
+      .collection('userProducts')
+      .orderBy('timestamp',descending: true)
+      .limit(300)
+      .get();
+  setState(() {
+    snapshot.docs.forEach((doc){
+      Tag_Model assign = Tag_Model(type: "shop",
+        ownerId:doc.data()["ownerId"],
+        postId:doc.data()["prodId"],
+        imgUrl:doc.data()["shopmediaUrl"],
+      );
+      tags.add(assign);
+    });
+  });
+
+
+
+}
+getHashTagNoneBlogs()async{
+
+
+  QuerySnapshot snapshot = await blogRef
+      .doc(widget.userid)
+      .collection('userBlog')
+      .orderBy('timestamp',descending: true)
+      .limit(300)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+      Tag_Model assign = Tag_Model(type: "editorial",
+        ownerId:doc.data()["ownerId"],
+        postId:doc.data()["blogId"],
+        imgUrl:doc.data()["blogmediaUrl"],
+      );
+      tags.add(assign);
+    });
+  });
+
+
+
+}
+getHashTagNoneCollections()async{
+
+  QuerySnapshot snapshot = await collRef
+      .doc(widget.userid)
+      .collection('userCollections')
+      .limit(300)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+      Tag_Model assign = Tag_Model(type: "collection",
+        ownerId:doc.data()["ownerId"],
+        postId:doc.data()["collId"],
+        imgUrl:doc.data()["collmediaUrl"],
+      );
+      tags.add(assign);
+    });
+  });
+
+}
+getHashTagNoneResale()async{
+
+  QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Resale')
+      .doc(widget.userid)
+      .collection('userResale')
+      .orderBy('timestamp',descending: true)
+      .limit(300)
+      .get();
+
+  setState(() {
+    snapshot.docs.forEach((doc){
+      Tag_Model assign = Tag_Model(type: "resale",
+        ownerId:doc.data()["ownerId"],
+        postId:doc.data()["resaleId"],
+        imgUrl:doc.data()["images"],
+      );
+      tags.add(assign);
+    });
+  });
+}
+
   logO() async {
     // await googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();

@@ -44,6 +44,8 @@ class _UploadState extends State<Upload>
     with AutomaticKeepAliveClientMixin<Upload> {
   TextEditingController captionController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+   TextEditingController tagController = TextEditingController();
+
   File file;
   bool isUploading = false;
   String postId = Uuid().v4();
@@ -561,10 +563,18 @@ class _UploadState extends State<Upload>
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
   }
+  tagList(tagsList){
+
+    hashTags = tagsList.split('');
+  }
+
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
     });
+    tagController.text == ""?null:tagList(tagController.text);
+
+
     file1!=null? await compressImage1():null;
     String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
     file2!=null? await compressImage2():null;
@@ -985,6 +995,16 @@ clearImage();
          //   //scrollableTagsMargin: EdgeInsets.only(left: 9),
          //   //scrollableTagsPadding: EdgeInsets.only(left: 9),
          // ),
+         Container(
+           width: 250.0,
+           child: TextField(
+             style:TextStyle(color: kText),
+
+             controller: tagController,
+             decoration: InputDecoration(
+                 hintText: "add hastags", border: InputBorder.none),
+           ),
+         ),
          Row(
            mainAxisAlignment:MainAxisAlignment.end,
 

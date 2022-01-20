@@ -57,6 +57,8 @@ class _UploadEditState extends State<UploadEdit>
   int pageChanged  = 0;
   String _error = 'No Error Dectected';
   TextEditingController titleController = TextEditingController();
+  TextEditingController tagController = TextEditingController();
+
   TextEditingController bodyController = TextEditingController();
   TextEditingController contentTitle = TextEditingController();
   TextEditingController contentBody = TextEditingController();
@@ -763,7 +765,16 @@ crossAxisAlignment: CrossAxisAlignment.center,
             //   //scrollableTagsPadding: EdgeInsets.only(left: 9),
             // ),
             // SizedBox(height:20),
+            Container(
+              width: 250.0,
+              child: TextField(
+                style:TextStyle(color: kText),
 
+                controller: tagController,
+                decoration: InputDecoration(
+                    hintText: "add hastags", border: InputBorder.none),
+              ),
+            ),
             ElevatedButton(
               style:ElevatedButton.styleFrom(primary: Colors.black,onPrimary: Colors.white),
               child: Text("Add content"),
@@ -820,11 +831,17 @@ crossAxisAlignment: CrossAxisAlignment.center,
         ),
       );
   }
+  tagList(tagsList){
+
+    hashTags = tagsList.split('');
+  }
 
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
     });
+    tagController.text == ""?null:tagList(tagController.text);
+
     file!=null? await compressImage():null;
     String mediaUrl =  file!=null?await uploadImage(file):"";
    await blogRef

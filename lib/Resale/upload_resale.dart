@@ -64,6 +64,8 @@ class _UploadResaleState extends State<UploadResale>
   TextEditingController sizeController = TextEditingController();
 TextEditingController shipController = TextEditingController();
 TextEditingController colorController = TextEditingController();
+TextEditingController tagController = TextEditingController();
+
   TextEditingController durationfrom = TextEditingController();
   TextEditingController durationto = TextEditingController();
   TextEditingController durationfromw = TextEditingController();
@@ -803,10 +805,17 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
 
 
   }
+  tagList(tagsList){
+
+    hashTags = tagsList.split('');
+  }
+
   Servicecatalog()async{
     setState(() {
       isUploading = true;
     });
+    tagController.text == ""?null:tagList(tagController.text);
+
     file1!=null? await compressImage1():null;
     String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
     file2!=null? await compressImage2():null;

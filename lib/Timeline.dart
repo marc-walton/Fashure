@@ -814,32 +814,50 @@ class _GlobalFeedState extends State<GlobalFeed> {
     });
   }
 
-  handleLikePost({String postId,String ownerId}) {
-    bool _isLiked = likes[currentUserId] == true;
-
+  handleLikePost({String postId,String ownerId, var randomTag1,var randomTag2}) {
+    bool _isLiked = isLiked;
     if (_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': false});
+      removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
-    } else if (!_isLiked) {
+    }
+    else if (!_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': true});
+      addLikeToActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
       setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
 //        showHeart = true;
       });
     }
@@ -972,6 +990,7 @@ class _GlobalFeedState extends State<GlobalFeed> {
          String location= documentSnapshot.data()['location'];
          String description= documentSnapshot.data()['description'];
          List mediaUrl= documentSnapshot.data()['mediaUrl'];
+List hashTags= documentSnapshot.data()['hashTags'];
 
          Map likes= documentSnapshot.data()['likes'];
          bool isLiked = likes[currentUserId] == true;
@@ -994,6 +1013,22 @@ class _GlobalFeedState extends State<GlobalFeed> {
 List Voters =  documentSnapshot.data()['Voters'];
 var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
+
+          postsRef
+              .doc(ownerId)
+              .collection('userPosts')
+              .doc(postId)
+              .collection("likes")
+              .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+          postsRef
+              .doc(ownerId)
+              .collection('userPosts')
+              .doc(postId)
+              .collection("likes")
+              .get().then((doc) => doc.docs.length=likeCount);
+          // isLiked = (likes[currentUserId] == true);
+         var randomTag1 = (hashTags.toList()..shuffle()).first;
+         var randomTag2 = (hashTags.toList()..shuffle()).last;
 
 
           return    type == 'Poll'?Column(children:[
@@ -1702,7 +1737,7 @@ var total =  documentSnapshot.data()['total'];
                     Padding(padding: EdgeInsets.only( left: 20.0)),
 
                     GestureDetector(
-                      onTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
+                      onTap:(){ handleLikePost(postId:postId,ownerId:ownerId,randomTag1:randomTag1,randomTag2:randomTag2);},
 
                       child: ImageIcon(
                         isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
@@ -1871,6 +1906,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
   String media;
   DynamicLinkService _dynamicLinkService = DynamicLinkService();
   final String currentUserId = currentUser?.id;
+
 
   int _current = 0;
   final CarouselController _ccontroller = CarouselController();
@@ -2104,32 +2140,50 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
     });
   }
 
-  handleLikePost({String postId,String ownerId}) {
-    bool _isLiked = likes[currentUserId] == true;
-
+  handleLikePost({String postId,String ownerId,var randomTag1,var randomTag2}) {
+    bool _isLiked = isLiked;
     if (_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
+          .collection("likes")
+          .doc(currentUserId).delete();
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': false});
+      removeLikeFromActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        likes[currentUserId] = false;
+        // likes[currentUserId] = false;
       });
-    } else if (!_isLiked) {
+    }
+    else if (!_isLiked) {
       postsRef
           .doc(ownerId)
           .collection('userPosts')
           .doc(postId)
-          .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
+          .collection("likes")
+          .doc(currentUserId).set({});
+      // postsRef
+      //     .doc(ownerId)
+      //     .collection('userPosts')
+      //     .doc(postId)
+      //     .update({'likes.$currentUserId': true});
+      addLikeToActivityFeed();
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
       setState(() {
         likeCount += 1;
         isLiked = true;
-        likes[currentUserId] = true;
+        // likes[currentUserId] = true;
 //        showHeart = true;
       });
     }
@@ -2272,6 +2326,8 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           String currency= documentSnapshot.data()['currency'];
           String  photoUrl= documentSnapshot.data()['photoUrl'];
           int likeCount = getLikeCount(this.likes);
+          List hashTags  =  documentSnapshot.data()['hashTags'];
+
           var option1Total =  documentSnapshot.data()['option1Total'];
           var option2Total =  documentSnapshot.data()['option2Total'];
           var option3Total =  documentSnapshot.data()['option3Total'];
@@ -2287,6 +2343,21 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           List Voters =  documentSnapshot.data()['Voters'];
           var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
+          postsRef
+              .doc(ownerId)
+              .collection('userPosts')
+              .doc(postId)
+              .collection("likes")
+              .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
+          postsRef
+              .doc(ownerId)
+              .collection('userPosts')
+              .doc(postId)
+              .collection("likes")
+              .get().then((doc) => doc.docs.length=likeCount);
+          // isLiked = (likes[currentUserId] == true);
+        var  randomTag1 = (hashTags.toList()..shuffle()).first;
+        var  randomTag2 = (hashTags.toList()..shuffle()).last;
 
 
           return    type == 'Poll'?Column(children:[
@@ -2995,7 +3066,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                   Padding(padding: EdgeInsets.only( left: 20.0)),
 
                   GestureDetector(
-                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
+                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId,randomTag1:randomTag1,randomTag2:randomTag2);},
 
                     child: ImageIcon(
                       isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
@@ -3183,6 +3254,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
           appBar:AppBar(
             toolbarHeight: 50.0 ,

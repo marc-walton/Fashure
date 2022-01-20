@@ -14435,6 +14435,16 @@ page0(){
 
                   ],
                 )),
+            Container(
+              width: 250.0,
+              child: TextField(
+                style:TextStyle(color: kText),
+
+                controller: tagController,
+                decoration: InputDecoration(
+                    hintText: "add hastags", border: InputBorder.none),
+              ),
+            ),
 
 
           ],
@@ -17320,6 +17330,7 @@ Container(              height:SizeConfig.screenHeight*0.83,
       },
     ),
   ),
+
 ]),),
           // TextFieldTags(
           //     textSeparators: <String> [
@@ -18554,10 +18565,14 @@ var resultGBP = await Currency.getConversion(
 
 
   }
+tagList(tagsList){
 
+    hashTags = tagsList.split('');
+}
   Future<void> handleSubmit() async {
-
     setState((){loading = "Uploading to database!";});
+    tagController.text == ""?null:tagList(tagController.text);
+
    file!=null? await compressImage():null;
     String mediaUrl =  file!=null?await uploadImage(file):"";
   file001!=null? await compressImage001():null;
@@ -18730,6 +18745,7 @@ var resultGBP = await Currency.getConversion(
       "photoUrl": widget.currentUser.photoUrl,
       "username": widget.currentUser.displayName,
       "shopmediaUrl": imageUrls,
+
       "Category": value,
       "Gender": dropdownValue,
       "details": detailsController.text,
