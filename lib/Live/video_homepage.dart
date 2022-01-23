@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/HomePage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -12,331 +15,328 @@ import 'package:path/path.dart' as p;
 import 'models/video_info.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:fashow/Live/models/video_player.dart';
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Video Sharing',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Video Sharing'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class UserVideos extends StatefulWidget {
+  UserVideos({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _UserVideosState createState() => _UserVideosState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final thumbWidth = 100;
-  final thumbHeight = 150;
-  List<VideoInfo> _videos = <VideoInfo>[];
-  bool _imagePickerActive = false;
-  bool _processing = false;
-  bool _canceled = false;
-  double _progress = 0.0;
-  int _videoDuration = 0;
-  String _processPhase = '';
-  final bool _debugMode = false;
+class _UserVideosState extends State<UserVideos> {
 
-  @override
-  void initState() {
-    FirebaseProvider.listenToVideos((newVideos) {
-      setState(() {
-        _videos = newVideos;
-      });
-    });
+  final VideoController videoController = Get.put(VideoController());
 
-    EncodingProvider.enableStatisticsCallback((int time,
-        int size,
-        double bitrate,
-        double speed,
-        int videoFrameNumber,
-        double videoQuality,
-        double videoFps) {
-      if (_canceled) return;
-
-      setState(() {
-        _progress = time / _videoDuration;
-      });
-    });
-
-    super.initState();
-  }
-
-  void _onUploadProgress(event) {
-    if (event.type == StorageTaskEventType.progress) {
-      final double progress =
-          event.snapshot.bytesTransferred / event.snapshot.totalByteCount;
-      setState(() {
-        _progress = progress;
-      });
-    }
-  }
-
-  Future<String> _uploadFile(filePath, folderName) async {
-    final file = new File(filePath);
-    final basename = p.basename(filePath);
-
-    final StorageReference ref =
-    FirebaseStorage.instance.ref().child(folderName).child(basename);
-    StorageUploadTask uploadTask = ref.putFile(file);
-    uploadTask.events.listen(_onUploadProgress);
-    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
-    String videoUrl = await taskSnapshot.ref.getDownloadURL();
-    return videoUrl;
-  }
-
-  String getFileExtension(String fileName) {
-    final exploded = fileName.split('.');
-    return exploded[exploded.length - 1];
-  }
-
-  void _updatePlaylistUrls(File file, String videoName) {
-    final lines = file.readAsLinesSync();
-    var updatedLines = List<String>();
-
-    for (final String line in lines) {
-      var updatedLine = line;
-      if (line.contains('.ts') || line.contains('.m3u8')) {
-        updatedLine = '$videoName%2F$line?alt=media';
-      }
-      updatedLines.add(updatedLine);
-    }
-    final updatedContents =
-    updatedLines.reduce((value, element) => value + '\n' + element);
-
-    file.writeAsStringSync(updatedContents);
-  }
-
-  Future<String> _uploadHLSFiles(dirPath, videoName) async {
-    final videosDir = Directory(dirPath);
-
-    var playlistUrl = '';
-
-    final files = videosDir.listSync();
-    int i = 1;
-    for (FileSystemEntity file in files) {
-      final fileName = p.basename(file.path);
-      final fileExtension = getFileExtension(fileName);
-      if (fileExtension == 'm3u8') _updatePlaylistUrls(file, videoName);
-
-      setState(() {
-        _processPhase = 'Uploading video file $i out of ${files.length}';
-        _progress = 0.0;
-      });
-
-      final downloadUrl = await _uploadFile(file.path, videoName);
-
-      if (fileName == 'master.m3u8') {
-        playlistUrl = downloadUrl;
-      }
-      i++;
-    }
-
-    return playlistUrl;
-  }
-
-  Future<void> _processVideo(File rawVideoFile) async {
-    final String rand = '${new Random().nextInt(10000)}';
-    final videoName = 'video$rand';
-    final Directory extDir = await getApplicationDocumentsDirectory();
-    final outDirPath = '${extDir.path}/Videos/$videoName';
-    final videosDir = new Directory(outDirPath);
-    videosDir.createSync(recursive: true);
-
-    final rawVideoPath = rawVideoFile.path;
-    final info = await EncodingProvider.getMediaInformation(rawVideoPath);
-    final aspectRatio = EncodingProvider.getAspectRatio(info);
-
-    setState(() {
-      _processPhase = 'Generating thumbnail';
-      _videoDuration = EncodingProvider.getDuration(info);
-      _progress = 0.0;
-    });
-
-    final thumbFilePath =
-    await EncodingProvider.getThumb(rawVideoPath, thumbWidth, thumbHeight);
-
-    setState(() {
-      _processPhase = 'Encoding video';
-      _progress = 0.0;
-    });
-
-    final encodedFilesDir =
-    await EncodingProvider.encodeHLS(rawVideoPath, outDirPath);
-
-    setState(() {
-      _processPhase = 'Uploading thumbnail to firebase storage';
-      _progress = 0.0;
-    });
-    final thumbUrl = await _uploadFile(thumbFilePath, 'thumbnail');
-    final videoUrl = await _uploadHLSFiles(encodedFilesDir, videoName);
-
-    final videoInfo = VideoInfo(
-      videoUrl: videoUrl,
-      thumbUrl: thumbUrl,
-      coverUrl: thumbUrl,
-      aspectRatio: aspectRatio,
-      uploadedAt: DateTime.now().millisecondsSinceEpoch,
-      videoName: videoName,
+  buildProfile(String profilePhoto) {
+    return SizedBox(
+      width: 60,
+      height: 60,
+      child: Stack(children: [
+        Positioned(
+          left: 5,
+          child: Container(
+            width: 50,
+            height: 50,
+            padding: const EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Image(
+                image: NetworkImage(profilePhoto),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        )
+      ]),
     );
-
-    setState(() {
-      _processPhase = 'Saving video metadata to cloud firestore';
-      _progress = 0.0;
-    });
-
-    await FirebaseProvider.saveVideo(videoInfo);
-
-    setState(() {
-      _processPhase = '';
-      _progress = 0.0;
-      _processing = false;
-    });
   }
 
-  void _takeVideo() async {
-    var videoFile;
-    if (_debugMode) {
-      videoFile = File(
-          '/storage/emulated/0/Android/data/com.learningsomethingnew.fluttervideo.flutter_video_sharing/files/Pictures/ebbafabc-dcbe-433b-93dd-80e7777ee4704451355941378265171.mp4');
-    } else {
-      if (_imagePickerActive) return;
 
-      _imagePickerActive = true;
-      videoFile = await ImagePicker.pickVideo(source: ImageSource.camera);
-      _imagePickerActive = false;
-
-      if (videoFile == null) return;
-    }
-    setState(() {
-      _processing = true;
-    });
-
-    try {
-      await _processVideo(videoFile);
-    } catch (e) {
-      print('${e.toString()}');
-    } finally {
-      setState(() {
-        _processing = false;
+  addLikeToActivityFeed(ownerId,postId,mediaUrl) {
+    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+    bool isNotPostOwner = currentUser.id != ownerId;
+    if (isNotPostOwner) {
+      activityFeedRef
+          .doc(ownerId)
+          .collection("feedItems")
+          .doc(postId)
+          .set({
+        "type": "like",
+        "username": currentUser.displayName,
+        "userId": currentUser.id,
+        "userProfileImg": currentUser.photoUrl,
+        "postId": postId,
+        "mediaUrl": mediaUrl.first,
+        "timestamp": timestamp,
+        "read": 'false',
       });
     }
   }
 
-  _getListView() {
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: _videos.length,
-        itemBuilder: (BuildContext context, int index) {
-          final video = _videos[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return Player(
-                      video: video,
-                    );
-                  },
+  removeLikeFromActivityFeed(ownerId,postId,mediaUrl) {
+    bool isNotPostOwner = currentUser.id != ownerId;
+    if (isNotPostOwner) {
+      activityFeedRef
+          .doc(ownerId)
+          .collection("feedItems")
+          .doc(postId)
+          .get()
+          .then((doc) {
+        if (doc.exists) {
+          doc.reference.delete();
+        }
+      });
+    }
+  }
+  likeColumn(postId,ownerId,mediaUrl){
+    bool isLiked;
+    int likeCount;
+    videoRef
+        .doc(ownerId)
+        .collection('userVideos')
+        .doc(postId)
+        .collection("likes")
+        .doc(currentUser.id).get().then((doc) => doc.exists?isLiked=true:false);
+    videoRef
+        .doc(ownerId)
+        .collection('userVideos')
+        .doc(postId)
+        .collection("likes")
+        .get().then((doc) => doc.docs.length=likeCount);
+    return
+      Column(
+        children: [
+          InkWell(
+            onTap: ()
+            {
+              if (isLiked) {
+                videoRef
+                    .doc(ownerId)
+                    .collection('userVideos')
+                    .doc(postId)
+                    .collection("likes")
+                    .doc(currentUser.id).delete();
+                removeLikeFromActivityFeed(ownerId,postId,mediaUrl);
+
+                setState(() {
+                  likeCount -= 1;
+                  isLiked = false;
+                });
+              }
+              else if (isLiked) {
+                videoRef
+                    .doc(ownerId)
+                    .collection('userVideos')
+                    .doc(postId)
+                    .collection("likes")
+                    .doc(currentUser.id).set({});
+                addLikeToActivityFeed(ownerId,postId,mediaUrl);
+
+                setState(() {
+                  likeCount += 1;
+                  isLiked = true;
+                });
+              }},
+            child: Icon(
+              Icons.favorite,
+              size: 40,
+              color: isLiked
+                  ? Colors.red
+                  : Colors.white,
+            ),
+          ),
+          const SizedBox(height: 7),
+          Text(
+            likeCount.toString(),
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          )
+        ],
+      );
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Obx(() {
+        return PageView.builder(
+          itemCount: videoController.videoList.length,
+          controller: PageController(initialPage: 0, viewportFraction: 1),
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            final data = videoController.videoList[index];
+            return Stack(
+              children: [
+                Player(
+                  video: data,
                 ),
-              );
-            },
-            child: Card(
-              child: new Container(
-                padding: new EdgeInsets.all(10.0),
-                child: Stack(
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            Container(
-                              width: thumbWidth.toDouble(),
-                              height: thumbHeight.toDouble(),
-                              child: Center(child: CircularProgressIndicator()),
-                            ),
-                            ClipRRect(
-                              borderRadius: new BorderRadius.circular(8.0),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: video.thumbUrl,
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                left: 20,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    data.username,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    data.description,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: new EdgeInsets.only(left: 20.0),
+                          ),
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(top: size.height / 5),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Text("${video.videoName}"),
-                                Container(
-                                  margin: new EdgeInsets.only(top: 12.0),
-                                  child: Text(
-                                      'Uploaded ${timeago.format(new DateTime.fromMillisecondsSinceEpoch(video.uploadedAt))}'),
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                buildProfile(
+                                  data.photoUrl,
                                 ),
+                                likeColumn(data.postId, data.ownerId, data.mediaUrl),
+                                // Column(
+                                //   children: [
+                                //     InkWell(
+                                //       onTap: () =>
+                                //           videoController.likeVideo(data.postId,data.ownerId),
+                                //       child: Icon(
+                                //         Icons.favorite,
+                                //         size: 40,
+                                //         color: videoController.ldata.likes.contains(
+                                //             authController.user.uid)
+                                //             ? Colors.red
+                                //             : Colors.white,
+                                //       ),
+                                //     ),
+                                //     const SizedBox(height: 7),
+                                //     Text(
+                                //       data.likes.length.toString(),
+                                //       style: const TextStyle(
+                                //         fontSize: 20,
+                                //         color: Colors.white,
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                                // Column(
+                                //   children: [
+                                //     InkWell(
+                                //       onTap: () => Navigator.of(context).push(
+                                //         MaterialPageRoute(
+                                //           builder: (context) => CommentScreen(
+                                //             id: data.id,
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       child: const Icon(
+                                //         Icons.comment,
+                                //         size: 40,
+                                //         color: Colors.white,
+                                //       ),
+                                //     ),
+                                //     const SizedBox(height: 7),
+                                //     Text(
+                                //       data.commentCount.toString(),
+                                //       style: const TextStyle(
+                                //         fontSize: 20,
+                                //         color: Colors.white,
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                                // Column(
+                                //   children: [
+                                //     InkWell(
+                                //       onTap: () {},
+                                //       child: const Icon(
+                                //         Icons.reply,
+                                //         size: 40,
+                                //         color: Colors.white,
+                                //       ),
+                                //     ),
+                                //     const SizedBox(height: 7),
+                                //     Text(
+                                //       data.shareCount.toString(),
+                                //       style: const TextStyle(
+                                //         fontSize: 20,
+                                //         color: Colors.white,
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-          );
-        });
-  }
-
-  _getProgressBar() {
-    return Container(
-      padding: EdgeInsets.all(30.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 30.0),
-            child: Text(_processPhase),
-          ),
-          LinearProgressIndicator(
-            value: _progress,
-          ),
-        ],
-      ),
+              ],
+            );
+          },
+        );
+      }),
     );
   }
+}
 
+
+class VideoController extends GetxController {
+  final Rx<List<VideoInfo>> _videoList = Rx<List<VideoInfo>>([]);
+
+  List<VideoInfo> get videoList => _videoList.value;
+bool isLiked;
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(child: _processing ? _getProgressBar() : _getListView()),
-      floatingActionButton: FloatingActionButton(
-          child: _processing
-              ? CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-          )
-              : Icon(Icons.add),
-          onPressed: _takeVideo),
-    );
+  void onInit() {
+    super.onInit();
+    _videoList.bindStream(
+        videosRef.orderBy('timestamp',descending: true).snapshots().map((QuerySnapshot query) {
+          List<VideoInfo> retVal = [];
+          for (var element in query.docs) {
+            retVal.add(
+              VideoInfo.fromDocument(element),
+            );
+          }
+          return retVal;
+        }));
   }
+
 }

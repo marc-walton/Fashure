@@ -53,6 +53,7 @@ final postsRef = FirebaseFirestore.instance.collection('posts');
 final bidsRef = FirebaseFirestore.instance.collection('bids');
 
 final videoRef = FirebaseFirestore.instance.collection('videos');
+final videosRef = FirebaseFirestore.instance.collectionGroup('userVideos');
 
 final commentsRef = FirebaseFirestore.instance.collection('comments');
 final videocommentsRef = FirebaseFirestore.instance.collection('videoComments');

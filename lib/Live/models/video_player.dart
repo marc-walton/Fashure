@@ -14,7 +14,23 @@ class Player extends StatefulWidget {
 class _PlayerState extends State<Player> {
   String _error;
 
+  // VideoPlayerController videoPlayerController;
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   videoPlayerController = VideoPlayerController.network(widget.video.mediaUrl)
+  //     ..initialize().then((value) {
+  //       videoPlayerController.play();
+  //       videoPlayerController.setVolume(1);
+  //     });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   videoPlayerController.dispose();
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +39,20 @@ class _PlayerState extends State<Player> {
         children: <Widget>[
           _error == null
               ? NetworkPlayerLifeCycle(
-            widget.video.videoUrl,
+            widget.video.mediaUrl,
                 (BuildContext context, VideoPlayerController controller) =>
                 AspectRatioVideo(controller),
           )
               : Center(
             child: Text(_error),
           ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: IconButton(
-              icon: Icon(Icons.close, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.all(16.0),
+          //   child: IconButton(
+          //     icon: Icon(Icons.close, color: Colors.white),
+          //     onPressed: () => Navigator.pop(context),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -220,8 +236,9 @@ abstract class _PlayerLifeCycleState extends State<PlayerLifeCycle> {
       }
     });
     controller.initialize();
-    controller.setLooping(true);
+    // controller.setLooping(true);
     controller.play();
+    controller.setVolume(1);
   }
 
   @override

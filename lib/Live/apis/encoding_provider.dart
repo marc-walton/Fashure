@@ -61,7 +61,7 @@ class EncodingProvider {
     await _encoder.cancel();
   }
 
-  static Future<Map<dynamic, dynamic>> getMediaInformation(String path) async {
+  static Future getMediaInformation(String path) async {
     assert(File(path).existsSync());
 
     return await _probe.getMediaInformation(path);
@@ -71,8 +71,8 @@ class EncodingProvider {
     return info['duration'];
   }
 
-  static void enableLogCallback(
-      void Function(int level, String message) logCallback) {
-    _config.enableLogCallback(logCallback);
-  }
+  // static void enableLogCallback(
+  //     void Function(int level, String message) logCallback) {
+  //   _config.enableLogCallback(logCallback);
+  // }
 }

@@ -3,12 +3,12 @@ import 'package:fashow/Live/models/video_info.dart';
 class FirebaseProvider {
   static saveVideo(VideoInfo video) async {
     await FirebaseFirestore.instance.collection('videos').doc().set({
-      'videoUrl': video.videoUrl,
+      'videoUrl': video.mediaUrl,
       'thumbUrl': video.thumbUrl,
       'coverUrl': video.coverUrl,
       'aspectRatio': video.aspectRatio,
-      'uploadedAt': video.uploadedAt,
-      'videoName': video.videoName,
+      'uploadedAt': video.timestamp,
+      'videoName': video.postId,
     });
   }
 
@@ -22,12 +22,12 @@ class FirebaseProvider {
   static mapQueryToVideoInfo(QuerySnapshot qs) {
     return qs.docs.map((DocumentSnapshot ds) {
       return VideoInfo(
-        videoUrl: ds.data()['videoUrl'],
+        mediaUrl: ds.data()['videoUrl'],
         thumbUrl: ds.data()['thumbUrl'],
         coverUrl: ds.data()['coverUrl'],
         aspectRatio: ds.data()['aspectRatio'],
-        videoName: ds.data()['videoName'],
-        uploadedAt: ds.data()['uploadedAt'],
+        postId: ds.data()['videoName'],
+        timestamp: ds.data()['uploadedAt'],
       );
     }).toList();
   }
