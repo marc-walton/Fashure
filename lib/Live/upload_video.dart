@@ -5,9 +5,11 @@ import 'package:fashow/HomePage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:video_compress/video_compress.dart';
 import 'package:video_player/video_player.dart';
 import 'apis/encoding_provider.dart';
 import 'apis/firebase_provider.dart';
@@ -79,7 +81,8 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
   int pageChanged  = 0;
   VideoPlayerController controller;
   List<String> imageUrls = <String>[];
-
+var duration;
+var image;
   bool _inProcess = false;
   @override
 
@@ -92,22 +95,33 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
         .collection("userVideos")
         .doc(postId)
         .set({});
-
-    EncodingProvider.enableStatisticsCallback((int time,
-        int size,
-        double bitrate,
-        double speed,
-        int videoFrameNumber,
-        double videoQuality,
-        double videoFps) {
-      if (_canceled) return;
-
-      setState(() {
-        _progress = time / _videoDuration;
-      });
-    });
+    //
+    // EncodingProvider.enableStatisticsCallback((int time,
+    //     int size,
+    //     double bitrate,
+    //     double speed,
+    //     int videoFrameNumber,
+    //     double videoQuality,
+    //     double videoFps) {
+    //   if (_canceled) return;
+    //
+    //   setState(() {
+    //     _progress = time / _videoDuration;
+    //   });
+    // });
 
     super.initState();
+  }
+  Future<String> uploadImage1(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('videos').child(postId).child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+
+    // images.add(downloadUrl);
+    return downloadUrl;
   }
 
   void _onUploadProgress(event) {
@@ -129,111 +143,29 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
     //   });
     // }
   }
-
-  Future<String> _uploadFile(filePath, folderName) async {
-    final file = new File(filePath);
-    final basename = p.basename(filePath);
-
-    final Reference ref =
-    FirebaseStorage.instance.ref().child(folderName).child(basename);
-    UploadTask uploadTask = ref.putFile(file);
-    uploadTask.snapshotEvents.listen(_onUploadProgress);
-    TaskSnapshot taskSnapshot = await uploadTask;
-    String videoUrl = await taskSnapshot.ref.getDownloadURL();
-    return videoUrl;
-  }
-
-  String getFileExtension(String fileName) {
-    final exploded = fileName.split('.');
-    return exploded[exploded.length - 1];
-  }
-
-  void _updatePlaylistUrls(File file, String videoName) {
-    final lines = file.readAsLinesSync();
-    var updatedLines = <String>[];
-
-    for (final String line in lines) {
-      var updatedLine = line;
-      if (line.contains('.ts') || line.contains('.m3u8')) {
-        updatedLine = '$videoName%2F$line?alt=media';
-      }
-      updatedLines.add(updatedLine);
-    }
-    final updatedContents =
-    updatedLines.reduce((value, element) => value + '\n' + element);
-
-    file.writeAsStringSync(updatedContents);
-  }
-
-  Future<String> _uploadHLSFiles(dirPath, videoName) async {
-    final videosDir = Directory(dirPath);
-
-    var playlistUrl = '';
-
-    final files = videosDir.listSync();
-    int i = 1;
-    for (FileSystemEntity file in files) {
-      final fileName = p.basename(file.path);
-      final fileExtension = getFileExtension(fileName);
-      if (fileExtension == 'm3u8') _updatePlaylistUrls(file, videoName);
-
-      setState(() {
-        _processPhase = 'Uploading video file $i out of ${files.length}';
-        _progress = 0.0;
-      });
-
-      final downloadUrl = await _uploadFile(file.path, videoName);
-
-      if (fileName == 'master.m3u8') {
-        playlistUrl = downloadUrl;
-      }
-      i++;
-    }
-
-    return playlistUrl;
-  }
-
-  Future<void> _processVideo(File rawVideoFile) async {
-    final videoName = "video$postId";
-    final Directory extDir = await getApplicationDocumentsDirectory();
-    final outDirPath = '${extDir.path}/Videos/$videoName';
-    final videosDir = new Directory(outDirPath);
-    videosDir.createSync(recursive: true);
-
-    final rawVideoPath = rawVideoFile.path;
-    final info = await EncodingProvider.getMediaInformation(rawVideoPath);
-    final aspectRatio = EncodingProvider.getAspectRatio(info);
+  Future<void> _processVideo(filePath) async {
 
     setState(() {
       _processPhase = 'Generating thumbnail';
-      _videoDuration = EncodingProvider.getDuration(info);
       _progress = 0.0;
     });
-
-    final thumbFilePath =
-    await EncodingProvider.getThumb(rawVideoPath, thumbWidth, thumbHeight);
-
-    setState(() {
-      _processPhase = 'Encoding video';
-      _progress = 0.0;
-    });
-
-    final encodedFilesDir =
-    await EncodingProvider.encodeHLS(rawVideoPath, outDirPath);
+    image = await VideoCompress.getFileThumbnail(videoFile.path,quality: 50,position: 2);
 
     setState(() {
       _processPhase = 'Uploading thumbnail to firebase storage';
       _progress = 0.0;
     });
-    final thumbUrl = await _uploadFile(thumbFilePath, 'thumbnail');
-    final videoUrl = await _uploadHLSFiles(encodedFilesDir, videoName);
-
+    final thumbUrl = await uploadImage1(image);
 
 
     setState(() {
-      _processPhase = 'Saving video metadata to cloud firestore';
+      _processPhase = 'Compressing and uploading video';
       _progress = 0.0;
     });
+
+    final videoUrl =
+    await _uploadFile(filePath);
+
     tagController.text == ""?null:tagList(tagController.text);
 
     await videoRef .doc(currentUser.id)
@@ -244,7 +176,6 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
       "hasHashTags":hashTags.isEmpty?false:true,
       'mediaUrl':videoUrl,
       'thumbUrl':thumbUrl,
-      'aspectRatio':aspectRatio,
 
       "postId": postId,
       "ownerId": currentUser.id,
@@ -272,23 +203,55 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
     });
   }
 
-  void _takeVideo(parentContext) async {
-      if (_imagePickerActive) return;
+  Future<String> _uploadFile(filePath) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('videos').child(postId).child("$fileName");
+    UploadTask uploadTask = reference.putFile(await _compressVideo(filePath));
+    uploadTask.snapshotEvents.listen(_onUploadProgress);
 
-      _inProcess = true;
-      videoFile = File(await ImagePicker().getVideo(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
 
-      final info = await EncodingProvider.getMediaInformation(videoFile.path);
-      _videoDuration = EncodingProvider.getDuration(info);
-     setState((){
-        _inProcess = false;
-      });
-
-
+    // images.add(downloadUrl);
+    return downloadUrl;
 
   }
 
 
+
+
+  void _takeVideo(parentContext) async {
+    setState((){
+      _inProcess = true;
+    });
+      videoFile = File(await ImagePicker().getVideo(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+    final info = await VideoCompress.getMediaInfo(videoFile.path);
+    duration  = info.duration;
+    if(    duration > 192000.00){
+      videoFile = null;
+      Fluttertoast.showToast(
+          msg: "Video length should be less than 3 minutes", timeInSecForIos: 4,gravity: ToastGravity.CENTER);
+      }
+
+    setState((){
+        _inProcess = false;
+      });
+
+
+ss
+  }
+
+  _compressVideo( videoPath) async {
+
+    final compressedVideo = await VideoCompress.compressVideo(
+      videoPath,
+      quality: VideoQuality.MediumQuality,
+    );
+    // VideoCompress.compressProgress$.subscribe((progress) {
+    //   debugPrint('progress: $progress');
+    // });
+    return compressedVideo.file;
+  }
   _getProgressBar() {
     return Container(
       padding: EdgeInsets.all(30.0),
@@ -335,7 +298,6 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
     setState(() {
       _processing = true;
 
-      isUploading = true;
     });
     try {
       await _processVideo(videoFile);
@@ -431,6 +393,22 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
         children: <Widget>[
           isUploading ? linearProgress() : Text(""),
           ConfirmScreen(videoFile: videoFile,),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundImage:
+              CachedNetworkImageProvider(currentUser.photoUrl),
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style:TextStyle(color: kText),
+
+                controller: captionController,
+                decoration: InputDecoration(
+                    hintText: "Write a caption...", border: InputBorder.none),
+              ),
+            ),
+          ),
 
           ListTile(
             leading: Icon(
@@ -473,8 +451,6 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
                   Icons.my_location,
                   color: Colors.white,
                 )),
-          ),
-          SizedBox( height:MediaQuery. of(context). size. width *0.5,
           ),
           // TextFieldTags(
           //     textSeparators: <String> [
@@ -544,7 +520,8 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
 
               controller: tagController,
               decoration: InputDecoration(
-                  hintText: "add hastags", border: InputBorder.none),
+                  hintText: "add hastags",fillColor: transwhite,
+                  border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)),
             ),
           ),
           Row(
@@ -609,7 +586,7 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
               ],
             ),
             Container(
-              height:MediaQuery. of(context). size. height *0.75,
+              height:MediaQuery. of(context). size. height *0.70,
               child: tagView(),
             ),
             Row(
@@ -670,15 +647,7 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
 
     return
 
-      Container(
-        child:  _videoDuration > 300? alert(
-          parentContext,
-          content:
-          Text('Please select a video with duration of 5 minutes or lower',
-            style: TextStyle(color: kblue,
-            ),),
-          textOK: Text('Ok'),
-        ):Stack(
+     Stack(
           children: [
             WillPopScope(
               onWillPop:()=>   _onBackPressed(),
@@ -721,7 +690,7 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
                           false),
 
                 ),
-                body:_processing ?Center(child:  _getProgressBar()):
+                body:_processing?_getProgressBar():
                 PageView(
                   physics:new NeverScrollableScrollPhysics(),
                   pageSnapping: true,
@@ -748,7 +717,6 @@ class _UploadVideoState extends State<UploadVideo>  with AutomaticKeepAliveClien
 
             ),
           ],
-        ),
       );
 
 
@@ -868,7 +836,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
     controller.initialize();
     controller.play();
     controller.setVolume(1);
-    controller.setLooping(true);
+    controller.setLooping(false);
   }
 
   @override
@@ -1278,7 +1246,7 @@ class TagItem extends StatelessWidget {
             child: Column(children:[
               ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: CachedImage(image)),
+                  child: CachedImage(image,height:MediaQuery.of(context).size.height/3)),
               Row(
                 children: [
                   Text(name,

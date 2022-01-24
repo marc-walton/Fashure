@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/Live/upload_video.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -314,6 +315,15 @@ class _UserVideosState extends State<UserVideos> {
           },
         );
       }),
+      floatingActionButton: FloatingActionButton(
+        heroTag:'uploadVideo',
+        backgroundColor: Colors.black38,
+        onPressed: () async{
+          //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadVideo()));
+        },
+        child: Icon(Icons.group_add_outlined),
+      )
     );
   }
 }

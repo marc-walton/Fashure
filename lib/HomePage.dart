@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Live/video_homepage.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/model/tags.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -754,7 +755,7 @@ getHashTagNoneResale()async{
             Timeline(currentUser: currentUser,userid:widget.userid,photo:widget.photo),
             Shop(currentUser: currentUser),
             Designer(),
-            LiveTv(),
+            UserVideos(),
             ActivityFeed(),
           ],
           controller: pageController,

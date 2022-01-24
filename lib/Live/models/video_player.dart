@@ -106,7 +106,7 @@ class _VideoPlayPauseState extends State<VideoPlayPause> {
       GestureDetector(
         child: VideoPlayer(controller),
         onTap: () {
-          if (!controller.value.initialized) {
+          if (!controller.value.isInitialized) {
             return;
           }
           if (controller.value.isPlaying) {
@@ -289,8 +289,8 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
       if (!mounted) {
         return;
       }
-      if (initialized != controller.value.initialized) {
-        initialized = controller.value.initialized;
+      if (initialized != controller.value.isInitialized) {
+        initialized = controller.value.isInitialized;
         if (mounted) {
           setState(() {});
         }
@@ -324,5 +324,48 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
     } else {
       return Center(child: CircularProgressIndicator());
     }
+  }
+}
+class VideoPlayerItem extends StatefulWidget {
+  final String videoUrl;
+   VideoPlayerItem({
+     this.videoUrl,
+  });
+
+  @override
+  _VideoPlayerItemState createState() => _VideoPlayerItemState();
+}
+
+class _VideoPlayerItemState extends State<VideoPlayerItem> {
+   VideoPlayerController videoPlayerController;
+
+  @override
+  void initState() {
+    super.initState();
+    videoPlayerController = VideoPlayerController.network(widget.videoUrl)
+      ..initialize().then((value) {
+        videoPlayerController.play();
+        videoPlayerController.setVolume(1);
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoPlayerController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      width: size.width,
+      height: size.height,
+      decoration: const BoxDecoration(
+        color: Colors.black,
+      ),
+      child: VideoPlayer(videoPlayerController),
+    );
   }
 }
