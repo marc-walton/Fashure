@@ -531,8 +531,9 @@ class _UploadCollState extends State<UploadColl>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Coll$CollId").child("colle_$CollId$fileName.jpg");
-   UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    Reference reference =     FirebaseStorage.instance.ref().child(currentUser.id).child('collections').child(CollId).child("$fileName.jpg");
+
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();

@@ -20,7 +20,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/user.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:quill_format/quill_format.dart';
+// import 'package:quill_format/quill_format.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
@@ -33,7 +33,7 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
-import 'package:zefyrka/zefyrka.dart';
+// import 'package:zefyrka/zefyrka.dart';
 
 class UploadEdit extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
@@ -48,10 +48,10 @@ class UploadEdit extends StatefulWidget {
 class _UploadEditState extends State<UploadEdit>
 {
   /// Allows to control the editor and the document.
-  ZefyrController _controller;
+  // ZefyrController _controller;
   //ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
-  FocusNode _focusNode;
+  // FocusNode _focusNode;
   List<Asset> images = <Asset>[];
   PageController pageController = PageController();
   int pageChanged  = 0;
@@ -81,20 +81,20 @@ File file1;
 
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
-    _loadFromAssets();
+    // _focusNode = FocusNode();
+    // _loadFromAssets();
     blogRef
         .doc(widget.currentUser.id)
         .collection("userBlog")
         .doc(blogId)
         .set({});
   }
-  Future<void> _loadFromAssets() async {
-    final doc = NotusDocument()..insert(0, '');
-    setState(() {
-      _controller = ZefyrController(doc);
-    });
-  }
+  // Future<void> _loadFromAssets() async {
+  //   final doc = NotusDocument()..insert(0, '');
+  //   setState(() {
+  //     _controller = ZefyrController(doc);
+  //   });
+  // }
 
   Future<void> loadAssets() async {
 
@@ -289,7 +289,7 @@ File file1;
   }
   Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('blog').child(blogId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -376,7 +376,7 @@ File file1;
   }
   Future<String> uploadImage(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('blog').child(blogId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -547,7 +547,7 @@ physics:NeverScrollableScrollPhysics(),
             }
             Future<String> uploadImage1(imageFile) async {
               String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-              Reference reference = FirebaseStorage.instance.ref().child("blog${blogId}").child("$fileName.jpg");
+              Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('blog').child(blogId).child("$fileName.jpg");
               UploadTask uploadTask = reference.putFile(imageFile);
 
               TaskSnapshot storageSnap = await uploadTask;

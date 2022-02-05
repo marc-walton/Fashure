@@ -5,9 +5,9 @@ class FirebaseProvider {
     await FirebaseFirestore.instance.collection('videos').doc().set({
       'videoUrl': video.mediaUrl,
       'thumbUrl': video.thumbUrl,
-      'coverUrl': video.coverUrl,
-      'aspectRatio': video.aspectRatio,
-      'uploadedAt': video.timestamp,
+      // 'coverUrl': video.coverUrl,
+      // 'aspectRatio': video.aspectRatio,
+      // 'uploadedAt': video.timestamp,
       'videoName': video.postId,
     });
   }
@@ -24,10 +24,10 @@ class FirebaseProvider {
       return VideoInfo(
         mediaUrl: ds.data()['videoUrl'],
         thumbUrl: ds.data()['thumbUrl'],
-        coverUrl: ds.data()['coverUrl'],
-        aspectRatio: ds.data()['aspectRatio'],
+        // coverUrl: ds.data()['coverUrl'],
+        // aspectRatio: ds.data()['aspectRatio'],
         postId: ds.data()['videoName'],
-        timestamp: ds.data()['uploadedAt'],
+        // timestamp: ds.data()['uploadedAt'],
       );
     }).toList();
   }

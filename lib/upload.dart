@@ -443,7 +443,7 @@ class _UploadState extends State<Upload>
   }
   Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -454,7 +454,7 @@ class _UploadState extends State<Upload>
   }
   Future<String> uploadImage2(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -464,7 +464,7 @@ class _UploadState extends State<Upload>
   }
   Future<String> uploadImage3(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -474,7 +474,7 @@ class _UploadState extends State<Upload>
   }
   Future<String> uploadImage4(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -484,7 +484,7 @@ class _UploadState extends State<Upload>
   }
   Future<String> uploadImage5(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -557,7 +557,7 @@ class _UploadState extends State<Upload>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("post${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('post').child(postId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());

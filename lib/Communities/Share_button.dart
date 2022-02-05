@@ -1,46 +1,16 @@
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:currency_formatter/currency_formatter.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
+
 import 'package:fashow/Communities/Community_model.dart';
-import 'package:fashow/Live/Live.dart';
-import 'package:fashow/Product_screen.dart';
-import 'package:fashow/chatcached_image.dart';
-import 'package:fashow/model/addressbuynow.dart';
-import 'package:fashow/model/tags.dart';
-import 'package:fashow/size_config.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:paginate_firestore/paginate_firestore.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:get/get.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/ActivityFeed.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fashow/enum/Variables.dart';
-import 'package:fashow/user.dart';
 
-import 'package:fashow/progress.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:fashow/product_custom.dart';
-import 'package:fashow/Profile.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
-import 'package:fashow/methods/dynamic_links_service.dart';
-import 'package:share/share.dart';
 
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:getwidget/types/gf_button_type.dart';
 import 'package:uuid/uuid.dart';
 
 

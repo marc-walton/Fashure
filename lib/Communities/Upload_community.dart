@@ -491,7 +491,7 @@ class _UploadCommunityPostState extends State<UploadCommunityPost>
   }
   Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Community${widget.CommunityId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Community').child(widget.CommunityId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -502,7 +502,7 @@ class _UploadCommunityPostState extends State<UploadCommunityPost>
   }
   Future<String> uploadImage2(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Community${widget.CommunityId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Community').child(widget.CommunityId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -512,7 +512,7 @@ class _UploadCommunityPostState extends State<UploadCommunityPost>
   }
   Future<String> uploadImage3(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Community${widget.CommunityId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Community').child(widget.CommunityId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -522,7 +522,7 @@ class _UploadCommunityPostState extends State<UploadCommunityPost>
   }
   Future<String> uploadImage4(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Community${widget.CommunityId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Community').child(widget.CommunityId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -532,7 +532,7 @@ class _UploadCommunityPostState extends State<UploadCommunityPost>
   }
   Future<String> uploadImage5(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Community${widget.CommunityId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Community').child(widget.CommunityId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;

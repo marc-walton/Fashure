@@ -149,7 +149,7 @@ List<String> userCommunityId = <String>[];
 
 
   Future<String> uploadImage1(imageFile) async {
-    Reference reference = FirebaseStorage.instance.ref().child("$communityId.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child("communities").child("$communityId.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;

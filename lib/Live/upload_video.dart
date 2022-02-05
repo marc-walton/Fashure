@@ -10,12 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:video_compress/video_compress.dart';
-import 'package:video_player/video_player.dart';
-import 'apis/encoding_provider.dart';
-import 'apis/firebase_provider.dart';
-import 'package:path/path.dart' as p;
-import 'models/video_info.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:cached_video_player/cached_video_player.dart';
+
 import 'package:fashow/Live/models/video_player.dart';
 import 'dart:io';
 import 'dart:async';
@@ -217,9 +213,6 @@ var image;
 
   }
 
-
-
-
   void _takeVideo(parentContext) async {
     setState((){
       _inProcess = true;
@@ -238,7 +231,6 @@ var image;
       });
 
 
-ss
   }
 
   _compressVideo( videoPath) async {
@@ -300,7 +292,7 @@ ss
 
     });
     try {
-      await _processVideo(videoFile);
+      await _processVideo(videoFile.path);
     } catch (e) {
       print('${e.toString()}');
     } finally {
@@ -1182,10 +1174,9 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
 
         onTap: ()
         {
-          FirebaseFirestore.instance
-              .collection('posts')
+         videoRef
               .doc(currentUser.id)
-              .collection('userPosts')
+              .collection('userVideos')
               .doc(prodId)
               .collection('tags')
               .doc(prod.prodId)
@@ -1227,10 +1218,9 @@ class TagItem extends StatelessWidget {
   TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   delete(){
-    var  docReference =  FirebaseFirestore.instance
-        .collection('posts')
+    var  docReference =  videoRef
         .doc(currentUser.id)
-        .collection('userPosts')
+        .collection('userVideos')
         .doc(prodId)
         .collection('tags')
         .doc(Id);

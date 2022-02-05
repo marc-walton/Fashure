@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class VideoInfo {
   String mediaUrl;
   String thumbUrl;
-  String coverUrl;
-  double aspectRatio;
-  Duration timestamp;
+  // String coverUrl;
+  // double aspectRatio;
+  // Duration timestamp;
   String postId;
   List hashTags;
   bool hasHashTags;
@@ -19,9 +19,9 @@ class VideoInfo {
   VideoInfo(
       {this.mediaUrl,
         this.thumbUrl,
-        this.coverUrl,
-        this.aspectRatio,
-        this.timestamp,
+        // this.coverUrl,
+        // this.aspectRatio,
+        // this.timestamp,
         this.postId,
         this.hashTags,
         this.hasHashTags,
@@ -36,8 +36,8 @@ class VideoInfo {
     return VideoInfo(
       mediaUrl: doc.data()['mediaUrl'],
       thumbUrl: doc.data()['thumbUrl'],
-      aspectRatio: doc.data()['aspectRatio'],
-      timestamp: doc.data()['timestamp'],
+      // aspectRatio: doc.data()['aspectRatio'],
+      // timestamp: doc.data()['timestamp'],
       postId: doc.data()['postId'],
       hashTags: doc.data()['hashTags'],
       hasHashTags: doc.data()['hasHashTags'],

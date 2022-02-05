@@ -10,10 +10,7 @@ import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
-import 'package:bottom_bar/bottom_bar.dart';
 
-import 'package:splashscreen/splashscreen.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
@@ -24,25 +21,16 @@ import 'package:badges/badges.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fashow/ActivityFeed.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fashow/Shop.dart';
 import 'package:fashow/Timeline.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:provider/provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'file:///C:/Users/marcw/StudioProjects/Fashow/lib/Live/Live.dart';
-import 'package:fashow/Live/Live.dart';
-import 'package:fashow/Create_account.dart';
+
 import 'package:fashow/Designer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:fashow/enum/user_state.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
-import 'package:uuid/uuid.dart';
-import 'package:flutter_svg/svg.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -520,19 +508,19 @@ getHashTagNoneResale()async{
     }
   }
 
-  handleSignIn(GoogleSignInAccount account) async {
-    if (account != null) {
-      await createUserInFirestore();
-      setState(() {
-        isAuth = true;
-      });
-      configurePushNotifications();
-    } else {
-      setState(() {
-        isAuth = false;
-      });
-    }
-  }
+  // handleSignIn(GoogleSignInAccount account) async {
+  //   if (account != null) {
+  //     await createUserInFirestore();
+  //     setState(() {
+  //       isAuth = true;
+  //     });
+  //     configurePushNotifications();
+  //   } else {
+  //     setState(() {
+  //       isAuth = false;
+  //     });
+  //   }
+  // }
 
 
   configurePushNotifications() {
@@ -575,61 +563,61 @@ getHashTagNoneResale()async{
     });
   }
 
-  createUserInFirestore() async {
-    // 1) check if user exists in users collection in database (according to their id)
-    final GoogleSignInAccount user = googleSignIn.currentUser;
-    DocumentSnapshot doc = await usersRef.doc(user.id).get();
-    // 2) if the user doesn't exist, then we want to take them to the create account page
-    if (!doc.exists) {
-      final dropdownValue = await Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CreateAccount()));
-
-
-      usersRef.doc(user.id).set({
-        "id": user.id,
-        "username" : dropdownValue,
-        "photoUrl": user.photoUrl,
-        "email": user.email,
-        "displayName": user.displayName,
-        "bio": "",
-        "client": 0 ,
-        "country":dropdownValue,
-        "timestamp": timestamp,
-        "ban":true
-      });
-
-
-
-      await  bankRef
-          .doc(user.id)
-          .set({
-
-        "accno":"",
-        "ifsc":"",
-
-      });
-      // make new user their own follower (to include their posts in their timeline)
-      await followersRef
-          .doc(user.id)
-          .collection('userFollowers')
-          .doc(user.id)
-          .set({});
-
-
-
-      doc = await usersRef.doc(user.id).get();
-    }
-    currentUser = Users.fromDocument(doc);
-
-    myPrefs = await SharedPreferences.getInstance();
-    await myPrefs.setString('id', currentUser.id);
-    await myPrefs.setString('displayName', currentUser.displayName);
-    await myPrefs.setString('photoUrl', currentUser.photoUrl);
-    myPrefs = await SharedPreferences.getInstance();
-    idd = myPrefs.getString('id') ?? '';
-    print(idd);
-
-  }
+  // createUserInFirestore() async {
+  //   // 1) check if user exists in users collection in database (according to their id)
+  //   final GoogleSignInAccount user = googleSignIn.currentUser;
+  //   DocumentSnapshot doc = await usersRef.doc(user.id).get();
+  //   // 2) if the user doesn't exist, then we want to take them to the create account page
+  //   if (!doc.exists) {
+  //     final dropdownValue = await Navigator.push(
+  //         context, MaterialPageRoute(builder: (context) => CreateAccount()));
+  //
+  //
+  //     usersRef.doc(user.id).set({
+  //       "id": user.id,
+  //       "username" : dropdownValue,
+  //       "photoUrl": user.photoUrl,
+  //       "email": user.email,
+  //       "displayName": user.displayName,
+  //       "bio": "",
+  //       "client": 0 ,
+  //       "country":dropdownValue,
+  //       "timestamp": timestamp,
+  //       "ban":true
+  //     });
+  //
+  //
+  //
+  //     await  bankRef
+  //         .doc(user.id)
+  //         .set({
+  //
+  //       "accno":"",
+  //       "ifsc":"",
+  //
+  //     });
+  //     // make new user their own follower (to include their posts in their timeline)
+  //     await followersRef
+  //         .doc(user.id)
+  //         .collection('userFollowers')
+  //         .doc(user.id)
+  //         .set({});
+  //
+  //
+  //
+  //     doc = await usersRef.doc(user.id).get();
+  //   }
+  //   currentUser = Users.fromDocument(doc);
+  //
+  //   myPrefs = await SharedPreferences.getInstance();
+  //   await myPrefs.setString('id', currentUser.id);
+  //   await myPrefs.setString('displayName', currentUser.displayName);
+  //   await myPrefs.setString('photoUrl', currentUser.photoUrl);
+  //   myPrefs = await SharedPreferences.getInstance();
+  //   idd = myPrefs.getString('id') ?? '';
+  //   print(idd);
+  //
+  // }
 
   @override
   void dispose() {

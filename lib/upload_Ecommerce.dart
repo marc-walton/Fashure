@@ -4635,7 +4635,7 @@ compressImage01() async {
 
   Future<String> uploadImage(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4646,7 +4646,7 @@ compressImage01() async {
   }
   Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4655,7 +4655,7 @@ compressImage01() async {
   }
   Future<String> uploadImage2(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4664,7 +4664,7 @@ compressImage01() async {
   }
   Future<String> uploadImage3(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4673,7 +4673,7 @@ compressImage01() async {
   }
   Future<String> uploadImage4(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4682,7 +4682,7 @@ compressImage01() async {
   }
   Future<String> uploadImage5(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4691,7 +4691,7 @@ compressImage01() async {
   }
   Future<String> uploadImage6(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4700,7 +4700,7 @@ compressImage01() async {
   }
   Future<String> uploadImage7(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4709,7 +4709,7 @@ compressImage01() async {
   }
   Future<String> uploadImage8(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4718,7 +4718,7 @@ compressImage01() async {
   }
   Future<String> uploadImage9(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -4727,7 +4727,7 @@ compressImage01() async {
   }
   Future<String> uploadImage01(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5099,7 +5099,7 @@ compressImage01() async {
   }
   Future<String> uploadImage001(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5110,7 +5110,7 @@ compressImage01() async {
   }
   Future<String> uploadImage002(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5120,7 +5120,7 @@ compressImage01() async {
   }
   Future<String> uploadImage003(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5130,7 +5130,7 @@ compressImage01() async {
   }
   Future<String> uploadImage004(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5140,7 +5140,7 @@ compressImage01() async {
   }
   Future<String> uploadImage005(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
@@ -5151,7 +5151,7 @@ compressImage01() async {
 
   // Future<String> uploadImage02(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5160,7 +5160,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage03(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5169,7 +5169,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage04(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5178,7 +5178,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage05(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5187,7 +5187,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage06(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5196,7 +5196,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage07(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5205,7 +5205,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage08(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5214,7 +5214,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage09(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5223,7 +5223,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage010(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5232,7 +5232,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage011(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5241,7 +5241,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage012(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5250,7 +5250,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage013(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5259,7 +5259,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage014(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5268,7 +5268,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage015(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5277,7 +5277,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage016(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5286,7 +5286,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage017(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5295,7 +5295,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage018(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5304,7 +5304,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage019(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5313,7 +5313,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage020(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5322,7 +5322,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage021(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5331,7 +5331,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage022(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5340,7 +5340,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage023(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5349,7 +5349,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage024(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5358,7 +5358,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage025(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5367,7 +5367,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage026(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5376,7 +5376,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage027(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5385,7 +5385,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage028(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5394,7 +5394,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage029(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5403,7 +5403,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage030(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5412,7 +5412,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage031(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5421,7 +5421,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage032(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5430,7 +5430,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage033(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5439,7 +5439,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage034(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5448,7 +5448,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage035(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5457,7 +5457,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage036(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5466,7 +5466,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage037(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5475,7 +5475,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage038(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5484,7 +5484,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage039(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5493,7 +5493,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage040(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5502,7 +5502,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage041(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5511,7 +5511,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage042(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5520,7 +5520,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage043(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5529,7 +5529,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage044(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5538,7 +5538,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage045(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5547,7 +5547,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage046(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5556,7 +5556,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage047(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5565,7 +5565,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage048(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5574,7 +5574,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage049(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5583,7 +5583,7 @@ compressImage01() async {
   // }
   // Future<String> uploadImage050(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
   //   UploadTask uploadTask = reference.putFile(imageFile);
   //
   //   TaskSnapshot storageSnap = await uploadTask;
@@ -5594,7 +5594,7 @@ compressImage01() async {
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child(currentUser.id).child('Shop').child(prodId).child("$fileName.jpg");
     UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());

@@ -3,33 +3,23 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
 import 'package:alert_dialog/alert_dialog.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'package:fashow/Live/models/bid_items.dart';
-import 'package:frino_icons/frino_icons.dart';
+
 
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:get/get.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:fashow/progress.dart';
+
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fashow/size_config.dart';
 
 class Upload_bid extends StatefulWidget {
@@ -431,94 +421,94 @@ String U;
               children: [
                 carousel(),
                 SizedBox(height:SizeConfig.blockSizeVertical*2),
-                Container(
-                  height:SizeConfig.screenHeight*0.1,
-                  width:SizeConfig.screenWidth*0.5,
-
-                  child: DropDownFormField(
-
-                    titleText: '',
-                    hintText: 'Auction timer',
-                    value: dropdownValue,
-                    onSaved: (value) {
-                      setState(() {
-                        dropdownValue = value;
-                      });
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        dropdownValue = value;
-                      });
-                    },
-                    dataSource: [
-                      {
-                        "display": "2 Hours",
-                        "value": 2,
-                      },
-                      {
-                        "display": "4 Hours",
-                        "value": 4,
-                      },
-                      {
-                        "display": "6 Hours",
-                        "value": 6,
-                      },
-                      {
-                        "display": "8 Hours",
-                        "value": 8,
-                      },
-                      {
-                        "display": "10 Hours",
-                        "value": 10,
-                      }, {
-                        "display": "12 Hours",
-                        "value": 12,
-                      }, {
-                        "display": "1 Day",
-                        "value": 24,
-                      },
-                      {
-                        "display": "2 Days",
-                        "value": 48,
-                      },
-                      {
-                        "display": "3 Days",
-                        "value": 72,
-                      },
-                      {
-                        "display": "4 Days",
-                        "value": 96,
-                      },
-                      {
-                        "display": "5 Days",
-                        "value": 120,
-                      },
-                      {
-                        "display": "6 Days",
-                        "value": 144,
-                      },
-                      {
-                        "display": "7 Days",
-                        "value": 168,
-                      },
-                      {
-                        "display": "8 Days",
-                        "value": 192,
-                      },
-                      {
-                        "display": "9 Days",
-                        "value": 216,
-                      },
-                      {
-                        "display": "10 Days",
-                        "value": 240,
-                      },
-
-                    ],
-                    textField: 'display',
-                    valueField: 'value',
-                  ),
-                ),
+                // Container(
+                //   height:SizeConfig.screenHeight*0.1,
+                //   width:SizeConfig.screenWidth*0.5,
+                //
+                //   child: DropDownFormField(
+                //
+                //     titleText: '',
+                //     hintText: 'Auction timer',
+                //     value: dropdownValue,
+                //     onSaved: (value) {
+                //       setState(() {
+                //         dropdownValue = value;
+                //       });
+                //     },
+                //     onChanged: (value) {
+                //       setState(() {
+                //         dropdownValue = value;
+                //       });
+                //     },
+                //     dataSource: [
+                //       {
+                //         "display": "2 Hours",
+                //         "value": 2,
+                //       },
+                //       {
+                //         "display": "4 Hours",
+                //         "value": 4,
+                //       },
+                //       {
+                //         "display": "6 Hours",
+                //         "value": 6,
+                //       },
+                //       {
+                //         "display": "8 Hours",
+                //         "value": 8,
+                //       },
+                //       {
+                //         "display": "10 Hours",
+                //         "value": 10,
+                //       }, {
+                //         "display": "12 Hours",
+                //         "value": 12,
+                //       }, {
+                //         "display": "1 Day",
+                //         "value": 24,
+                //       },
+                //       {
+                //         "display": "2 Days",
+                //         "value": 48,
+                //       },
+                //       {
+                //         "display": "3 Days",
+                //         "value": 72,
+                //       },
+                //       {
+                //         "display": "4 Days",
+                //         "value": 96,
+                //       },
+                //       {
+                //         "display": "5 Days",
+                //         "value": 120,
+                //       },
+                //       {
+                //         "display": "6 Days",
+                //         "value": 144,
+                //       },
+                //       {
+                //         "display": "7 Days",
+                //         "value": 168,
+                //       },
+                //       {
+                //         "display": "8 Days",
+                //         "value": 192,
+                //       },
+                //       {
+                //         "display": "9 Days",
+                //         "value": 216,
+                //       },
+                //       {
+                //         "display": "10 Days",
+                //         "value": 240,
+                //       },
+                //
+                //     ],
+                //     textField: 'display',
+                //     valueField: 'value',
+                //   ),
+                // ),
 
 SizedBox(height:SizeConfig.blockSizeVertical*2),
 

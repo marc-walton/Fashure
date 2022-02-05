@@ -8,7 +8,6 @@ import 'package:getwidget/components/toast/gf_toast.dart';
 import 'package:getwidget/types/gf_toast_type.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';

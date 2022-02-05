@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:fashow/Communities/post_screen.dart';
+import 'package:fashow/Live/Video_screen.dart';
 import 'package:fashow/Live/models/auction_model.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
@@ -448,6 +449,17 @@ this.communityId,
       ),
     );
   }
+showVideo(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VideoScreen(
+          postId: postId,
+          userId: userId,
+        ),
+      ),
+    );
+  }
 
   showCommunityPost(context) {
     Navigator.push(
@@ -624,6 +636,29 @@ showOrders(context) {
         ),
       );
     }
+     else if (type == "Videolike" || type == 'VideoComment') {
+      return
+      mediaPreview = GestureDetector(
+        onTap: () => showVideo(context),
+        child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+          child: Container(
+            height: 50.0,
+            width: 50.0,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(mediaUrl),
+                    )),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     else if (type == 'bloglike'||type == 'blogcomment'){
       return
 
@@ -816,7 +851,7 @@ showOrders(context) {
       activityItemText = "$message";
     }
 
-    else if (type == 'collectioncomment'||type == 'Videocomment'||type == 'blogcomment'||type == 'comment'||type == 'communityComment') {
+    else if (type == 'collectioncomment'||type == 'VideoComment'||type == 'blogcomment'||type == 'comment'||type == 'communityComment') {
       activityItemText = '$commentData';
     }
 else if (type == 'fav'||type == 'resaleLike') {
@@ -1939,6 +1974,52 @@ child:CircleAvatar(
          ),
        );
   }
+  video(ParentContext){
+
+    return
+      Padding(
+        padding: EdgeInsets.only(bottom: 2.0),
+        child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+          child: Container(
+            color: Color(0XFFb3b3ff).withOpacity(0.3),
+            child: ListTile(
+              title: GestureDetector(
+                onTap: () => showPost(ParentContext),
+                child: RichText(
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: kText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: username,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: ' $activityItemText',
+                      )
+                    ]),
+                ),
+              ),
+              leading: GestureDetector(
+                onTap: () => showProfile(ParentContext,profileId: userId),
+                child:CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(userProfileImg),
+                ),
+              ),
+              subtitle: Text(
+                timeago.format(timestamp.toDate()),
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: kSubtitle),
+              ),
+              trailing: mediaPreview,
+            ),
+          ),
+        ),
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1947,6 +2028,8 @@ child:CircleAvatar(
     // || type == 'Videocomment'|| type == 'Videolike'
     return
       type == 'like'|| type == 'comment' ? main(context):
+       type == 'Videolike'|| type == 'VideoComment' ? video(context):
+
         type == 'communitylike'|| type == 'communityComment' ? communityPosts(context):
 
        type == 'follow' ? followers(context):

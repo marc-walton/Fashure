@@ -206,6 +206,7 @@ exports.onCreateActivityFeedItem = functions.firestore
         case "like":
           body = `${activityFeedItem.username} liked your post`;
           break;
+
           case "communityComment":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.commentData}`;
           break;
@@ -270,7 +271,7 @@ case "ServicePayment":
 case "PaymentO":
           body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
-case "Videocomment":
+case "VideoComment":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.commentData}`;
           break;
 case "blogcomment":

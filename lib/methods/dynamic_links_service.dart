@@ -90,6 +90,13 @@ class DynamicLinkService {
                   postId: postId,
                   userId: ownerId,
                 )));
+      }  else if (type == "Video") {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                PostScreen(
+                  postId: postId,
+                  userId: ownerId,
+                )));
       }
 
 
@@ -149,6 +156,13 @@ class DynamicLinkService {
                       )));
             }
             else if (type == "post") {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      PostScreen(
+                        postId: postId,
+                        userId: ownerId,
+                      )));
+            }   else if (type == "Video") {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) =>
                       PostScreen(

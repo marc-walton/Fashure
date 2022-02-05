@@ -1,32 +1,29 @@
 import 'dart:io';
-import 'dart:math';
+import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/Communities/Share_button.dart';
+import 'package:fashow/Constants.dart';
+import 'package:fashow/Live/video_comments.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Live/upload_video.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'apis/encoding_provider.dart';
-import 'apis/firebase_provider.dart';
-import 'package:path/path.dart' as p;
+import 'package:share/share.dart';
 import 'models/video_info.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:fashow/Live/models/video_player.dart';
 
 class UserVideos extends StatefulWidget {
-  UserVideos({Key key, this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _UserVideosState createState() => _UserVideosState();
 }
 
 class _UserVideosState extends State<UserVideos> {
+  DynamicLinkService _dynamicLinkService = DynamicLinkService();
 
   final VideoController videoController = Get.put(VideoController());
 
@@ -57,8 +54,6 @@ class _UserVideosState extends State<UserVideos> {
       ]),
     );
   }
-
-
   addLikeToActivityFeed(ownerId,postId,mediaUrl) {
     // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
     bool isNotPostOwner = currentUser.id != ownerId;
@@ -79,7 +74,6 @@ class _UserVideosState extends State<UserVideos> {
       });
     }
   }
-
   removeLikeFromActivityFeed(ownerId,postId,mediaUrl) {
     bool isNotPostOwner = currentUser.id != ownerId;
     if (isNotPostOwner) {
@@ -96,8 +90,8 @@ class _UserVideosState extends State<UserVideos> {
     }
   }
   likeColumn(postId,ownerId,mediaUrl){
-    bool isLiked;
-    int likeCount;
+    bool isLiked = false;
+    int likeCount = 0;
     videoRef
         .doc(ownerId)
         .collection('userVideos')
@@ -109,14 +103,17 @@ class _UserVideosState extends State<UserVideos> {
         .collection('userVideos')
         .doc(postId)
         .collection("likes")
-        .get().then((doc) => doc.docs.length=likeCount);
+        .get().then((doc) => setState((){likeCount = doc.docs.length;}));
     return
       Column(
         children: [
           InkWell(
             onTap: ()
             {
-              if (isLiked) {
+              print("||||||||||||||||||||||||");
+              if (isLiked == true) {
+                print("|||||||||||||||||||||||true|");
+
                 videoRef
                     .doc(ownerId)
                     .collection('userVideos')
@@ -130,7 +127,9 @@ class _UserVideosState extends State<UserVideos> {
                   isLiked = false;
                 });
               }
-              else if (isLiked) {
+              else if (isLiked== false) {
+                print("|||||||||||||||||||||||false|");
+
                 videoRef
                     .doc(ownerId)
                     .collection('userVideos')
@@ -167,19 +166,44 @@ class _UserVideosState extends State<UserVideos> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Obx(() {
-        return PageView.builder(
+        return PreloadPageView.builder(
+          preloadPagesCount: 25,
           itemCount: videoController.videoList.length,
           controller: PageController(initialPage: 0, viewportFraction: 1),
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             final data = videoController.videoList[index];
+            print(data.mediaUrl);
             return Stack(
               children: [
-                Player(
-                  video: data,
+                // BetterPlayer.network(
+                // data.mediaUrl,
+                //   betterPlayerConfiguration: BetterPlayerConfiguration(
+                //     fit: BoxFit.cover,
+                //     // autoDetectFullscreenDeviceOrientation: true,
+                //     deviceOrientationsAfterFullScreen: [
+                //       DeviceOrientation.portraitUp
+                //     ],
+                //     // deviceOrientationsOnFullScreen: [
+                //     //   DeviceOrientation.portraitUp
+                //     // ],
+                //     autoPlay: true,
+                //     // aspectRatio: _aspectRatio,
+                //     // eventListener: (BetterPlayerEvent event) {},
+                //     controlsConfiguration:
+                //     const BetterPlayerControlsConfiguration(
+                //       // backgroundColor: Colors.transparent,
+                //       enableFullscreen: false,
+                //       showControlsOnInitialize: false,
+                //       enableProgressBar: false,
+                //       enableProgressText: false,
+                //     ),
+                //   ),
+                // ),
+                VideoPlayerItem(
+                  videoUrl: data.mediaUrl,
                 ),
                 Column(
                   children: [
@@ -202,13 +226,25 @@ class _UserVideosState extends State<UserVideos> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
-                                    data.username,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () => showProfile(context, profileId: data.ownerId),
+
+                                        child: CircleAvatar(
+                                          backgroundImage: CachedNetworkImageProvider(data.photoUrl),
+                                          backgroundColor: Colors.grey,
+                                        ),
+                                      ),
+                                      Text(
+                                        data.username,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Text(
                                     data.description,
@@ -228,10 +264,90 @@ class _UserVideosState extends State<UserVideos> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                buildProfile(
-                                  data.photoUrl,
-                                ),
                                 likeColumn(data.postId, data.ownerId, data.mediaUrl),
+
+                                GestureDetector(
+                                  onTap: handleLikePost,
+
+                                  child: ImageIcon(
+                                    isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                                    color: kText,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () => showComments(
+                                    context,
+                                    postId: data.postId,
+                                    ownerId: data.ownerId,
+                                    mediaUrl: data.thumbUrl,
+                                  ),
+                                  child: Icon(
+                                    Icons.mode_comment_outlined,
+                                    size: 28.0,
+                                    color: Colors.white,
+                                  ),
+
+                                ),
+                                IconButton(
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    showModalBottomSheet(context: context, builder:(context) {
+                                      return Center(child:
+                                      Column(
+
+                                          children:[
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                elevation : 0.1,
+                                                side: BorderSide.none,
+
+                                                primary:  Colors.black, // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                                    ShareButton(
+                                                      postId:data.postId,
+                                                      ownerId:data.ownerId,
+                                                      type:"SharedVideo",
+                                                      imageURL:data.thumbUrl,
+                                                      productname:data.description,
+
+                                                    ),
+                                                ));
+                                              },
+                                              child: Text("Share to a community",style: TextStyle(color: kText),),
+                                            ),
+                                            FutureBuilder<Uri>(
+                                                future: _dynamicLinkService.createDynamicLink( postId:data.postId,ownerId: data.ownerId,Description: data.description,type: "Video",imageURL:data.thumbUrl),
+                                                builder: (context, snapshot) {
+                                                  if(snapshot.hasData) {
+                                                    Uri uri = snapshot.data;
+                                                    return ElevatedButton(
+                                                      style: ElevatedButton.styleFrom(
+                                                        elevation : 0.1,
+                                                        side: BorderSide.none,
+
+                                                        primary:  Colors.black, // background
+                                                      ),
+                                                      onPressed: () {
+                                                        Share.share(uri.toString());},
+                                                      child: Text("Share to External Apps",style: TextStyle(color: kText),),
+                                                    );
+                                                  } else {
+                                                    return Container();
+                                                  }
+
+                                                }
+                                            ),
+
+
+                                          ])
+                                      );
+                                    });
+                                  },
+                                  // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
+                                  icon: Icon(Icons.send),
+                                ),
                                 // Column(
                                 //   children: [
                                 //     InkWell(
@@ -328,7 +444,16 @@ class _UserVideosState extends State<UserVideos> {
   }
 }
 
-
+showComments(BuildContext context,
+    {String postId, String ownerId, String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return VideoComments(
+      postId: postId,
+      postOwnerId: ownerId,
+      postMediaUrl: mediaUrl,
+    );
+  }));
+}
 class VideoController extends GetxController {
   final Rx<List<VideoInfo>> _videoList = Rx<List<VideoInfo>>([]);
 

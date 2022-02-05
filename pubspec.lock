@@ -141,6 +141,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.1"
+  cached_video_player:
+    dependency: "direct main"
+    description:
+      name: cached_video_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0-dev.1"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -288,24 +295,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2"
-  custom_timer:
-    dependency: "direct main"
-    description:
-      name: custom_timer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.6"
   diacritic:
     dependency: transitive
     description:
       name: diacritic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.3"
-  dropdown_formfield:
-    dependency: "direct main"
-    description:
-      name: dropdown_formfield
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
@@ -463,13 +456,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+3"
-  firestore_collection:
-    dependency: "direct main"
-    description:
-      name: firestore_collection
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.6"
   flare_flutter:
     dependency: "direct main"
     description:
@@ -565,7 +551,7 @@ packages:
       name: flutter_markdown
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4"
+    version: "0.5.2"
   flutter_multiselect:
     dependency: "direct main"
     description:
@@ -778,7 +764,7 @@ packages:
       name: markdown
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.8"
+    version: "3.0.0"
   matcher:
     dependency: transitive
     description:
@@ -835,13 +821,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  notus_format:
-    dependency: transitive
-    description:
-      name: notus_format
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   number_inc_dec:
     dependency: "direct main"
     description:
@@ -968,6 +947,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  preload_page_view:
+    dependency: "direct main"
+    description:
+      name: preload_page_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.6"
   process:
     dependency: transitive
     description:
@@ -982,20 +968,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.3"
-  quill_delta:
-    dependency: "direct main"
-    description:
-      name: quill_delta
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.3"
-  quill_format:
-    dependency: transitive
-    description:
-      name: quill_format
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   quiver:
     dependency: transitive
     description:
@@ -1003,13 +975,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  quiver_hashcode:
-    dependency: transitive
-    description:
-      name: quiver_hashcode
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   random_color:
     dependency: "direct main"
     description:
@@ -1302,13 +1267,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  video_player:
-    dependency: "direct main"
-    description:
-      name: video_player
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.3"
   video_player_platform_interface:
     dependency: transitive
     description:
@@ -1351,13 +1309,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.5.1"
-  zefyrka:
-    dependency: "direct main"
-    description:
-      name: zefyrka
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.10"
 sdks:
   dart: ">=2.13.0 <3.0.0"
   flutter: ">=2.0.0"

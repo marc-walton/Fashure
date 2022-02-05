@@ -8,7 +8,7 @@ import 'package:fashow/Live/countdown_timer/current_remaining_time.dart';
 import 'package:fashow/Live/countdown_timer/flutter_countdown_timer.dart';
 import 'package:fashow/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firestore_collection/firestore_collection.dart';
+// import 'package:firestore_collection/firestore_collection.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/size_config.dart';
@@ -25,26 +25,26 @@ class UserBids extends StatefulWidget {
 }
 
 class _UserBidsState extends State<UserBids> {
-  FirestoreCollection _fireCollection = FirestoreCollection(
-    collection: bidsRef
-        .doc(currentUser.id)
-        .collection("userBids"),
-
-    initializeOnStart: true,
-    // first page will fetched immediately
-    offset: 15,
-    // page size
-    serverOnly: false,
-    // cache first
-    live: true,
-    // notifies to newest documents
-    query: bidsRef
-        .doc(currentUser.id)
-        .collection("userBids")
-
-        .where("bidOn", isEqualTo: false),
-    queryOrder: QueryOrder(orderField: 'timestamp'),
-  );
+  // FirestoreCollection _fireCollection = FirestoreCollection(
+  //   collection: bidsRef
+  //       .doc(currentUser.id)
+  //       .collection("userBids"),
+  //
+  //   initializeOnStart: true,
+  //   // first page will fetched immediately
+  //   offset: 15,
+  //   // page size
+  //   serverOnly: false,
+  //   // cache first
+  //   live: true,
+  //   // notifies to newest documents
+  //   query: bidsRef
+  //       .doc(currentUser.id)
+  //       .collection("userBids")
+  //
+  //       .where("bidOn", isEqualTo: false),
+  //   queryOrder: QueryOrder(orderField: 'timestamp'),
+  // );
   final String currentUserId = currentUser?.id;
 
   deletePost({List url,String Id,String postId, }) async {

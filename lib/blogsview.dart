@@ -35,7 +35,7 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
-import 'package:zefyrka/zefyrka.dart';
+// import 'package:zefyrka/zefyrka.dart';
 
 import 'chatcached_image.dart';
 //import 'package:zefyr/zefyr.dart';
@@ -150,10 +150,10 @@ class _BlogState extends State<Blog> {
   var randomTag2;
 
   List <Widget>listOfImages = <Widget>[];
-  ZefyrController _controller;
+  // ZefyrController _controller;
   //ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
-  FocusNode _focusNode;
+  // FocusNode _focusNode;
   _BlogState({
     this.blogId,
     this.ownerId,

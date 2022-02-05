@@ -1,6 +1,5 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:currency_formatter/currency_formatter.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
