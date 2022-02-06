@@ -734,7 +734,8 @@ getHashTagNoneResale()async{
 
     return Scaffold(
       key: _scaffoldKey,
-
+      // extendBodyBehindAppBar: true,
+      // extendBody: true,
       body: Container(
 
         child: PageView(
@@ -753,10 +754,12 @@ getHashTagNoneResale()async{
       ),
       bottomNavigationBar:
       BottomNavigationBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         currentIndex: pageIndex,
-        selectedItemColor: Colors.black,
-        selectedLabelStyle:TextStyle(color:Colors.black),
+        selectedItemColor: Colors.white,
+        selectedLabelStyle:TextStyle(color:Colors.white),
+        selectedIconTheme:IconThemeData(color:Colors.white ),
+        elevation:0.1,
         onTap: (int index) {
           pageController.jumpToPage(index);
           setState(() => pageIndex = index);
@@ -764,44 +767,43 @@ getHashTagNoneResale()async{
         items: [
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.weekend,color: Colors.grey,),
+            icon: Icon(Icons.weekend,color:Colors.white,),
             label: 'Home',
             activeIcon:Icon(Icons.weekend,color: Colors.black,),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
 
           ),
           BottomNavigationBarItem(
-            icon:    Icon(Icons.store,color: Colors.grey,),
+            icon:    Icon(Icons.store,color: Colors.white,),
             label: 'Shop',
             activeIcon:Icon(Icons.store,color: Colors.black,),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.swatchbook,color: Colors.grey,),
+            icon: Icon(FontAwesomeIcons.swatchbook,color: Colors.white,),
             label: 'Freelancers',
             activeIcon:Icon(FontAwesomeIcons.swatchbook,color: Colors.black,),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
 
           ),
           BottomNavigationBarItem(
-            icon:Icon(Icons.play_arrow,color: Colors.grey,),
+            icon:Icon(Icons.play_arrow,color: Colors.white,),
             label: 'FashureTV',
             activeIcon:Icon(Icons.play_arrow,color: Colors.black,),
-            backgroundColor: Colors.white,
-
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Row(
               children: [
-                Icon(Icons.inbox,color: Colors.grey,),
+                Icon(Icons.inbox,color: Colors.white,),
                 currentUser == null?  Container():badgescount(),
 
               ],
             ),
             label: 'Settings',
 activeIcon:Icon(Icons.inbox,color: Colors.black,),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
 
 
           ),

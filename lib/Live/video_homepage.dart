@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashow/ActivityFeed.dart';
@@ -26,6 +27,7 @@ class _UserVideosState extends State<UserVideos> {
   DynamicLinkService _dynamicLinkService = DynamicLinkService();
 
   final VideoController videoController = Get.put(VideoController());
+  final String currentUserId = currentUser?.id;
 
   buildProfile(String profilePhoto) {
     return SizedBox(
@@ -54,115 +56,7 @@ class _UserVideosState extends State<UserVideos> {
       ]),
     );
   }
-  addLikeToActivityFeed(ownerId,postId,mediaUrl) {
-    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
-    bool isNotPostOwner = currentUser.id != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .set({
-        "type": "like",
-        "username": currentUser.displayName,
-        "userId": currentUser.id,
-        "userProfileImg": currentUser.photoUrl,
-        "postId": postId,
-        "mediaUrl": mediaUrl.first,
-        "timestamp": timestamp,
-        "read": 'false',
-      });
-    }
-  }
-  removeLikeFromActivityFeed(ownerId,postId,mediaUrl) {
-    bool isNotPostOwner = currentUser.id != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .get()
-          .then((doc) {
-        if (doc.exists) {
-          doc.reference.delete();
-        }
-      });
-    }
-  }
-  likeColumn(postId,ownerId,mediaUrl){
-    bool isLiked = false;
-    int likeCount = 0;
-    videoRef
-        .doc(ownerId)
-        .collection('userVideos')
-        .doc(postId)
-        .collection("likes")
-        .doc(currentUser.id).get().then((doc) => doc.exists?isLiked=true:false);
-    videoRef
-        .doc(ownerId)
-        .collection('userVideos')
-        .doc(postId)
-        .collection("likes")
-        .get().then((doc) => setState((){likeCount = doc.docs.length;}));
-    return
-      Column(
-        children: [
-          InkWell(
-            onTap: ()
-            {
-              print("||||||||||||||||||||||||");
-              if (isLiked == true) {
-                print("|||||||||||||||||||||||true|");
 
-                videoRef
-                    .doc(ownerId)
-                    .collection('userVideos')
-                    .doc(postId)
-                    .collection("likes")
-                    .doc(currentUser.id).delete();
-                removeLikeFromActivityFeed(ownerId,postId,mediaUrl);
-
-                setState(() {
-                  likeCount -= 1;
-                  isLiked = false;
-                });
-              }
-              else if (isLiked== false) {
-                print("|||||||||||||||||||||||false|");
-
-                videoRef
-                    .doc(ownerId)
-                    .collection('userVideos')
-                    .doc(postId)
-                    .collection("likes")
-                    .doc(currentUser.id).set({});
-                addLikeToActivityFeed(ownerId,postId,mediaUrl);
-
-                setState(() {
-                  likeCount += 1;
-                  isLiked = true;
-                });
-              }},
-            child: Icon(
-              Icons.favorite,
-              size: 40,
-              color: isLiked
-                  ? Colors.red
-                  : Colors.white,
-            ),
-          ),
-          const SizedBox(height: 7),
-          Text(
-            likeCount.toString(),
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          )
-        ],
-      );
-
-  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -171,11 +65,104 @@ class _UserVideosState extends State<UserVideos> {
         return PreloadPageView.builder(
           preloadPagesCount: 25,
           itemCount: videoController.videoList.length,
-          controller: PageController(initialPage: 0, viewportFraction: 1),
+          controller: PreloadPageController(initialPage: 0, viewportFraction: 1),
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             final data = videoController.videoList[index];
-            print(data.mediaUrl);
+            Map likes= data.likes;
+            bool isLiked = likes[currentUserId] == true;
+            isLiked = (likes[currentUserId] == true);
+            var  randomTag1 = (data.hashTags.toList()..shuffle()).first;
+            var  randomTag2 = (data.hashTags.toList()..shuffle()).last;
+            int getLikeCount(likes) {
+              //if no likesm return 0
+              if (likes == null) {
+                return 0;
+              }
+              int count = 0;
+              // if the key is explicitly set to true, add a like
+              likes.values.forEach((val) {
+                if (val == true) {
+                  count += 1;
+                }
+              });
+              return count;
+            }
+            addLikeToActivityFeed(ownerId,postId,mediaUrl) {
+              // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+              bool isNotPostOwner = currentUser.id != ownerId;
+              if (isNotPostOwner) {
+                activityFeedRef
+                    .doc(ownerId)
+                    .collection("feedItems")
+                    .doc(postId)
+                    .set({
+                  "type": "like",
+                  "username": currentUser.displayName,
+                  "userId": currentUser.id,
+                  "userProfileImg": currentUser.photoUrl,
+                  "postId": postId,
+                  "mediaUrl": mediaUrl.first,
+                  "timestamp": timestamp,
+                  "read": 'false',
+                });
+              }
+            }
+            removeLikeFromActivityFeed(ownerId,postId,mediaUrl) {
+              bool isNotPostOwner = currentUser.id != ownerId;
+              if (isNotPostOwner) {
+                activityFeedRef
+                    .doc(ownerId)
+                    .collection("feedItems")
+                    .doc(postId)
+                    .get()
+                    .then((doc) {
+                  if (doc.exists) {
+                    doc.reference.delete();
+                  }
+                });
+              }
+            }
+            handleLikePost() {
+              bool _isLiked = isLiked;
+
+              if (_isLiked) {
+
+                videoRef
+                    .doc(data.ownerId)
+                    .collection('userVideos')
+                    .doc(data.postId)
+                    .update({'likes.$currentUserId': false});
+                removeLikeFromActivityFeed(data.ownerId,data.postId,data.mediaUrl);
+
+                usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+                usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
+                setState(() {
+                  // likeCount -= 1;
+                  isLiked = false;
+                  likes[currentUserId] = false;
+                });
+              } else if (!_isLiked) {
+                videoRef
+                    .doc(data.ownerId)
+                    .collection('userVideos')
+                    .doc(data.postId)
+                    .update({'likes.$currentUserId': true});
+                addLikeToActivityFeed(data.ownerId,data.postId,data.mediaUrl);
+
+                usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+                usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
+                setState(() {
+                  // likeCount += 1;
+                  isLiked = true;
+                  likes[currentUserId] = true;
+//        showHeart = true;
+                });
+              }
+            }
+
             return Stack(
               children: [
                 // BetterPlayer.network(
@@ -260,20 +247,30 @@ class _UserVideosState extends State<UserVideos> {
                           ),
                           Container(
                             width: 100,
-                            margin: EdgeInsets.only(top: size.height / 5),
+                            margin: EdgeInsets.only(top: size.height / 3),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                likeColumn(data.postId, data.ownerId, data.mediaUrl),
-
                                 GestureDetector(
                                   onTap: handleLikePost,
 
                                   child: ImageIcon(
                                     isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                                    color: kText,
+                                    color: Colors.white,
                                   ),
                                 ),
+                                SizedBox(height:5),
+
+                                Text(
+                                  // "${likeCount} likes",
+                                  "${getLikeCount(likes)} ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(height:size.height / 30),
+
                                 GestureDetector(
                                   onTap: () => showComments(
                                     context,
@@ -288,8 +285,10 @@ class _UserVideosState extends State<UserVideos> {
                                   ),
 
                                 ),
+                                SizedBox(height:size.height / 30),
+
                                 IconButton(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   onPressed: () {
                                     showModalBottomSheet(context: context, builder:(context) {
                                       return Center(child:
@@ -301,7 +300,7 @@ class _UserVideosState extends State<UserVideos> {
                                                 elevation : 0.1,
                                                 side: BorderSide.none,
 
-                                                primary:  Colors.black, // background
+                                                primary:  Colors.white, // background
                                               ),
                                               onPressed: () {
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) =>
@@ -347,6 +346,10 @@ class _UserVideosState extends State<UserVideos> {
                                   },
                                   // Share.shareFiles(["${shopmediaUrl.first}"],text:"$productname",subject:"${uri.toString()}");},
                                   icon: Icon(Icons.send),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SupportButton(userId: data.ownerId,displayName: data.username,currency: data.currency,imgUrl: data.photoUrl,mediaUrl: data.thumbUrl,),
                                 ),
                                 // Column(
                                 //   children: [

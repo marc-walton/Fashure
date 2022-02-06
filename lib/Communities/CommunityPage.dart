@@ -65,7 +65,6 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
    String username;
    String location;
    String description;
-   String communityId;
    List mediaUrl;
    DynamicLinkService _dynamicLinkService = DynamicLinkService();
    String photoUrl;
@@ -98,7 +97,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
     return
       FutureBuilder<QuerySnapshot> (
           future:    FirebaseFirestore.instance.collection('Community')
-              .doc(communityId)
+              .doc(widget.CommunityId)
               .collection('communityPosts')
               .where('postId' ,isEqualTo: '$prodid')
           // .where('ownerId' ,isEqualTo: '$ownerId')
@@ -229,216 +228,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
 
   }
 
-  handleDeletePost(BuildContext parentContext,{String communityId,String ownerId}) {
-    return showDialog(
 
-        context: parentContext,
-        builder: (context) {
-          return ClipRRect(borderRadius: BorderRadius.circular(20.0),
-            child: SimpleDialog(
-
-              backgroundColor: kSecondaryColor,
-              title: Text("Remove this post?",style: TextStyle(color: kText),),
-              children: <Widget>[
-                SimpleDialogOption(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    deletePost(postId:postId);
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-                SimpleDialogOption(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel',
-                    style: TextStyle(color: Colors.white),),
-                )
-              ],
-            ),
-          );
-        });
-  }
-
-// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
-  deletePost({String postId}) async {
-    // delete post itself
-    FirebaseFirestore.instance.collection('Community')
-        .doc(communityId)
-        .collection('communityPosts')
-        .doc(postId)
-        .get()
-        .then((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-
-    for ( var imageFile in mediaUrl) {
-      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
-      await photo.delete();}
-    // then delete all activity feed notifications
-    QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
-        .collection("feedItems")
-        .where('postId', isEqualTo: postId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-    // then delete all comments
-    QuerySnapshot commentsSnapshot = await communitycommentsRef
-        .doc(postId)
-        .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-  }
-
-  handleLikePost({String postId,String ownerId}) {
-    bool _isLiked = likes[currentUserId] == true;
-
-    if (_isLiked) {
-      FirebaseFirestore.instance.collection('Community')
-          .doc(communityId)
-          .collection('communityPosts')
-          .doc(postId)
-          .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed(postId:postId,ownerId:ownerId);
-      setState(() {
-        likeCount -= 1;
-        isLiked = false;
-        likes[currentUserId] = false;
-      });
-    } else if (!_isLiked) {
-      FirebaseFirestore.instance.collection('Community')
-          .doc(communityId)
-          .collection('communityPosts')
-          .doc(postId)
-          .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed(postId:postId,ownerId:ownerId);
-      setState(() {
-        likeCount += 1;
-        isLiked = true;
-        likes[currentUserId] = true;
-//        showHeart = true;
-      });
-    }
-  }
-
-  addLikeToActivityFeed({String postId,String ownerId}) {
-    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
-    bool isNotPostOwner = currentUserId != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .set({
-        "type": "communitylike",
-        "username": currentUser.displayName,
-        "userId": currentUser.id,
-        "userProfileImg": currentUser.photoUrl,
-        "postId": postId,
-        "mediaUrl": mediaUrl.first,
-        "timestamp": timestamp,
-        "read": 'false',
-        "communityId": communityId,
-
-      });
-    }
-  }
-
-  removeLikeFromActivityFeed({String postId,String ownerId}) {
-    bool isNotPostOwner = currentUserId != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .get()
-          .then((doc) {
-        if (doc.exists) {
-          doc.reference.delete();
-        }
-      });
-    }
-  }
-  report({String postId,String ownerId}){
-    Fluttertoast.showToast(
-        msg: "Your report has been submitted", timeInSecForIos: 4);
-    FirebaseFirestore.instance.collection('reports')
-        .doc(ownerId)
-        .collection("userReports")
-        .doc(postId)
-        .set({
-      "type": "communityPost",
-      "userId": ownerId,
-      "postId": postId,
-      "timestamp": timestamp,
-    });
-  }
-  tagView({String postId}){
-    return
-      StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Community')
-            .doc(communityId)
-            .collection('communityPosts')
-            .doc(postId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-            return
-              Container();
-          } else {
-            return new ListView.builder(
-                scrollDirection :Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.docs[index];
-                  return TagItem(
-                    Id: ds['prodId'],
-                    ownerId: ds['ownerId'],
-                    name: ds['name'],
-                    usd: ds['usd'],
-                    inr: ds['inr'],
-                    eur: ds['eur'],
-                    gbp: ds['gbp'],
-                    taggerId : ds['taggerId'],
-                    taggerImg : ds['taggerImg'],
-                    taggerName : ds['taggerName'],
-                    taggerCurrency : ds['taggerCurrency'],
-                    TaggerProdId: ds['prodId'],
-                    TaggerOwnerId: ds['ownerId'],
-                    image: ds['image'],
-                    prodId:postId,
-
-                  );
-                }
-            );
-          }
-        },
-      );
-
-  }
-  viewProducts({String postId}){
-    return  showMaterialModalBottomSheet(
-        context: context,
-        builder: (BuildContext context)
-        {
-
-          return
-            Container(   color:Colors.black,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId),);
-        });
-  }
   pagiante(){
     return PaginateView(
       child: PaginateFirestore(
@@ -460,7 +250,7 @@ class _CommunityMainPageState extends State<CommunityMainPage> {
 
           String currency= documentSnapshot.data()['currency'];
           String  photoUrl= documentSnapshot.data()['photoUrl'];
-           communityId= documentSnapshot.data()['communityId'];
+          String  communityId= documentSnapshot.data()['communityId'];
 
 
           var option1Total =  documentSnapshot.data()['option1Total'];
@@ -490,6 +280,234 @@ String inr =  documentSnapshot.data()['inr'];
 String usd =  documentSnapshot.data()['usd'];
 String gbp =  documentSnapshot.data()['gbp'];
 String eur =  documentSnapshot.data()['eur'];
+          isLiked = (likes[currentUserId] == true);
+
+          int getLikeCount(likes) {
+            //if no likesm return 0
+            if (likes == null) {
+              return 0;
+            }
+            int count = 0;
+            // if the key is explicitly set to true, add a like
+            likes.values.forEach((val) {
+              if (val == true) {
+                count += 1;
+              }
+            });
+            return count;
+          }
+
+// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
+          deletePost({String postId}) async {
+            // delete post itself
+            FirebaseFirestore.instance.collection('Community')
+                .doc(communityId)
+                .collection('communityPosts')
+                .doc(postId)
+                .get()
+                .then((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+
+            for ( var imageFile in mediaUrl) {
+              var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+              await photo.delete();}
+            // then delete all activity feed notifications
+            QuerySnapshot activityFeedSnapshot = await activityFeedRef
+                .doc(ownerId)
+                .collection("feedItems")
+                .where('postId', isEqualTo: postId)
+                .get();
+            activityFeedSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+            // then delete all comments
+            QuerySnapshot commentsSnapshot = await communitycommentsRef
+                .doc(postId)
+                .collection('comments')
+                .get();
+            commentsSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+          }
+
+          addLikeToActivityFeed() {
+            // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .set({
+                "type": "communitylike",
+                "username": currentUser.displayName,
+                "userId": currentUser.id,
+                "userProfileImg": currentUser.photoUrl,
+                "postId": postId,
+                "mediaUrl": mediaUrl.first,
+                "timestamp": timestamp,
+                "read": 'false',
+                "communityId": communityId,
+
+              });
+            }
+          }
+
+          removeLikeFromActivityFeed() {
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .get()
+                  .then((doc) {
+                if (doc.exists) {
+                  doc.reference.delete();
+                }
+              });
+            }
+          }
+          handleDeletePost(BuildContext parentContext,{String communityId,String ownerId}) {
+            return showDialog(
+
+                context: parentContext,
+                builder: (context) {
+                  return ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                    child: SimpleDialog(
+
+                      backgroundColor: kSecondaryColor,
+                      title: Text("Remove this post?",style: TextStyle(color: kText),),
+                      children: <Widget>[
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            deletePost(postId:postId);
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        SimpleDialogOption(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('Cancel',
+                            style: TextStyle(color: Colors.white),),
+                        )
+                      ],
+                    ),
+                  );
+                });
+          }
+
+          handleLikePost() {
+            bool _isLiked = likes[currentUserId] == true;
+
+            if (_isLiked) {
+              FirebaseFirestore.instance.collection('Community')
+                  .doc(communityId)
+                  .collection('communityPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': false});
+              removeLikeFromActivityFeed();
+              setState(() {
+                likeCount -= 1;
+                isLiked = false;
+                likes[currentUserId] = false;
+              });
+            } else if (!_isLiked) {
+              FirebaseFirestore.instance.collection('Community')
+                  .doc(communityId)
+                  .collection('communityPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': true});
+              addLikeToActivityFeed();
+              setState(() {
+                likeCount += 1;
+                isLiked = true;
+                likes[currentUserId] = true;
+//        showHeart = true;
+              });
+            }
+          }
+
+          report({String postId,String ownerId}){
+            Fluttertoast.showToast(
+                msg: "Your report has been submitted", timeInSecForIos: 4);
+            FirebaseFirestore.instance.collection('reports')
+                .doc(ownerId)
+                .collection("userReports")
+                .doc(postId)
+                .set({
+              "type": "communityPost",
+              "userId": ownerId,
+              "postId": postId,
+              "timestamp": timestamp,
+            });
+          }
+          tagView({String postId}){
+            return
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('Community')
+                    .doc(communityId)
+                    .collection('communityPosts')
+                    .doc(postId)
+                    .collection("tags")
+                    .orderBy('timestamp',descending: true).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                    return
+                      Container();
+                  } else {
+                    return new ListView.builder(
+                        scrollDirection :Axis.horizontal,
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot ds = snapshot.data.docs[index];
+                          return TagItem(
+                            Id: ds['prodId'],
+                            ownerId: ds['ownerId'],
+                            name: ds['name'],
+                            usd: ds['usd'],
+                            inr: ds['inr'],
+                            eur: ds['eur'],
+                            gbp: ds['gbp'],
+                            taggerId : ds['taggerId'],
+                            taggerImg : ds['taggerImg'],
+                            taggerName : ds['taggerName'],
+                            taggerCurrency : ds['taggerCurrency'],
+                            TaggerProdId: ds['prodId'],
+                            TaggerOwnerId: ds['ownerId'],
+                            image: ds['image'],
+                            prodId:postId,
+
+                          );
+                        }
+                    );
+                  }
+                },
+              );
+
+          }
+          viewProducts({String postId}){
+            return  showMaterialModalBottomSheet(
+                context: context,
+                builder: (BuildContext context)
+                {
+
+                  return
+                    Container(   color:Colors.black,    height: MediaQuery.of(context).size.height/2,child:tagView(postId:postId),);
+                });
+          }
+
 
 
 
@@ -2248,7 +2266,7 @@ SimplePollsWidget(
               ),
               SizedBox( height:0.0,),
               GestureDetector(
-                  onDoubleTap: (){handleLikePost(ownerId: ownerId,postId:postId);},
+                  onDoubleTap: (){handleLikePost();},
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -2317,7 +2335,7 @@ SimplePollsWidget(
                   Padding(padding: EdgeInsets.only( left: 20.0)),
 
                   GestureDetector(
-                    onTap: handleLikePost,
+                    onTap:()=>handleLikePost(),
 
                     child: ImageIcon(
                       isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
@@ -2611,11 +2629,6 @@ child:Icon(Icons.poll),
       Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadCommunityPoll(CommunityId:widget.CommunityId)));
 
     },
-  ),
-    SpeedDialChild(
-child:Icon(Icons.play_arrow_outlined),
-    label:'Upload a video',
-    onPressed:(){},
   ),
 
 ]

@@ -278,17 +278,12 @@ class _BlogState extends State<Blog> {
     bool _isLiked = isLiked;
 
     if (_isLiked) {
+
       blogRef
           .doc(ownerId)
           .collection('userBlog')
           .doc(blogId)
-          .collection("likes")
-          .doc(currentUserId).delete();
-      // blogRef
-      //     .doc(ownerId)
-      //     .collection('userBlog')
-      //     .doc(blogId)
-      //     .update({'claps.$currentUserId': false});
+          .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
@@ -296,20 +291,15 @@ class _BlogState extends State<Blog> {
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        // likes[currentUserId] = false;
+        likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
+
       blogRef
           .doc(ownerId)
           .collection('userBlog')
           .doc(blogId)
-          .collection("likes")
-          .doc(currentUserId).set({});
-      // blogRef
-      //     .doc(ownerId)
-      //     .collection('userBlog')
-      //     .doc(blogId)
-      //     .update({'claps.$currentUserId': true});
+          .update({'claps.$currentUserId': true});
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
 
@@ -317,7 +307,7 @@ class _BlogState extends State<Blog> {
       setState(() {
         likeCount += 1;
         isLiked = true;
-        // likes[currentUserId] = true;
+        likes[currentUserId] = true;
 //        showHeart = true;
       });
 //      Timer(Duration(milliseconds: 500), () {
@@ -654,20 +644,9 @@ class _BlogState extends State<Blog> {
 
   @override
   Widget build(BuildContext context) {
-    blogRef
-        .doc(ownerId)
-        .collection('userBlog')
-        .doc(blogId)
-        .collection("likes")
-        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
-      blogRef
-        .doc(ownerId)
-        .collection('userBlog')
-        .doc(blogId)
-        .collection("likes")
-          .get().then((doc) => doc.docs.length=likeCount);
 
-    // isLiked = (likes[currentUserId] == true);
+
+    isLiked = (likes[currentUserId] == true);
      randomTag1 = (hashTags.toList()..shuffle()).first;
      randomTag2 = (hashTags.toList()..shuffle()).last;
     usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});

@@ -241,16 +241,11 @@ final String photoUrl;
     bool _isLiked = isLiked;
 
     if (_isLiked) {
+
       collRef
-          .doc(ownerId)
-          .collection('userCollections')
+
           .doc(collId)
-          .collection("likes")
-          .doc(currentUserId).delete();
-      // collRef
-      //
-      //     .doc(collId)
-      //     .update({'claps.$currentUserId': false});
+          .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
@@ -258,15 +253,13 @@ final String photoUrl;
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        // likes[currentUserId] = false;
+        likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       collRef
-          .doc(ownerId)
-          .collection('userCollections')
+
           .doc(collId)
-          .collection("likes")
-          .doc(currentUserId).set({});
+          .update({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
@@ -274,7 +267,7 @@ final String photoUrl;
       setState(() {
         likeCount += 1;
         isLiked = true;
-        // likes[currentUserId] = true;
+        likes[currentUserId] = true;
       });
     }
   }
@@ -768,20 +761,8 @@ buildPostHeader(CTX) {
 
   @override
   Widget build(BuildContext context) {
-    collRef
-        .doc(ownerId)
-        .collection('userCollections')
-        .doc(collId)
-        .collection("likes")
-        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
-        collRef
-        .doc(ownerId)
-        .collection('userCollections')
-        .doc(collId)
-        .collection("likes")
-            .get().then((doc) => doc.docs.length=likeCount);
 
-    // isLiked = (likes[currentUserId] == true);
+    isLiked = (likes[currentUserId] == true);
      randomTag1 = (hashTags.toList()..shuffle()).first;
      randomTag2 = (hashTags.toList()..shuffle()).last;
     usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});

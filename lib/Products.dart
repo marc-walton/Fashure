@@ -10581,17 +10581,12 @@ backgroundColor: Colors.black,
     bool _isFav = isfav;
 
     if(!_isFav) {
+
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .collection("likes")
-          .doc(currentUserId).set({});
-      // productsRef
-      //     .doc(ownerId)
-      //     .collection('userProducts')
-      //     .doc(prodId)
-      //     .update({'likes.$currentUserId': true});
+          .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
@@ -10615,20 +10610,15 @@ backgroundColor: Colors.black,
       setState(() {
 
         isfav = true;
-        // likes[currentUserId] = true;
+        likes[currentUserId] = true;
       });
     } else if (_isFav) {
+
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .collection("likes")
-          .doc(currentUserId).delete();
-      // productsRef
-      //     .doc(ownerId)
-      //     .collection('userProducts')
-      //     .doc(prodId)
-      //     .update({'likes.$currentUserId': false});
+          .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
       usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
@@ -10638,7 +10628,7 @@ backgroundColor: Colors.black,
       setState(() {
 
         isfav = false;
-        // likes[currentUserId] = false;
+        likes[currentUserId] = false;
       });
     }
 
@@ -10687,20 +10677,9 @@ backgroundColor: Colors.black,
 
   @override
   Widget build(BuildContext context) {
-    productsRef
-        .doc(ownerId)
-        .collection('userProducts')
-        .doc(prodId)
-        .collection("likes")
-        .doc(currentUserId).get().then((doc) => doc.exists?isfav=true:false);
-        productsRef
-        .doc(ownerId)
-        .collection('userProducts')
-        .doc(prodId)
-        .collection("likes")
-            .get().then((doc) => doc.docs.length=likeCount);
 
-    // isfav = (likes[currentUserId] == true);
+
+    isfav = (likes[currentUserId] == true);
      randomTag1 = (hashTags.toList()..shuffle()).first;
      randomTag2 = (hashTags.toList()..shuffle()).last;
     usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});

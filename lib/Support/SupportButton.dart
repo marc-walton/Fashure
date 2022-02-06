@@ -130,7 +130,7 @@ class _SupportButtonState extends State<SupportButton> {
 
               children: [
                 Icon(Icons.paid_outlined,color: Colors.green,),
-                Text("Support"),
+                // Text("Support"),
               ],
             ),
 

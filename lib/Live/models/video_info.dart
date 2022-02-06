@@ -15,13 +15,13 @@ class VideoInfo {
   String currency;
    String description;
    String location;
-
+Map likes;
   VideoInfo(
       {this.mediaUrl,
         this.thumbUrl,
         // this.coverUrl,
         // this.aspectRatio,
-        // this.timestamp,
+        this.likes,
         this.postId,
         this.hashTags,
         this.hasHashTags,
@@ -36,7 +36,7 @@ class VideoInfo {
     return VideoInfo(
       mediaUrl: doc.data()['mediaUrl'],
       thumbUrl: doc.data()['thumbUrl'],
-      // aspectRatio: doc.data()['aspectRatio'],
+      likes: doc.data()['likes'],
       // timestamp: doc.data()['timestamp'],
       postId: doc.data()['postId'],
       hashTags: doc.data()['hashTags'],

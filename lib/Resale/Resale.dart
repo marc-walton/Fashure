@@ -553,17 +553,12 @@ shipBool = currentUser.country == country?freeship:freeworldship;
     bool _isLiked = isLiked;
 
     if (_isLiked) {
+
       FirebaseFirestore.instance.collection('Resale')
           .doc(ownerId)
           .collection('userResale')
-          .doc(ownerId)
-          .collection("likes")
-          .doc(currentUserId).delete();
-      // FirebaseFirestore.instance.collection('Resale')
-      //     .doc(ownerId)
-      //     .collection('userResale')
-      //     .doc(resaleId)
-      //     .update({'likes.$currentUserId': false});
+          .doc(resaleId)
+          .update({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
       var docReference = favRef.doc(currentUser.id).collection("userWishlist").doc(resaleId);
       docReference.delete();
@@ -573,20 +568,15 @@ shipBool = currentUser.country == country?freeship:freeworldship;
       setState(() {
         likeCount -= 1;
         isLiked = false;
-        // likes[currentUserId] = false;
+        likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
+
       FirebaseFirestore.instance.collection('Resale')
           .doc(ownerId)
           .collection('userResale')
-          .doc(ownerId)
-          .collection("likes")
-          .doc(currentUserId).set({});
-      // FirebaseFirestore.instance.collection('Resale')
-      //     .doc(ownerId)
-      //     .collection('userResale')
-      //     .doc(resaleId)
-      //     .update({'likes.$currentUserId': true});
+          .doc(resaleId)
+          .update({'likes.$currentUserId': true});
       addLikeToActivityFeed();
       favRef.doc(currentUser.id).collection("userWishlist")
           .doc(resaleId)
@@ -610,7 +600,7 @@ shipBool = currentUser.country == country?freeship:freeworldship;
     setState(() {
         likeCount += 1;
         isLiked = true;
-        // likes[currentUserId] = true;
+        likes[currentUserId] = true;
 //        showHeart = true;
       });
     }
@@ -1727,20 +1717,8 @@ addingToList(){
 }
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore.instance.collection('Resale')
-        .doc(ownerId)
-        .collection('userResale')
-        .doc(ownerId)
-        .collection("likes")
-        .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
-      FirebaseFirestore.instance.collection('Resale')
-        .doc(ownerId)
-        .collection('userResale')
-        .doc(ownerId)
-        .collection("likes")
-     .get().then((doc) => doc.docs.length=likeCount);
 
-    // isLiked = (likes[currentUserId] == true);
+    isLiked = (likes[currentUserId] == true);
      randomTag1 = (hashTags.toList()..shuffle()).first;
      randomTag2 = (hashTags.toList()..shuffle()).last;
     usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});

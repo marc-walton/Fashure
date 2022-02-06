@@ -997,7 +997,7 @@ List hashTags= documentSnapshot.data()['hashTags'];
 
          String currency= documentSnapshot.data()['currency'];
         String  photoUrl= documentSnapshot.data()['photoUrl'];
-         int likeCount = getLikeCount(this.likes);
+         // int likeCount = getLikeCount(this.likes);
           var option1Total =  documentSnapshot.data()['option1Total'];
           var option2Total =  documentSnapshot.data()['option2Total'];
           var option3Total =  documentSnapshot.data()['option3Total'];
@@ -1014,23 +1014,242 @@ List Voters =  documentSnapshot.data()['Voters'];
 var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
 
-          postsRef
-              .doc(ownerId)
-              .collection('userPosts')
-              .doc(postId)
-              .collection("likes")
-              .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
-          postsRef
-              .doc(ownerId)
-              .collection('userPosts')
-              .doc(postId)
-              .collection("likes")
-              .get().then((doc) => doc.docs.length=likeCount);
-          // isLiked = (likes[currentUserId] == true);
+          isLiked = (likes[currentUserId] == true);
          var randomTag1 = (hashTags.toList()..shuffle()).first;
          var randomTag2 = (hashTags.toList()..shuffle()).last;
 
+          int getLikeCount(likes) {
+            //if no likesm return 0
+            if (likes == null) {
+              return 0;
+            }
+            int count = 0;
+            // if the key is explicitly set to true, add a like
+            likes.values.forEach((val) {
+              if (val == true) {
+                count += 1;
+              }
+            });
+            return count;
+          }
+          deletePost({String postId,String ownerId}) async {
+            // delete post itself
+            postsRef
+                .doc(ownerId)
+                .collection('userPosts')
+                .doc(postId)
+                .get()
+                .then((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+            // delete uploaded image for the post
+//    storageRef.child("postnow${postId}").delete();
 
+            for ( var imageFile in mediaUrl) {
+              var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+              await photo.delete();}
+            // then delete all activity feed notifications
+            QuerySnapshot activityFeedSnapshot = await activityFeedRef
+                .doc(ownerId)
+                .collection("feedItems")
+                .where('postId', isEqualTo: postId)
+                .get();
+            activityFeedSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+            // then delete all comments
+            QuerySnapshot commentsSnapshot = await commentsRef
+                .doc(postId)
+                .collection('comments')
+                .get();
+            commentsSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+          }
+
+          addLikeToActivityFeed({String postId,String ownerId}) {
+            // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .set({
+                "type": "like",
+                "username": currentUser.displayName,
+                "userId": currentUser.id,
+                "userProfileImg": currentUser.photoUrl,
+                "postId": postId,
+                "mediaUrl": mediaUrl,
+                "timestamp": timestamp,
+                "read": 'false',
+              });
+            }
+          }
+
+          removeLikeFromActivityFeed({String postId,String ownerId}) {
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .get()
+                  .then((doc) {
+                if (doc.exists) {
+                  doc.reference.delete();
+                }
+              });
+            }
+          }
+          report({String postId,String ownerId}){
+            Fluttertoast.showToast(
+                msg: "Your report has been submitted", timeInSecForIos: 4);
+            FirebaseFirestore.instance.collection('reports')
+                .doc(ownerId)
+                .collection("userReports")
+                .doc(postId)
+                .set({
+              "type": "post",
+              "userId": ownerId,
+              "postId": postId,
+              "timestamp": timestamp,
+            });
+          }
+          tagView({String postId,String ownerId}){
+            return
+              StreamBuilder(
+                stream:  postsRef
+                    .doc(ownerId)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .collection("tags")
+                    .orderBy('timestamp',descending: true).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                    return
+                      Container(child: Text("sjdvclskbcskcbaskcaskcbasdc$ownerId$postId"),);
+                  } else {
+                    return new ListView.builder(
+                        scrollDirection :Axis.horizontal,
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot ds = snapshot.data.docs[index];
+                          return TagItem(
+                            Id: ds['prodId'],
+                            ownerId: ds['ownerId'],
+                            name: ds['name'],
+                            usd: ds['usd'],
+                            inr: ds['inr'],
+                            eur: ds['eur'],
+                            gbp: ds['gbp'],
+                            taggerId : ds['taggerId'],
+                            taggerImg : ds['taggerImg'],
+                            taggerName : ds['taggerName'],
+                            taggerCurrency : ds['taggerCurrency'],
+                            TaggerProdId: ds['prodId'],
+                            TaggerOwnerId: ds['ownerId'],
+                            image: ds['image'],
+                            prodId:postId,
+
+                          );
+                        }
+                    );
+                  }
+                },
+              );
+
+          }
+          viewProducts({String postId,String ownerId}){
+            return  showMaterialModalBottomSheet(
+                context: context,
+                builder: (BuildContext context)
+                {
+
+                  return
+                    Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
+                });
+          }
+          handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
+            return showDialog(
+
+                context: parentContext,
+                builder: (context) {
+                  return ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                    child: SimpleDialog(
+
+                      backgroundColor: kSecondaryColor,
+                      title: Text("Remove this post?",style: TextStyle(color: kText),),
+                      children: <Widget>[
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            deletePost(postId:postId,ownerId:ownerId);
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        SimpleDialogOption(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('Cancel',
+                            style: TextStyle(color: Colors.white),),
+                        )
+                      ],
+                    ),
+                  );
+                });
+          }
+
+// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
+
+          handleLikePost({String postId,String ownerId,var randomTag1,var randomTag2}) {
+            bool _isLiked = isLiked;
+            if (_isLiked) {
+
+              postsRef
+                  .doc(ownerId)
+                  .collection('userPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': false});
+              removeLikeFromActivityFeed();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
+              setState(() {
+                likeCount -= 1;
+                isLiked = false;
+                likes[currentUserId] = false;
+              });
+            }
+            else if (!_isLiked) {
+
+              postsRef
+                  .doc(ownerId)
+                  .collection('userPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': true});
+              addLikeToActivityFeed();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
+              setState(() {
+                likeCount += 1;
+                isLiked = true;
+                likes[currentUserId] = true;
+//        showHeart = true;
+              });
+            }
+          }
           return    type == 'Poll'?Column(children:[
             ListTile(
               leading: GestureDetector(
@@ -1898,9 +2117,9 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
   String location;
   String description;
   List mediaUrl;
-  int likeCount;
+  int likeCount = 0;
   Map likes ;
-  bool isLiked ;
+  bool isLiked = false;
   bool showHeart = false;
   List <Widget>listOfImages = <Widget>[];
   String media;
@@ -2050,249 +2269,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           });
 
   }
-  int getLikeCount(likes) {
-    //if no likesm return 0
-    if (likes == null) {
-      return 0;
-    }
-    int count = 0;
-    // if the key is explicitly set to true, add a like
-    likes.values.forEach((val) {
-      if (val == true) {
-        count += 1;
-      }
-    });
-    return count;
-  }
 
-  handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
-    return showDialog(
-
-        context: parentContext,
-        builder: (context) {
-          return ClipRRect(borderRadius: BorderRadius.circular(20.0),
-            child: SimpleDialog(
-
-              backgroundColor: kSecondaryColor,
-              title: Text("Remove this post?",style: TextStyle(color: kText),),
-              children: <Widget>[
-                SimpleDialogOption(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    deletePost(postId:postId,ownerId:ownerId);
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-                SimpleDialogOption(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel',
-                    style: TextStyle(color: Colors.white),),
-                )
-              ],
-            ),
-          );
-        });
-  }
-
-// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
-  deletePost({String postId,String ownerId}) async {
-    // delete post itself
-    postsRef
-        .doc(ownerId)
-        .collection('userPosts')
-        .doc(postId)
-        .get()
-        .then((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-    // delete uploaded image for the post
-//    storageRef.child("postnow${postId}").delete();
-
-    for ( var imageFile in mediaUrl) {
-      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
-      await photo.delete();}
-    // then delete all activity feed notifications
-    QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
-        .collection("feedItems")
-        .where('postId', isEqualTo: postId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-    // then delete all comments
-    QuerySnapshot commentsSnapshot = await commentsRef
-        .doc(postId)
-        .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
-  }
-
-  handleLikePost({String postId,String ownerId,var randomTag1,var randomTag2}) {
-    bool _isLiked = isLiked;
-    if (_isLiked) {
-      postsRef
-          .doc(ownerId)
-          .collection('userPosts')
-          .doc(postId)
-          .collection("likes")
-          .doc(currentUserId).delete();
-      // postsRef
-      //     .doc(ownerId)
-      //     .collection('userPosts')
-      //     .doc(postId)
-      //     .update({'likes.$currentUserId': false});
-      removeLikeFromActivityFeed();
-      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
-      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
-
-      setState(() {
-        likeCount -= 1;
-        isLiked = false;
-        // likes[currentUserId] = false;
-      });
-    }
-    else if (!_isLiked) {
-      postsRef
-          .doc(ownerId)
-          .collection('userPosts')
-          .doc(postId)
-          .collection("likes")
-          .doc(currentUserId).set({});
-      // postsRef
-      //     .doc(ownerId)
-      //     .collection('userPosts')
-      //     .doc(postId)
-      //     .update({'likes.$currentUserId': true});
-      addLikeToActivityFeed();
-      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
-      usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
-
-      setState(() {
-        likeCount += 1;
-        isLiked = true;
-        // likes[currentUserId] = true;
-//        showHeart = true;
-      });
-    }
-  }
-
-  addLikeToActivityFeed({String postId,String ownerId}) {
-    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
-    bool isNotPostOwner = currentUserId != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .set({
-        "type": "like",
-        "username": currentUser.displayName,
-        "userId": currentUser.id,
-        "userProfileImg": currentUser.photoUrl,
-        "postId": postId,
-        "mediaUrl": mediaUrl.first,
-        "timestamp": timestamp,
-        "read": 'false',
-      });
-    }
-  }
-
-  removeLikeFromActivityFeed({String postId,String ownerId}) {
-    bool isNotPostOwner = currentUserId != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .get()
-          .then((doc) {
-        if (doc.exists) {
-          doc.reference.delete();
-        }
-      });
-    }
-  }
-  report({String postId,String ownerId}){
-    Fluttertoast.showToast(
-        msg: "Your report has been submitted", timeInSecForIos: 4);
-    FirebaseFirestore.instance.collection('reports')
-        .doc(ownerId)
-        .collection("userReports")
-        .doc(postId)
-        .set({
-      "type": "post",
-      "userId": ownerId,
-      "postId": postId,
-      "timestamp": timestamp,
-    });
-  }
-  tagView({String postId,String ownerId}){
-    return
-      StreamBuilder(
-        stream:  postsRef
-            .doc(ownerId)
-            .collection("userPosts")
-            .doc(postId)
-            .collection("tags")
-            .orderBy('timestamp',descending: true).snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-            return
-              Container(child: Text("sjdvclskbcskcbaskcaskcbasdc$ownerId$postId"),);
-          } else {
-            return new ListView.builder(
-                scrollDirection :Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.docs[index];
-                  return TagItem(
-                    Id: ds['prodId'],
-                    ownerId: ds['ownerId'],
-                    name: ds['name'],
-                    usd: ds['usd'],
-                    inr: ds['inr'],
-                    eur: ds['eur'],
-                    gbp: ds['gbp'],
-                    taggerId : ds['taggerId'],
-                    taggerImg : ds['taggerImg'],
-                    taggerName : ds['taggerName'],
-                    taggerCurrency : ds['taggerCurrency'],
-                    TaggerProdId: ds['prodId'],
-                    TaggerOwnerId: ds['ownerId'],
-                    image: ds['image'],
-                    prodId:postId,
-
-                  );
-                }
-            );
-          }
-        },
-      );
-
-  }
-  viewProducts({String postId,String ownerId}){
-    return  showMaterialModalBottomSheet(
-        context: context,
-        builder: (BuildContext context)
-        {
-
-          return
-            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
-        });
-  }
   getFfollowing() async {
     QuerySnapshot snapshot = await followingRef
         .doc(currentUser.id)
@@ -2322,10 +2299,11 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
           Map likes= documentSnapshot.data()['likes'];
           bool isLiked = likes[currentUserId] == true;
-
+          // bool isLiked ;
+          // int likeCount ;
           String currency= documentSnapshot.data()['currency'];
           String  photoUrl= documentSnapshot.data()['photoUrl'];
-          int likeCount = getLikeCount(this.likes);
+          // int likeCount = getLikeCount(this.likes);
           List hashTags  =  documentSnapshot.data()['hashTags'];
 
           var option1Total =  documentSnapshot.data()['option1Total'];
@@ -2343,21 +2321,242 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           List Voters =  documentSnapshot.data()['Voters'];
           var total =  documentSnapshot.data()['total'];
           String type =  documentSnapshot.data()['type'];
-          postsRef
-              .doc(ownerId)
-              .collection('userPosts')
-              .doc(postId)
-              .collection("likes")
-              .doc(currentUserId).get().then((doc) => doc.exists?isLiked=true:false);
-          postsRef
-              .doc(ownerId)
-              .collection('userPosts')
-              .doc(postId)
-              .collection("likes")
-              .get().then((doc) => doc.docs.length=likeCount);
-          // isLiked = (likes[currentUserId] == true);
+
+          isLiked = (likes[currentUserId] == true);
         var  randomTag1 = (hashTags.toList()..shuffle()).first;
         var  randomTag2 = (hashTags.toList()..shuffle()).last;
+          int getLikeCount(likes) {
+            //if no likesm return 0
+            if (likes == null) {
+              return 0;
+            }
+            int count = 0;
+            // if the key is explicitly set to true, add a like
+            likes.values.forEach((val) {
+              if (val == true) {
+                count += 1;
+              }
+            });
+            return count;
+          }
+          deletePost({String postId,String ownerId}) async {
+            // delete post itself
+            postsRef
+                .doc(ownerId)
+                .collection('userPosts')
+                .doc(postId)
+                .get()
+                .then((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+            // delete uploaded image for the post
+//    storageRef.child("postnow${postId}").delete();
+
+            for ( var imageFile in mediaUrl) {
+              var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+              await photo.delete();}
+            // then delete all activity feed notifications
+            QuerySnapshot activityFeedSnapshot = await activityFeedRef
+                .doc(ownerId)
+                .collection("feedItems")
+                .where('postId', isEqualTo: postId)
+                .get();
+            activityFeedSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+            // then delete all comments
+            QuerySnapshot commentsSnapshot = await commentsRef
+                .doc(postId)
+                .collection('comments')
+                .get();
+            commentsSnapshot.docs.forEach((doc) {
+              if (doc.exists) {
+                doc.reference.delete();
+              }
+            });
+          }
+
+          addLikeToActivityFeed({String postId,String ownerId}) {
+            // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .set({
+                "type": "like",
+                "username": currentUser.displayName,
+                "userId": currentUser.id,
+                "userProfileImg": currentUser.photoUrl,
+                "postId": postId,
+                "mediaUrl": mediaUrl,
+                "timestamp": timestamp,
+                "read": 'false',
+              });
+            }
+          }
+
+          removeLikeFromActivityFeed({String postId,String ownerId}) {
+            bool isNotPostOwner = currentUserId != ownerId;
+            if (isNotPostOwner) {
+              activityFeedRef
+                  .doc(ownerId)
+                  .collection("feedItems")
+                  .doc(postId)
+                  .get()
+                  .then((doc) {
+                if (doc.exists) {
+                  doc.reference.delete();
+                }
+              });
+            }
+          }
+          report({String postId,String ownerId}){
+            Fluttertoast.showToast(
+                msg: "Your report has been submitted", timeInSecForIos: 4);
+            FirebaseFirestore.instance.collection('reports')
+                .doc(ownerId)
+                .collection("userReports")
+                .doc(postId)
+                .set({
+              "type": "post",
+              "userId": ownerId,
+              "postId": postId,
+              "timestamp": timestamp,
+            });
+          }
+          tagView({String postId,String ownerId}){
+            return
+              StreamBuilder(
+                stream:  postsRef
+                    .doc(ownerId)
+                    .collection("userPosts")
+                    .doc(postId)
+                    .collection("tags")
+                    .orderBy('timestamp',descending: true).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                    return
+                      Container(child: Text("sjdvclskbcskcbaskcaskcbasdc$ownerId$postId"),);
+                  } else {
+                    return new ListView.builder(
+                        scrollDirection :Axis.horizontal,
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot ds = snapshot.data.docs[index];
+                          return TagItem(
+                            Id: ds['prodId'],
+                            ownerId: ds['ownerId'],
+                            name: ds['name'],
+                            usd: ds['usd'],
+                            inr: ds['inr'],
+                            eur: ds['eur'],
+                            gbp: ds['gbp'],
+                            taggerId : ds['taggerId'],
+                            taggerImg : ds['taggerImg'],
+                            taggerName : ds['taggerName'],
+                            taggerCurrency : ds['taggerCurrency'],
+                            TaggerProdId: ds['prodId'],
+                            TaggerOwnerId: ds['ownerId'],
+                            image: ds['image'],
+                            prodId:postId,
+
+                          );
+                        }
+                    );
+                  }
+                },
+              );
+
+          }
+          viewProducts({String postId,String ownerId}){
+            return  showMaterialModalBottomSheet(
+                context: context,
+                builder: (BuildContext context)
+                {
+
+                  return
+                    Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
+                });
+          }
+          handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
+            return showDialog(
+
+                context: parentContext,
+                builder: (context) {
+                  return ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                    child: SimpleDialog(
+
+                      backgroundColor: kSecondaryColor,
+                      title: Text("Remove this post?",style: TextStyle(color: kText),),
+                      children: <Widget>[
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            deletePost(postId:postId,ownerId:ownerId);
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        SimpleDialogOption(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('Cancel',
+                            style: TextStyle(color: Colors.white),),
+                        )
+                      ],
+                    ),
+                  );
+                });
+          }
+
+// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
+
+          handleLikePost({String postId,String ownerId,var randomTag1,var randomTag2}) {
+            bool _isLiked = isLiked;
+            if (_isLiked) {
+
+              postsRef
+                  .doc(ownerId)
+                  .collection('userPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': false});
+              removeLikeFromActivityFeed();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).delete();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).delete();
+
+              setState(() {
+                likeCount -= 1;
+                isLiked = false;
+                likes[currentUserId] = false;
+              });
+            }
+            else if (!_isLiked) {
+
+              postsRef
+                  .doc(ownerId)
+                  .collection('userPosts')
+                  .doc(postId)
+                  .update({'likes.$currentUserId': true});
+              addLikeToActivityFeed();
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag1).set({"timestamp":timestamp});
+              usersRef.doc(currentUser.id).collection("hashTags").doc(randomTag2).set({"timestamp":timestamp});
+
+              setState(() {
+                likeCount += 1;
+                isLiked = true;
+                likes[currentUserId] = true;
+//        showHeart = true;
+              });
+            }
+          }
 
 
           return    type == 'Poll'?Column(children:[
@@ -3066,7 +3265,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                   Padding(padding: EdgeInsets.only( left: 20.0)),
 
                   GestureDetector(
-                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId,randomTag1:randomTag1,randomTag2:randomTag2);},
+                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId,randomTag1:randomTag1,randomTag2:randomTag2,);},
 
                     child: ImageIcon(
                       isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
@@ -3166,6 +3365,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
                   Container(
                     child: Text(
+                      // "${likeCount} likes",
                       "${getLikeCount(likes)} likes",
                       style: TextStyle(
                         color: Colors.black,

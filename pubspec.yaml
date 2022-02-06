@@ -136,7 +136,7 @@ dependencies:
 #  flick_video_player: any
   simple_polls:
   flutter_sticky_header:
-  simple_speed_dial:
+#  simple_speed_dial: any
   lazy_loading_list:
   video_compress:
   cached_video_player: ^2.0.0-dev
@@ -151,7 +151,8 @@ dependencies:
 #  textfield_tags: ^1.4.2
 
 
-#dependency_overrides:
+dependency_overrides:
+  simple_speed_dial: ^4.6.6
 #  video_player:
 #    git:
 #      url: git://github.com/syonip/plugins.git

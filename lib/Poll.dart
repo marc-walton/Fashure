@@ -72,14 +72,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class UploadResale extends StatefulWidget {
+class UploadPoll extends StatefulWidget {
 
   @override
-  _UploadResaleState createState() => _UploadResaleState();
+  _UploadPollState createState() => _UploadPollState();
 }
 
-class _UploadResaleState extends State<UploadResale>
-    with AutomaticKeepAliveClientMixin<UploadResale>{
+class _UploadPollState extends State<UploadPoll>
+    with AutomaticKeepAliveClientMixin<UploadPoll>{
   String postId = Uuid().v4();
   bool isUploading = false;
   int optionNos = 2;
