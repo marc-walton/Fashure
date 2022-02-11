@@ -6,7 +6,7 @@ import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Communities/Upload_community.dart';
 import 'package:fashow/Communities/upload_poll.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-import 'package:simple_speed_dial/simple_speed_dial.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fashow/Communities/comments.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
@@ -2613,11 +2613,11 @@ SimplePollsWidget(
         ),
 floatingActionButton:widget.members.contains(currentUser.id)?SpeedDial(
     child:Icon(Icons.add),
-speedDialChildren:<SpeedDialChild>[
+    children:<SpeedDialChild>[
   SpeedDialChild(
 child:Icon(Icons.dynamic_feed_outlined),
     label:'Upload a post',
-    onPressed:(){
+    onTap:(){
       Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadCommunityPost(CommunityId:widget.CommunityId)));
 
     },
@@ -2625,7 +2625,7 @@ child:Icon(Icons.dynamic_feed_outlined),
     SpeedDialChild(
 child:Icon(Icons.poll),
     label:'Upload a poll',
-    onPressed:(){
+      onTap:(){
       Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadCommunityPoll(CommunityId:widget.CommunityId)));
 
     },

@@ -65,6 +65,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -72,12 +80,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -86,9 +94,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -255,6 +265,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -262,12 +280,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -276,9 +294,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -444,6 +464,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -451,12 +479,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -465,9 +493,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -633,6 +663,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -640,12 +678,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -654,9 +692,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -822,6 +862,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -829,12 +877,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -843,9 +891,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1011,6 +1061,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1018,12 +1076,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1032,9 +1090,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1200,6 +1260,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1207,12 +1275,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1221,9 +1289,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1389,6 +1459,14 @@ class _TGEthnicState extends State<TGEthnic> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1396,12 +1474,12 @@ class _TGEthnicState extends State<TGEthnic> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1410,9 +1488,11 @@ class _TGEthnicState extends State<TGEthnic> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(

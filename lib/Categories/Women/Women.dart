@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -106,6 +107,14 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -113,12 +122,12 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -127,9 +136,11 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -66,6 +66,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -73,12 +81,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -87,9 +95,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -264,6 +274,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -271,12 +289,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -285,9 +303,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -461,6 +481,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -468,12 +496,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -482,9 +510,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -657,6 +687,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -664,12 +702,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -678,9 +716,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -855,6 +895,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -862,12 +910,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -876,9 +924,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1052,6 +1102,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1059,12 +1117,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1073,9 +1131,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1249,6 +1309,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1256,12 +1324,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1270,9 +1338,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1444,6 +1514,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1451,12 +1529,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1465,9 +1543,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1638,6 +1718,14 @@ class _AccessoriesState extends State<Accessories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1645,12 +1733,12 @@ class _AccessoriesState extends State<Accessories> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1659,9 +1747,11 @@ class _AccessoriesState extends State<Accessories> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1827,30 +1917,40 @@ class _AccessoriesState extends State<Accessories> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: ownerId),
-                      child:Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(children:[
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage: CachedNetworkImageProvider(photoUrl),
-                            backgroundColor: Colors.grey,
+                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(children:[
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        SizedBox(width: 7.0,),
+                        Text(
+                          user.username,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(width: 7.0,),
-                          Text(
-                            username,
-                            style: TextStyle(
-                              color: kText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
-                      ),
-
+                        ),
+                      ]),
                     ),
 
-                    GestureDetector(
+                  );
+
+              },
+            ),
+GestureDetector(
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(

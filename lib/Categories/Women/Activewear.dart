@@ -65,6 +65,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -72,12 +80,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -86,9 +94,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -249,6 +259,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -256,12 +274,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -270,9 +288,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -433,6 +453,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -440,12 +468,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -454,9 +482,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -617,6 +647,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -624,12 +662,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -638,9 +676,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -801,6 +841,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -808,12 +856,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -822,9 +870,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -985,6 +1035,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -992,12 +1050,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1006,9 +1064,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -1169,6 +1229,14 @@ class _ActiveWearWState extends State<ActiveWearW> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -1176,12 +1244,12 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -1190,9 +1258,11 @@ class _ActiveWearWState extends State<ActiveWearW> {
                       ]),
                     ),
 
-                  ),
+                  );
 
-                  GestureDetector(
+              },
+            ),
+GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(

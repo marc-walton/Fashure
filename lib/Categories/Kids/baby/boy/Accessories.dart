@@ -1,3 +1,5 @@
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
@@ -65,6 +67,14 @@ class _BabyAcBState extends State<BabyAcB> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+              FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -72,12 +82,12 @@ class _BabyAcBState extends State<BabyAcB> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -86,7 +96,10 @@ class _BabyAcBState extends State<BabyAcB> {
                       ]),
                     ),
 
-                  ),
+                  );
+
+              },
+            ),
 
                   GestureDetector(
                     onTap: () => Navigator.push(
@@ -254,6 +267,14 @@ class _BabyAcBState extends State<BabyAcB> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -261,12 +282,12 @@ class _BabyAcBState extends State<BabyAcB> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -275,7 +296,11 @@ class _BabyAcBState extends State<BabyAcB> {
                       ]),
                     ),
 
-                  ),
+                  );
+
+              },
+            ),
+
 
                   GestureDetector(
                     onTap: () => Navigator.push(
@@ -443,6 +468,14 @@ class _BabyAcBState extends State<BabyAcB> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -450,12 +483,12 @@ class _BabyAcBState extends State<BabyAcB> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -464,7 +497,11 @@ class _BabyAcBState extends State<BabyAcB> {
                       ]),
                     ),
 
-                  ),
+                  );
+
+              },
+            ),
+
 
                   GestureDetector(
                     onTap: () => Navigator.push(
@@ -632,6 +669,14 @@ class _BabyAcBState extends State<BabyAcB> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                                FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
                   GestureDetector(
                     onTap: () => showProfile(context, profileId: ownerId),
                     child:Padding(
@@ -639,12 +684,12 @@ class _BabyAcBState extends State<BabyAcB> {
                       child: Row(children:[
                         CircleAvatar(
                           radius: 15,
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
                           backgroundColor: Colors.grey,
                         ),
                         SizedBox(width: 7.0,),
                         Text(
-                          username,
+                          user.username,
                           style: TextStyle(
                             color: kText,
                             fontWeight: FontWeight.bold,
@@ -653,7 +698,11 @@ class _BabyAcBState extends State<BabyAcB> {
                       ]),
                     ),
 
-                  ),
+                  );
+
+              },
+            ),
+
 
                   GestureDetector(
                     onTap: () => Navigator.push(
