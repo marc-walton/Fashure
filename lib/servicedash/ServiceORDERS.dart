@@ -265,21 +265,32 @@ isLive: true,
               child: Card(
                 child: Column(
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: cusId),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(cusProfileImg),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          cusname,
-                          style: TextStyle(
-                            color:kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                    FutureBuilder(
+                      future: usersRef.doc(cusId).get(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return circularProgress();
+                        }
+                        Users user = Users.fromDocument(snapshot.data);
+                        return
+                          GestureDetector(
+                            onTap: () => showProfile(context, profileId: cusId),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                                backgroundColor: Colors.grey,
+                              ),
+                              title: Text(
+                                user.username,
+                                style: TextStyle(
+                                  color: kText,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          );
+
+                      },
                     ),
 
                     df(productname:title,
@@ -351,21 +362,33 @@ String description = documentSnapshot.data()['description'];
             return Card(
               child: Column(
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: cusId),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(cusProfileImg),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        cusname,
-                        style: TextStyle(
-                          color:kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+
+                  FutureBuilder(
+                    future: usersRef.doc(cusId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: cusId),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+
+                    },
                   ),
 
                   df(productname:title,

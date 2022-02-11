@@ -12,6 +12,7 @@ import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/model/hashTag_screen.dart';
+import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -966,65 +967,76 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                     ],
                   ),
                 ),
+                FutureBuilder(
+                  future: usersRef.doc(ownerId).get(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return circularProgress();
+                    }
+                    Users user = Users.fromDocument(snapshot.data);
+                    return
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: ownerId),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text(
+                            user.username,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
 
-                GestureDetector(
-                  onTap: () => showProfile(context, profileId: ownerId),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                    title: Text(
-                      username,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                        onPressed: () {
-                          !isPostOwner?showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  backgroundColor: kSecondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(20.0)), //this right here
-                                  child: GestureDetector(
-                                    onTap: (){report();
-                                    Navigator.pop(context);},
-                                    child: Container(
-                                      height: 100,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: Text('Report this post?',style: TextStyle(
-                                                      color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.0),)),),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
 
-                                          ],
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                                // ignore: unnecessary_statements
-                              }):handleDeletePost(context);
-                        }),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
 
-                  ),
+                        ),
+                      );
+
+                  },
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[

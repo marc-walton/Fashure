@@ -9,8 +9,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 
-import 'package:fashow/Product_screen.dart';
-import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/Categories/Men/Accessories.dart';

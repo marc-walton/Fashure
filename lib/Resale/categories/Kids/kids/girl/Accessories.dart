@@ -8,8 +8,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 
-import 'package:fashow/Product_screen.dart';
-import 'package:fashow/Categories/Kids/kids/girl/hats.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:fashow/Categories/Kids/kids/girl/hats.dart';
 import 'package:fashow/Categories/Kids/kids/girl/hair.dart';
 import 'package:fashow/Categories/Kids/kids/girl/bags.dart';
 import 'package:fashow/Categories/Kids/kids/girl/braces.dart';

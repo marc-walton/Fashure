@@ -484,69 +484,79 @@ class _PostState extends State<Post> {
       margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
       child: Column(
         children:  <Widget> [
-          ListTile(
-            leading: GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
+          FutureBuilder(
+            future: usersRef.doc(ownerId).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return circularProgress();
+              }
+              Users user = Users.fromDocument(snapshot.data);
+              return
+                GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child:    ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                      backgroundColor: Colors.grey,
+                    ),
+                    title: Text(
+                      user.username,
+                      style: TextStyle(
+                        color:  kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(location,
+                      style: TextStyle(color: kText),),
 
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(photoUrl),
-                backgroundColor: Colors.grey,
-              ),
-            ),
-            title: GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
-              child: Text(
-                username,
-                style: TextStyle(
-                  color: kText,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            subtitle: Text(location,
-              style: TextStyle(color: kText),),
-            trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                onPressed: () {
-                  !isPostOwner?showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: kSecondaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0)), //this right here
-                          child: GestureDetector(
-                            onTap: (){report();
-                            Navigator.pop(context);},
-                            child: Container(
-                              height: 100,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
+                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                        onPressed: () {
+                          !isPostOwner?showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: kSecondaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(20.0)), //this right here
+                                  child: GestureDetector(
+                                    onTap: (){report();
+                                    Navigator.pop(context);},
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
 
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text('Report this post?',style: TextStyle(
-                                              color: Colors.blueAccent,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20.0),)),),
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
 
 
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                        // ignore: unnecessary_statements
-                      }):handleDeletePost(context);
-                }),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                // ignore: unnecessary_statements
+                              }):handleDeletePost(context);
+                        }),
 
+                  ),
+                );
+
+
+            },
           ),
+
           SizedBox( height:0.0,),
           GestureDetector(
               onDoubleTap: handleLikePost,

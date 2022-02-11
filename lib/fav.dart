@@ -175,25 +175,36 @@ class CartItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
-            ListTile(
-              leading: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
-                child: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-              ),
-              title: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
-                child: Text(
-                  username,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:    ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.username,
+                        style: TextStyle(
+                          color:  kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                    ),
+                  );
+
+
+              },
             ),
+
             GestureDetector(
               onTap: () => showProduct(context),
               child: Stack(

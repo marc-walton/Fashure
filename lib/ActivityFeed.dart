@@ -14,6 +14,7 @@ import 'package:fashow/collscreen.dart';
 import 'package:fashow/invoiceview.dart';
 import 'package:fashow/page_view/chatlist.dart';
 import 'package:fashow/servicedash/ServiceDash.dart';
+import 'package:fashow/user.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -895,12 +896,24 @@ else if (type == 'fav'||type == 'resaleLike') {
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -941,12 +954,24 @@ child:CircleAvatar(
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -988,12 +1013,24 @@ payent(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1035,12 +1072,24 @@ paymentA(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1081,12 +1130,24 @@ paymentOA(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1128,12 +1189,24 @@ Auction(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1174,12 +1247,24 @@ blog(ParentContext){
                     ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1221,12 +1306,24 @@ collection(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1268,12 +1365,24 @@ payo(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1315,12 +1424,24 @@ prod(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1370,12 +1491,24 @@ resale(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1419,12 +1552,24 @@ child:CircleAvatar(
                     ]),
                 ),
               ),
-              leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+              leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1466,12 +1611,24 @@ ReqPaymentI(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1513,12 +1670,24 @@ child:CircleAvatar(
                     ]),
                 ),
               ),
-              leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+              leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1560,12 +1729,24 @@ ReviewO(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1607,12 +1788,24 @@ child:CircleAvatar(
                     ]),
                 ),
               ),
-              leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+              leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1655,12 +1848,24 @@ ServicePayment(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1703,12 +1908,24 @@ Commission(ParentContext){
                   ]),
               ),
             ),
-            leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1865,12 +2082,24 @@ child:CircleAvatar(
                      ]),
                  ),
                ),
-               leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+               leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
                subtitle: Text(
                  timeago.format(timestamp.toDate()),
                  overflow: TextOverflow.ellipsis,
@@ -1911,12 +2140,24 @@ child:CircleAvatar(
                      ]),
                  ),
                ),
-               leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+               leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
                subtitle: Text(
                  timeago.format(timestamp.toDate()),
                  overflow: TextOverflow.ellipsis,
@@ -1957,12 +2198,24 @@ child:CircleAvatar(
                      ]),
                  ),
                ),
-               leading: GestureDetector(
-              onTap: () => showProfile(ParentContext,profileId: userId),
-child:CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+               leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
             ),
-),
+                        );
+
+                    },
+                  ),
+
                subtitle: Text(
                  timeago.format(timestamp.toDate()),
                  overflow: TextOverflow.ellipsis,
@@ -2003,12 +2256,24 @@ child:CircleAvatar(
                     ]),
                 ),
               ),
-              leading: GestureDetector(
-                onTap: () => showProfile(ParentContext,profileId: userId),
-                child:CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(userProfileImg),
-                ),
-              ),
+              leading:                   FutureBuilder(
+                    future: usersRef.doc(userId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: userId),
+                          child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+            ),
+                        );
+
+                    },
+                  ),
+
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,

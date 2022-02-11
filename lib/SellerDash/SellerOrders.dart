@@ -73,22 +73,35 @@ String productname = documentSnapshot.data()['productname'];
               child: Column(
                 mainAxisAlignment:MainAxisAlignment.start,
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: cusId),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(cusImg),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        cusName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                  FutureBuilder(
+                    future: usersRef.doc(cusId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: cusId),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+
+                    },
                   ),
+
+
                   Column(
                     children: [
                       ListTile(
@@ -344,22 +357,34 @@ isLive: true,
                 mainAxisAlignment:MainAxisAlignment.start,
 
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: cusId),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(cusImg),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        cusName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                  FutureBuilder(
+                    future: usersRef.doc(cusId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: cusId),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+
+                    },
                   ),
+
                   ListTile(
 
 

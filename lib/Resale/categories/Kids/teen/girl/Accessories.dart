@@ -11,8 +11,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 
-import 'package:fashow/Product_screen.dart';
-import 'package:fashow/Categories/Kids/teen/girl/hair.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:fashow/Categories/Kids/teen/girl/hair.dart';
 import 'package:fashow/Categories/Kids/teen/girl/hats.dart';
 import 'package:fashow/Categories/Kids/teen/girl/bags.dart';
 import 'package:fashow/Categories/Kids/teen/girl/braces.dart';

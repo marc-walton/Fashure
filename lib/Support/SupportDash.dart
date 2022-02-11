@@ -7,8 +7,10 @@ import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/progress.dart';
 import 'package:fashow/servicedash/ServiceORDERS.dart';
 import 'package:fashow/servicedash/Payments_service.dart';
+import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
@@ -46,21 +48,32 @@ class _SupportDashState extends State<SupportDash> {
                 mainAxisAlignment:MainAxisAlignment.start,
 
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(userProfileImg),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        username,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                  FutureBuilder(
+                    future: usersRef.doc(ownerId).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: ownerId),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+
+                    },
                   ),
                   ListTile(
 

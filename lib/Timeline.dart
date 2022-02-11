@@ -451,25 +451,36 @@ class Collections extends StatelessWidget {
                     ],
                   ),
                 ),
-        ListTile(
-        leading: GestureDetector(
-        onTap: () => showProfile(context, profileId: ownerId),
-        child: CircleAvatar(
-        backgroundImage: CachedNetworkImageProvider(photoUrl),
-        backgroundColor: Colors.grey,
-        ),
-        ),
-        title: GestureDetector(
-        onTap: () => showProfile(context, profileId: ownerId),
-        child: Text(
-        username,
-        style: TextStyle(
-        color: kText,
-        fontWeight: FontWeight.bold,
-        ),
-        ),
-        ),
-        ),
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: ownerId),
+                      child:    ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.username,
+                          style: TextStyle(
+                            color:  kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+
+                      ),
+                    );
+
+
+                },
+              ),
 
               ],
             ),
@@ -528,29 +539,37 @@ class Blogs extends StatelessWidget {
                     ),
 
                   ),
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                  FutureBuilder(
+                    future: usersRef.doc(documentSnapshot.data()['ownerId']).get(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return circularProgress();
+                      }
+                      Users user = Users.fromDocument(snapshot.data);
+                      return
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                          child:    ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.username,
+                              style: TextStyle(
+                                color:  kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
 
-                    child: ListTile(
-                      leading: GestureDetector(
-                        onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                        child: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
-                          backgroundColor: Colors.grey,
-                        ),
-                      ),
-                      title: GestureDetector(
-                        onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                        child: Text(
-                          documentSnapshot.data()['username'],
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
+
                           ),
-                        ),
-                      ),
-                    ),
+                        );
+
+
+                    },
                   ),
+
           ],
 
           ),
@@ -1109,7 +1128,7 @@ var total =  documentSnapshot.data()['total'];
               });
             }
           }
-          report({String postId,String ownerId}){
+          report(){
             Fluttertoast.showToast(
                 msg: "Your report has been submitted", timeInSecForIos: 4);
             FirebaseFirestore.instance.collection('reports')
@@ -1251,69 +1270,77 @@ var total =  documentSnapshot.data()['total'];
             }
           }
           return    type == 'Poll'?Column(children:[
-            ListTile(
-              leading: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
+            FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:    ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.username,
+                        style: TextStyle(
+                          color:  kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
 
-                child: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-              ),
-              title: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
-                child: Text(
-                  username,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              subtitle: Text(location,
-                style: TextStyle(color: kText),),
-              trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                  onPressed: () {
-                    !isPostOwner?showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            backgroundColor: kSecondaryColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(20.0)), //this right here
-                            child: GestureDetector(
-                              onTap: (){report();
-                              Navigator.pop(context);},
-                              child: Container(
-                                height: 100,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
+                      subtitle: Text(location,
+                        style: TextStyle(color: kText),),
+                      trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                          onPressed: () {
+                            !isPostOwner?showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: kSecondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20.0)), //this right here
+                                    child: GestureDetector(
+                                      onTap: (){report();
+                                      Navigator.pop(context);},
+                                      child: Container(
+                                        height: 100,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
 
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text('Report this post?',style: TextStyle(
-                                                color: Colors.blueAccent,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20.0),)),),
+                                                child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text('Report this post?',style: TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 20.0),)),),
 
 
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                          // ignore: unnecessary_statements
-                        }):handleDeletePost(context);
-                  }),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  // ignore: unnecessary_statements
+                                }):handleDeletePost(context);
+                          }),
+                    ),
+                  );
 
-            ),SizedBox( height:0.0,),
+
+              },
+            ),
 
             documentSnapshot.data()['optionNos'] == 2?
             SimplePollsWidget(
@@ -1803,69 +1830,78 @@ var total =  documentSnapshot.data()['total'];
           ]):
           Column(
               children:  <Widget> [
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
+                FutureBuilder(
+                  future: usersRef.doc(ownerId).get(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return circularProgress();
+                    }
+                    Users user = Users.fromDocument(snapshot.data);
+                    return
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: ownerId),
+                        child:    ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text(
+                            user.username,
+                            style: TextStyle(
+                              color:  kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
 
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                  ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: Text(
-                      username,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  subtitle: Text(location,
-                    style: TextStyle(color: kText),),
-                  trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                      onPressed: () {
-                        !isPostOwner?showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Dialog(
-                                backgroundColor: kSecondaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(20.0)), //this right here
-                                child: GestureDetector(
-                                  onTap: (){report();
-                                  Navigator.pop(context);},
-                                  child: Container(
-                                    height: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
+                          subtitle: Text(location,
+                            style: TextStyle(color: kText),),
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                                            child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text('Report this post?',style: TextStyle(
-                                                    color: Colors.blueAccent,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.0),)),),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
 
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                              // ignore: unnecessary_statements
-                            }):handleDeletePost(context,postId:postId,ownerId:ownerId);
-                      }),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
+                        ),
+                      );
 
-                ),SizedBox( height:0.0,),
+
+                  },
+                ),
+
                 GestureDetector(
                     onDoubleTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
                     child: Stack(
@@ -2416,7 +2452,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
               });
             }
           }
-          report({String postId,String ownerId}){
+          report(){
             Fluttertoast.showToast(
                 msg: "Your report has been submitted", timeInSecForIos: 4);
             FirebaseFirestore.instance.collection('reports')
@@ -2430,7 +2466,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
               "timestamp": timestamp,
             });
           }
-          tagView({String postId,String ownerId}){
+          tagView(){
             return
               StreamBuilder(
                 stream:  postsRef
@@ -2474,17 +2510,17 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
               );
 
           }
-          viewProducts({String postId,String ownerId}){
+          viewProducts(){
             return  showMaterialModalBottomSheet(
                 context: context,
                 builder: (BuildContext context)
                 {
 
                   return
-                    Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(postId:postId,ownerId:ownerId),);
+                    Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
                 });
           }
-          handleDeletePost(BuildContext parentContext, {String postId,String ownerId}) {
+          handleDeletePost(BuildContext parentContext, ) {
             return showDialog(
 
                 context: parentContext,
@@ -2519,7 +2555,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
 // Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
 
-          handleLikePost({String postId,String ownerId,var randomTag1,var randomTag2}) {
+          handleLikePost() {
             bool _isLiked = isLiked;
             if (_isLiked) {
 
@@ -2560,69 +2596,77 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
 
 
           return    type == 'Poll'?Column(children:[
-            ListTile(
-              leading: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
+            FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                Users user = Users.fromDocument(snapshot.data);
+                return
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:    ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.username,
+                        style: TextStyle(
+                          color:  kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
 
-                child: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-              ),
-              title: GestureDetector(
-                onTap: () => showProfile(context, profileId: ownerId),
-                child: Text(
-                  username,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              subtitle: Text(location,
-                style: TextStyle(color: kText),),
-              trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                  onPressed: () {
-                    !isPostOwner?showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            backgroundColor: kSecondaryColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(20.0)), //this right here
-                            child: GestureDetector(
-                              onTap: (){report();
-                              Navigator.pop(context);},
-                              child: Container(
-                                height: 100,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
+                      subtitle: Text(location,
+                        style: TextStyle(color: kText),),
+                      trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                          onPressed: () {
+                            !isPostOwner?showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: kSecondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20.0)), //this right here
+                                    child: GestureDetector(
+                                      onTap: (){report();
+                                      Navigator.pop(context);},
+                                      child: Container(
+                                        height: 100,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
 
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text('Report this post?',style: TextStyle(
-                                                color: Colors.blueAccent,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20.0),)),),
+                                                child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text('Report this post?',style: TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 20.0),)),),
 
 
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                          // ignore: unnecessary_statements
-                        }):handleDeletePost(context);
-                  }),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  // ignore: unnecessary_statements
+                                }):handleDeletePost(context);
+                          }),
+                    ),
+                  );
 
-            ),SizedBox( height:0.0,),
+
+              },
+            ),
 
             documentSnapshot.data()['optionNos'] == 2?
             SimplePollsWidget(
@@ -3112,71 +3156,79 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
           ]):
           Column(
             children:  <Widget> [
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () => showProfile(context, profileId: ownerId),
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: ownerId),
+                      child:    ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.username,
+                          style: TextStyle(
+                            color:  kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
 
-                  child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                ),
-                title: GestureDetector(
-                  onTap: () => showProfile(context, profileId: ownerId),
-                  child: Text(
-                    username,
-                    style: TextStyle(
-                      color: kText,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                subtitle: Text(location,
-                  style: TextStyle(color: kText),),
-                trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                    onPressed: () {
-                      !isPostOwner?showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              backgroundColor: kSecondaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0)), //this right here
-                              child: GestureDetector(
-                                onTap: (){report();
-                                Navigator.pop(context);},
-                                child: Container(
-                                  height: 100,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
+                        subtitle: Text(location,
+                          style: TextStyle(color: kText),),
+                        trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                            onPressed: () {
+                              !isPostOwner?showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      backgroundColor: kSecondaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(20.0)), //this right here
+                                      child: GestureDetector(
+                                        onTap: (){report();
+                                        Navigator.pop(context);},
+                                        child: Container(
+                                          height: 100,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
 
-                                          child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text('Report this post?',style: TextStyle(
-                                                  color: Colors.blueAccent,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20.0),)),),
+                                                  child: Align(
+                                                      alignment: Alignment.center,
+                                                      child: Text('Report this post?',style: TextStyle(
+                                                          color: Colors.blueAccent,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0),)),),
 
 
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                            // ignore: unnecessary_statements
-                          }):handleDeletePost(context,postId:postId,ownerId:ownerId);
-                    }),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                    // ignore: unnecessary_statements
+                                  }):handleDeletePost(context);
+                            }),
+                      ),
+                    );
 
-              ),SizedBox( height:0.0,),
+
+                },
+              ),
               GestureDetector(
-                  onDoubleTap:(){ handleLikePost(postId:postId,ownerId:ownerId);},
+                  onDoubleTap:(){ handleLikePost();},
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -3228,7 +3280,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                           shape:  GFButtonShape.pills,
                           textColor: Colors.black,
                           type : GFButtonType.outline,
-                          onPressed:(){viewProducts(postId:postId,ownerId:ownerId);},
+                          onPressed:(){viewProducts();},
                           text:"View Products",
                           icon: Icon(
                             Icons.add_shopping_cart,
@@ -3265,7 +3317,7 @@ class _FeedState extends State<Feed> with SingleTickerProviderStateMixin {
                   Padding(padding: EdgeInsets.only( left: 20.0)),
 
                   GestureDetector(
-                    onTap:(){ handleLikePost(postId:postId,ownerId:ownerId,randomTag1:randomTag1,randomTag2:randomTag2,);},
+                    onTap:(){ handleLikePost();},
 
                     child: ImageIcon(
                       isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),

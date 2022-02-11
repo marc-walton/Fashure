@@ -9127,56 +9127,6 @@ ListView(
     );
 
   }
-  postindia(){
-    return FutureBuilder(
-      future: usersRef.doc(ownerId).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        }
-        Users user = Users.fromDocument(snapshot.data);
-        bool isPostOwner = currentUserId == ownerId;
-        return Container(
-          margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
-
-          child: Expanded(
-            child: Column(
-              children:  [
-                Stack(
-                  children:     <Widget> [
-
-                    Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.only
-                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.65,
-
-                                width:     MediaQuery.of(context).size.width,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: cachedNetworkImage(shopmediaUrl.first)))),
-                      ],
-                    ),
-
-
-                  ],
-                ),
-
-
-
-
-
-              ],
-            ),
-          ),
-
-        );
-      },
-    );
-  }
 
   buildPostHeader() {
     bool isPostOwner = currentUserId == ownerId;

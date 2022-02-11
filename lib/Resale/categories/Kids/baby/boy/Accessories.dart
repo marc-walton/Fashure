@@ -11,9 +11,8 @@ import 'package:fashow/HomePage.dart';
 
 import 'package:fashow/Categories/Kids/baby/boy/hats.dart';
 import 'package:fashow/Categories/Kids/baby/boy/ties.dart';
-import 'package:fashow/Product_screen.dart';
-
-import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 class BabyAcB extends StatefulWidget {

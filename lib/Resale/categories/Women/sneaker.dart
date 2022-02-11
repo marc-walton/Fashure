@@ -4,8 +4,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 
-import 'package:fashow/Product_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:flutter/material.dart';
 import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';

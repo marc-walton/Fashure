@@ -9,9 +9,8 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 
-import 'package:fashow/Product_screen.dart';
-
-import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 class SkirtW extends StatefulWidget {
