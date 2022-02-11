@@ -414,26 +414,40 @@ class _PostState extends State<VideoView> {
                         mainAxisAlignment:
                         MainAxisAlignment.spaceEvenly,
                         children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () => showProfile(context, profileId: ownerId),
+                          FutureBuilder(
+                            future: usersRef.doc(ownerId).get(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return circularProgress();
+                              }
+                              Users user = Users.fromDocument(snapshot.data);
+                              return
+                                Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => showProfile(context, profileId: ownerId),
 
-                                child: CircleAvatar(
-                                  backgroundImage: CachedNetworkImageProvider(photoUrl),
-                                  backgroundColor: Colors.grey,
-                                ),
-                              ),
-                              Text(
-                                username,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                                      child: CircleAvatar(
+                                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                                        backgroundColor: Colors.grey,
+                                      ),
+                                    ),
+                                    Text(
+                                      user.username,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                );
+
+
+                            },
                           ),
+
+
                           Text(description,
                             style: const TextStyle(
                               fontSize: 15,

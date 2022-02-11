@@ -21,6 +21,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';
 
 import 'package:fashow/Product_screen.dart';
 

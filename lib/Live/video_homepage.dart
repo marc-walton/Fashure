@@ -6,6 +6,8 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Communities/Share_button.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/Live/video_comments.dart';
+import 'package:fashow/progress.dart';
+import 'package:fashow/user.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -213,25 +215,37 @@ class _UserVideosState extends State<UserVideos> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () => showProfile(context, profileId: data.ownerId),
+                                  FutureBuilder(
+                                    future: usersRef.doc(data.ownerId).get(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return circularProgress();
+                                      }
+                                      Users user = Users.fromDocument(snapshot.data);
+                                      return
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () => showProfile(context, profileId: data.ownerId),
 
-                                        child: CircleAvatar(
-                                          backgroundImage: CachedNetworkImageProvider(data.photoUrl),
-                                          backgroundColor: Colors.grey,
-                                        ),
-                                      ),
-                                      Text(
-                                        data.username,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                              child: CircleAvatar(
+                                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                                                backgroundColor: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              user.username,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+
+
+                                    },
                                   ),
                                   Text(
                                     data.description,
