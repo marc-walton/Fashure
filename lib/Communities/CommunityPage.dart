@@ -389,7 +389,7 @@ String eur =  documentSnapshot.data()['eur'];
                         SimpleDialogOption(
                           onPressed: () {
                             Navigator.pop(context);
-                            deletePost(postId:postId);
+                            deletePost();
                             Navigator.pop(context);
                           },
                           child: Text(

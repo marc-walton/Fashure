@@ -142,7 +142,7 @@ dependencies:
   cached_video_player: ^2.0.0-dev
   preload_page_view: ^0.1.6
   flutter_speed_dial: ^4.4.0
-
+  sn_progress_dialog: ^1.0.3
   #  better_video_player:
 #  better_player:
 #  meta: ^1.7.0
