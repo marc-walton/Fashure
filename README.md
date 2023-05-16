@@ -1,6 +1,6 @@
 # fashow
 
-A new Flutter project.
+A fashion social ecommerce app for Android and iphone.
 
 ## Getting Started
 
